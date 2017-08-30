@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <title>paint/html</title>
+  <style>
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: Consolas,'Microsoft JhengHei', sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+p {
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+}
+ul, li {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+#layers {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  width: 200px;
+  height: calc(100% - 28px);
+  border: 1px solid black;
+  text-align: center
+}
+#layer {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 170px);
+  border: 1px solid black;
+  text-align: center;
+  overflow: auto;
+}
+.layer {
+  display: block;
+  margin: 1px auto;
+  padding: 0;
+  width: 100%;
+  height: 40px;
+  background: #ccc;
+  font-size: 12px;
+  line-height: 40px;
+}
+.layer.sel {
+  background: #ACF;
+}
+.layerxy {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100px;
+  border: 1px solid black;
+}
+.layerpos {
+  display: inline-block;
+  margin-top: 2px;
+  width: calc(50% - 8px);
+  text-align: left;
+}
+.layerpos input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  -moz-user-select: text;
+  margin-top: 3px;
+  width: 100%;
+}
+.layerpos input[type="number"]::-webkit-outer-spin-button,
+.layerpos input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.layerxy.disabled input {
+  pointer-events: none;
+  box-shadow: none;
+  color: transparent !important;
+  cursor: default;
+}
+#tools {
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border: 1px solid black;
+  vertical-align: top;
+  text-align: center
+}
+.tool {
+  display: block;
+  margin: 2.5px 0 2.5px 0;
+  padding: 0px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid black;
+}
+input[type="checkbox"]:checked ~ .tool {
+  color: white;
+  background-color: black;
+}
+#tools_add {
+  display: none;
+  position: absolute;
+  top: -2px;
+  left: 42px;
+  width: 352px;
+  height: 50px;
+  border: 1px solid red;
+  background: rgba(255, 255, 255, 0.9);
+  vertical-align: top;
+  text-align: center;
+//  transform: translate(23px, -47px);
+  z-index: 1;
+}
+input[type="button"].clickadd ~ .tool {
+  background: #AACCFF;
+}
+input[type="button"].clickadd ~ #tools_add {
+  display: inline-block;
+}
+.add_tool {
+  display: inline-block;
+  margin: 5px;
+  padding: 0px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid black;
+}
+#tools input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: none;
+  opacity: 0.6;
+}
+.canvasbox {
+  display: inline-block;
+  border: 1px solid black;
+  width: calc(100% - 209px);
+  height: calc(100% - 28px);
+  vertical-align: top;
+  background: gray;
+  overflow: scroll;
+}
+canvas {
+  display: block;
+  border: 1px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  background: white;
+}
+.scel-icon > div {
+  display: inline-block;
+  margin-top: 8px;
+  width: 20px;
+  height: 20px;
+  vertical-align: bottom;
+}
+</style>
+</head>
+<body>
+  <div id="layers">
+    <p>layers</p>
+    <div id="layer"></div>
+    <ul id="tools">
+      <!--li><input type="checkbox" name="group1[]" id="cb_draw" autocomplete="off"/><label class="tool" for="cb_draw">Draw</label></li-->
+      <li>
+        <input type="button" id="cb_add"/><label class="tool" for="cb_add">Add</label>
+        <ul id="tools_add"><!--
+      ---><li><input type="button" id="add_Image"/><label class="add_tool" for="add_Image">Image</label></li><!--
+      ---><li><input type="button" id="add_VorI"/><label class="add_tool" for="add_VorI">Video</label></li><!--
+      ---><li><input type="button" id="add_Ticker"/><label class="add_tool" for="add_Ticker">Ticker</label></li><!--
+      ---><li><input type="button" id="add_RSS"/><label class="add_tool" for="add_RSS">RSS</label></li><!--
+      ---><li><input type="button" id="add_QR"/><label class="add_tool" for="add_QR">QR</label></li><!--
+      ---><li><input type="button" id="add_HDMI_IN"/><label class="add_tool" for="add_HDMI_IN">HDMI</label></li><!--
+      ---><li><input type="button" id="add_Video4KorH265"/><label class="add_tool" for="add_Video4KorH265">4K</label></li><!--
+    ---></ul>
+      </li>
+      <li><input type="checkbox" name="group1[]" id="cb_move" autocomplete="off"/><label class="tool" for="cb_move">Move</label></li>
+      <li><input type="button" id="cb_list"/><label class="tool" for="cb_list">list</label></li>
+      <li><input type="button" id="cb_save"/><label class="tool" for="cb_save">save</label></li>
+      <!--li><input type="button" id="cb_clear"/><label class="tool" for="cb_clear">clear</label></li-->
+    </ul>
+    <div id="layerpos" class="layerxy disabled">
+      <div class="layerpos"><input type="number" id="layerw"/>Width</div>
+      <div class="layerpos"><input type="number" id="layerh"/>Height</div>
+      <div class="layerpos"><input type="number" id="layerx"/>X-Position</div>
+      <div class="layerpos"><input type="number" id="layery"/>Y-Position</div>
+    </div>
+  </div>
+  
+  <div class="canvasbox"><canvas id="html5Canvas" width="1920" height="1080"></canvas></div>
+  <br>
+  <div class="scel-icon">
+    <div style="background-color:rgb(65,105,225);"></div><span> Image </span>
+    <div style="background-color:rgb(46,139,87);"></div><span> Video or Image </span>
+    <div style="background-color:rgb(205,133,63);"></div><span> Ticker </span>
+    <div style="background-color:rgb(205,92,92);"></div><span> RSS feed</span>
+    <div style="background-color:rgb(128,128,255);"></div><span> QR</span>
+    <div style="background-color:rgb(143,188,139);"></div><span> HDMI IN</span>
+    <div style="background-color:rgb(50,205,50);"></div><span> 4K video</span>
+  </div>
+</body>
+<script>
+var canvasbox = document.querySelector('.canvasbox');
+var scale = 1;
+var canvas = document.getElementById("html5Canvas");
+var ctx = canvas.getContext("2d");
+var startdraw = drawing = startdrag = draging = false;
+var dragLT = dragMT = dragRT = dragLB = dragMB = dragRB = dragLM = dragRM = false;
+var rects = corners = [];
+var selection = null;
+var miniwidth, miniheight;
+var startX, startY, dragoffX, dragoffY;
+
+window.addEventListener("resize", cnavasresize, false);
+cnavasresize ();
+function cnavasresize () {
+  let box = {w: canvasbox.clientWidth, h: canvasbox.clientHeight};
+  let HeightTowidth = 9 / 16;
+  let newHeightTowidth = box.h / box.w;
+  if (newHeightTowidth > HeightTowidth) {
+// 高度大於寬度
+    scale = Math.floor(box.w / 16) * 16 / 1920;
+  } else {
+// 寬度大於高度
+    scale = Math.floor(box.h / 9) * 9 / 1080;
+  }
+//  canvas.width = scale * 1920 ;
+//  canvas.height = scale * 1080 ;
+  canvas.style.width = scale * 1920 + 'px';
+  canvas.style.height = scale * 1080 + 'px';
+  console.log('box:', box, scale);
+  console.log('canvas:', canvas.style.width, canvas.style.height);
+
+  drawAll();
+}
+
+$('#tools input[type="checkbox"]').on('change', function() {
+  $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+  if (this.checked) {
+    switch (this.id) {
+//      case "cb_draw":
+//        drawing = true;
+//        draging = false;
+//        canvas.style.cursor = 'crosshair';
+//        break;
+      case "cb_move":
+        drawing = false;
+        draging = true;
+        canvas.style.cursor = 'default';
+        break;
+      case "cb_x":
+        console.log(this.id);
+        break;
+      case "cb_y":
+        console.log(this.id);
+        break;
+    } 
+  } else {
+    drawing = false;
+//    draging = false;
+    canvas.style.cursor = 'default';
+  }
+});
+$('#tools input[type="button"]').on('click', function() {
+  console.log(this);
+  let type;
+  switch (this.id) {
+    case "cb_add":
+      this.classList.toggle("clickadd"); 
+      canvas.style.cursor = 'default';
+      break;
+    case "add_Image":
+      type = this.id.split('add_');
+      addlayer(type[1]);
+      canvas.style.cursor = 'default';
+      break;
+    case "add_VorI":
+      type = this.id.split('add_');
+      addlayer(type[1]);
+      canvas.style.cursor = 'default';
+      break;
+    case "add_Ticker":
+      type = this.id.split('add_');
+      addlayer(type[1]);
+      canvas.style.cursor = 'default';
+      break;
+    case "add_RSS":
+      type = this.id.split('add_');
+      addlayer(type[1]);
+      canvas.style.cursor = 'default';
+      break;
+    case "add_QR":
+      type = this.id.split('add_');
+      addlayer(type[1]);
+      canvas.style.cursor = 'default';
+      break;
+    case "add_HDMI_IN":
+      type = this.id.split('add_');
+      addlayer(type[1]);
+      canvas.style.cursor = 'default';
+      break;
+    case "add_Video4KorH265":
+      type = this.id.split('add_');
+      addlayer(type[1]);
+      canvas.style.cursor = 'default';
+      break;
+    case "cb_list":
+      console.log(rects);
+      break;
+    case "cb_save":
+      layoutsave();
+      console.log(this.id);
+      break;
+    case "cb_clear":
+      clearlayerslist();
+      console.log(this.id);
+      break;
+  } 
+});
+
+canvas.addEventListener("mousedown", handleMouseDown, false);
+canvas.addEventListener("mousemove", handleMouseMove, false);
+canvas.addEventListener("mouseup", handleMouseUp, false);
+canvas.addEventListener("mouseout", handleMouseOut, false);
+//canvas.addEventListener("click", checkLine, false);
+
+/*** Shape ***/
+function Shape(x, y, w, h, type) {
+  /*** "Name":"Zone2", "Type":"Image", "Index":3, "X":0, "Y":540, "Width":960, "Height":540 ***/
+  this.X = x;
+  this.Y = y;
+  this.Width = w;
+  this.Height = h;
+  this.Type = type;
+}
+Shape.prototype.draw = function(ctx) {
+  let fill;
+  if (this.X <= 0) this.X = 0;
+  if (this.Width >= 1920) this.Width = 1920;
+  if (this.X + this.Width > canvas.width) this.X = canvas.width - this.Width;
+  if (this.Y <= 0) this.Y = 0;
+  if (this.Height >= 1080) this.Height = 1080;
+  if (this.Y + this.Height > canvas.height) this.Y = canvas.height - this.Height;
+  switch (this.Type) {
+    case 'Image':
+      fill = 'rgba(65, 105, 225, ';
+      if (this.Width < 100) this.Width = 100;
+      if (this.Height < 100) this.Height = 100;
+      break;
+    case 'VorI':
+      fill = 'rgba(46, 139, 87, ';
+      if (this.Width < 100) this.Width = 100;
+      if (this.Height < 100) this.Height = 100;
+      break;
+    case 'Ticker':
+      fill = 'rgba(205, 133, 63, ';
+      if (this.Width < 100) this.Width = 100;
+      if (this.Height != 80) this.Height = 80;
+      break;
+    case 'RSS':
+      fill = 'rgba(205, 92, 92, ';
+      if (this.Width < 100) this.Width = 100;
+      if (this.Height != 80) this.Height = 80;
+      break;
+    case 'QR':
+      fill = 'rgba(128, 128, 255, ';
+      if (this.Width != 50) this.Width = 50;
+      if (this.Height != 50) this.Height = 50;
+      break;
+    case 'HDMI_IN':
+      fill = 'rgba(143, 188, 139, ';
+      if (this.Width < 480) this.Width = 480;
+      if (this.Height < 270) this.Height = 270;
+      break;
+    case 'Video4KorH265':
+      fill = 'rgba(50, 205, 50, ';
+      if (this.Width < 480) this.Width = 480;
+      if (this.Height < 270) this.Height = 270;
+      break;
+  }
+  ctx.beginPath();
+  ctx.rect(this.X, this.Y, this.Width, this.Height);
+  ctx.fillStyle = fill + '0.3)';
+  ctx.fill();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = fill + '0.7)';
+  ctx.stroke();
+  ctx.font = "18pt Arial";
+  ctx.textBaseline = "top"; 
+  ctx.fillStyle = 'black';
+  ctx.fillText(this.list, this.X + 10, this.Y + 10);
+// ctx.fillRect(this.x, this.y, this.w, this.h);
+}
+Shape.prototype.contains = function(mx, my) {
+  // All we have to do is make sure the Mouse X,Y fall in the area between
+  // the shape's X and (X + Width) and its Y and (Y + Height)
+  return  (this.X <= mx) && (this.X + this.Width >= mx) &&
+          (this.Y <= my) && (this.Y + this.Height >= my);
+}
+/*** MouseDown ***/
+function handleMouseDown(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (drawing) {
+    startdraw = true;
+    let pos = mouseXY(canvas, e);
+    startX = parseInt(pos.x, 10);
+    startY = parseInt(pos.y, 10);
+  }
+// dragLT = dragMT = dragRT = dragLB = dragMB = dragRB = dragLM = dragRM = false;
+  if (draging) {
+    let pos = mouseXY(canvas, e);
+    let mx = parseInt(pos.x, 10);
+    let my = parseInt(pos.y, 10);
+    if (selection !== null) {
+      let mySel = selection;
+      let l = corners.length;
+      for (let ci = 0; ci < l; ci++) {
+        if (corners[ci].contains(mx, my)) {
+          let mySelCor = corners[ci];
+          startdrag = true;
+          dragoffX = mySelCor.Radius / 2;
+          dragoffY = mySelCor.Radius / 2;
+          console.log(corners[ci].Tag, mx, my);
+          return;
+        }
+      }
+    }
+    let l = rects.length;
+    for (let i = l - 1; i >= 0; i--) {
+      if (rects[i].contains(mx, my)) {
+        let mySel = rects[i];
+        dragoffX = mx - mySel.X;
+        dragoffY = my - mySel.Y;
+        startdrag = true;
+        selection = mySel;
+        console.log(selection.list);
+        layerselection();
+        return;
+      } else {
+        selection = null;
+        layerxy.classList.add("disabled");
+      }
+    }
+  }
+}
+/*** MouseMove ***/
+function handleMouseMove(e) {
+  if (drawing && startdraw) {
+    e.preventDefault();
+    e.stopPropagation();
+    let pos = mouseXY(canvas, e);
+    console.log('startxy:', startX, startY, 'mousexy', pos.x, pos.y);
+    if (pos.x <= 0) pos.x = 0;
+    if (pos.x >= canvas.width) pos.x = canvas.width;
+    if (pos.y <= 0) pos.y = 0;
+    if (pos.y >= canvas.width) pos.y = canvas.width;
+    drawAll();
+    ctx.strokeStyle = "lightgray";
+    ctx.strokeRect(startX, startY, parseInt(pos.x - startX, 10), parseInt(pos.y - startY, 10));
+  }
+// dragLT = dragMT = dragRT = dragLB = dragMB = dragRB = dragLM = dragRM = false;
+  if (draging && startdrag && selection) {
+  let mySel = selection;
+    e.preventDefault();
+    e.stopPropagation();
+    let pos = mouseXY(canvas, e);
+    let offsideX = mySel.X + mySel.Width;
+    let offsideY = mySel.Y + mySel.Height
+    if (dragLT) {
+      /*** 左上 : */
+      mySel.Width = (pos.x <= dragoffX) ? offsideX : offsideX - pos.x + dragoffX;
+      mySel.X = (mySel.Width < miniwidth) ? offsideX - miniwidth : pos.x - dragoffX;
+      mySel.Height = (pos.y <= dragoffY) ? offsideY : offsideY - pos.y + dragoffY;
+      mySel.Y = (mySel.Height < miniheight) ? offsideY - miniheight : pos.y - dragoffY;
+    } else if (dragMT) {
+      /*** 中上 : OK */
+      mySel.Height = (pos.y <= dragoffY) ? offsideY : offsideY - pos.y + dragoffY;
+      mySel.Y = (mySel.Height < miniheight) ? offsideY - miniheight : pos.y - dragoffY;
+    } else if (dragRT) {
+      /*** 右上 : */
+      mySel.Width = (pos.x > 1920 - dragoffX) ? 1920 - mySel.X : pos.x - mySel.X + dragoffX;
+      mySel.Height = (pos.y <= dragoffY) ? offsideY : offsideY - pos.y + dragoffY;
+      mySel.Y = (mySel.Height < miniheight) ? offsideY - miniheight : pos.y - dragoffY;
+    } else if (dragLB) {
+      /*** 左下 : OK */
+      mySel.Width = (pos.x <= dragoffX) ? offsideX : offsideX - pos.x + dragoffX;
+      mySel.X = (mySel.Width < miniwidth) ? offsideX - miniwidth : pos.x - dragoffX;
+      mySel.Height = (pos.y > 1080 - dragoffY) ? 1080 - mySel.Y : pos.y - mySel.Y + dragoffY;
+    } else if (dragMB) {
+      /*** 中下 : OK */
+      mySel.Height = (pos.y > 1080 - dragoffY) ? 1080 - mySel.Y : pos.y - mySel.Y + dragoffY;
+    } else if (dragRB) {
+      /*** 右下 : OK */
+      mySel.Width = (pos.x > 1920 - dragoffX) ? 1920 - mySel.X : pos.x - mySel.X + dragoffX;
+      mySel.Height = (pos.y > 1080 - dragoffY) ? 1080 - mySel.Y : pos.y - mySel.Y + dragoffY;
+    } else if (dragLM) {
+      /*** 左中 : OK */
+      mySel.Width = (pos.x <= dragoffX) ? offsideX : offsideX - pos.x + dragoffX;
+      mySel.X = (mySel.Width < miniwidth) ? offsideX - miniwidth : pos.x - dragoffX;
+    } else if (dragRM) {
+      /*** 右中 : OK */
+      mySel.Width = (pos.x > 1920 - dragoffX) ? 1920 - mySel.X : pos.x - mySel.X + dragoffX;
+    } else if (startdrag) {
+      /*** 其他 : */
+      mySel.X = pos.x - dragoffX;
+      mySel.Y = pos.y - dragoffY;
+    }
+    drawAll();
+    layerselection();
+  }
+}
+/*** MouseUp ***/
+function handleMouseUp(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (drawing) {
+    let pos = mouseXY(canvas, e);
+    endX = parseInt(pos.x, 10);
+    endY = parseInt(pos.y, 10);
+    let w = endX - startX;
+    let h = endY - startY;
+    let offsetX = (w < 0) ? w : 0;
+    let offsetY = (h < 0) ? h : 0;
+    let width = Math.abs(w);
+    let height = Math.abs(h);
+    
+    if (!(startX === endX || startY === endY)) {
+      rects.push(new Shape(startX + offsetX, startY + offsetY, width, height, 'Image'));
+    }
+    startdraw = false;
+  }
+  if (draging) {
+    startdrag = false;
+    dragLT = dragMT = dragRT = dragLB = dragMB = dragRB = dragLM = dragRM = false;
+  }
+  layerslist();
+  drawAll();
+}
+/*** MouseOut ***/
+function handleMouseOut(e){
+  e.preventDefault();
+  e.stopPropagation();
+  startdrag = false;
+  dragLT = dragMT = dragRT = dragLB = dragMB = dragRB = dragLM = dragRM = false;
+  drawAll();
+}
+/*** drawAll ***/
+function drawAll() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (var i = 0; i < rects.length; i++) {
+    var r = rects[i];
+    r.draw(ctx);
+    if (draging && selection == r) {
+      ctx.strokeStyle = 'black';
+      ctx.strokeRect(selection.X,selection.Y,selection.Width,selection.Height);
+      drawHandles();
+    }
+  }
+}
+
+/*** MousePosition ***/
+function mouseXY(ele, e) {
+    let r = ele.getBoundingClientRect();
+    r.x = Math.floor((e.clientX - r.left) / scale);
+    r.y = Math.floor((e.clientY - r.top) / scale);
+    return {x: r.x, y: r.y};
+}
+
+/*** addlayer ***/
+function addlayer(type) {
+  switch (type) {
+    case 'Image':
+      rects.push(new Shape(50, 50, 100, 100, type));
+      break;
+    case 'VorI':
+      rects.push(new Shape(50, 50, 200, 200, type));
+      break;
+    case 'Ticker':
+    case 'RSS':
+      rects.push(new Shape(50, 50, 200, 80, type));
+      break;
+    case 'QR':
+      rects.push(new Shape(50, 50, 50, 50, type));
+      break;
+    case 'HDMI_IN':
+    case 'Video4KorH265':
+      rects.push(new Shape(50, 50, 480, 270, type));
+      break;
+  }
+  $('#cb_add').removeClass("clickadd");
+  layerslist();
+  drawAll();
+}
+Array.prototype.move = function(from, to) {
+  this.splice(to, 0, this.splice(from, 1)[0]);
+  drawAll();
+  layerslist();
+};
+/*** layerslist ***/
+function layerslist() {
+  var layers = document.getElementById("layer");
+  var typename = {'Image': 'Image', 'VorI': 'Video or Image', 'Ticker': 'Ticker', 
+                  'RSS': 'RSS feed', 'QR': 'QR', 'HDMI_IN': 'HDMI IN', 'Video4KorH265': '4K video'};
+  layers.innerHTML = '';
+  for (let i = 0; i < rects.length; i++) {
+    let j = i + 1;
+    if (true) {
+      rects[i]["Name"]= 'Zone' + j;
+      rects[i]["list"]= typename[rects[i].Type] + ' ' + j;
+      var btn = document.createElement("div");
+      btn.setAttribute("id", 'layerdiv' + i);
+      btn.setAttribute("class", (rects[i] === selection) ? "layer sel" : "layer");
+      btn.setAttribute("data-x", rects[i].X);
+      btn.setAttribute("data-y", rects[i].Y);
+      btn.setAttribute("data-w", rects[i].Width);
+      btn.setAttribute("data-h", rects[i].Height);
+      btn.addEventListener("click", function() {layersbtn(this);}, false);
+      btn.innerText = rects[i].list;
+      layers.insertBefore(btn, layers.firstChild);
+    }
+  }
+}
+
+/*** layersbtn ***/
+function layersbtn(ele) {
+  console.log(ele);
+  selection = rects[ele.getAttribute("id").slice(8)];
+  draging = true;
+  drawAll();
+  layerselection();
+  layerslist();
+}
+
+var layerw = document.querySelector('#layerw');
+var layerh = document.querySelector('#layerh');
+var layerx = document.querySelector('#layerx');
+var layery = document.querySelector('#layery');
+var layerxy = document.querySelector('.layerxy');
+
+layerw.addEventListener("change", function() {layerinput(this);}, false);
+layerh.addEventListener("change", function() {layerinput(this);}, false);
+layerx.addEventListener("change", function() {layerinput(this);}, false);
+layery.addEventListener("change", function() {layerinput(this);}, false);
+
+/*** layerselection ***/
+function layerselection() {
+  layerw.disabled = layerh.disabled = layerx.disabled = layery.disabled = false;
+  layerxy.classList.remove("disabled");
+  switch (selection.Type) {
+    case 'Image':
+      miniwidth = 100;
+      miniheight = 100;
+      break;
+    case 'VorI':
+      miniwidth = 100;
+      miniheight = 100;
+      break;
+    case 'Ticker':
+      miniwidth = 100;
+      miniheight = 80;
+      layerh.disabled = true;
+      break;
+    case 'RSS':
+      miniwidth = 100;
+      miniheight = 80;
+      layerh.disabled = true;
+      break;
+    case 'QR':
+      miniwidth = 50;
+      miniheight = 50;
+      layerw.disabled = layerh.disabled = true;
+      break;
+    case 'HDMI_IN':
+      miniwidth = 480;
+      miniheight = 270;
+      break;
+    case 'Video4KorH265':
+      miniwidth = 480;
+      miniheight = 270;
+      break;
+  }
+  layerw.value = selection.Width;
+  layerh.value = selection.Height;
+  layerx.value = selection.X;
+  layery.value = selection.Y;
+}
+/*** drawHandles ***/
+function drawHandles() {
+  corners = [];
+  let radius = 20;
+  if (selection.Type === 'QR') return;
+  if (selection.Type !== 'RSS' && selection.Type !== 'Ticker') {
+    corners.push(new RectCorner('LT', selection.X, selection.Y, radius));
+    corners.push(new RectCorner('MT', selection.X + selection.Width / 2 - radius / 2, selection.Y, radius));
+    corners.push(new RectCorner('RT', selection.X + selection.Width - radius, selection.Y, radius));
+    corners.push(new RectCorner('LB', selection.X, selection.Y + selection.Height - radius, radius));
+    corners.push(new RectCorner('MB', selection.X + selection.Width / 2 - radius / 2, selection.Y + selection.Height - radius, radius));
+    corners.push(new RectCorner('RB', selection.X + selection.Width - radius, selection.Y + selection.Height - radius, radius));
+  }
+  corners.push(new RectCorner('LM', selection.X, selection.Y + selection.Height / 2 - radius / 2, radius));
+  corners.push(new RectCorner('RM', selection.X + selection.Width - radius, selection.Y + selection.Height / 2 - radius / 2, radius));
+  let l = corners.length;
+  for (let i = 0; i < l; i++) {
+    let c = corners[i];
+    c.draw(ctx);
+  }
+}
+/*** new RectCorner ***/
+function RectCorner(tag, x, y, radius) {
+  this.Tag = tag;
+  this.X = x;
+  this.Y = y;
+  this.Radius = radius;
+}
+RectCorner.prototype.draw = function(ctx) {
+  ctx.fillStyle = "red";
+  ctx.fillRect(this.X, this.Y, this.Radius, this.Radius);
+}
+RectCorner.prototype.contains = function(mx, my) {
+  let returnvalue = (this.X <= mx) && (this.X + this.Radius >= mx) && (this.Y <= my) && (this.Y + this.Radius >= my);
+  if (returnvalue) {
+    switch (this.Tag) {
+      case 'LT': dragLT = true; break;
+      case 'MT': dragMT = true; break;
+      case 'RT': dragRT = true; break;
+      case 'LB': dragLB = true; break;
+      case 'MB': dragMB = true; break;
+      case 'RB': dragRB = true; break;
+      case 'LM': dragLM = true; break;
+      case 'RM': dragRM = true; break;
+    }
+  } else {
+    dragLT = dragMT = dragRT = dragLB = dragMB = dragRB = dragLM = dragRM = false;
+  }
+  return returnvalue;
+}
+/*** layerinput ***/
+function layerinput(input) {
+  console.log(input.id, input.value);
+  if (input.value <= 0) input.value = 0;
+  switch (input.id) {
+    case 'layerw':
+      if (parseInt(selection.X, 10) + parseInt(input.value, 10) > canvas.width) break;
+      selection.Width = parseInt(input.value, 10);
+      break;
+    case 'layerh':
+      if (parseInt(selection.Y, 10) + parseInt(input.value, 10) > canvas.height) break;
+      selection.Height = parseInt(input.value, 10);
+      break;
+    case 'layerx':
+      if (parseInt(selection.Width, 10) + parseInt(input.value, 10) > canvas.width) break;
+      selection.X = parseInt(input.value, 10);
+      break;
+    case 'layery':
+      if (parseInt(selection.Height, 10) + parseInt(input.value, 10) > canvas.height) break;
+      selection.Y = parseInt(input.value, 10);
+      break;
+  }
+  drawAll();
+  layerselection();
+  layerslist();
+}
+/*** --layoutsave--- ***/
+function layoutsave() {
+  let ZoneList = [];
+  let l = rects.length;
+  for (let i = 0; i < l; i++) {
+    let r = {};
+    console.log(i);
+    r['Name'] = rects[i]['Name'];
+    r['Type'] = rects[i]['Type'];
+    r['Index'] = i;
+    r['X'] = rects[i]['X'];
+    r['Y'] = rects[i]['Y'];
+    r['Width'] = rects[i]['Width'];
+    r['Height'] = rects[i]['Height'];
+    console.log('r', r);
+    ZoneList.push(r);
+  }
+  console.log('ZoneList:', JSON.stringify(ZoneList));
+}
+/*** --CLEAR--- ***/
+function clearlayerslist() {
+  rects = [];
+  selection = null;
+  layerxy.classList.add("disabled");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  var layers = document.getElementById("layer");
+  for (let i = layers.childNodes.length - 1; i >= 0; i--) {
+    layers.removeChild(layers.childNodes[i]);
+  }
+  console.log(layers);
+}
+
+// https://simonsarris.com/making-html5-canvas-useful/
+// https://stackoverflow.com/questions/31791152/draw-multiple-rectangle-boxes-on-canvas
+
+</script>
+</html>
