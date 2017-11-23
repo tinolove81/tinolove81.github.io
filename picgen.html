@@ -5,18 +5,21 @@
   <meta http-equiv="expires" content="0"> 
   <meta http-equiv="Pragma" Content="No-cache">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
   </script>
   <title>Pic Generator</title>
 <style>
+* {
+  box-sizing: border-box;
+}
 html, body { height: 100%; }
 body {
   margin: 0;
   padding: 0;
-  font-family: Consolas,'Microsoft JhengHei', sans-serif;
   border: 1px solid black;
-  overflow: hidden;
-  box-sizing: border-box;
+  text-align: center;
+  font-family: Consolas,'Microsoft JhengHei', sans-serif;
 }
 .piczone {
   display: inline-block;
@@ -25,24 +28,96 @@ body {
 }
 .textzone {
   display: inline-block;
+  position: relative;
   width: 500px;
+  height: 600px;
+  text-align: left;
+  vertical-align: top;
   border: 1px solid black;
+}
+.textzone .zone01 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25%;
+  height: 40%;
+  background: #999;
+}
+.textzone .zone02 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 75%;
+  height: 40%;
+  background: #B99;
+}
+.textzone .zone03 {
+  position: absolute;
+  top: 40%;
+  right: 0;
+  width: 50%;
+  height: 60%;
+  background: #9B9;
+}
+.textzone .zone04 {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 50%;
+  height: 35%;
+  background: #99B;
+}
+.textzone .zone05 {
+  position: absolute;
+  top: 75%;
+  left: 0;
+  width: 50%;
+  height: 25%;
+  background: #B9B;
+}
+.textzone input[type*="text"] {
+  position: absolute;
+  width: 100px;
+  z-index: 2;
+}
+.textzone #text01 {
+  top: 55%;
+  right: 5%;
+}
+.textzone #text02 {
+  top: 10%;
+  right: -5%;
+}
+.textzone #text03 {
+  top: 5%;
+  left: 15%;
+}
+.textzone #text04 {
+  top: 25%;
+  left: 1%;
+}
+.textzone #text05 {
+  left: 2%;
+  bottom: 2%;
 }
 </style>
 </head>
 <body>
+  <div class="title">
+    <h1>Generator</h1>
+  </div>
   <div class="piczone">
-    <img src="./vddXDCE[1].png" width="100px"/>
+    <img src="./vddXDCE[1].png" width="100%"/>
   </div>
   <div class="textzone">
     <div class="zone01">
-      <span>內容:</span><input type="text" id="text01"/>
+      <input type="text" id="text01"/>
     </div>
     <div class="zone02">
-      <span>內容:</span><input type="text" id="text02"/>
-      <span>內容:</span><input type="text" id="text03"/>
-      <span>內容:</span><input type="text" id="text04"/>
-      <span>內容:</span><input type="text" id="text05"/>
+      <input type="text" id="text02"/>
+      <input type="text" id="text03"/>
+      <input type="text" id="text04"/>
+      <input type="text" id="text05"/>
     </div>
     <div class="zone03">
       <span>內容:</span><input type="text" id="text06"/>
