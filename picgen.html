@@ -23,14 +23,21 @@ body {
 }
 .piczone {
   display: inline-block;
-  width: 450px;
+  width: 407px;
+  vertical-align: top;
+  border: 1px solid black;
+}
+.drawzone {
+  display: inline-block;
+  width: 407px;
+  vertical-align: top;
   border: 1px solid black;
 }
 .textzone {
   display: inline-block;
   position: relative;
-  width: 500px;
-  height: 600px;
+  width: 407px;
+  height: 593px;
   text-align: left;
   vertical-align: top;
   border: 1px solid black;
@@ -40,7 +47,7 @@ body {
   top: 0;
   right: 0;
   width: 25%;
-  height: 40%;
+  height: 50%;
   background: #999;
 }
 .textzone .zone02 {
@@ -48,36 +55,36 @@ body {
   top: 0;
   left: 0;
   width: 75%;
-  height: 40%;
+  height: 50%;
   background: #B99;
 }
 .textzone .zone03 {
   position: absolute;
-  top: 40%;
+  top: 50%;
   right: 0;
   width: 50%;
-  height: 60%;
+  height: 50%;
   background: #9B9;
 }
 .textzone .zone04 {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 0;
   width: 50%;
-  height: 20%;
+  height: 15%;
   background: #99B;
 }
 .textzone .zone05 {
   position: absolute;
-  top: 60%;
+  top: 65%;
   left: 0;
   width: 50%;
-  height: 40%;
+  height: 35%;
   background: #B9B;
 }
 .textzone input[type="text"] {
   position: absolute;
-  width: 100px;
+  width: 120px;
   z-index: 2;
 }
 .textzone #text01 { top: 55%; right: 5%; }
@@ -86,12 +93,11 @@ body {
 .textzone #text04 { top: 25%; left: 1%; }
 .textzone #text05 { left: 2%; bottom: 2%; }
 .textzone #text06 { top: 5%; right: 2%; }
-.textzone #text07 { top: 60%; left: 2%; }
+.textzone #text07 { top: 50%; left: 2%; }
 .textzone #text08 { left: 5%; bottom: 10%; }
 .textzone #text09 { top: 30%; right: 0; }
-.textzone #text10 { top: 2%; right: 0; }
-.textzone #text11 { top: 0; left: 0; }
-.textzone #text12 { left: 0; bottom: 5%; }
+.textzone #text10 { top: 1%; left: 2%; }
+.textzone #text11 { left: 1%; bottom: 5%; }
 .ctrlzone {
   text-align: center;
 }
@@ -102,38 +108,55 @@ body {
     <h1>Generator</h1>
   </div>
   <div class="piczone">
-    <img src="./vddXDCE[1].png" width="100%"/>
+    <img src="http://n.1whour.com/comic/kuku2comic/er/Vol_15/HorrorWorldOfJUNJI_15_161.jpg" width="100%" style="opacity: 0.03;"/>
+  </div>
+  <div class="drawzone">
+    <canvas id="canvas" width="405" height="591"></canvas>
   </div>
   <div class="textzone">
     <div class="zone01">
-      <input type="text" id="text01"/>
+      <input type="text" id="text01" autocomplete="off" placeholder="〇〇〇！"/>
     </div>
     <div class="zone02">
-      <input type="text" id="text02"/><input type="text" id="text03"/>
-      <input type="text" id="text04"/><input type="text" id="text05"/>
-    </div>
+      <input type="text" id="text02" autocomplete="off" placeholder="〇〇〇ー"/>
+      <input type="text" id="text03" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
+      <input type="text" id="text04" autocomplete="off" placeholder="〇〇〇！"/>
+      <input type="text" id="text05" autocomplete="off" placeholder="〇〇〇ー"/>
+    </div>〇
     <div class="zone03">
-      <input type="text" id="text06"/><input type="text" id="text07"/>
-      <input type="text" id="text08"/>
+      <input type="text" id="text06" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
+      <input type="text" id="text07" autocomplete="off" placeholder="〇〇〇！"/>
+      <input type="text" id="text08" autocomplete="off" placeholder="〇〇〇ー"/>
     </div>
     <div class="zone04">
-      <input type="text" id="text09"/>
+      <input type="text" id="text09" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
     </div>
     <div class="zone05">
-      <input type="text" id="text10"/><input type="text" id="text11"/>
-      <input type="text" id="text12"/>
+      <input type="text" id="text10" autocomplete="off" placeholder="〇！"/>
+      <input type="text" id="text11" autocomplete="off" placeholder="〇〇！〇〇〇！"/>
     </div>
   </div>
   <div class="ctrlzone">
-    <input type="button" id="btn01" class="btn btn-outline-primary"/>
-    <input type="button" id="btn02" class="btn btn-outline-primary"/>
-    <input type="button" id="btn03" class="btn btn-outline-primary"/><br/>
-    <input type="button" id="btn04" class="btn btn-outline-primary"/>
-    <input type="button" id="btn05" class="btn btn-outline-primary"/>
-    <input type="button" id="btn06" class="btn btn-outline-primary"/><br/>
+    <input type="button" id="btn01" class="btn btn-outline-primary" value="button"/>
+    <input type="button" id="btn02" class="btn btn-outline-primary" value="button"/>
+    <input type="button" id="btn03" class="btn btn-outline-primary" value="button"/><br/>
+    <input type="button" id="btn04" class="btn btn-outline-primary" value="button"/>
+    <input type="button" id="btn05" class="btn btn-outline-primary" value="button"/>
+    <input type="button" id="btn06" class="btn btn-outline-primary" value="button"/><br/>
   </div>
 </body>
 <script>
-
+var t01 = $('#text01').val() || $('#text01').attr('placeholder');
+var t02 = $('#text02').val() || $('#text02').attr('placeholder');
+var t03 = $('#text03').val() || $('#text03').attr('placeholder');
+var t04 = $('#text04').val() || $('#text04').attr('placeholder');
+var t05 = $('#text05').val() || $('#text05').attr('placeholder');
+var t06 = $('#text06').val() || $('#text06').attr('placeholder');
+var t07 = $('#text07').val() || $('#text07').attr('placeholder');
+var t08 = $('#text08').val() || $('#text08').attr('placeholder');
+var t09 = $('#text09').val() || $('#text09').attr('placeholder');
+var t10 = $('#text10').val() || $('#text10').attr('placeholder');
+var t11 = $('#text11').val() || $('#text11').attr('placeholder');
+var canvas = $('#canvas');
 </script>
 </html>
