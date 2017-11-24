@@ -111,7 +111,7 @@ body {
     <img src="http://n.1whour.com/comic/kuku2comic/er/Vol_15/HorrorWorldOfJUNJI_15_161.jpg" width="100%" style="opacity: 0.03;"/>
   </div>
   <div class="drawzone">
-    <canvas id="canvas" width="405" height="591"></canvas>
+    <canvas id="drawcanvas" width="405" height="591" style="display: block;"></canvas>
   </div>
   <div class="textzone">
     <div class="zone01">
@@ -122,7 +122,7 @@ body {
       <input type="text" id="text03" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
       <input type="text" id="text04" autocomplete="off" placeholder="〇〇〇！"/>
       <input type="text" id="text05" autocomplete="off" placeholder="〇〇〇ー"/>
-    </div>〇
+    </div>
     <div class="zone03">
       <input type="text" id="text06" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
       <input type="text" id="text07" autocomplete="off" placeholder="〇〇〇！"/>
@@ -136,6 +136,7 @@ body {
       <input type="text" id="text11" autocomplete="off" placeholder="〇〇！〇〇〇！"/>
     </div>
   </div>
+  <br/>
   <div class="ctrlzone">
     <input type="button" id="btn01" class="btn btn-outline-primary" value="button"/>
     <input type="button" id="btn02" class="btn btn-outline-primary" value="button"/>
@@ -157,6 +158,12 @@ var t08 = $('#text08').val() || $('#text08').attr('placeholder');
 var t09 = $('#text09').val() || $('#text09').attr('placeholder');
 var t10 = $('#text10').val() || $('#text10').attr('placeholder');
 var t11 = $('#text11').val() || $('#text11').attr('placeholder');
-var canvas = $('#canvas');
+var c = document.getElementById('drawcanvas');
+var ctx = c.getContext("2d");
+var img = new Image();
+img.onload = function() {
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+};
+img.src = 'http://n.1whour.com/comic/kuku2comic/er/Vol_15/HorrorWorldOfJUNJI_15_161.jpg';
 </script>
 </html>
