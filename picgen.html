@@ -160,26 +160,39 @@ ctx.textBaseline = 'top';
 
 var writetext = function(that, max_x, max_y, x, y) {
   var str = that.val();
-  console.log(that[0].id, ctx.measureText(str).width, max_y);
-  ctx.font = lineHeight + 'px DFKai-sb';
+  var strlen = ctx.measureText(str).width;
   var words = str.split('');
-  for (var i = 0, j = words.length; i < j; i++) {
-    ctx.fillText(words[i], x, y + (lineHeight * i));
+  ctx.font = lineHeight + 'px DFKai-sb';
+  
+  if (strlen <= max_y) {
+    console.log(that[0].id, strlen, max_y);
+    for (var i = 0, j = words.length; i < j; i++) {
+      ctx.fillText(words[i], x, y + (lineHeight * i));
+    }
+  } else if ((max_x / lineHeight) >= 2) {
+    var tmp = 0;
+    for (var i = 0, j = words.length; i < j; i++) {
+      if (y + (lineHeight * (i - tmp)) > max_y) {
+        tmp = i;
+        x = x - lineHeight;
+      }
+      ctx.fillText(words[i], x, y + (lineHeight * (i - tmp)));
+    }
   }
 }
 b01.on('click', function(){
   ctx.clearRect(0, 0, c.width, c.height);
-  writetext($('#text01'), 25, 50, 350, 155);
-  writetext($('#text02'), 40, 55, 305, 40);
-  writetext($('#text03'), 45, 60, 110, 30);
-  writetext($('#text04'), 20, 55, 50, 50);
-  writetext($('#text05'), 45, 45, 50, 230);
-  writetext($('#text06'), 30, 50, 125, 0);
-  writetext($('#text07'), 20, 60, 150, 0);
-  writetext($('#text08'), 20, 60, 175, 0);
-  writetext($('#text09'), 30, 70, 200, 0);
-  writetext($('#text10'), 30, 50, 225, 0);
-  writetext($('#text11'), 40, 65, 250, 0);
+  writetext($('#text01'), 30, 81, 350, 155);
+  writetext($('#text02'), 40, 51, 305, 40);
+  writetext($('#text03'), 45, 61, 110, 30);
+  writetext($('#text04'), 20, 56, 50, 50);
+  writetext($('#text05'), 45, 46, 50, 230);
+  writetext($('#text06'), 30, 51, 125, 0);
+  writetext($('#text07'), 20, 61, 150, 0);
+  writetext($('#text08'), 20, 61, 175, 0);
+  writetext($('#text09'), 30, 71, 200, 0);
+  writetext($('#text10'), 30, 51, 225, 0);
+  writetext($('#text11'), 40, 66, 250, 0);
 });
 b03.on('click', function(){
   ctx.clearRect(0, 0, c.width, c.height);
