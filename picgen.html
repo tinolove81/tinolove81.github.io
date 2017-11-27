@@ -46,7 +46,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 25%;
+  width: 20%;
   height: 50%;
   background: #999;
 }
@@ -54,7 +54,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 75%;
+  width: 80%;
   height: 50%;
   background: #B99;
 }
@@ -84,20 +84,23 @@ body {
 }
 .textzone input[type="text"] {
   position: absolute;
-  width: 120px;
+  height: 120px;
+  font-size: 12px;
+  font-family: DFKai-sb;
+  writing-mode: vertical-rl;
   z-index: 2;
 }
-.textzone #text01 { top: 55%; right: 5%; }
-.textzone #text02 { top: 10%; right: -5%; }
-.textzone #text03 { top: 5%; left: 15%; }
-.textzone #text04 { top: 25%; left: 1%; }
+.textzone #text01 { top: 45%; right: 20%; }
+.textzone #text02 { top: 5%; right: 5%; }
+.textzone #text03 { top: 5%; left: 25%; }
+.textzone #text04 { top: 10%; left: 5%; }
 .textzone #text05 { left: 2%; bottom: 2%; }
-.textzone #text06 { top: 5%; right: 2%; }
-.textzone #text07 { top: 50%; left: 2%; }
-.textzone #text08 { left: 5%; bottom: 10%; }
-.textzone #text09 { top: 30%; right: 0; }
-.textzone #text10 { top: 1%; left: 2%; }
-.textzone #text11 { left: 1%; bottom: 5%; }
+.textzone #text06 { top: 2%; right: 5%; }
+.textzone #text07 { top: 15%; left: 2%; }
+.textzone #text08 { left: 5%; bottom: 2%; }
+.textzone #text09 { top: 2%; right: 2%; }
+.textzone #text10 { top: -5%; left: 2%; }
+.textzone #text11 { left: 1%; bottom: 1%; }
 .ctrlzone {
   text-align: center;
 }
@@ -115,55 +118,76 @@ body {
   </div>
   <div class="textzone">
     <div class="zone01">
-      <input type="text" id="text01" autocomplete="off" placeholder="〇〇〇！"/>
+      <input type="text" id="text01" autocomplete="off" value="〇〇〇︱︱"/>
     </div>
     <div class="zone02">
-      <input type="text" id="text02" autocomplete="off" placeholder="〇〇〇ー"/>
-      <input type="text" id="text03" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
-      <input type="text" id="text04" autocomplete="off" placeholder="〇〇〇！"/>
-      <input type="text" id="text05" autocomplete="off" placeholder="〇〇〇ー"/>
+      <input type="text" id="text02" autocomplete="off" value="〇〇〇︱︱"/>
+      <input type="text" id="text03" autocomplete="off" value="〇〇〇，〇〇！"/>
+      <input type="text" id="text04" autocomplete="off" value="〇〇〇！"/>
+      <input type="text" id="text05" autocomplete="off" value="〇〇〇︱︱"/>
     </div>
     <div class="zone03">
-      <input type="text" id="text06" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
-      <input type="text" id="text07" autocomplete="off" placeholder="〇〇〇！"/>
-      <input type="text" id="text08" autocomplete="off" placeholder="〇〇〇ー"/>
+      <input type="text" id="text06" autocomplete="off" value="〇〇〇，〇〇！"/>
+      <input type="text" id="text07" autocomplete="off" value="〇〇〇！"/>
+      <input type="text" id="text08" autocomplete="off" value="〇〇〇︱︱"/>
     </div>
     <div class="zone04">
-      <input type="text" id="text09" autocomplete="off" placeholder="〇〇〇，〇〇！"/>
+      <input type="text" id="text09" autocomplete="off" value="〇〇〇，〇〇！"/>
     </div>
     <div class="zone05">
-      <input type="text" id="text10" autocomplete="off" placeholder="〇！"/>
-      <input type="text" id="text11" autocomplete="off" placeholder="〇〇！〇〇〇！"/>
+      <input type="text" id="text10" autocomplete="off" value="〇！"/>
+      <input type="text" id="text11" autocomplete="off" value="〇〇！〇〇〇！"/>
     </div>
   </div>
   <br/>
   <div class="ctrlzone">
-    <input type="button" id="btn01" class="btn btn-outline-primary" value="button"/>
+    <input type="button" id="btn01" class="btn btn-outline-primary" value="Apply"/>
     <input type="button" id="btn02" class="btn btn-outline-primary" value="button"/>
-    <input type="button" id="btn03" class="btn btn-outline-primary" value="button"/><br/>
+    <input type="button" id="btn03" class="btn btn-outline-primary" value="Clear"/><br/>
     <input type="button" id="btn04" class="btn btn-outline-primary" value="button"/>
     <input type="button" id="btn05" class="btn btn-outline-primary" value="button"/>
     <input type="button" id="btn06" class="btn btn-outline-primary" value="button"/><br/>
   </div>
 </body>
 <script>
-var t01 = $('#text01').val() || $('#text01').attr('placeholder');
-var t02 = $('#text02').val() || $('#text02').attr('placeholder');
-var t03 = $('#text03').val() || $('#text03').attr('placeholder');
-var t04 = $('#text04').val() || $('#text04').attr('placeholder');
-var t05 = $('#text05').val() || $('#text05').attr('placeholder');
-var t06 = $('#text06').val() || $('#text06').attr('placeholder');
-var t07 = $('#text07').val() || $('#text07').attr('placeholder');
-var t08 = $('#text08').val() || $('#text08').attr('placeholder');
-var t09 = $('#text09').val() || $('#text09').attr('placeholder');
-var t10 = $('#text10').val() || $('#text10').attr('placeholder');
-var t11 = $('#text11').val() || $('#text11').attr('placeholder');
+var b01 = $('#btn01');
+var b03 = $('#btn03');
 var c = document.getElementById('drawcanvas');
 var ctx = c.getContext("2d");
+ctx.textBaseline = 'top';
+ctx.font = '24px Consolas';
+
+var writetext = function(str, x, y) {
+  var words = str.split('');
+  for (var i = 0, j = words.length; i < j; i++) {
+    ctx.fillText(words[i], x, y + (24 * i));
+  }
+}
+b01.on('click', function(){
+  var t01 = $('#text01').val();
+  var t02 = $('#text02').val();
+  var t03 = $('#text03').val();
+  var t04 = $('#text04').val();
+  var t05 = $('#text05').val();
+  var t06 = $('#text06').val();
+  var t07 = $('#text07').val();
+  var t08 = $('#text08').val();
+  var t09 = $('#text09').val();
+  var t10 = $('#text10').val();
+  var t11 = $('#text11').val();
+  writetext(t01, 0, 0);
+  writetext(t02, 50, 0);
+});
+b03.on('click', function(){
+  ctx.clearRect(0, 0, c.width, c.height);
+});
+
+/*
 var img = new Image();
 img.onload = function() {
     ctx.drawImage(img, 0, 0, c.width, c.height);
 };
 img.src = 'http://n.1whour.com/comic/kuku2comic/er/Vol_15/HorrorWorldOfJUNJI_15_161.jpg';
+*/
 </script>
 </html>
