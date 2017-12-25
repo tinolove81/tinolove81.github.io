@@ -2,7 +2,7 @@
 #bar {
     width: 500px;
     height: 20px;
-    border: 3px solid blue;
+    border: 1px solid #ACF;
     background: url('data:image/gif;base64,R0lGODlhAQABAPAAAAD/AP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==') no-repeat;
 }
 #txt {
@@ -16,20 +16,20 @@
 </div>
 
 <script>
-var percentage = 0.1;
-var stepSize = 100;
+var percentage = 0;
+var stepSize = 50;
 setTimeout((function() {
-    return function progress() {
-    		$("#bar").css("background-size", percentage + "% 100%");
-    		$("#bar").css("line-height", $("#bar").css("height"));
-        $("#txt").text(percentage + '%');
-        if(percentage >= 100) percentage = 0;
-        if(percentage <= 100){
-            setTimeout(progress, stepSize);
-        }
-        percentage += 0.1;
-        percentage = Number(percentage.toFixed(2));
-//        console.log(percentage);
+  return function progress() {
+    $("#bar").css("background-size", percentage + "% 100%");
+    $("#bar").css("line-height", $("#bar").css("height"));
+    $("#txt").text(percentage + '%');
+    if (percentage >= 100) percentage = 0;
+    if (percentage <= 100) {
+      setTimeout(progress, stepSize);
     }
+    percentage += 0.7;
+    percentage = Number(percentage.toFixed(2));
+  }
 }()), stepSize);
+
 </script>
