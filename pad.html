@@ -1,146 +1,93 @@
+<!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery-3.2.1.min.js"></script>
-<style>
-body {
-  background: black;
-}
-table {
-  border-collapse: collapse;
-}
-td {
-  background: white;
-  border: 1px solid white;
-}
-img {
-  width: 50px;
-}
-.op {
-  opacity: 0.5;
-}
-</style>
+  <meta charset='UTF-8'>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+  <style>
+  body {
+    background: black;
+  }
+  </style>
 </head>
 <body>
-  <table id='table'>
-  </table>
+  <div class='mt-5 container'>
+    <table id='table' class='table text-center bg-light'>
+      <thead>
+        <tr>
+          <th scope='col'>#</th>
+          <th scope='col'>台幣匯率</th>
+          <th scope='col'>美金匯率</th>
+          <th scope='col'>韓元匯率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope='col'>台灣</th>
+          <th scope='col'>x</th>
+          <th scope='col'><input type='text' id=''/></th>
+          <th scope='col'><input type='text' id=''/></th>
+        </tr>
+        <tr>
+          <th scope='col'>韓國</th>
+          <th scope='col'><input type='text' id=''/></th>
+          <th scope='col'><input type='text' id=''/></th>
+          <th scope='col'>x</th>
+        </tr>
+        <tr>
+          <th scope='col'>==></th>
+          <th scope='col'><input type='text' id='' disabled readonly/></th>
+          <th scope='col'><input type='text' id='' disabled readonly/></th>
+          <th scope='col'><input type='text' id='' disabled readonly/></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    /*
+  var img = [
+      ['6', '限', 'https://img.game8.jp/947991/833f7865b932b980d0475e7b2c086d2f_2017-04-28.png/show?1493364060'],
+      ['6', '系', 'https://img.game8.jp/798740/ec2319d3c11922c02bc7c27b9205188f_2016-12-26.jpeg/show?1482742928']
+  ];
+  var table = $('table');
+  for (var i = 0, j = img.length; i < j;) {
+    var code = '';
+    code += '<tr>';
+      for (var k = 0; k < 5;k++,i++) {
+        code += '<td>';
+        code += '<img class='op' src='' + img[i] + ''/>';
+        code += '</td>';
+      }
+    code += '</tr>';
+    table.append(code);
+    if (i == 60) break;
+  }
+  $('img').on('click', function () {
+    console.log(this);
+    $(this).toggleClass('op');
+  });
+  /*
+  var src = [];
+  $('td a img').each(function(){
+    var img = this;
+    src.push(img.src);
+  });
+
+  var img = [];
+  $('a img.lazy').each(function () {
+    img.push($(this).attr('title'));
+    img.push($(this).attr('src'));
+  });
+  src.push(img);
+
+  $('tr.atwiki_tr_2').each(function () {
+    console.log($.trim($('td:nth-child(1)', this).text())); //No.
+    console.log($.trim($('td:nth-child(3)', this).text())); //レア度
+    console.log($.trim($(this).prev('tr').text())); //Name
+  });
+
+
+  */
+  </script>
 </body>
-<script>
-var img = [
-    ["6", "限", "https://img.game8.jp/947991/833f7865b932b980d0475e7b2c086d2f_2017-04-28.png/show?1493364060"],
-    ["6", "系", "https://img.game8.jp/798740/ec2319d3c11922c02bc7c27b9205188f_2016-12-26.jpeg/show?1482742928"],
-    ["6", "", "https://img.game8.jp/994652/bac91c24d4ee124f255689aafc78118c_2017-05-29.jpeg/show?1496043756"],
-    ["6", "", "https://img.game8.jp/1053888/596368af97d2ec9ec1042a56a2bf2cb2_2017-07-12.jpeg/show?1499844387"],
-    ["6", "", "https://img.game8.jp/1123929/fc73645b209df6013929e642ebedfa56_2017-08-30.jpeg/show?1504067720"],
-    ["6", "", "https://img.game8.jp/0_pd_m/i1587.jpg"],
-    ["6", "", "https://img.game8.jp/1276411/b3fd27bc0f5732536fab25468a307b79.jpeg/show?1511940015"],
-    ["6", "", "https://img.game8.jp/1276412/0520edbc7454d25c81085947261ff5ad.jpeg/show?1511940015"],
-    ["6", "", "https://img.game8.jp/0_pd_m/i1950.jpg"],
-    ["6", "", "https://img.game8.jp/175137/267084b024477472b2b8617c89af98b9_2015-12-10.jpeg/show?1449742485"],
-    ["6", "", "https://img.game8.jp/262888/afe1056a120ff1aea8482295d8f32b59_2016-05-12.jpeg/show?1463036074"],
-    ["6", "", "https://img.game8.jp/1147015/6ce0c0812e770b8ba719780b077bc88e_2017-09-14.png/show?1505385356"],
-    ["6", "", "https://img.game8.jp/928843/289a521810c7a09fb143fbb92ee5eebc_2017-04-13.jpeg/show?1492069973"],
-    ["6", "", "https://img.game8.jp/0_pd_m/i753.jpg"],
-    ["6", "", "https://img.game8.jp/0_pd_m/i498.jpg"],
-    ["6", "", "https://img.game8.jp/928844/e471df501f29bd685b312c5d7ee4a23d_2017-04-13.jpeg/show?1492069973"],
-    ["6", "", "https://img.game8.jp/798739/77a883db807e55901168f52ee02bc3a4_2016-12-26.jpeg/show?1482742928"],
-    ["6", "", "https://img.game8.jp/1147023/8c1154b314afbb5ccd547cbd7960815f_2017-09-14.png/show?1505385357"],
-    ["6", "", "https://img.game8.jp/798652/84aa588c0a069c5790b5afa70479dfd0_2016-12-26.jpeg/show?1482741350"],
-    ["6", "", "https://img.game8.jp/0_pd_m/i1107.jpg"],
-    ["", "", "https://img.game8.jp/1147017/8667a8078f4ba24ad2ddaa1ced34fc17_2017-09-14.png/show?1505385356"],
-    ["", "", "https://img.game8.jp/1276410/2eb04c09b7e3ce73ebe2956f19b331fa.jpeg/show?1511940015"],
-    ["", "", "https://img.game8.jp/329904/100f3d45391606ad9656d9b037814f50_2016-07-29.jpeg/show?1469763672"],
-    ["", "", "https://img.game8.jp/912583/e96259b0183e4b0dad8a85d0b152e2f0_2017-03-31.png/show?1490925315"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1673.jpg"],
-    ["", "", "https://img.game8.jp/301597/ae824ea50aa2a543d3e48ac4348aa850_2016-06-30.jpeg/show?1467248046"],
-    ["", "", "https://img.game8.jp/0_pd_m/i751.jpg"],
-    ["", "", "https://img.game8.jp/928840/70fe27fd708e9a3dc8ed70e886e042ea_2017-04-13.jpeg/show?1492069972"],
-    ["", "", "https://img.game8.jp/0_pd_m/i803.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1336.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i138.jpg"],
-    ["", "", "https://img.game8.jp/155538/64e3b2843a210ef446ce69a0255ea449_2015-10-08.jpeg/show?1444287628"],
-    ["", "", "https://img.game8.jp/329890/361c53b2967645ee33c44733b3e37738_2016-07-29.jpeg/show?1469763408"],
-    ["", "", "https://img.game8.jp/0_pd_m/i496.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i140.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i2147.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i122.jpg"],
-    ["", "", "https://img.game8.jp/1147020/1f594a1fd4ec6ebf9acab518e8dd14fd_2017-09-14.png/show?1505385357"],
-    ["", "", "https://img.game8.jp/0_pd_m/i628.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i571.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1585.jpg"],
-    ["", "", "https://img.game8.jp/798654/6265fa226ee5dcf7741f584040789f63_2016-12-26.jpeg/show?1482741350"],
-    ["", "", "https://img.game8.jp/1147018/5be1a4566ce36ff3d3007fe8fccf1438_2017-09-14.png/show?1505385356"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1073.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i492.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1235.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i2145.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i242.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i134.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i626.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i911.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i638.jpg"],
-    ["", "", "https://img.game8.jp/392856/5b14998dd2a2db159ec47dd8dd2a1e07_2016-09-14.jpeg/show?1473834929"],
-    ["", "", "https://img.game8.jp/0_pd_m/i130.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i494.jpg"],
-    ["", "", "https://img.game8.jp/262879/2b70c43ab3233d71f37fb0577848678a_2016-05-12.jpeg/show?1463035813"],
-    ["", "", "https://img.game8.jp/392858/e15ac4526dffd0da701cc97a5d94630c_2016-09-14.jpeg/show?1473834929"],
-    ["", "", "https://img.game8.jp/0_pd_m/i370.jpg"],
-    ["", "", "https://img.game8.jp/557366/06a3e40a037f04f73105004ae99e4e85_2016-10-26.jpeg/show?1477473335"],
-    ["", "", "https://img.game8.jp/0_pd_m/i364.jpg"],
-    ["", "", "https://img.game8.jp/947991/833f7865b932b980d0475e7b2c086d2f_2017-04-28.png/show?1493364060"],
-    ["", "", "https://img.game8.jp/1053888/596368af97d2ec9ec1042a56a2bf2cb2_2017-07-12.jpeg/show?1499844387"],
-    ["", "", "https://img.game8.jp/0_pd_m/i498.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1336.jpg"],
-    ["", "", "https://img.game8.jp/928843/289a521810c7a09fb143fbb92ee5eebc_2017-04-13.jpeg/show?1492069973"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1587.jpg"],
-    ["", "", "https://img.game8.jp/1123929/fc73645b209df6013929e642ebedfa56_2017-08-30.jpeg/show?1504067720"],
-    ["", "", "https://img.game8.jp/994652/bac91c24d4ee124f255689aafc78118c_2017-05-29.jpeg/show?1496043756"],
-    ["", "", "https://img.game8.jp/0_pd_m/i1674.jpg"],
-    ["", "", "https://img.game8.jp/0_pd_m/i496.jpg"],
-    ["", "", "https://img.game8.jp/1276002/4c86d5043eddfd07fde15b5494157fbc.jpeg/show?1511936005"],
-    ["", "", "https://img.game8.jp/798742/d6686447081e5df044d355dd211b5512_2016-12-26.jpeg/show?1482742928"],
-    ["", "", "https://img.game8.jp/1324568/fe0937ea544ff90a3a0c206747eb60e5.jpeg/show?1514257658"]
-];
-var table = $('table');
-for (var i = 0, j = img.length; i < j;) {
-  var code = '';
-  code += '<tr>';
-    for (var k = 0; k < 5;k++,i++) {
-      code += '<td>';
-      code += '<img class="op" src="' + img[i] + '"/>';
-      code += '</td>';
-    }
-  code += '</tr>';
-  table.append(code);
-  if (i == 60) break;
-}
-$('img').on('click', function () {
-  console.log(this);
-  $(this).toggleClass('op');
-});
-/*
-var src = [];
-$('td a img').each(function(){
-  var img = this;
-  src.push(img.src);
-});
-
-var img = [];
-$('a img.lazy').each(function () {
-  img.push($(this).attr('title'));
-  img.push($(this).attr('src'));
-});
-src.push(img);
-
-
-//https://www18.atwiki.jp/pazdra/pages/12956.html
-
-$('tr.atwiki_tr_2').each(function () {
-  console.log($.trim($('td:nth-child(1)', this).text())); //No.
-  console.log($.trim($('td:nth-child(3)', this).text())); //レア度
-  console.log($.trim($(this).prev('tr').text())); //Name
-});
-
-
-*/
-</script>
 </html>
