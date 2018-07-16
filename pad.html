@@ -25,31 +25,34 @@
         <tr>
           <th scope='col'>台灣</th>
           <th scope='col'>x</th>
-          <th scope='col'><input type='text' id=''/></th>
-          <th scope='col'><input type='text' id=''/></th>
+          <th scope='col'><input type='text' id='' value='0' autocomplete='off'/></th>
+          <th scope='col'><input type='text' id='' value='0' autocomplete='off'/></th>
         </tr>
         <tr>
           <th scope='col'>韓國</th>
-          <th scope='col'><input type='text' id=''/></th>
-          <th scope='col'><input type='text' id=''/></th>
+          <th scope='col'><input type='text' id='' value='0' autocomplete='off'/></th>
+          <th scope='col'><input type='text' id='' value='0' autocomplete='off'/></th>
           <th scope='col'>x</th>
         </tr>
         <tr>
           <th scope='col'>==></th>
-          <th scope='col'><input type='text' id='' disabled readonly/></th>
-          <th scope='col'><input type='text' id='' disabled readonly/></th>
-          <th scope='col'><input type='text' id='' disabled readonly/></th>
+          <th scope='col'><input type='text' id='' value='0' autocomplete='off' disabled readonly/></th>
+          <th scope='col'><input type='text' id='' value='0' autocomplete='off' disabled readonly/></th>
+          <th scope='col'><input type='text' id='' value='0' autocomplete='off' disabled readonly/></th>
         </tr>
       </tbody>
     </table>
   </div>
   <script>
+    let input = $('input');
+    input.on('keyup', (e) => {
+      let me = e.target;
+      console.log(me, me.value);
+      if (me.value == '') me.value = 0;
+    });
+
+
     /*
-  var img = [
-      ['6', '限', 'https://img.game8.jp/947991/833f7865b932b980d0475e7b2c086d2f_2017-04-28.png/show?1493364060'],
-      ['6', '系', 'https://img.game8.jp/798740/ec2319d3c11922c02bc7c27b9205188f_2016-12-26.jpeg/show?1482742928']
-  ];
-  var table = $('table');
   for (var i = 0, j = img.length; i < j;) {
     var code = '';
     code += '<tr>';
