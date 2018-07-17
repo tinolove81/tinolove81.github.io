@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+  <style>
+  body {
+    background: lightgray;
+  }
+  input.currency {
+    text-align: right;
+  }
+  </style>
+</head>
+<body>
+  <div class='mt-5 p-5 container bg-info'>
+    <table id='table' class='m-0 table text-center bg-light'>
+      <thead>
+        <tr class='table-primary'>
+          <th>#</th>
+          <th>台幣匯率</th>
+          <th>美金匯率</th>
+          <th>韓元匯率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>台灣</th>
+          <td>x</td>
+          <td><input type='text' id='iNTUS' class='rate' value='0' autocomplete='on'/></td>
+          <td><input type='text' id='iNTKR' class='rate' value='0' autocomplete='on'/></td>
+        </tr>
+        <tr>
+          <th>韓國</th>
+          <td><input type='text' id='iKRNT' class='rate' value='0' autocomplete='on'/></td>
+          <td><input type='text' id='iKRUS' class='rate' value='0' autocomplete='on'/></td>
+          <td>x</td>
+        </tr>
+        <tr class='table-primary'>
+          <th>$ <input type='text' id='iMoney' value='10000' autocomplete='on'/> NTD</th>
+          <th>在台灣換</th>
+          <th>在韓國換</th>
+          <th>相差</th>
+        </tr>
+        <tr id='SUMNTKR'>
+          <th>用台幣換</th>
+          <td><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</td>
+          <td><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</td>
+          <td><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW </td>
+        </tr>
+        <tr id='SUMUSKR'>
+          <th>用美金換</th>
+          <td><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</td>
+          <td><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</td>
+          <td><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    let irate = $('input.rate');
+    let iMoney = $('input#iMoney');
+    irate.on('change', (e) => {
+      let me = e.target;
+      if (me.value == '') {
+        me.value = 0;
+      } else {
+        changeMoney();
+      }
+    });
+    iMoney.on('keyup', (e) => {
+      let me = e.target;
+      if (me.value == '') {
+        me.value = 0;
+      } else {
+        me.value = showCurrency(me.value.replace(/,/g, ''), 0);
+        changeMoney();
+      }
+    });
+    function changeMoney() {
+      console.log('exChange!');
+      let Money = Number($('input#iMoney').val().replace(/,/g, ''));
+      let iNTUS = Number($('input#iNTUS').val());
+      let iNTKR = Number($('input#iNTKR').val());
+
+      let iKRNT = Number($('input#iKRNT').val());
+      let iKRUS = Number($('input#iKRUS').val());
+
+      let SUMNTKR = $('#SUMNTKR');
+      let NTKR1 = (Money / iNTKR);
+      let NTKR2 = (Money / ( 1 / iKRNT));
+      $('input:nth(0)', SUMNTKR).val( showCurrency(NTKR1, 2) );
+      $('input:nth(1)', SUMNTKR).val( showCurrency(NTKR2, 2) );
+      $('input:nth(2)', SUMNTKR).val( showCurrency(NTKR1 - NTKR2, 2) );
+      if ((NTKR1 - NTKR2) > 0) {
+        $('input:nth(2)', SUMNTKR).removeClass('text-danger').addClass('text-success');
+      } else {
+        $('input:nth(2)', SUMNTKR).removeClass('text-success').addClass('text-danger');
+      }
+
+      let SUMUSKR = $('#SUMUSKR');
+      let USKR1 = (Money / iNTKR);
+      let USKR2 = (Money / iNTUS * iKRUS);
+      $('input:nth(0)', SUMUSKR).val( showCurrency(USKR1, 2) );
+      $('input:nth(1)', SUMUSKR).val( showCurrency(USKR2, 2) );
+      $('input:nth(2)', SUMUSKR).val( showCurrency(USKR1 - USKR2, 2) );
+      if ((USKR1 - USKR2) > 0) {
+        $('input:nth(2)', SUMUSKR).removeClass('text-danger').addClass('text-success');
+      } else {
+        $('input:nth(2)', SUMUSKR).removeClass('text-success').addClass('text-danger');
+      }
+    }
+
+    function showCurrency(params, d) {
+      if (!isNaN(params)) {
+        return Number(params).toLocaleString(undefined, {
+          minimumFractionDigits: d,
+          maximumFractionDigits: 2
+        });
+      } else {
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>
