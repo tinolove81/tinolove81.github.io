@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+    <title>403 Forbidden.</title>
+    <style>
+        body {
+            background: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player">
+        <video id="video"></video>
+    </div>
+    <script>
+        let link = "http://camerabaymbr-walkgame.cdn.hinet.net/walkgame-camerabaymbr/smil:mbrmaster.smil/chunklist_b2128000.m3u8";
+        if (Hls.isSupported()) {
+            var video = document.getElementById('video');
+            var hls = new Hls();
+            hls.loadSource(link);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        }
+    </script>
+</body>
+
+</html>
