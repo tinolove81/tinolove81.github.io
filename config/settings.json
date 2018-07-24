@@ -1,0 +1,28 @@
+{
+  "editor.minimap.enabled": false,
+  "editor.detectIndentation": true,
+  "files.autoSave": "onWindowChange",
+  "workbench.colorTheme": "Monokai",
+  "workbench.colorCustomizations": {
+    //搜索匹配的背景色
+    "editor.findMatchBackground": "#ffff00",
+    "editor.findMatchHighlightBackground": "#00FF00"
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#E29393"
+  },
+  /** Easy Sass 插件 **/
+  "easysass.formats": [
+    {
+      "format": "expanded",
+      "extension": ".css"
+    }
+  ],
+  "easysass.targetDir": "./css/",
+  "workbench.activityBar.visible": false,
+  "workbench.sideBar.location": "left",
+  "window.menuBarVisibility": "default",
+  "editor.multiCursorModifier": "alt",
+  "git.ignoreMissingGitWarning": true,
+  "editor.tabSize": 4
+}
