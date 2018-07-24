@@ -6,4 +6,5 @@
  >  Visual Studio Code setting
  + vscode-settings.json
  >  Visual Studio Code setting
-     //%APPDATA%\Code\User\settings.json
+
+ //%APPDATA%\Code\User\settings.json
