@@ -4,8 +4,9 @@
 <head>
     <meta charset='UTF-8'>
     <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <!-- <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script> -->
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
+    <link rel='icon' href='./favicon.ico' type='image/x-icon'>
     <title>Goodbye world !</title>
     <style>
         html,
@@ -15,34 +16,96 @@
             background: black;
         }
 
+        ._card {
+            width: 100%;
+            color: white;
+            text-align: center;
+            font-size: 70px;
+            font-family: 'りいてがき筆';
+            background: black;
+        }
+
+        ._item {
+            position: relative;
+            display: none;
+            align-items: center;
+            width: 100%;
+            transition: all .6s ease;
+        }
+        
+        ._item.active {
+            display: block;
+        }
+
+        ._control {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 15%;
+            text-align: center;
+            opacity: 0;
+            transition: all .3s ease;
+        }
+        ._control:hover {
+            opacity: .5;
+        }
+        ._control.left {
+            left: 0;
+        }
+        ._control.right {
+            right: 0;
+        }
+
         p {
             margin: 0;
             padding: 0;
         }
 
-        .font {
-            font-size: 70px;
-            font-family: りいてがき筆;
-        }
-
         @font-face {
             font-family: りいてがき筆;
-            src: local("りいてがき筆"),
+            src: local('りいてがき筆'),
             url(./public/RiiT.otf);
         }
     </style>
 </head>
 
 <body class='d-flex'>
-    <div class='font m-auto text-center text-light'>
-        <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
-        <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
-        <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
-        <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
-        <span class='d-none'>時に = ～的時候～</span>
+    <div class='_card m-auto'>
+        <div class='_item active'>
+            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
+            <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
+            <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
+            <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
+            <span class='d-none'>時に = ～的時候～</span>
+        </div>
+        <div class='_item'>
+            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
+            <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
+            <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
+            <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
+            <span class='d-none'>時に = ～的時候～</span>
+        </div>
+        <div class='_item'>
+            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
+            <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
+            <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
+            <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
+            <span class='d-none'>時に = ～的時候～</span>
+        </div>
+        <a class='_control left' href='#'>
+            <span class='carousel-control-prev-icon'></span>
+        </a>
+        <a class='_control right' href='#'>
+            <span class='carousel-control-next-icon'></span>
+        </a>
     </div>
+
     <script>
-        let p = $('p');
+        let btn_left = $('._control.left');
+        let btn_right = $('._control.right');
     </script>
 </body>
 
