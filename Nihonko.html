@@ -30,11 +30,17 @@
             display: none;
             align-items: center;
             width: 100%;
-            transition: all .6s ease;
+            opacity: 0;
         }
-        
+        ._item.fadein {
+            transition: opacity .3s ease-in;
+        }
+        ._item.in {
+            display: block;
+        }
         ._item.active {
             display: block;
+            opacity: 1;
         }
 
         ._control {
@@ -47,7 +53,7 @@
             width: 15%;
             text-align: center;
             opacity: 0;
-            transition: all .3s ease;
+            transition: all .1s linear;
         }
         ._control:hover {
             opacity: .5;
@@ -74,26 +80,20 @@
 
 <body class='d-flex'>
     <div class='_card m-auto'>
-        <div class='_item active'>
+        <div class='_item fadein active'>
             <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
             <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
             <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
             <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
             <span class='d-none'>時に = ～的時候～</span>
         </div>
-        <div class='_item'>
-            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
+        <div class='_item fadein'>
+            <p><ruby>誰<rt>だれ</rt></ruby>も<span class='text-danger'><ruby>見<rt>み</rt></ruby>てない</span><ruby>時<rt>とき</rt></ruby>に　　　</p>
             <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
-            <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
-            <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
-            <span class='d-none'>時に = ～的時候～</span>
         </div>
-        <div class='_item'>
+        <div class='_item fadein'>
             <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
-            <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
-            <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
-            <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
-            <span class='d-none'>時に = ～的時候～</span>
+            <p>　　　　<span class='text-danger'>あなた</span>は<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
         </div>
         <a class='_control left' href='#'>
             <span class='carousel-control-prev-icon'></span>
@@ -104,8 +104,35 @@
     </div>
 
     <script>
-        let btn_left = $('._control.left');
-        let btn_right = $('._control.right');
+        let col = $('._card ._item');
+
+        $('._control.left').on('click', (e) => {
+            let idx = col.index( $('._card ._item.active') );
+            col.removeClass('active');
+            if (idx - 1 < 0) {
+                idx = col.length - 1;
+            } else {
+                idx = idx - 1;
+            }
+            showslow( $('._card ._item:nth('+ idx +')') );
+        });
+        $('._control.right').on('click', (e) => {
+            let idx = col.index( $('._card ._item.active') );
+            col.removeClass('active');
+            if (idx + 1 >= col.length) {
+                idx = 0;
+            } else {
+                idx = idx + 1;
+            }
+            showslow( $('._card ._item:nth('+ idx +')') );
+        });
+        
+        function showslow(element) {
+                element.addClass('in');
+            setTimeout( () => {
+                element.addClass('active').removeClass('in');
+            }, 100);
+        }
     </script>
 </body>
 
