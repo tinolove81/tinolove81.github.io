@@ -1,184 +1,202 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='UTF-8'>
-  <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-  <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script>
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
-  <style>
-    input.currency {
-      text-align: right;
-    }
-  </style>
-</head>
-<body>
-  <!-- Modal TWBank -->
-  <div class='modal fade' id='TWBankModal' tabindex='-1'>
-    <div class='modal-dialog modal-dialog-centered'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <h5 class='modal-title' id='exampleModalLabel'>TW Bank Modal</h5>
-          <button type='button' class='close' data-dismiss='modal' aria-label='Close'>&times;</button>
-        </div>
-        <div class='modal-body'>
-        </div>
-        <div class='modal-footer'><button type='button' class='btn btn-sm btn-secondary' data-dismiss='modal'>Close</button></div>
-      </div>
-    </div>
-  </div>
-  <!-- /Modal TWBank -->
-  <div class='m-5 p-4 card text-monospace border rounded'>
-    <div class='card-body container-fluid bg-light rounded'>
-      <div class='row'>
-        <div class='col-lg-2'>@台灣</div>
-        <div class='col-lg-4'>美金匯率：<input type='text' id='iNTUS' class='rate' value='0' autocomplete='on'/></div>
-        <div class='col-lg-4'>韓元匯率：<input type='text' id='iNTKR' class='rate' value='0' autocomplete='on'/></div>
-        <div class='col-lg-2 text-right'><a href='https://rate.bot.com.tw/xrt?Lang=zh-TW' target='_blank'>&gt;台銀匯率</a></div>
-      </div>
-      <div class='row'>
-        <div class='col-lg-2'>@韓國</div>
-        <div class='col-lg-4'>美金匯率：<input type='text' id='iKRUS' class='rate' value='0' autocomplete='on'/></div>
-        <div class='col-lg-4'>台幣匯率：<input type='text' id='iKRNT' class='rate' value='0' autocomplete='on'/></div>
-      </div>
-      <hr>
-      <div class='row'>
-        <div class='col-6 col-lg-2'>$你的預算　　　：</div>
-        <div class='col-6 col-lg'><input type='text' id='iMoney' value='10,000' autocomplete='on'/> NTD</div>
-      </div>
-      <div id='SUMNTKR' class='row'>
-        <div class='col-8 col-md-6 col-lg-2'>&gt;在台灣用台幣換：</div>
-        <div class='col-6 col-lg'><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
-      </div>
-      <div id='SUMKRNT' class='row'>
-        <div class='col-8 col-md-6 col-lg-2'>&gt;在韓國用台幣換：</div>
-        <div class='col-6 col-lg'><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
-        <div class='col-6 col-lg'>-相差：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
-        <div class='col-6 col-lg'>=換算：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> NTD</div>
-      </div>
-      <div id='SUMKRUS' class='row'>
-        <div class='col-8 col-md-6 col-lg-2'>&gt;在韓國用美金換：</div>
-        <div class='col-6 col-lg'><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
-        <div class='col-6 col-lg'>-相差：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
-        <div class='col-6 col-lg'>=換算：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> NTD</div>
-      </div>
-      <div id='SUMKRALL' class='row'>
-        <div class='col-8 col-md-6 col-lg-2'>&gt;在韓國幣值相差：</div>
-        <div class='col-6 col-lg d-none d-lg-block'>　</div>
-        <div class='col-6 col-lg'>-相差：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
-        <div class='col-6 col-lg'>=換算：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> NTD</div>
-      </div>
-      <hr>
-      <div id='Message' class='row'>
-        <div class='col-lg-2'>#總結：</div>
-        <div class='col-lg'></div>
-        <div class='col-lg-3'></div>
-      </div>
-    </div>
-  </div>
 
-  <script>
+<head>
+    <meta charset='UTF-8'>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
+    <style>
+        input.currency {
+            text-align: right;
+        }
+        row:hover {
+            background: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modal -->
+    <div class='modal fade' id='TWBankModal' tabindex='-1'>
+        <div class='modal-dialog modal-dialog-centered'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+            <h5 class='modal-title' id='exampleModalLabel'>TW Bank Modal</h5>
+            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>&times;</button>
+            </div>
+            <div class='modal-body'>
+            </div>
+            <div class='modal-footer'><button type='button' class='btn btn-sm btn-secondary' data-dismiss='modal'>Close</button></div>
+        </div>
+        </div>
+    </div>
+    <!-- /Modal -->
+    <div class='m-5 p-4 card text-monospace border rounded'>
+        <div class='card-body container-fluid bg-light rounded'>
+            <div class='row'>
+                <div class='col-lg-2'>@台灣(現金賣出)</div>
+                <div class='col-lg-4'>美金匯率：<input type='text' id='iNTUS' class='rate' value='0' autocomplete='on'/></div>
+                <div class='col-lg-4'>韓元匯率：<input type='text' id='iNTKR' class='rate' value='0' autocomplete='on'/></div>
+                <div class='col-lg-2 text-right'><a href='https://rate.bot.com.tw/xrt?Lang=zh-TW' target='_blank'>&gt;台銀匯率</a></div>
+            </div>
+            <div class='row'>
+                <div class='col-lg-2'>@韓國</div>
+                <div class='col-lg-4'>美金匯率：<input type='text' id='iKRUS' class='rate' value='0' autocomplete='on'/></div>
+                <div class='col-lg-4'>台幣匯率：<input type='text' id='iKRNT' class='rate' value='0' autocomplete='on'/></div>
+            </div>
+            <hr>
+            <div class='row'>
+                <div class='col-lg-2'>$你的預算：</div>
+                <div class='col-lg'><input type='text' id='iMoney' value='10,000' autocomplete='on'/> NTD</div>
+                <div class='col-lg d-none d-lg-block text-center'></div>
+                <div class='col-lg d-none d-lg-block text-center'></div>
+            </div>
+            <div id='SUMNTKR' class='row'>
+                <div class='col-md-6 col-lg-2'>&gt;在台灣用台幣換：</div>
+                <div class='col-lg'><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
+                <div class='col-lg d-none d-lg-block text-center'></div>
+                <div class='col-lg d-none d-lg-block text-center'></div>
+            </div>
+            <div id='SUMKRNT' class='row'>
+                <div class='col-md-6 col-lg-2'>&gt;在韓國用台幣換：</div>
+                <div class='col-lg'><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
+                <div class='col-lg'>-相差：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
+                <div class='col-lg'>=換算：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> NTD</div>
+            </div>
+            <div id='SUMKRUS' class='row'>
+                <div class='col-md-6 col-lg-2'>&gt;在韓國用美金換：</div>
+                <div class='col-lg'><input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
+                <div class='col-lg'>-相差：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
+                <div class='col-lg'>=換算：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> NTD</div>
+            </div>
+            <div id='SUMKRALL' class='row'>
+                <div class='col-md-6 col-lg-2'>&gt;在韓國幣值相差：</div>
+                <div class='col-lg d-none d-lg-block'></div>
+                <div class='col-lg'>-相差：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> KRW</div>
+                <div class='col-lg'>=換算：<input type='text' class='currency' value='0' autocomplete='off' disabled readonly/> NTD</div>
+            </div>
+            <hr>
+            <div id='Message' class='row'>
+                <div class='col-lg-2'>#總結：</div>
+                <div class='col-lg'></div>
+                <div class='col-lg-3'></div>
+            </div>
+        </div>
+    </div>
+    <div class='d-none'>
+
+
+
+    </div>
+
+    <script>
     let irate = $('input.rate');
     let iMoney = $('input#iMoney');
 
+    /******************************
+    *     Event Listener          *
+    ******************************/
     irate.on('change', (e) => {
-      let me = e.target;
-      if (me.value == '') {
-        me.value = 0;
-      } else {
-        changeMoney();
-      }
+        let me = e.target;
+        if (me.value == '') {
+            me.value = 0;
+        } else {
+            changeMoney();
+        }
     });
     iMoney.on('keyup', (e) => {
-      let me = e.target;
-      if (me.value == '') {
-        me.value = 0;
-      } else {
-        me.value = showCurrency(me.value.replace(/,/g, ''), 0);
-        changeMoney();
-      }
+        let me = e.target;
+        if (me.value == '') {
+            me.value = 0;
+        } else {
+            me.value = showCurrency(me.value.replace(/,/g, ''), 0);
+            changeMoney();
+        }
     });
 
     function changeMoney() {
-      console.log('exChange!');
-      let Money = Number($('input#iMoney').val().replace(/,/g, ''));
-      let iNTUS = Number($('input#iNTUS').val());
-      let iNTKR = Number($('input#iNTKR').val());
+        console.log('exChange!');
+        let Money = Number($('input#iMoney').val().replace(/,/g, ''));
+        let vNTUS = Number($('input#iNTUS').val());
+        let vNTKR = Number($('input#iNTKR').val());
 
-      let iKRUS = Number($('input#iKRUS').val());
-      let iKRNT = Number($('input#iKRNT').val());
+        let vKRUS = Number($('input#iKRUS').val());
+        let vKRNT = Number($('input#iKRNT').val());
 
-      let SUMNTKR = $('#SUMNTKR');
-      let NTKR1 = (Money / iNTKR);
-      $('input:nth(0)', SUMNTKR).val( showCurrency(NTKR1, 2) );
+        let SUMNTKR = $('#SUMNTKR');
+        let NTKR1 = (Money / vNTKR);
+        let sNTKR = $('input:nth(0)', SUMNTKR);
+        sNTKR.val(showCurrency(NTKR1, 2));
 
-      let SUMKRNT = $('#SUMKRNT');
-      let KRNT1 = (Money / ( 1 / iKRNT));
-      let MINUSKRNT = (NTKR1 - KRNT1);
-      $('input:nth(0)', SUMKRNT).val( showCurrency(KRNT1, 2) );
-      $('input:nth(1)', SUMKRNT).val( showCurrency(MINUSKRNT, 2) );
-      $('input:nth(2)', SUMKRNT).val( showCurrency(Math.abs(MINUSKRNT) / iKRNT, 2) );
-      if (MINUSKRNT > 0) {
-        $('input:nth(1)', SUMKRNT).removeClass('text-danger').addClass('text-success');
-      } else {
-        $('input:nth(1)', SUMKRNT).removeClass('text-success').addClass('text-danger');
-      }
+        let SUMKRNT = $('#SUMKRNT');
+        let KRNT1 = (Money / (1 / vKRNT));
+        let MINUSKRNT = (NTKR1 - KRNT1);
+        $('input:nth(0)', SUMKRNT).val(showCurrency(KRNT1, 2));
+        $('input:nth(1)', SUMKRNT).val(showCurrency(MINUSKRNT, 2));
+        $('input:nth(2)', SUMKRNT).val(showCurrency(Math.abs(MINUSKRNT) / vKRNT, 2));
+        if (MINUSKRNT > 0) {
+            $('input:nth(1)', SUMKRNT).removeClass('text-danger').addClass('text-success');
+        } else {
+            $('input:nth(1)', SUMKRNT).removeClass('text-success').addClass('text-danger');
+        }
 
-      let SUMKRUS = $('#SUMKRUS');
-      let KRUS1 = (Money / iNTUS * iKRUS);
-      let MINUSKRUS = (NTKR1 - KRUS1);
-      $('input:nth(0)', SUMKRUS).val( showCurrency(KRUS1, 2) );
-      $('input:nth(1)', SUMKRUS).val( showCurrency(MINUSKRUS, 2) );
-      $('input:nth(2)', SUMKRUS).val( showCurrency(Math.abs(MINUSKRUS) / iKRNT, 2) );
-      if (MINUSKRUS > 0) {
-        $('input:nth(1)', SUMKRUS).removeClass('text-danger').addClass('text-success');
-      } else {
-        $('input:nth(1)', SUMKRUS).removeClass('text-success').addClass('text-danger');
-      }
+        let SUMKRUS = $('#SUMKRUS');
+        let KRUS1 = (Money / vNTUS * vKRUS);
+        let MINUSKRUS = (NTKR1 - KRUS1);
+        $('input:nth(0)', SUMKRUS).val(showCurrency(KRUS1, 2));
+        $('input:nth(1)', SUMKRUS).val(showCurrency(MINUSKRUS, 2));
+        $('input:nth(2)', SUMKRUS).val(showCurrency(Math.abs(MINUSKRUS) / vKRNT, 2));
+        if (MINUSKRUS > 0) {
+            $('input:nth(1)', SUMKRUS).removeClass('text-danger').addClass('text-success');
+        } else {
+            $('input:nth(1)', SUMKRUS).removeClass('text-success').addClass('text-danger');
+        }
 
-      let SUMKRALL = $('#SUMKRALL');
-      let COUNT1 = (KRNT1 - KRUS1);
-      $('input:nth(0)', SUMKRALL).val( showCurrency(COUNT1, 2) );
-      $('input:nth(1)', SUMKRALL).val( showCurrency(Math.abs(COUNT1) / iKRNT, 2) );
-      if (COUNT1 > 0) {
-        $('input:nth(0)', SUMKRALL).removeClass('text-danger').addClass('text-success');
-      } else {
-        $('input:nth(0)', SUMKRALL).removeClass('text-success').addClass('text-danger');
-      }
+        let SUMKRALL = $('#SUMKRALL');
+        let COUNT1 = (KRNT1 - KRUS1);
+        $('input:nth(0)', SUMKRALL).val(showCurrency(COUNT1, 2));
+        $('input:nth(1)', SUMKRALL).val(showCurrency(Math.abs(COUNT1) / vKRNT, 2));
+        if (COUNT1 > 0) {
+            $('input:nth(0)', SUMKRALL).removeClass('text-danger').addClass('text-success');
+        } else {
+            $('input:nth(0)', SUMKRALL).removeClass('text-success').addClass('text-danger');
+        }
 
-      let Message = $('#Message');
-      let exArray = [Math.round(NTKR1), Math.round(KRNT1), Math.round(KRUS1)];
-      let MAX = exArray.indexOf(Math.max(...exArray)) + 3;
-      let msg = $('.card .card-body div.row:nth('+MAX+') div').html().split('：')[0];
-      let output = '';
-      let ps = '';
-      if (msg.indexOf('台幣') > -1) {
-        output += '在台灣用台幣，';
-      } else {
-        output += '在台灣換美金，';
-      }
-      if (msg.indexOf('韓國') > -1) {
-        output = output.replace(/用/, '領');
-        output += '去韓國再換韓元。';
-        ps += '多換 ' + $('.card .card-body div.row:nth('+MAX+') div:nth(3) input').val() + ' 韓元，賺！';
-      } else {
-        output += '直接換韓元。';
-      }
-      $('div:nth(1) input', '.card .card-body div.row:not(div.row:nth('+MAX+'))').removeClass('text-success');
-      $('.card .card-body div.row:nth('+MAX+') div:nth(1) input').addClass('text-success');
-      $('div:nth(1)', Message).html(output);
-      $('div:nth(2)', Message).html(ps);
+        let Message = $('#Message');
+        let exArray = [Math.round(NTKR1), Math.round(KRNT1), Math.round(KRUS1)];
+        let MAX = exArray.indexOf(Math.max(...exArray)) + 3;
+        let msg = $('.card .card-body div.row:nth(' + MAX + ') div').html().split('：')[0];
+        let output = '';
+        let ps = '';
+        if (msg.indexOf('台幣') > -1) {
+            output += '在台灣用台幣，';
+        } else {
+            output += '在台灣換美金(匯差會有手續費自己算)，';
+        }
+        if (msg.indexOf('韓國') > -1) {
+            output = output.replace(/用/, '領');
+            output += '去韓國再換韓元。';
+            ps += '多換 ' + $('.card .card-body div.row:nth(' + MAX + ') div:nth(3) input').val() + ' 韓元，賺！';
+        } else {
+            output += '直接換韓元。';
+        }
+        $('div:nth(1) input', '.card .card-body div.row:not(div.row:nth(' + MAX + '))').removeClass('text-success');
+        $('.card .card-body div.row:nth(' + MAX + ') div:nth(1) input').addClass('text-success');
+        $('div:nth(1)', Message).html(output);
+        $('div:nth(2)', Message).html(ps);
     }
 
     function showCurrency(params, d) {
-      if (!isNaN(params)) {
-        return Number(params).toLocaleString(undefined, {
-          minimumFractionDigits: d,
-          maximumFractionDigits: 2
-        });
-      } else {
-        return '0';
-      }
+        if (!isNaN(params)) {
+            return Number(params).toLocaleString(undefined, {
+                minimumFractionDigits: d,
+                maximumFractionDigits: 2
+            });
+        } else {
+            return '0';
+        }
     }
-  </script>
+    </script>
 </body>
 </html>
