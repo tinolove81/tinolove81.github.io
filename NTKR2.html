@@ -3,6 +3,7 @@
 
 <head>
     <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
     <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script>
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
@@ -85,9 +86,9 @@
         </div>
     </div>
     <div class='d-none'>
-
-
-
+    </div>
+    <div class='fixed-bottom text-right'>
+        Width: <span>0</span> px
     </div>
 
     <script>
@@ -114,7 +115,15 @@
             changeMoney();
         }
     });
+    $(window).resize(function() {
+        let wdth = $(window).width();
+        $('.fixed-bottom span').text(wdth);
+    });
+    $('.fixed-bottom span').text($(window).width());
 
+    /******************************
+    *     Local Function          *
+    ******************************/
     function changeMoney() {
         console.log('exChange!');
         let Money = Number($('input#iMoney').val().replace(/,/g, ''));
