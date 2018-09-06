@@ -1,0 +1,210 @@
+#----特殊顯示
+Show
+	BaseType "Sorcerer Boots" "Occultist's Vestment" "Ambusher" "Vaal Regalia" "Moonstone Ring" "Elegant Sword"
+	Rarity = Normal
+	SetFontSize 32
+	SetBackgroundColor 255 0 0 100
+
+#----稀有基底
+Show
+	BaseType "Steel Ring" "Opal Ring" "Blue Pearl Amulet" "Marble Amulet" "Vanguard Belt" "Crystal Belt" "Bone Helmet" "Two-Toned Boots" "Spiked Gloves" "Gripped Gloves" "Fingerless Silk Gloves" "Divine Vessel"
+	Rarity < Unique
+	SetFontSize 32
+	SetBackgroundColor 0 255 0
+
+#----功能水瓶
+Show
+	Class "Utility Flasks"
+	Rarity < Unique
+	SetFontSize 32
+	SetBackgroundColor 0 0 255 100
+
+#----傳奇裝
+Show
+	Rarity = Unique
+	SetFontSize 35
+  SetBorderColor 180 95 50
+	SetBackgroundColor 255 255 255
+  
+#----5連+六連
+Show
+	LinkedSockets >= 5
+	SetBorderColor 128 255 128
+
+#----6洞
+Show
+	Sockets = 6
+	SetBorderColor 128 128 128
+
+#----3色相連
+Show
+	SocketGroup RGB
+	SetFontSize 32
+	SetBorderColor 128 128 128
+
+#----寶珠
+Show
+	Class "Jewel"
+	SetFontSize 32
+	SetBorderColor 255 128 255
+
+#----特殊技能石
+Show
+	Class "Skill Gems"
+	BaseType "Enlighten" "Empower" "Enhance" "Portal"
+	SetBorderColor 128 200 200
+
+#----精良的技能石
+Show
+	Class "Skill Gems"
+	Quality >= 10
+	SetFontSize 32
+	SetBorderColor 0 128 128
+
+#----H通貨
+Show
+	BaseType "Mirror of Kalandra" "Vaal Orb" "Exalted Orb" "Orb of Regret" "Orb of Scouring" "Divine Orb" "Blessed Orb" "Chaos Orb" "Regal Orb" "Orb of Alchemy" "Orb of Chance" "Orb of Fusing" "Chromatic Orb" "Jeweller's Orb" "Gemcutter's Prism" "Cartographer's Chisel" "Glassblower's Bauble" "Albino Rhoa Feather" "Perandus Coin" "Silver Coin"
+	Class "Currency"
+	SetBorderColor 30 144 255
+	PlayAlertSound 4
+  MinimapIcon 1 Green Circle
+	PlayEffect Green
+#---- 裂片
+Show
+	BaseType "Splinter of Chayula" "Splinter of Esh" "Splinter of Tul" "Splinter of Uul-Netol" "Splinter of Xoph"
+	SetFontSize 33
+	SetTextColor 144 30 255 255
+	SetBorderColor 144 30 255 255
+  
+#---- 通貨
+Show
+	Class "Currency"
+	SetFontSize 32
+	SetBorderColor 30 144 255 128
+  MinimapIcon 2 Green Circle
+
+#---- 命運卡
+Show
+	Class "Divination Card"
+	SetBorderColor 128 255 255
+
+#---- 迷宮道具
+Show
+	Class "Labyrinth"
+	SetBorderColor 128 255 255
+
+#----塑界裝
+Show
+	ElderItem True
+	SetBorderColor 255 0 0 200
+#----塑界裝
+Show
+	ShaperItem True
+	SetBorderColor 255 0 0 200
+#----雕塑地圖
+Show
+	ShapedMap True
+	SetBorderColor 255 0 0 200
+
+#---- 入侵道具
+Show
+	Class "Incursion"
+	SetBorderColor 128 255 255
+
+#---- 魚竿
+Show
+	Class "Fishing Rods"
+	SetBorderColor 255 255 255 128
+	SetBackgroundColor 255 255 255 128
+
+#----T12+地圖
+Show
+	Class Map
+	DropLevel >= 79
+	SetFontSize 35
+	SetBorderColor 255 128 255
+
+#----T6-11地圖
+Show
+	Class Map
+	DropLevel >= 73
+	SetFontSize 32
+	SetBorderColor 255 128 255
+
+#----T1-6地圖
+Show
+	Class Map
+	DropLevel < 73
+	SetFontSize 28
+	SetBackgroundColor 50 50 50 50
+	SetBorderColor 255 128 255 200
+
+#----鎚子換釘子
+Show
+	BaseType "Stone Hammer" "Rock Breaker" "Gavel"
+	Rarity = Normal
+	SetFontSize 28
+	SetBackgroundColor 120 120 120 
+ 
+#Show
+#	DropLevel >= 68
+#	SetFontSize 29
+
+Show
+	Class "Amulet" "Ring" "Belt" "Quiver" 
+	
+
+#----隱藏, 藥劑特別分類
+Hide
+	Class "Life Flasks" "Mana Flasks"
+	DropLevel < 20
+	ItemLevel >= 20
+	Rarity <= Magic
+	SetFontSize 10
+	SetBackgroundColor 50 50 50 100
+Hide
+	Class "Life Flasks" "Mana Flasks"
+	DropLevel < 40
+	ItemLevel >= 40
+	Rarity <= Magic
+	SetFontSize 10
+	SetBackgroundColor 50 50 50 100
+Hide
+	Class "Life Flasks" "Mana Flasks"
+	DropLevel < 60
+	ItemLevel >= 60
+	Rarity <= Magic
+	SetFontSize 10
+	SetBackgroundColor 50 50 50 100
+
+#----隱藏, 低等藍白裝
+Hide
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres""Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" 
+	DropLevel < 72
+	ItemLevel >= 72
+	Rarity <= Magic
+	SetFontSize 10
+	SetBackgroundColor 50 50 50 100
+Hide
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres""Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" 
+	DropLevel < 60
+	ItemLevel >= 60
+	Rarity <= Magic
+	SetFontSize 10
+	SetBackgroundColor 50 50 50 100
+Hide
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres""Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" 
+	DropLevel < 40
+	ItemLevel >= 40
+	Rarity <= Rare
+	SetFontSize 10
+	SetBackgroundColor 50 50 50 100
+
+#Show
+#	SetFontSize 10
+#	SetBackgroundColor 50 50 50 100
+
+Hide
+	Rarity <= Magic
+	SetFontSize 28
+	SetBackgroundColor 50 50 50 100
