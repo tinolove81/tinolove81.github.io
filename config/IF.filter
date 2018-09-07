@@ -1,210 +1,289 @@
 #----特殊顯示
 Show
-	BaseType "Sorcerer Boots" "Occultist's Vestment" "Ambusher" "Vaal Regalia" "Moonstone Ring" "Elegant Sword"
+	BaseType "Sorcerer Boots" "Occultist's Vestment" "Vaal Regalia"
 	Rarity = Normal
 	SetFontSize 32
 	SetBackgroundColor 255 0 0 100
 
-#----稀有基底
-Show
-	BaseType "Steel Ring" "Opal Ring" "Blue Pearl Amulet" "Marble Amulet" "Vanguard Belt" "Crystal Belt" "Bone Helmet" "Two-Toned Boots" "Spiked Gloves" "Gripped Gloves" "Fingerless Silk Gloves" "Divine Vessel"
-	Rarity < Unique
-	SetFontSize 32
-	SetBackgroundColor 0 255 0
-
-#----功能水瓶
-Show
-	Class "Utility Flasks"
-	Rarity < Unique
-	SetFontSize 32
-	SetBackgroundColor 0 0 255 100
-
-#----傳奇裝
+### ------------------------  #
+###      傳奇裝備防止線        #
+### ------------------------ #
 Show
 	Rarity = Unique
 	SetFontSize 35
-  SetBorderColor 180 95 50
+    SetBorderColor 175 96 37
 	SetBackgroundColor 255 255 255
-  
-#----5連+六連
-Show
-	LinkedSockets >= 5
-	SetBorderColor 128 255 128
+  	MinimapIcon 0 Brown Star
+	PlayEffect Brown
 
-#----6洞
+### ------------------------  #
+###      特殊條件             #
+### ------------------------ #
+#---- 6連
+Show
+	LinkedSockets = 6
+	SetBorderColor 128 255 128
+  	MinimapIcon 0 Brown Star
+#---- 6洞
 Show
 	Sockets = 6
 	SetBorderColor 128 128 128
-
+  	MinimapIcon 0 Yellow Hexagon
+#---- 5連
+Show
+	LinkedSockets = 5
+	SetBorderColor 128 255 128
+  	MinimapIcon 2 White Hexagon
 #----3色相連
 Show
 	SocketGroup RGB
 	SetFontSize 32
 	SetBorderColor 128 128 128
-
-#----寶珠
+  	MinimapIcon 2 White Hexagon
+#----功能水瓶
 Show
-	Class "Jewel"
+	Class "Utility Flasks"
 	SetFontSize 32
-	SetBorderColor 255 128 255
+	SetBackgroundColor 0 0 255 100
+#----稀有基底
+Show
+	BaseType "Steel Ring" "Opal Ring" "Blue Pearl Amulet" "Marble Amulet" "Vanguard Belt" "Crystal Belt" "Bone Helmet" "Two-Toned Boots" "Spiked Gloves" "Gripped Gloves" "Fingerless Silk Gloves" "Divine Vessel"
+	SetFontSize 32
+	SetBackgroundColor 0 255 0
+  	MinimapIcon 2 Brown Star
 
+### ------------------------  #
+###      普通物品             #
+### ------------------------ #
+#----塑界裝
+Show
+	ElderItem True
+	SetBorderColor 255 0 0 200
+  	MinimapIcon 1 Red Hexagon
+	PlayEffect Red
+#----塑界裝
+Show
+	ShaperItem True
+	SetBorderColor 255 0 0 200
+  	MinimapIcon 1 Red Hexagon
+	PlayEffect Red
 #----特殊技能石
 Show
 	Class "Skill Gems"
 	BaseType "Enlighten" "Empower" "Enhance" "Portal"
-	SetBorderColor 128 200 200
-
+	SetBorderColor 27 162 155
+  	MinimapIcon 1 Yellow Hexagon
+	PlayEffect Yellow
 #----精良的技能石
 Show
 	Class "Skill Gems"
 	Quality >= 10
 	SetFontSize 32
-	SetBorderColor 0 128 128
-
-#----H通貨
-Show
-	BaseType "Mirror of Kalandra" "Vaal Orb" "Exalted Orb" "Orb of Regret" "Orb of Scouring" "Divine Orb" "Blessed Orb" "Chaos Orb" "Regal Orb" "Orb of Alchemy" "Orb of Chance" "Orb of Fusing" "Chromatic Orb" "Jeweller's Orb" "Gemcutter's Prism" "Cartographer's Chisel" "Glassblower's Bauble" "Albino Rhoa Feather" "Perandus Coin" "Silver Coin"
-	Class "Currency"
-	SetBorderColor 30 144 255
-	PlayAlertSound 4
-  MinimapIcon 1 Green Circle
-	PlayEffect Green
-#---- 裂片
-Show
-	BaseType "Splinter of Chayula" "Splinter of Esh" "Splinter of Tul" "Splinter of Uul-Netol" "Splinter of Xoph"
-	SetFontSize 33
-	SetTextColor 144 30 255 255
-	SetBorderColor 144 30 255 255
-  
-#---- 通貨
-Show
-	Class "Currency"
-	SetFontSize 32
-	SetBorderColor 30 144 255 128
-  MinimapIcon 2 Green Circle
-
+	SetBorderColor 27 162 155
+  	MinimapIcon 2 Yellow Hexagon
 #---- 命運卡
 Show
 	Class "Divination Card"
-	SetBorderColor 128 255 255
-
-#---- 迷宮道具
+	SetBorderColor 14 186 255
+  	MinimapIcon 1 Blue Square
+	PlayEffect Blue
+#---- 寶珠
 Show
-	Class "Labyrinth"
-	SetBorderColor 128 255 255
-
-#----塑界裝
-Show
-	ElderItem True
-	SetBorderColor 255 0 0 200
-#----塑界裝
-Show
-	ShaperItem True
-	SetBorderColor 255 0 0 200
-#----雕塑地圖
-Show
-	ShapedMap True
-	SetBorderColor 255 0 0 200
-
-#---- 入侵道具
-Show
-	Class "Incursion"
-	SetBorderColor 128 255 255
-
+	Class "Jewel"
+	SetFontSize 32
+	SetBorderColor 255 128 255
+  	MinimapIcon 2 Blue Hexagon
 #---- 魚竿
 Show
 	Class "Fishing Rods"
 	SetBorderColor 255 255 255 128
 	SetBackgroundColor 255 255 255 128
+  	MinimapIcon 0 Brown Circle
 
-#----T12+地圖
+### ------------------------  #
+###      特殊物品             #
+### ------------------------ #
+#---- 掘獄道具
 Show
-	Class Map
-	DropLevel >= 79
+	Class "Delve"
+	SetBorderColor 74 230 58
+  	MinimapIcon 1 Yellow Circle
+#---- 穿越道具
+Show
+	Class "Incursion"
+	SetBorderColor 74 230 58
+  	MinimapIcon 1 Yellow Circle
+#---- 迷宮道具
+Show
+	Class "Labyrinth"
+	SetBorderColor 74 230 58
+  	MinimapIcon 1 Yellow Circle
+#---- 聯盟道具
+Show
+	Class "Leaguestones"
+	SetBorderColor 74 230 58
+  	MinimapIcon 1 Yellow Circle
+
+### ------------------------  #
+###      通貨                 #
+### ------------------------ #
+#----UR通貨
+Show
+	BaseType "Mirror of Kalandra" "Exalted Orb" "Eternal Orb" "Divine Orb" "Blessed Orb" "Chaos Orb" "Albino Rhoa Feather"
+	Class "Currency"
 	SetFontSize 35
-	SetBorderColor 255 128 255
-
-#----T6-11地圖
+	SetBorderColor 30 144 255
+	PlayAlertSound 4
+  	MinimapIcon 0 Brown Circle
+	PlayEffect Brown
+#----SR通貨
 Show
-	Class Map
-	DropLevel >= 73
+	BaseType "Vaal Orb" "Orb of Regret" "Orb of Scouring" "Regal Orb" "Orb of Alchemy" "Orb of Chance" "Orb of Fusing" "Jeweller's Orb" "Chromatic Orb" "Orb of Annulment" "Gemcutter's Prism" "Cartographer's Chisel" "Glassblower's Bauble" "Perandus Coin" "Silver Coin" "Stacked Deck" "Sextant"
+	Class "Currency"
+	SetFontSize 33
+	SetBorderColor 30 144 255
+	PlayAlertSound 4
+  	MinimapIcon 1 Yellow Circle
+	PlayEffect Yellow
+#----掘獄相關 化石 鑄新儀
+Show
+	BaseType "Fossils" "Resonators"
+	Class "Currency"
+	SetFontSize 33
+	SetBorderColor 30 144 255
+	PlayAlertSound 4
+  	MinimapIcon 1 Yellow Circle
+	PlayEffect Yellow
+#---- 裂痕碎片
+Show
+	BaseType "Splinter of Chayula" "Splinter of Esh" "Splinter of Tul" "Splinter of Uul-Netol" "Splinter of Xoph"
+	SetFontSize 33
+	SetTextColor 144 30 255 255
+	SetBorderColor 144 30 255 255
+  	MinimapIcon 1 Yellow Circle
+	PlayEffect Yellow
+#---- 裂痕祝福
+Show
+	BaseType "Blessing of Chayula" "Blessing of Esh" "Blessing of Tul" "Blessing of Uul-Netol" "Blessing of Xoph"
+	SetFontSize 33
+	SetTextColor 144 30 255 255
+	SetBorderColor 144 30 255 255
+  	MinimapIcon 1 Yellow Circle
+	PlayEffect Yellow
+#----特殊通貨
+Show
+	BaseType "Ancient" "Annulment" "Binding" "Chaos Shard" "Engineer's" "Exalted Shard" "Harbinger's" "Horizon" "Mirror Shard" "Regal Shard"
+	Class "Currency"
+	SetFontSize 33
+	SetBorderColor 30 144 255
+	PlayAlertSound 4
+  	MinimapIcon 1 Yellow Circle
+	PlayEffect Yellow
+#---- 其他通貨防止線
+Show
+	Class "Currency"
 	SetFontSize 32
-	SetBorderColor 255 128 255
+	SetBorderColor 170 158 130 128
+ 	MinimapIcon 2 White Circle
 
-#----T1-6地圖
+### ------------------------  #
+###      等級調整地圖顯示      #
+### ------------------------ #
+#---- 雕塑地圖
+Show
+	ShapedMap True
+	SetBorderColor 210 0 0 200
+ 	MinimapIcon 1 White Triangle
+#---- 地圖碎片
+Show
+	Class "Map Fragments"
+	SetBorderColor 210 0 0 200
+ 	MinimapIcon 1 White Triangle
+#---- T1-T6 白圖
 Show
 	Class Map
 	DropLevel < 73
-	SetFontSize 28
+	SetFontSize 29
 	SetBackgroundColor 50 50 50 50
 	SetBorderColor 255 128 255 200
-
-#----鎚子換釘子
+ 	MinimapIcon 2 White Triangle
+#---- T6-T11 黃圖
 Show
-	BaseType "Stone Hammer" "Rock Breaker" "Gavel"
-	Rarity = Normal
-	SetFontSize 28
-	SetBackgroundColor 120 120 120 
- 
-#Show
-#	DropLevel >= 68
-#	SetFontSize 29
-
+	Class Map
+	DropLevel >= 73
+	DropLevel < 78
+	SetFontSize 32
+	SetBorderColor 255 128 255
+ 	MinimapIcon 1 Yellow Triangle
+#---- T12+ 紅圖
 Show
-	Class "Amulet" "Ring" "Belt" "Quiver" 
-	
+	Class Map
+	DropLevel >= 78
+	SetFontSize 35
+	SetBorderColor 255 128 255
+  	MinimapIcon 0 Brown Triangle
+	PlayEffect Brown
 
-#----隱藏, 藥劑特別分類
+### ------------------------  #
+###      等級調整藥劑顯示      #
+### ------------------------ #
 Hide
 	Class "Life Flasks" "Mana Flasks"
-	DropLevel < 20
-	ItemLevel >= 20
+	ItemLevel >= 18
+	DropLevel < 18
 	Rarity <= Magic
 	SetFontSize 10
 	SetBackgroundColor 50 50 50 100
 Hide
 	Class "Life Flasks" "Mana Flasks"
-	DropLevel < 40
-	ItemLevel >= 40
+	ItemLevel >= 36
+	DropLevel < 36
 	Rarity <= Magic
 	SetFontSize 10
 	SetBackgroundColor 50 50 50 100
 Hide
 	Class "Life Flasks" "Mana Flasks"
-	DropLevel < 60
 	ItemLevel >= 60
-	Rarity <= Magic
-	SetFontSize 10
-	SetBackgroundColor 50 50 50 100
-
-#----隱藏, 低等藍白裝
-Hide
-	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres""Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" 
-	DropLevel < 72
-	ItemLevel >= 72
-	Rarity <= Magic
-	SetFontSize 10
-	SetBackgroundColor 50 50 50 100
-Hide
-	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres""Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" 
 	DropLevel < 60
-	ItemLevel >= 60
 	Rarity <= Magic
 	SetFontSize 10
 	SetBackgroundColor 50 50 50 100
-Hide
-	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres""Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" 
-	DropLevel < 40
-	ItemLevel >= 40
-	Rarity <= Rare
-	SetFontSize 10
-	SetBackgroundColor 50 50 50 100
 
-#Show
-#	SetFontSize 10
-#	SetBackgroundColor 50 50 50 100
-
+### ------------------------  #
+###      等級調整裝備顯示      #
+### ------------------------ #
 Hide
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres" "Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" "Quiver"
+	ItemLevel >= 26
+	DropLevel < 26
 	Rarity <= Magic
-	SetFontSize 28
+	SetFontSize 12
 	SetBackgroundColor 50 50 50 100
+Hide
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres" "Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" "Quiver"
+	ItemLevel >= 42
+	DropLevel < 42
+	Rarity <= Magic
+	SetFontSize 12
+	SetBackgroundColor 50 50 50 100
+Hide
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "Thrusting One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres" "Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Bows" "Gloves" "Boots" "Body Armours" "Helmets" "Shields" "Quiver"
+	ItemLevel >= 58
+	DropLevel < 58
+	Rarity <= Magic
+	SetFontSize 12
+	SetBackgroundColor 50 50 50 100
+#---- 飾品
+Show
+	Class "Amulet" "Ring" "Belt"
+	Rarity >= Magic
+	SetBorderColor 255 128 255
+
+### ------------------------  #
+###      其他類型防止線        #
+### ------------------------ #
+show
+	SetFontSize 30
+	SetBackgroundColor 50 50 50 100
+  	MinimapIcon 0 Red Star
+	PlayEffect Red
