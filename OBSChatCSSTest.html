@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang='zh-tw'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='expires' content='0'>
+    <Meta http-equiv='Pragma' Content='No-cache'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <link href='https://bootstrap.hexschool.com/dist/css/bootstrap.css' rel='stylesheet'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <title>OBS Chat CSS Test</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: consolas, 'Meiryo', 'Microsoft JhengHei';
+        }
+
+        input::placeholder,
+        input::-webkit-input-placeholder,
+        input::-moz-placeholder,
+        input::-ms-input-placeholder,
+        .form-control::placeholder,
+        .form-control::-moz-placeholder {
+            color: #DDD !important;
+            opacity: .1 !important;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+                transform: scale(1);
+            }
+            60% {
+                transform: scale(1);
+            }
+            70% {
+                box-shadow: 0 0 0 0 rgba(255, 170, 204, 1);
+                transform: scale(.98);
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 .5em 1.6em rgba(255, 170, 204, 0);
+                transform: scale(1);
+            }
+        }
+
+        #BTN_B01_block>button::before,
+        #BTN_B01_block>button::after {
+            content: attr(data-start);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            border: 2px solid #FFFFFF;
+            color: crimson;
+            background: #FFAACC;
+            overflow: hidden;
+            transition: transform .3s cubic-bezier(.2, 1, .3, 1);
+        }
+
+        #BTN_B01_block>button::before {
+            top: 0;
+            height: 50%;
+            border-bottom: none;
+            line-height: 3.1;
+        }
+
+        #BTN_B01_block>button::after {
+            top: 50%;
+            height: 50%;
+            border-top: none;
+            line-height: .1;
+        }
+
+        #BTN_B01_block>button:hover::before {
+            transform: translate3d(0, -100%, 0);
+        }
+
+        #BTN_B01_block>button:hover::after {
+            transform: translate3d(0, 100%, 0);
+        }
+
+        #BTN_B01_block>button>span {
+            display: block;
+            opacity: 0;
+            transform: scale3d(.2, .2, 1);
+            transition: transform 300ms, opacity 300ms cubic-bezier(.2, 1, .3, 1);
+            outline: none;
+        }
+
+        #BTN_B01_block>button:hover span {
+            opacity: 1;
+            transform: scale3d(1, 1, 1);
+        }
+
+        #BTN_B02_block>button {
+            border: 1px solid #FFC107;
+            border-radius: .25rem !important;
+            color: #FFC107;
+            background: transparent;
+            overflow: hidden;
+            transition: all 1s;
+            z-index: 1;
+        }
+
+        #BTN_B02_block>button::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: coral;
+            z-index: -1;
+            transition: top 0.13s ease-in;
+        }
+
+        #BTN_B02_block>button:hover::before {
+            top: 0;
+        }
+
+        #BTN_B03_block>button {
+            border: 1px solid white;
+            border-radius: .25rem !important;
+            color: white;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        #BTN_B03_block>button::before,
+        #BTN_B03_block>button::after {
+            content: 'View ->';
+            position: absolute;
+            top: 25%;
+            width: 100%;
+            height: 50%;
+            color: white;
+            border: 0;
+            transition: all .3s cubic-bezier(0.680, -0.550, 0.265, 1.550);
+        }
+
+        #BTN_B03_block>button::before {
+            left: -100%;
+        }
+
+        #BTN_B03_block>button::after {
+            left: 0;
+        }
+
+        #BTN_B03_block>button:hover::before {
+            left: 0;
+        }
+
+        #BTN_B03_block>button:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+
+<body class='container-fluid'>
+    <!-- As a heading -->
+    <nav class='navbar navbar-dark bg-dark rounded'>
+        <span class='navbar-brand mb-0 h1'>Navbar</span>
+    </nav>
+    <div class='d-flex flex-column h-100 '>
+        <div class='row h-100'>
+            <div id='ModifyArea' class='col-7'>
+                <div class='row mt-2'>
+                    A
+                </div>
+            </div>
+            <div id='DisplayArea' class='col-5'>
+                <div class='row mt-2'>
+                    <div class='col-12'>
+                        <div class='input-group input-group-sm mb-2'>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>Link</span>
+                            </div>
+                            <input type='text' id='DisplayAreaInput01' class='form-control' placeholder='https://www.nightdev.com/hosted/obschat/?channel=...'>
+                        </div>
+                        <div class='input-group input-group-sm mb-2'>
+                            <div class='input-group-prepend'><span class='input-group-text'>Width</span></div>
+                            <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='300' />
+                            <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
+                            <input type='text' id='DisplayAreaInput03' class='form-control' placeholder='600' />
+                            <div class='input-group-append'>
+                                <button id='DisplayAreaSubmit' class='btn btn-success btn-sm' type='button'>Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='ml-auto col-12'></div>
+                    <div class='ml-auto col-12 d-flex justify-content-center align-items-center'>
+                        <iframe id='DisplayAreaChat' class='border'></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#DisplayAreaSubmit').on('click', () => {
+            let url = $('#DisplayAreaInput01').val() || null;
+            let width = parseInt($('#DisplayAreaInput02').val()) || 300;
+            let height = parseInt($('#DisplayAreaInput03').val()) || 600;
+            console.log(url, width, height);
+            if (url != null) {
+                let iframe = document.getElementById('DisplayAreaChat');
+                iframe.style.width = width + 'px';
+                iframe.style.height = height + 'px';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
