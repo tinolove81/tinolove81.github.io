@@ -14,7 +14,7 @@
         body {
             width: 100%;
             height: 100%;
-            font-family: Consolas, 'Microsoft JhengHei', sans-serif;
+            font-family: 'Meiryo', 'Microsoft JhengHei';
             background: #333;
         }
 
@@ -35,13 +35,11 @@
             cursor: pointer;
             outline: none !important;
         }
-
         #BTN_A01_block > button {
             color: crimson;
             background: white;
             animation: pulse 1.6s infinite ease-in-out;
         }
-
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
@@ -68,7 +66,6 @@
             background: white;
             overflow: hidden;
         }
-
         #BTN_B01_block > button::before,
         #BTN_B01_block > button::after {
             content: attr(data-start);
@@ -81,21 +78,18 @@
             overflow: hidden;
             transition: transform .3s cubic-bezier(.2, 1, .3, 1);
         }
-
         #BTN_B01_block > button::before {
             top: 0;
             height: 50%;
             border-bottom: none;
             line-height: 3.1;
         }
-
         #BTN_B01_block > button::after {
             top: 50%;
             height: 50%;
             border-top: none;
             line-height: .1;
         }
-
         #BTN_B01_block > button:hover::before {
             transform: translate3d(0, -100%, 0);
         }
@@ -103,7 +97,6 @@
         #BTN_B01_block > button:hover::after {
             transform: translate3d(0, 100%, 0);
         }
-
         #BTN_B01_block > button > span {
             display: block;
             opacity: 0;
@@ -111,7 +104,6 @@
             transition: transform 300ms, opacity 300ms cubic-bezier(.2, 1, .3, 1);
             outline: none;
         }
-
         #BTN_B01_block > button:hover span {
             opacity: 1;
             transform: scale3d(1, 1, 1);
@@ -137,9 +129,39 @@
             z-index: -1;
             transition: top 0.13s ease-in;
         }
-
         #BTN_B02_block > button:hover::before {
             top: 0;
+        }
+
+        #BTN_B03_block > button {
+            border: 1px solid white;
+            border-radius: .25rem !important;
+            color: white;
+            background: transparent;
+            overflow: hidden;
+        }
+        #BTN_B03_block > button::before,
+        #BTN_B03_block > button::after {
+            content: 'View ->';
+            position: absolute;
+            top: 25%;
+            width: 100%;
+            height: 50%;
+            color: white;
+            border: 0;
+            transition: all .3s cubic-bezier(0.680, -0.550, 0.265, 1.550);
+        }
+        #BTN_B03_block > button::before {
+            left: -100%;
+        }
+        #BTN_B03_block > button::after {
+            left: 0;
+        }
+        #BTN_B03_block > button:hover::before {
+            left: 0;
+        }
+        #BTN_B03_block > button:hover::after {
+            left: 100%;
         }
 
     </style>
@@ -159,6 +181,9 @@
                 <button data-start='Hover me!'><span>Done!</span></button>
                 <!-- Acknowledgements: the button is pretty much recycled from http://sparetime.arkivert.no/en -->
             </div>
+            <div id='BTN_A02_block' class='col-4 showcase-block'>
+                <iframe src='https://www.nightdev.com/hosted/obschat/?channel=tinolove81&fade=false&bot_activity=true&prevent_clipping=false'></iframe>
+            </div>
         </div>
         <h3>被動</h3>
         <div class='row text-center'>
@@ -166,7 +191,7 @@
                 <button data-start='Hover me!'><span>Done!</span></button>
             </div>
             <div id='BTN_B02_block' class='col-4 showcase-block'>
-                <button class=''><span>This is a button.</span></button>
+                <button class=''><span>This is a button</span></button>
             </div>
             <div id='BTN_B03_block' class='col-4 showcase-block'>
                 <button class=''></button>
