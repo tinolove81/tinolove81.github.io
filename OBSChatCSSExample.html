@@ -3,6 +3,93 @@
 <head>
     <title>KapChat</title>
     <meta charset='UTF-8'>
+    <style>
+    body {
+        overflow: hidden;
+        margin: 5px;
+    }
+
+    #chat-box {
+        background-color: transparent;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        position: absolute;
+        overflow: hidden;
+        color: #D3D3D3;
+        border-radius: 4px;
+        width: calc(100% - 10px);
+    }
+
+    #chat_box.dark {
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+    }
+
+    #chat_box.light {
+        background: rgba(255, 255, 255, 0.3);
+        color: #000;
+    }
+
+    .nick {
+        font-weight: bold;
+    }
+
+    .tag {
+        display: inline-block;
+        text-indent: 21px;
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        vertical-align: bottom;
+        height: 18px;
+        min-width: 18px;
+        width: auto;
+        padding: 0;
+        margin-right: 3px;
+        margin-bottom: -1px;
+        text-indent: -9999px;
+        border-radius: 2px;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .chat_line {
+        margin-left: 3px;
+        margin-right: 3px;
+        padding-top: 2px;
+        padding-bottom: 3px;
+        line-height: 16px;
+    }
+
+    .chat_line .message {
+        /*word-break: break-all;*/
+        word-wrap: break-word;
+    }
+
+    .chat_line .time_stamp {
+        display: none;
+        padding-right: 3px;
+    }
+
+    .emoticon {
+        margin-bottom: -7px;
+    }
+
+    .cheermote {
+        width: auto;
+        max-height: 28px;
+    }
+
+    .emoji {
+        width: 20px;
+        height: auto;
+    }
+    </style>
     <style type='text/css'>.\31 979-revolution_1-1 {background-image: url('https://static-cdn.jtvnw.net/badges/v1/7833bb6e-d20d-48ff-a58d-67fe827a4f84/3'); }</style>
     <style type='text/css'>.\36 0-seconds_1-1 { background-image: url('https://static-cdn.jtvnw.net/badges/v1/1e7252f9-7e80-4d3d-ae42-319f030cca99/3'); }</style>
     <style type='text/css'>.\36 0-seconds_2-1 { background-image: url('https://static-cdn.jtvnw.net/badges/v1/64513f7d-21dd-4a05-a699-d73761945cf9/3'); }</style>
@@ -122,93 +209,7 @@
     <style type='text/css'>.vip-1 { background-image: url('https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/3'); }</style>
     <style type='text/css'>.warcraft-alliance { background-image: url('https://static-cdn.jtvnw.net/badges/v1/c4816339-bad4-4645-ae69-d1ab2076a6b0/3'); }</style>
     <style type='text/css'>.warcraft-horde { background-image: url('https://static-cdn.jtvnw.net/badges/v1/de8b26b6-fd28-4e6c-bc89-3d597343800d/3'); }</style>
-    <style>
-        body {
-            overflow: hidden;
-            margin: 5px;
-        }
-
-        #chat-box {
-            background-color: transparent;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 13px;
-            font-style: normal;
-            font-variant: normal;
-            font-weight: normal;
-            position: absolute;
-            overflow: hidden;
-            color: #D3D3D3;
-            border-radius: 4px;
-            width: calc(100% - 10px);
-        }
-
-        #chat_box.dark {
-            background: rgba(0, 0, 0, 0.3);
-            color: #fff;
-        }
-
-        #chat_box.light {
-            background: rgba(255, 255, 255, 0.3);
-            color: #000;
-        }
-
-        .nick {
-            font-weight: bold;
-        }
-
-        .tag {
-            display: inline-block;
-            text-indent: 21px;
-            background-position: 0 center;
-            background-repeat: no-repeat;
-            background-size: contain;
-            display: inline-block;
-            vertical-align: bottom;
-            height: 18px;
-            min-width: 18px;
-            width: auto;
-            padding: 0;
-            margin-right: 3px;
-            margin-bottom: -1px;
-            text-indent: -9999px;
-            border-radius: 2px;
-            -moz-border-radius: 2px;
-            -webkit-border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .chat_line {
-            margin-left: 3px;
-            margin-right: 3px;
-            padding-top: 2px;
-            padding-bottom: 3px;
-            line-height: 16px;
-        }
-
-        .chat_line .message {
-            /*word-break: break-all;*/
-            word-wrap: break-word;
-        }
-
-        .chat_line .time_stamp {
-            display: none;
-            padding-right: 3px;
-        }
-
-        .emoticon {
-            margin-bottom: -7px;
-        }
-
-        .cheermote {
-            width: auto;
-            max-height: 28px;
-        }
-
-        .emoji {
-            width: 20px;
-            height: auto;
-        }
-    </style>
+    
 
     <body>
         <div id='chat_box' class='clear' style='height: calc(100% - 10px);'>
