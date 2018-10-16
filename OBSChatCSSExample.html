@@ -124,8 +124,8 @@
     
     <style>
         body {
-            overflow: hidden;
             margin: 5px;
+            overflow: hidden;
         }
 
         #chat_box {
@@ -213,23 +213,101 @@
     </head>
 
     <body>
-        <div id='chat_box' class='clear' style='height: calc(100% - 10px);'>
-            <div class='chat_line' data-nick='Chat' data-timestamp='1539671460134'><span class='time_stamp'>下午2:31:00</span><span class='nick'>Chat</span><span class='colon'>:</span>&nbsp;<span
-                    class='message'>Connecting to chat server..</span></div>
-            <div class='chat_line' data-nick='Chat' data-timestamp='1539671460723'><span class='time_stamp'>下午2:31:00</span><span class='nick'>Chat</span><span class='colon'>:</span>&nbsp;<span
-                    class='message'>Connected.</span></div>
-            <div class='chat_line' data-nick='Chat' data-timestamp='1539671461175'><span class='time_stamp'>下午2:31:01</span><span class='nick'>Chat</span><span class='colon'>:</span>&nbsp;<span
-                    class='message'>Joined channel: tinolove81.</span></div>
-            <div class='chat_line' data-nick='tinolove81' data-timestamp='1539672050416'><span class='time_stamp'>下午2:40:50</span><span class='broadcaster-1 tag'>&nbsp;</span><span class='nick' style='color: rgb(30, 144, 255);'>tinolove81</span><span
-                    class='colon'>:</span>&nbsp;<span class='message'>abc</span></div>
-            <div class='chat_line' data-nick='tinolove81'
-                data-timestamp='1539672054686'><span class='time_stamp'>下午2:40:54</span><span class='broadcaster-1 tag'>&nbsp;</span><span class='nick' style='color: rgb(30, 144, 255);'>tinolove81</span><span
-                    class='colon'>:</span>&nbsp;<span class='message'>123</span></div>
-            <div class='chat_line' data-nick='tinolove81'
-                data-timestamp='1539672058736'><span class='time_stamp'>下午2:40:58</span><span class='broadcaster-1 tag'>&nbsp;</span><span class='nick' style='color: rgb(30, 144, 255);'>tinolove81</span><span
-                    class='colon'>:</span>&nbsp;<span class='message'>中文</span></div>
-        </div>
 
+        <div id='chat_box' class='clear' style='height: calc(100% - 10px);'>
+        </div>
+        <div></div>
     </body>
+
+    <script>
+    let ConnectMsg = [];
+    document.addEventListener('DOMContentLoaded', function(event) {
+
+        ConnectMsg.push(()=>sendMsg('Chat', 'Connecting to chat server..'));
+        ConnectMsg.push(()=>sendMsg('Chat', 'Connected.'));
+        ConnectMsg.push(()=>sendMsg('Chat', 'Joined channel: tinolove81.'));
+        ConnectMsg.push(()=>sendMsg('tinolove81', 'Test.', 'broadcaster'));
+        randomWakeUp();
+
+    });
+    
+    let now = {
+        local: function() {
+            return new Date().toLocaleTimeString();
+        },
+        unix: function() {
+            return Math.round(new Date().getTime());
+        }
+    }
+
+    function sendMsg(_n, _m, _t, cb) {
+        let p = document.querySelector('#chat_box');
+        let chat_line = document.createElement('div');
+        chat_line.className = 'chat_line';
+        chat_line.dataset.nick = _n;
+        chat_line.dataset.timestamp = now.unix();
+        let time_stamp = document.createElement('span');
+        time_stamp.className = 'time_stamp';
+        time_stamp.appendChild(document.createTextNode(now.local()));
+        chat_line.appendChild(time_stamp);
+        let badge = findBadge(_t);
+        if (!!badge) {
+            let tag = document.createElement('span');
+            tag.className = badge + ' tag';
+            tag.appendChild(document.createTextNode(' '));
+            chat_line.appendChild(tag);
+        }
+        let nick = document.createElement('span');
+        nick.className = 'nick';
+        if (_n != 'Chat') nick.style.color = randomColor();
+        nick.appendChild(document.createTextNode(_n));
+        chat_line.appendChild(nick);
+        let colon = document.createElement('span');
+        colon.className = 'colon';
+        colon.appendChild(document.createTextNode(':'));
+        chat_line.appendChild(colon);
+        chat_line.appendChild(document.createTextNode(' '));
+        let message = document.createElement('span');
+        message.className = 'message';
+        message.appendChild(document.createTextNode(_m));
+        chat_line.appendChild(message);
+
+        p.appendChild(chat_line);
+        p.scrollTop = p.scrollHeight;
+    }
+    function findBadge(tag) {
+        let badgeArray = {
+            'broadcaster': 'broadcaster-1',
+            'mod': 'moderator-1',
+            'clip': 'clip-champ-1',
+            'partner': 'partner-1',
+            'premium': 'premium-1',
+            'staff': 'staff-1',
+            'gifter': 'sub-gifter-1',
+            'turbo': 'turbo-1',
+            'bot': 'twitchbot-1',
+            'ow': 'overwatch-league-insider_1-1'
+        };
+        return badgeArray[tag];
+    }
+    function randomColor() {
+        return `rgb(${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)})`;
+    }
+    function randomWakeUp() {
+        let delay = parseInt(Math.random() * (10 - 1) + 1 ) * 50;
+        console.log(delay);
+        if (ConnectMsg[0]) {
+            setTimeout(function () {
+                ConnectMsg[0]();
+                ConnectMsg.shift();
+                setTimeout(function () {
+                    randomWakeUp();
+                }, delay);
+            }, delay);
+        } else {
+            console.log('Keep Sleep ~');
+        }
+    }
+    </script>
 
 </html>

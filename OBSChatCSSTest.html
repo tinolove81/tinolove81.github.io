@@ -78,12 +78,6 @@
                 <div class='row mt-2'>
                     <div class='col-12'>
                         <div class='input-group input-group-sm mb-2'>
-                            <div class='input-group-prepend'>
-                                <span class='input-group-text'>Link</span>
-                            </div>
-                            <input type='text' id='DisplayAreaInput01' class='form-control' placeholder='https://www.nightdev.com/hosted/obschat/?channel=...'>
-                        </div>
-                        <div class='input-group input-group-sm mb-2'>
                             <div class='input-group-prepend'><span class='input-group-text'>Width</span></div>
                             <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='300' />
                             <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
@@ -106,9 +100,7 @@
 
     <script>
 
-
         $('#DisplayAreaSubmit').on('click', () => {
-            let url = 'https://tinolove81.github.io/OBSChatCSSExample.html';
             let width = parseInt($('#DisplayAreaInput02').val()) || 300;
             let height = parseInt($('#DisplayAreaInput03').val()) || 600;
             console.log(url, width, height);
