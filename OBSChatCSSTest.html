@@ -33,99 +33,6 @@
             color: red !important;
             opacity: .3 !important;
         }
-
-/* KapChat 預設值 */
-            body {
-                overflow: hidden;
-                margin: 5px;
-            }
-
-            #chat_box {
-                background-color: transparent;
-                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                font-size: 13px;
-                font-style: normal;
-                font-variant: normal;
-                font-weight: normal;
-                position: absolute;
-                overflow: hidden;
-                color: #D3D3D3;
-                border-radius: 4px;
-                width: calc(100% - 10px);
-                /*height: calc(100% - 10px);*/
-            }
-
-            #chat_box.dark {
-                background: rgba(0,0,0,0.3);
-                color: #fff;
-            }
-
-            #chat_box.light {
-                background: rgba(255,255,255,0.3);
-                color: #000;
-            }
-
-            .nick {
-                font-weight: bold;
-            }
-
-            .tag {
-                display: inline-block;
-                text-indent: 21px;
-                background-position: 0 center;
-                background-repeat: no-repeat;
-                background-size: contain;
-                display: inline-block;
-                vertical-align: bottom;
-                height: 18px;
-                min-width: 18px;
-                width:"auto";
-                padding: 0;
-                margin-right: 3px;
-                margin-bottom: -1px;
-                text-indent: -9999px;
-                border-radius: 2px;
-                -moz-border-radius: 2px;
-                -webkit-border-radius: 2px;
-                overflow: hidden;
-            }
-
-            .chat_line {
-                margin-left: 3px;
-                margin-right: 3px;
-                padding-top: 2px;
-                padding-bottom: 3px;
-                line-height: 16px;
-            }
-
-            .chat_line .message {
-                /*word-break: break-all;*/
-                word-wrap: break-word;
-            }
-
-            .chat_line .time_stamp {
-                display: none;
-                padding-right: 3px;
-            }
-
-            .emoticon {
-                margin-bottom: -7px;
-            }
-
-            .cheermote {
-                width: auto;
-                max-height: 28px;
-            }
-
-            .emoji {
-                width: 20px;
-                height: auto;
-            }
-        
-/* KapChat 預設值 */
-
-
-
     </style>
 </head>
 
@@ -188,9 +95,7 @@
                     </div>
                     <div class='ml-auto col-12'></div>
                     <div class='ml-auto col-12 d-flex justify-content-center align-items-center'>
-                        <iframe id='DisplayAreaIframe' class='border'>
-                                <div id="chat_box" class="clear" style="height: calc(100% - 10px);"><div class="chat_line" data-nick="Chat" data-timestamp="1539671460134"><span class="time_stamp">下午2:31:00</span><span class="nick">Chat</span><span class="colon">:</span>&nbsp;<span class="message">Connecting to chat server..</span></div><div class="chat_line" data-nick="Chat" data-timestamp="1539671460723"><span class="time_stamp">下午2:31:00</span><span class="nick">Chat</span><span class="colon">:</span>&nbsp;<span class="message">Connected.</span></div><div class="chat_line" data-nick="Chat" data-timestamp="1539671461175"><span class="time_stamp">下午2:31:01</span><span class="nick">Chat</span><span class="colon">:</span>&nbsp;<span class="message">Joined channel: tinolove81.</span></div><div class="chat_line" data-nick="tinolove81" data-timestamp="1539672050416"><span class="time_stamp">下午2:40:50</span><span class="broadcaster-1 tag">&nbsp;</span><span class="nick" style="color: rgb(30, 144, 255);">tinolove81</span><span class="colon">:</span>&nbsp;<span class="message">abc</span></div><div class="chat_line" data-nick="tinolove81" data-timestamp="1539672054686"><span class="time_stamp">下午2:40:54</span><span class="broadcaster-1 tag">&nbsp;</span><span class="nick" style="color: rgb(30, 144, 255);">tinolove81</span><span class="colon">:</span>&nbsp;<span class="message">123</span></div><div class="chat_line" data-nick="tinolove81" data-timestamp="1539672058736"><span class="time_stamp">下午2:40:58</span><span class="broadcaster-1 tag">&nbsp;</span><span class="nick" style="color: rgb(30, 144, 255);">tinolove81</span><span class="colon">:</span>&nbsp;<span class="message">中文</span></div></div>
-                        </iframe>
+                        <iframe id='DisplayAreaIframe' class='border'></iframe>
                     </div>
                 </div>
             </div>
@@ -201,6 +106,7 @@
 
     <script>
 
+
         $('#DisplayAreaSubmit').on('click', () => {
             let url = $('#DisplayAreaInput01').val() || null;
             let width = parseInt($('#DisplayAreaInput02').val()) || 300;
@@ -208,6 +114,7 @@
             console.log(url, width, height);
             if (url != null) {
                 let iframe = document.getElementById('DisplayAreaIframe');
+                iframe.src = 'https://tinolove81.github.io/OBSChatCSSExample.html';
                 iframe.style.width = width + 'px';
                 iframe.style.height = height + 'px';
             }
