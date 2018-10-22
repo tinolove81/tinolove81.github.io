@@ -294,7 +294,11 @@
         return badgeArray[tag];
     }
     function randomColor() {
-        return `rgb(${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)})`;
+        let color = ['Blue', 'Coral', 'DodgerBlue', 'SpringGreen', 'YellowGreen', 'Green', 'OrangeRed', 'Red', 'GoldenRod', 'HotPink',
+                    'CadetBlue', 'SeaGreen', 'Chocolate', 'BlueViolet', 'Firebrick'];
+        let m = 14;
+        let n = 0;
+        return color[parseInt(Math.random() * ( m - n + 1 ) + n)];
     }
     function randomWakeUp() {
         let delay = parseInt(Math.random() * (10 - 1) + 1 ) * 50;
