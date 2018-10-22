@@ -17,6 +17,7 @@
             width: 100%;
             height: 100%;
             font-family: consolas, 'Meiryo', 'Microsoft JhengHei';
+            background: url("https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg") left center no-repeat;
         }
         body {
             position: relative;
@@ -101,6 +102,68 @@
 }
 
 .chat_line .message {
+}
+                        </textarea>
+                    <div class='col-12'>
+                        <textarea id='textarea02' class='w-100 h-100'>
+::-webkit-scrollbar {
+    visibility: hidden;
+}
+
+#chat_box {
+    padding: 0;
+    color: white;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: 'Meiryo', 'Microsoft JhengHei';
+}
+
+.chat_line {
+    margin: 2px;
+    padding: 0;
+    width: 100%;
+    line-height: 1rem;
+    animation: slideInRight .6s cubic-bezier(.2, 1, .3, 1);
+}
+
+.chat_line .time_stamp {
+    display: none;
+}
+
+.chat_line .nick {
+    text-shadow: 0 -1px #000,
+    1px -1px #000,
+    1px 0 #000,
+    1px 1px #000,
+    0 1px #000,
+    -1px 1px #000,
+    -1px 0 #000,
+    -1px -1px #000;
+}
+
+.chat_line .message {
+    color: white;
+    text-shadow: 0 -1px #000,
+    1px -1px #000,
+    1px 0 #000,
+    1px 1px #000,
+    0 1px #000,
+    -1px 1px #000,
+    -1px 0 #000,
+    -1px -1px #000;
+}
+
+@keyframes slideInRight {
+    0% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        visibility: visible;
+    }
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
 }
                         </textarea>
                     </div>
