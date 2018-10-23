@@ -17,8 +17,10 @@
         body {
             width: 100%;
             height: 100%;
-            font-family: consolas, 'Meiryo', 'Microsoft JhengHei';
-            background: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg') left center no-repeat;
+            font-family: consolas, 'Microsoft JhengHei';
+            background-image: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg');
+            background-repeat: no-repeat;
+            background-position:  left center;
         }
         body {
             position: relative;
@@ -34,8 +36,9 @@
             width: 300px;
             height: 450px;
         }
-        input, select {
-            background: rgba(255, 255, 255, .7) !important;
+        input:not(:focus),
+        select:not(:focus) {
+            background-color: rgba(255, 255, 255, .7) !important;
         }
         input::placeholder {
             color: rgba(170, 204, 255, .7) !important;
@@ -98,8 +101,8 @@
                             </div>
                         </div>
                         <div id='collapseExample_color' class='collapse'>
-                            <div class='card'>
-                                <table class='table table-sm'>
+                            <div class='card card-body'>
+                                <table class='table table-sm table-bordered m-0'>
                                     <tr><td>顏色名稱(color name)</td><td>瀏覽器支援內建名稱(browsers support the 140 color names)<br/>(ex. red, blue, white, black, transparent...)</td></tr>
                                     <tr><td rowspan='4'>顏色代碼(color code)</td><td>HEX Value: #AACCFF = #ACF</td></tr>
                                     <tr><td>RGB color: rgb(255, 255, 255)</td></tr>
@@ -119,7 +122,7 @@
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字體粗細</span></div>
-                            <select class='custom-select  form-control-sm' id='CB_fontwidth'>
+                            <select class='custom-select custom-select-sm' id='CB_fontwidth'>
                                 <option value='normal' selected>預設</option>
                                 <option value='bold'>粗體</option>
                             </select>
@@ -134,8 +137,8 @@
                             </div>
                         </div>
                         <div id='collapseExample_fontfamily' class='collapse'>
-                            <div class='card'>
-                                <table class='table table-sm'>
+                            <div class='card card-body'>
+                                <table class='table table-sm table-bordered m-0'>
                                     <tr style='font-family: "Helvetica Neue";'><td>'Helvetica Neue'</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
                                     <tr style='font-family: Arial;'><td>Arial</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
                                     <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
@@ -170,8 +173,8 @@
                             </div>
                         </div>
                         <div id='collapseExample_animation' class='collapse'>
-                            <div class='card'>
-                                <table class='table table-sm'>
+                            <div class='card card-body'>
+                                <table class='table table-sm table-bordered m-0'>
                                     <tr><td>slideInRight .6s cubic-bezier(.2, 1, .3, 1);</td></tr>
                                     <tr><td>slideInRight .6s cubic-bezier(.2, 1, .3, 1);</td></tr>
                                 </table>
