@@ -10,6 +10,7 @@
     <!-- <link href='file:///D:/VSCodeWorkSpace/CMSWebServer/css/bootstrap.min.css' rel='stylesheet'> -->
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <!-- <script src='file:///D:/VSCodeWorkSpace/CMSWebServer/js/jquery-3.2.1.min.js'></script> -->
+    <script src='https://bootstrap.hexschool.com/dist/js/bootstrap.js'></script>
     <title>OBS Chat CSS Test</title>
     <style>
         html,
@@ -17,16 +18,15 @@
             width: 100%;
             height: 100%;
             font-family: consolas, 'Meiryo', 'Microsoft JhengHei';
-            background: url("https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg") left center no-repeat;
+            background: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg') left center no-repeat;
         }
         body {
             position: relative;
-            padding-top: 56px;
             overflow: hidden;
         }
 
         body > div {
-            height: calc(100%);
+            height: calc(100% - 56px);
         }
 
         iframe {
@@ -50,6 +50,14 @@
             color: rgba(170, 204, 255, .7) !important;
         }
 
+        #ModifyArea {
+            overflow: auto;
+        }
+        #DisplayAreaBlock {
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
         .mask_for_iframe {
             position: absolute;
             margin: 0;
@@ -69,7 +77,7 @@
 
 <body class='container-fluid'>
     <!-- As a heading -->
-    <nav class='navbar navbar-dark bg-dark rounded fixed-top'>
+    <nav class='navbar navbar-dark bg-dark rounded'>
         <span class='navbar-brand mb-0 h1'>Navbar</span>
     </nav>
     <div class='d-flex flex-column'>
@@ -78,11 +86,27 @@
         <!-- Detail Area -->
             <div id='ModifyArea' class='col-6 h-100'>
                 <div class='row mt-2'>
-                    <div class='col-12 mb-2'>
+                    <div class='col-12'>
                         <strong class='input-group-text'>聊天室本體(#chat_box)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字色</span></div>
                             <input type='text' id='CB_color' class='form-control' placeholder='#D3D3D3' />
+                            <div class='input-group-append'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_color'>
+                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                </button>
+                            </div>
+                        </div>
+                        <div id='collapseExample_color' class='collapse'>
+                            <div class='card'>
+                                <table class='table table-sm'>
+                                    <tr><td>顏色名稱(color name)</td><td>瀏覽器支援內建名稱(browsers support the 140 color names)<br/>(ex. red, blue, white, black...)</td></tr>
+                                    <tr><td rowspan='4'>顏色代碼(color code)</td><td>HEX Value: #AACCFF = #ACF</td></tr>
+                                    <tr><td>RGB color: rgb(255, 255, 255)</td></tr>
+                                    <tr><td>RGBA color: rgba(255, 255, 255, 1)</td></tr>
+                                    <tr><td>HSL color: HSL(240, 100%, 50%)</td></tr>
+                                </table>
+                            </div>
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室背景色</span></div>
@@ -90,37 +114,73 @@
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字體大小</span></div>
-                            <input type='text' id='CB_fontsize' class='form-control' placeholder='16px' />
+                            <input type='text' id='CB_fontsize' class='form-control' placeholder='16' />
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字體粗細</span></div>
-                            <input type='text' id='CB_fontwidth' class='form-control' placeholder='300' />
+                            <select class='custom-select  form-control-sm' id='CB_fontwidth'>
+                                <option value='normal' selected>預設</option>
+                                <option value='bold'>粗體</option>
+                            </select>
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字型</span></div>
                             <input type='text' id='CB_fomefamily' class='form-control' placeholder='"Helvetica Neue", Helvetica, Arial, sans-serif' />
+                            <div class='input-group-append'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_fontfamily'>
+                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                </button>
+                            </div>
+                        </div>
+                        <div id='collapseExample_fontfamily' class='collapse'>
+                            <div class='card'>
+                                <table class='table table-sm'>
+                                    <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: "Helvetica Neue";'><td>'Helvetica Neue'</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: Arial;'><td>Arial</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: sans-serif;'><td>sans-serif</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: Meiryo;'><td>Meiryo</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: "Microsoft JhengHei";'><td>'Microsoft JhengHei'</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class='row mt-2'>
-                    <div class='col-12 mb-2'>
+                    <div class='col-12'>
                         <strong class='input-group-text'>聊天室單行(.chat_line)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>單行邊界</span></div>
-                            <input type='text' id='CL_margin' class='form-control' placeholder='0' />
+                            <input type='text' id='CL_margin' class='form-control' placeholder='2' />
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>單行字元間距</span></div>
-                            <input type='text' id='CL_margin' class='form-control' placeholder='1rem' />
+                            <input type='text' id='CL_lineheight' class='form-control' placeholder='1' />
+                            <div class='input-group-append'><span class='input-group-text'>rem</span></div>
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>單行動畫</span></div>
-                            <input type='text' id='CL_margin' class='form-control' placeholder='' />
+                            <input type='text' id='CL_animation' class='form-control' placeholder='' />
+                            <div class='input-group-append'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_animation'>
+                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                </button>
+                            </div>
+                        </div>
+                        <div id='collapseExample_animation' class='collapse'>
+                            <div class='card'>
+                                <table class='table table-sm'>
+                                    <tr><td>slideInRight .6s cubic-bezier(.2, 1, .3, 1);</td></tr>
+                                    <tr><td>slideInRight .6s cubic-bezier(.2, 1, .3, 1);</td></tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class='row mt-2'>
-                    <div class='col-12 mb-2'>
+                    <div class='col-12'>
                         <strong class='input-group-text'>單行暱稱(.nick)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'>
@@ -129,7 +189,13 @@
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>陰影粗細</span>
                             </div>
-                            <input type='text' id='CLN_shadowwidth' class='form-control' placeholder='1px' />
+                            <input type='text' id='CLN_shadowwidth' class='form-control' placeholder='1' />
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>陰影擴散</span>
+                            </div>
+                            <input type='text' id='CLN_shadowblur' class='form-control' placeholder='0' />
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>陰影顏色</span>
                             </div>
@@ -137,12 +203,12 @@
                         </div>
                     </div>
                 </div>
-                <div class='row mt-2'>
-                    <div class='col-12 mb-2'>
+                <div class='row my-2'>
+                    <div class='col-12'>
                         <strong class='input-group-text'>聊天內容(.message)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>字色</span></div>
-                            <input type='text' id='CLM_color' class='form-control' placeholder='#FFF' />
+                            <input type='text' id='CLM_color' class='form-control' placeholder='#D3D3D3' />
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'>
@@ -151,7 +217,12 @@
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>陰影粗細</span>
                             </div>
-                            <input type='text' id='CLM_shadowwidth' class='form-control' placeholder='1px' />
+                            <input type='text' id='CLM_shadowwidth' class='form-control' placeholder='1' />
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>陰影擴散</span>
+                            </div>
+                            <input type='text' id='CLM_shadowblur' class='form-control' placeholder='0' />
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>陰影顏色</span>
                             </div>
@@ -160,7 +231,7 @@
                     </div>
                 </div>
                 <div class='row mt-2 d-none'>
-                    <div class='col-12 mb-2'>
+                    <div class='col-12'>
                         <strong class='input-group-text'>聊天室單行(.chat_line)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>##</span></div>
@@ -258,7 +329,7 @@
             <div id='DisplayArea' class='col-6 d-flex flex-column'>
                 <div class='row mt-2'>
                     <div class='col-12'>
-                        <div class='input-group input-group-sm mb-2'>
+                        <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>Width</span></div>
                             <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='300' />
                             <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
@@ -270,27 +341,18 @@
                         </div>
                     </div>
                 </div>
-                <div class='row mt-2 mb-2'>
+                <div class='row mt-2'>
                     <div class='col-12'>
                         <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
-                            <label class='btn btn-secondary active'>
-                                <input class='form-check-input' type='radio' name='DisplayBGRadio' value='white' checked>
-                                <span>White</span>
-                            </label>
-                            <label class='btn btn-secondary'>
-                                <input class='form-check-input' type='radio' name='DisplayBGRadio' value='black'>
-                                <span>Black</span>
-                            </label>
-                            <label class='btn btn-secondary'>
-                                <input class='form-check-input' type='radio' name='DisplayBGRadio' value='yellow'>
-                                <span>Yellow</span>
-                            </label>
+                            <button class='btn btn-secondary' type='radio' name='DisplayBGRadio' value='white'>White</button>
+                            <button class='btn btn-secondary' type='radio' name='DisplayBGRadio' value='black'>Black</button>
+                            <button class='btn btn-secondary' type='radio' name='DisplayBGRadio' value='yellow'>Yellow</button>
                         </div>
                     </div>
                 </div>
-                <div class='row mt-2 flex-grow-1'>
+                <div class='row my-2 flex-grow-1'>
                     <div class='col-12'>
-                        <div class='position-relative w-100 h-100 border'>
+                        <div id='DisplayAreaBlock' class='position-relative w-100 h-100 border'>
                             <iframe id='DisplayAreaIframe' class='position-absolute border border-dotted' src=''></iframe>
                         </div>
                     </div>
@@ -322,8 +384,8 @@
             $iframe.css('width', if_w);
             $iframe.css('height', if_h);
 
-            $iframe.on('load', function() {
-                ImportCSS();
+            $iframe.one('load', function() {
+                ImportCSS2();
             });
             iframeMask();
         });
@@ -388,10 +450,11 @@
             $Dargging = null;
             mouse_pos = null;
         });
-        $('input[name="DisplayBGRadio"]').on('click', function (e) {
+        $('button[name="DisplayBGRadio"]').on('click', function (e) {
             let element = $(e.target);
-            element.parent().parent().find('label.active').removeClass('active');
-            element.parent().addClass('active');
+            console.log(element);
+            // element.parent().parent().find('label.active').removeClass('active');
+            // element.parent().addClass('active');
             switch (element.val()) {
                 case 'black':
                     $iframe.parent().css('background', 'black');
@@ -413,8 +476,68 @@
             $mask.css('width', $iframe.outerWidth());
             $mask.css('height', $iframe.outerHeight());
         }
+        function CreateCSS() {
+            let css = '';
+            css += '#chat_box {';
+            css += 'color: ' + ($('#CB_color').val() ||　'#D3D3D3') + ';';
+            css += 'background: ' + ($('#CB_bgcolor').val() ||　'transparent') + ';';
+            css += 'font-size: ' + ($('#CB_fontsize').val() ||　'16') + 'px;';
+            css += 'font-weight: ' + ($('#CB_fontwidth').val() ||　'normal') + ';';
+            css += 'font-family: ' + ($('#CB_fomefamily').val() ||　'"Helvetica Neue", Helvetica, Arial, sans-serif') + ';';
+            css += '}';
+
+            css += '.chat_line {';
+            css += 'padding: 0;';
+            css += 'margin: ' + ($('#CL_margin').val() ||　'2') + 'px;';
+            css += 'line-height: ' + ($('#CL_lineheight').val() ||　'1') + 'rem;';
+            css += 'animation: ' + ($('#CL_animation').val() ||　'0') + ';';
+            css += '}';
+            
+            css += '.chat_line .nick {';
+            if ($('#CLN_shadow_cb').is(':checked')) {
+                let sw = ($('#CLN_shadowwidth').val() ||　'1') + 'px';
+                let sb = ($('#CLN_shadowblur').val() ||　'0') + 'px';
+                let sc = ($('#CLN_shadowcolor').val() ||　'black');
+                css += 'text-shadow: ';
+                css += `0 -${sw} ${sb} ${sc},`;
+                css += `${sw} -${sw} ${sb} ${sc},`;
+                css += `${sw} 0 ${sb} ${sc},`;
+                css += `${sw} ${sw} ${sb} ${sc},`;
+                css += `0 ${sw} ${sb} ${sc},`;
+                css += `-${sw} ${sw} ${sb} ${sc},`;
+                css += `-${sw} 0 ${sb} ${sc},`;
+                css += `-${sw} -${sw} ${sb} ${sc}`;
+                css += ';';
+            }
+            css += '}';
+
+            css += '.chat_line .message {';
+            css += 'color: ' + ($('#CLM_color').val() ||　'#D3D3D3') + ';';
+            if ($('#CLM_shadow_cb').is(':checked')) {
+                let sw = ($('#CLM_shadowwidth').val() ||　'1') + 'px';
+                let sb = ($('#CLM_shadowblur').val() ||　'0') + 'px';
+                let sc = ($('#CLM_shadowcolor').val() ||　'black');
+                css += 'text-shadow: ';
+                css += `0 -${sw} ${sb} ${sc},`;
+                css += `${sw} -${sw} ${sb} ${sc},`;
+                css += `${sw} 0 ${sb} ${sc},`;
+                css += `${sw} ${sw} ${sb} ${sc},`;
+                css += `0 ${sw} ${sb} ${sc},`;
+                css += `-${sw} ${sw} ${sb} ${sc},`;
+                css += `-${sw} 0 ${sb} ${sc},`;
+                css += `-${sw} -${sw} ${sb} ${sc}`;
+                css += ';';
+            }
+            css += '}';
+
+            return css;
+        }
         function ImportCSS() {
             $('iframe').contents().find('head').append('<style>' + $('#textarea02').val() + '</style>');
+        }
+        function ImportCSS2() {
+            let _c = CreateCSS();
+            $('iframe').contents().find('head').append('<style>' + _c + '</style>');
         }
         
 

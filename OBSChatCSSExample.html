@@ -228,8 +228,11 @@
         ConnectMsg.push(()=>sendMsg('Chat', 'Joined channel: tinolove81.'));
         ConnectMsg.push(()=>sendMsg('tinolove81', 'Test.', 'broadcaster'));
         ConnectMsg.push(()=>sendMsg('tinolove81', 'just an english comment passing through', 'broadcaster'));
-        ConnectMsg.push(()=>sendMsg('tinolove81', 'Am I the only one speak English here?', 'broadcaster'));
-        ConnectMsg.push(()=>sendMsg('tinolove81', ' Kappa ', 'broadcaster'));
+        ConnectMsg.push(()=>sendMsg('tinolove81', 'Am I the only one speak English here,LUL?', 'broadcaster'));
+        ConnectMsg.push(()=>sendMsg('tinolove81', '這是中文你懂的', 'turbo'));
+        ConnectMsg.push(()=>sendMsg('tinolove81', '你要我怎麼做怎麼說你才能愛我，要我唱幾首歌才能夠將你捕捉', 'turbo'));
+        ConnectMsg.push(()=>sendMsg('tinolove81', 'みんなさん、こんばんは', 'turbo'));
+        ConnectMsg.push(()=>sendMsg('tinolove81', 'ねぇ、今すぐ会いたいよ～', 'turbo'));
         randomWakeUp();
 
     });
@@ -243,7 +246,7 @@
         }
     }
 
-    function sendMsg(_n, _m, _t, cb) {
+    function sendMsg(_n, _m, _t) {
         let p = document.querySelector('#chat_box');
         let chat_line = document.createElement('div');
         chat_line.className = 'chat_line';
