@@ -33,8 +33,8 @@
 
         iframe {
             display: block;
-            width: 300px;
-            height: 450px;
+            width: 500px;
+            height: 200px;
         }
         input:not(:focus),
         select:not(:focus) {
@@ -117,7 +117,7 @@
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字體大小</span></div>
-                            <input type='text' id='CB_fontsize' class='form-control' placeholder='16' />
+                            <input type='text' id='CB_fontsize' class='form-control' placeholder='13' />
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                         </div>
                         <div class='input-group input-group-sm'>
@@ -152,7 +152,14 @@
                 </div>
                 <div class='row mt-2'>
                     <div class='col-12'>
-                        <strong class='input-group-text'>聊天室單行(.chat_line)</strong>
+                        <strong class='input-group-text'>聊天室每一行(.chat_line)</strong>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>單行分隔</span></div>
+                            <select class='custom-select custom-select-sm' id='CL_display'>
+                                <option value='block' selected>預設</option>
+                                <option value='flex'>分隔暱稱及訊息</option>
+                            </select>
+                        </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>單行邊界</span></div>
                             <input type='text' id='CL_margin' class='form-control' placeholder='2' />
@@ -186,21 +193,26 @@
                     <div class='col-12'>
                         <strong class='input-group-text'>單行暱稱(.nick)</strong>
                         <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
+                            <input type='text' id='CLN_bgcolor' class='form-control' placeholder='transparent'' />
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
                             <div class='input-group-prepend'>
                                 <div class='input-group-text'><input type='checkbox' id='CLN_shadow_cb' /></div>
                             </div>
                             <div class='input-group-prepend'>
-                                <span class='input-group-text'>陰影粗細</span>
+                                <span class='input-group-text'>粗細</span>
                             </div>
                             <input type='text' id='CLN_shadowwidth' class='form-control' placeholder='1' />
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
-                                <span class='input-group-text'>陰影擴散</span>
+                                <span class='input-group-text'>擴散</span>
                             </div>
                             <input type='text' id='CLN_shadowblur' class='form-control' placeholder='0' />
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
-                                <span class='input-group-text'>陰影顏色</span>
+                                <span class='input-group-text'>顏色</span>
                             </div>
                             <input type='text' id='CLN_shadowcolor' class='form-control' placeholder='#000000' />
                         </div>
@@ -214,21 +226,26 @@
                             <input type='text' id='CLM_color' class='form-control' placeholder='#D3D3D3' />
                         </div>
                         <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
+                            <input type='text' id='CLM_bgcolor' class='form-control' placeholder='transparent'' />
+                        </div>
+                        <div class='input-group input-group-sm'>
+                        <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
                             <div class='input-group-prepend'>
                                 <div class='input-group-text'><input type='checkbox' id='CLM_shadow_cb' /></div>
                             </div>
                             <div class='input-group-prepend'>
-                                <span class='input-group-text'>陰影粗細</span>
+                                <span class='input-group-text'>粗細</span>
                             </div>
                             <input type='text' id='CLM_shadowwidth' class='form-control' placeholder='1' />
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
-                                <span class='input-group-text'>陰影擴散</span>
+                                <span class='input-group-text'>擴散</span>
                             </div>
                             <input type='text' id='CLM_shadowblur' class='form-control' placeholder='0' />
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
-                                <span class='input-group-text'>陰影顏色</span>
+                                <span class='input-group-text'>顏色</span>
                             </div>
                             <input type='text' id='CLM_shadowcolor' class='form-control' placeholder='#000000' />
                         </div>
@@ -260,9 +277,9 @@
                     <div class='col-12'>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>Width</span></div>
-                            <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='300' />
+                            <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='500' />
                             <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
-                            <input type='text' id='DisplayAreaInput03' class='form-control' placeholder='450' />
+                            <input type='text' id='DisplayAreaInput03' class='form-control' placeholder='200' />
                             <button id='DisplayAreaSubmit' class='btn btn-success btn-sm' type='button'>Try it</button>
                             <button id='DisplayAreaCancel' class='btn btn-warning btn-sm' type='button'>Reset</button>
                         </div>
@@ -314,12 +331,9 @@
         }); 
 
         $('#DisplayAreaSubmit').on('click', () => {
-            let if_w = parseInt($('#DisplayAreaInput02').val()) || 300;
-            let if_h = parseInt($('#DisplayAreaInput03').val()) || 450;
-
             $iframe.prop('src', location.toString().replace('Test', 'Example'));
-            $iframe.css('width', if_w);
-            $iframe.css('height', if_h);
+            $iframe.css('width', (parseInt($('#DisplayAreaInput02').val()) || 500));
+            $iframe.css('height', (parseInt($('#DisplayAreaInput03').val()) || 200));
 
             $iframe.one('load', function() {
                 ImportCSS();
@@ -327,12 +341,9 @@
             iframeMask();
         });
         $('#DisplayAreaCancel').on('click', () => {
-            let if_w = parseInt($('#DisplayAreaInput02').val()) || 300;
-            let if_h = parseInt($('#DisplayAreaInput03').val()) || 450;
-
             $iframe.prop('src', location.toString().replace('Test', 'Example'));
-            $iframe.css('width', if_w);
-            $iframe.css('height', if_h);
+            $iframe.css('width', (parseInt($('#DisplayAreaInput02').val()) || 500));
+            $iframe.css('height', (parseInt($('#DisplayAreaInput03').val()) || 200));
 
             $iframe.off('load');
             iframeMask();
@@ -421,19 +432,21 @@
             css += '#chat_box {';
             css += 'color: ' + ($('#CB_color').val() ||　'#D3D3D3') + ';';
             css += 'background: ' + ($('#CB_bgcolor').val() ||　'transparent') + ';';
-            css += 'font-size: ' + ($('#CB_fontsize').val() ||　'16') + 'px;';
+            css += 'font-size: ' + ($('#CB_fontsize').val() ||　'13') + 'px;';
             css += 'font-weight: ' + ($('#CB_fontwidth').val() ||　'normal') + ';';
             css += 'font-family: ' + ($('#CB_fomefamily').val() ||　'"Helvetica Neue", Helvetica, Arial, sans-serif') + ';';
             css += '}';
 
             css += '.chat_line {';
-            css += 'padding: 0;';
+            css += 'display: ' + ($('#CL_display').val()) + ';';
             css += 'margin: ' + ($('#CL_margin').val() ||　'2') + 'px;';
+            css += 'padding: 0;';
             css += 'line-height: ' + ($('#CL_lineheight').val() ||　'1') + 'em;';
             css += 'animation: ' + ($('#CL_animation').val() ||　'0') + ';';
             css += '}';
             
             css += '.chat_line .nick {';
+            css += 'background: ' + ($('#CLN_bgcolor').val() ||　'transparent') + ';';
             if ($('#CLN_shadow_cb').is(':checked')) {
                 let sw = ($('#CLN_shadowwidth').val() ||　'1') + 'px';
                 let sb = ($('#CLN_shadowblur').val() ||　'0') + 'px';
@@ -453,6 +466,7 @@
 
             css += '.chat_line .message {';
             css += 'color: ' + ($('#CLM_color').val() ||　'#D3D3D3') + ';';
+            css += 'background: ' + ($('#CLM_bgcolor').val() ||　'transparent') + ';';
             if ($('#CLM_shadow_cb').is(':checked')) {
                 let sw = ($('#CLM_shadowwidth').val() ||　'1') + 'px';
                 let sb = ($('#CLM_shadowblur').val() ||　'0') + 'px';
