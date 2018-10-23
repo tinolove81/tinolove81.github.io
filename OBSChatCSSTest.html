@@ -34,7 +34,7 @@
             width: 300px;
             height: 450px;
         }
-        input {
+        input, select {
             background: rgba(255, 255, 255, .7) !important;
         }
         input::placeholder {
@@ -100,7 +100,7 @@
                         <div id='collapseExample_color' class='collapse'>
                             <div class='card'>
                                 <table class='table table-sm'>
-                                    <tr><td>顏色名稱(color name)</td><td>瀏覽器支援內建名稱(browsers support the 140 color names)<br/>(ex. red, blue, white, black...)</td></tr>
+                                    <tr><td>顏色名稱(color name)</td><td>瀏覽器支援內建名稱(browsers support the 140 color names)<br/>(ex. red, blue, white, black, transparent...)</td></tr>
                                     <tr><td rowspan='4'>顏色代碼(color code)</td><td>HEX Value: #AACCFF = #ACF</td></tr>
                                     <tr><td>RGB color: rgb(255, 255, 255)</td></tr>
                                     <tr><td>RGBA color: rgba(255, 255, 255, 1)</td></tr>
@@ -136,12 +136,12 @@
                         <div id='collapseExample_fontfamily' class='collapse'>
                             <div class='card'>
                                 <table class='table table-sm'>
-                                    <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
                                     <tr style='font-family: "Helvetica Neue";'><td>'Helvetica Neue'</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
                                     <tr style='font-family: Arial;'><td>Arial</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
-                                    <tr style='font-family: sans-serif;'><td>sans-serif</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
                                     <tr style='font-family: Meiryo;'><td>Meiryo</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
                                     <tr style='font-family: "Microsoft JhengHei";'><td>'Microsoft JhengHei'</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: "Microsoft YaHei";'><td>'Microsoft YaHei'</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
                                 </table>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>單行字元間距</span></div>
                             <input type='text' id='CL_lineheight' class='form-control' placeholder='1' />
-                            <div class='input-group-append'><span class='input-group-text'>rem</span></div>
+                            <div class='input-group-append'><span class='input-group-text'>em</span></div>
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>單行動畫</span></div>
@@ -218,6 +218,7 @@
                                 <span class='input-group-text'>陰影粗細</span>
                             </div>
                             <input type='text' id='CLM_shadowwidth' class='form-control' placeholder='1' />
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>陰影擴散</span>
                             </div>
@@ -232,82 +233,7 @@
                 </div>
                 <div class='row mt-2 d-none'>
                     <div class='col-12'>
-                        <strong class='input-group-text'>聊天室單行(.chat_line)</strong>
-                        <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>##</span></div>
-                            <input type='text' id='CL_margin' class='form-control' placeholder='###' />
-                        </div>
-                    </div>
-                </div>
-                <div class='row mt-2 d-none'>
-                    <div class='col-12'>
-                        <textarea class='w-100 h-100'>
-::-webkit-scrollbar {
-    visibility: hidden;
-}
-
-#chat_box {
-}
-
-.chat_line {
-}
-
-.chat_line .nick {
-}
-
-.chat_line .message {
-}
-                        </textarea>
-                    </div>
-                    <div class='col-12'>
                         <textarea id='textarea02' class='w-100 h-100'>
-::-webkit-scrollbar {
-    visibility: hidden;
-}
-
-#chat_box {
-    padding: 0;
-    color: white;
-    background: transparent;
-    font-size: 16px;
-    font-weight: 300;
-    font-family: 'Meiryo', 'Microsoft JhengHei';
-}
-
-.chat_line {
-    margin: 2px;
-    padding: 0;
-    line-height: 1rem;
-    animation: slideInRight .6s cubic-bezier(.2, 1, .3, 1);
-}
-
-.chat_line .time_stamp {
-    display: none;
-}
-
-.chat_line .nick {
-    text-shadow: 0 -1px #000,
-    1px -1px #000,
-    1px 0 #000,
-    1px 1px #000,
-    0 1px #000,
-    -1px 1px #000,
-    -1px 0 #000,
-    -1px -1px #000;
-}
-
-.chat_line .message {
-    color: white;
-    text-shadow: 0 -1px #000,
-    1px -1px #000,
-    1px 0 #000,
-    1px 1px #000,
-    0 1px #000,
-    -1px 1px #000,
-    -1px 0 #000,
-    -1px -1px #000;
-}
-
 @keyframes slideInRight {
     0% {
         -webkit-transform: translateX(100%);
@@ -334,10 +260,8 @@
                             <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='300' />
                             <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
                             <input type='text' id='DisplayAreaInput03' class='form-control' placeholder='450' />
-                            <div class='input-group-append'>
-                                <button id='DisplayAreaSubmit' class='btn btn-outline-success btn-sm' type='button'>Submit</button>
-                                <button id='DisplayAreaCancel' class='btn btn-outline-success btn-sm' type='button'>Reset</button>
-                            </div>
+                            <button id='DisplayAreaSubmit' class='btn btn-success btn-sm' type='button'>Try it</button>
+                            <button id='DisplayAreaCancel' class='btn btn-warning btn-sm' type='button'>Reset</button>
                         </div>
                     </div>
                 </div>
@@ -350,10 +274,22 @@
                         </div>
                     </div>
                 </div>
-                <div class='row my-2 flex-grow-1'>
+                <div class='row mt-2 flex-grow-1'>
                     <div class='col-12'>
                         <div id='DisplayAreaBlock' class='position-relative w-100 h-100 border'>
                             <iframe id='DisplayAreaIframe' class='position-absolute border border-dotted' src=''></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class='row my-2'>
+                    <div class='col-12'>
+                        <strong class='input-group-text'>複製代碼</strong>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>自訂CSS</span></div>
+                            <input type='text' id='CSS_code' class='form-control' />
+                            <div class='input-group-append'>
+                                <button id='CSS_code_btn' class='btn btn-outline-secondary' type='button'>複製(Copy)</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -372,8 +308,6 @@
 
         $(function() { 
             iframeMask();
-            
-
         }); 
 
         $('#DisplayAreaSubmit').on('click', () => {
@@ -385,7 +319,7 @@
             $iframe.css('height', if_h);
 
             $iframe.one('load', function() {
-                ImportCSS2();
+                ImportCSS();
             });
             iframeMask();
         });
@@ -452,9 +386,6 @@
         });
         $('button[name="DisplayBGRadio"]').on('click', function (e) {
             let element = $(e.target);
-            console.log(element);
-            // element.parent().parent().find('label.active').removeClass('active');
-            // element.parent().addClass('active');
             switch (element.val()) {
                 case 'black':
                     $iframe.parent().css('background', 'black');
@@ -467,6 +398,12 @@
                     break;
                 default:
                     break;
+            }
+        });
+        $('#CSS_code_btn').on('click', () => {
+            if ($('#CSS_code').val()) {
+                $('#CSS_code').select();
+                document.execCommand("copy");
             }
         });
 
@@ -489,7 +426,7 @@
             css += '.chat_line {';
             css += 'padding: 0;';
             css += 'margin: ' + ($('#CL_margin').val() ||　'2') + 'px;';
-            css += 'line-height: ' + ($('#CL_lineheight').val() ||　'1') + 'rem;';
+            css += 'line-height: ' + ($('#CL_lineheight').val() ||　'1') + 'em;';
             css += 'animation: ' + ($('#CL_animation').val() ||　'0') + ';';
             css += '}';
             
@@ -533,14 +470,12 @@
             return css;
         }
         function ImportCSS() {
-            $('iframe').contents().find('head').append('<style>' + $('#textarea02').val() + '</style>');
-        }
-        function ImportCSS2() {
             let _c = CreateCSS();
+            $('#CSS_code').val(_c);
+            $('#CSS_code').select();
             $('iframe').contents().find('head').append('<style>' + _c + '</style>');
         }
         
-
     </script>
 </body>
 
