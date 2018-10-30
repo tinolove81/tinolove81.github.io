@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang='zh-tw'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='expires' content='0'>
+    <Meta http-equiv='Pragma' Content='No-cache'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <link href='https://bootstrap.hexschool.com/dist/css/bootstrap.css' rel='stylesheet'>
+    <!-- <link href='file:///D:/VSCodeWorkSpace/CMSWebServer/css/bootstrap.min.css' rel='stylesheet'> -->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <!-- <script src='file:///D:/VSCodeWorkSpace/CMSWebServer/js/jquery-3.2.1.min.js'></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src='https://bootstrap.hexschool.com/dist/js/bootstrap.js'></script>
+    <title>OBS Chat CSS Test</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: consolas, 'Microsoft JhengHei';
+            background-image: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg');
+            background-repeat: no-repeat;
+            background-position:  left center;
+        }
+        body {
+            position: relative;
+            overflow: hidden;
+        }
+
+        body > div {
+            height: calc(100%);
+        }
+
+        iframe {
+            display: block;
+            width: 500px;
+            height: 200px;
+        }
+        input:not(:focus),
+        select:not(:focus) {
+            background-color: rgba(255, 255, 255, .7) !important;
+        }
+        input::placeholder {
+            color: rgba(170, 204, 255, .7) !important;
+        }
+        input::-webkit-input-placeholder {
+            color: rgba(170, 204, 255, .7) !important;
+        }
+        input::-moz-placeholder {
+            color: rgba(170, 204, 255, .7) !important;
+        }
+        input::-ms-input-placeholder {
+            color: rgba(170, 204, 255, .7) !important;
+        }
+
+        #ModifyArea {
+            overflow: auto;
+        }
+        #DisplayAreaBlock {
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .mask_for_iframe {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            color: transparent;
+            background: rgba(255, 255, 255, 0);
+            border: 0;
+            z-index: 3;
+        }
+
+        .border-dotted {
+            border-style: dotted !important;
+        }
+
+    </style>
+</head>
+
+<body class='container-fluid'>
+    <div id='app' class='d-flex flex-column'>
+        <div class='row h-100'>
+        <!-- Detail Area -->
+            <div id='ModifyArea' class='col-6 h-100'>
+                <div class='row mt-2'>
+                    <div class='col-12'>
+                        <strong class='input-group-text'>聊天室本體(#chat_box)</strong>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>聊天室字色</span></div>
+                            <input type='text' class='form-control' placeholder='#D3D3D3' v-model.lazy='modifyData.CB_color'/>
+                            <div class='input-group-append'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_color'>
+                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                </button>
+                            </div>
+                        </div>
+                        <div id='collapseExample_color' class='collapse'>
+                            <div class='card card-body'>
+                                <table class='table table-sm table-bordered m-0'>
+                                    <tr><td>顏色名稱(color name)</td><td>瀏覽器支援內建名稱(browsers support the 140 color names)<br/>(ex. red, blue, white, black, transparent...)</td></tr>
+                                    <tr><td rowspan='4'>顏色代碼(color code)</td><td>HEX Value: #AACCFF = #ACF</td></tr>
+                                    <tr><td>RGB color: rgb(255, 255, 255)</td></tr>
+                                    <tr><td>RGBA color: rgba(255, 255, 255, 1)</td></tr>
+                                    <tr><td>HSL color: HSL(240, 100%, 50%)</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>聊天室背景色</span></div>
+                            <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CB_bgcolor'/>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>聊天室字體大小</span></div>
+                            <input type='text' class='form-control' placeholder='13' v-model.lazy='modifyData.CB_fontsize'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>聊天室字體粗細</span></div>
+                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CB_fontwidth'>
+                                <option value='normal' selected>預設</option>
+                                <option value='bold'>粗體</option>
+                            </select>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>聊天室字型</span></div>
+                            <input type='text' class='form-control' placeholder='"Helvetica Neue", Helvetica, Arial, sans-serif' v-model.lazy='modifyData.CB_fomefamily'/>
+                            <div class='input-group-append'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_fontfamily'>
+                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                </button>
+                            </div>
+                        </div>
+                        <div id='collapseExample_fontfamily' class='collapse'>
+                            <div class='card card-body'>
+                                <table class='table table-sm table-bordered m-0'>
+                                    <tr style='font-family: "Helvetica Neue";'><td>"Helvetica Neue"</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: Arial;'><td>Arial</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: Meiryo;'><td>Meiryo</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: "Microsoft JhengHei";'><td>"Microsoft JhengHei"</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: "Microsoft YaHei";'><td>"Microsoft YaHei"</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row mt-2'>
+                    <div class='col-12'>
+                        <strong class='input-group-text'>聊天室每一行(.chat_line)</strong>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>單行分隔</span></div>
+                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display'>
+                                <option value='block' selected>預設</option>
+                                <option value='flex'>分隔暱稱及訊息</option>
+                            </select>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>單行邊界</span></div>
+                            <input type='text' class='form-control' placeholder='2' v-model.lazy='modifyData.CL_margin'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>單行字元間距</span></div>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CL_lineheight'/>
+                            <div class='input-group-append'><span class='input-group-text'>em</span></div>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>單行動畫</span></div>
+                            <input type='text' class='form-control' v-model.lazy='modifyData.CL_animation'/>
+                            <div class='input-group-append'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_animation'>
+                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                </button>
+                            </div>
+                        </div>
+                        <div id='collapseExample_animation' class='collapse'>
+                            <div class='card card-body'>
+                                <table class='table table-sm table-bordered m-0'>
+                                    <tr><td>想到再做</td></tr>
+                                    <tr><td>//slideInRight .6s cubic-bezier(.2, 1, .3, 1);</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row mt-2'>
+                    <div class='col-12'>
+                        <strong class='input-group-text'>單行暱稱(.nick)</strong>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
+                            <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CLN_bgcolor'/>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
+                            <div class='input-group-prepend'>
+                                <div class='input-group-text'><input type='checkbox' v-model.lazy='modifyData.CLN_shadow_cb'/></div>
+                            </div>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>粗細</span>
+                            </div>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLN_shadowwidth'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>擴散</span>
+                            </div>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLN_shadowblur'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>顏色</span>
+                            </div>
+                            <input type='text' class='form-control' placeholder='#000000' v-model.lazy='modifyData.CLN_shadowcolor'/>
+                        </div>
+                    </div>
+                </div>
+                <div class='row my-2'>
+                    <div class='col-12'>
+                        <strong class='input-group-text'>聊天內容(.message)</strong>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>字色</span></div>
+                            <input type='text' class='form-control' placeholder='#D3D3D3' v-model.lazy='modifyData.CLM_color'/>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
+                            <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CLM_bgcolor'/>
+                        </div>
+                        <div class='input-group input-group-sm'>
+                        <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
+                            <div class='input-group-prepend'>
+                                <div class='input-group-text'><input type='checkbox' v-model.lazy='modifyData.CLM_shadow_cb' /></div>
+                            </div>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>粗細</span>
+                            </div>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLM_shadowwidth'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>擴散</span>
+                            </div>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLM_shadowblur'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'>
+                                <span class='input-group-text'>顏色</span>
+                            </div>
+                            <input type='text' class='form-control' placeholder='#000000' v-model.lazy='modifyData.CLM_shadowcolor'/>
+                        </div>
+                    </div>
+                </div>
+                <div class='row mt-2 d-none'>
+                    <div class='col-12'>
+                        <textarea id='textarea02' class='w-100 h-100'>
+@keyframes slideInRight {
+    0% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        visibility: visible;
+    }
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        <!-- /Detail Area -->
+
+        <!-- Display Area -->
+            <div id='DisplayArea' class='col-6 d-flex flex-column'>
+                <div class='row mt-2'>
+                    <div class='col-12'>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>Width</span></div>
+                            <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='500' />
+                            <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
+                            <input type='text' id='DisplayAreaInput03' class='form-control' placeholder='200' />
+                            <button class='btn btn-success btn-sm' type='button' v-on:click='DisplayAreaSubmit'>Try it</button>
+                            <button class='btn btn-warning btn-sm' type='button' v-on:click='DisplayAreaCancel'>Reset</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='row mt-2'>
+                    <div class='col-12'>
+                        <div class='btn-group btn-group-sm btn-group-toggle'>
+                            <label class='btn btn-secondary' v-bind:class='[displayData.DAB_bgcolor.background == "white" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.DAB_bgcolor.background' value='white'/>White</label>
+                            <label class='btn btn-secondary' v-bind:class='[displayData.DAB_bgcolor.background == "black" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.DAB_bgcolor.background' value='black'/>Black</label>
+                            <label class='btn btn-secondary' v-bind:class='[displayData.DAB_bgcolor.background == "yellow" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.DAB_bgcolor.background' value='yellow'/>Yellow</label>
+                        </div>
+                    </div>
+                </div>
+                <div class='row mt-2 flex-grow-1'>
+                    <div class='col-12'>
+                        <div id='DisplayAreaBlock' class='position-relative w-100 h-100 border' v-bind:style='displayData.DAB_bgcolor'>
+                            <iframe id='DisplayAreaIframe' class='position-absolute border border-dotted' src='' v-on:load='DAIframeLoad'></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class='row my-2'>
+                    <div class='col-12'>
+                        <strong class='input-group-text'>複製代碼</strong>
+                        <div class='input-group input-group-sm'>
+                            <div class='input-group-prepend'><span class='input-group-text'>自訂CSS</span></div>
+                            <input type='text' id='CSS_code' class='form-control' />
+                            <div class='input-group-append'>
+                                <button id='CSS_code_btn' class='btn btn-primary' type='button'>複製(Copy)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /Display Area -->
+
+        </div>
+    </div>
+    <div id='MaskForIframe' class='mask_for_iframe'></div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                'dargging': null,
+                'mouse_pos': null,
+                'modifyData': {
+                    'CB_color': '#D3D3D3',
+                    'CB_bgcolor': 'transparent',
+                    'CB_fontsize': 13,
+                    'CB_fontwidth': 'normal',
+                    'CB_fomefamily': '"Helvetica Neue", Helvetica, Arial, sans-serif',
+                    'CL_display': 'block',
+                    'CL_margin': 2,
+                    'CL_lineheight': 1,
+                    'CL_animation': '',
+                    'CLN_bgcolor': 'transparent',
+                    'CLN_shadow_cb': false,
+                    'CLN_shadowwidth': 1,
+                    'CLN_shadowblur': 1,
+                    'CLN_shadowcolor': '#000000',
+                    'CLM_color': '#D3D3D3',
+                    'CLM_bgcolor': 'transparent',
+                    'CLM_shadow_cb': false,
+                    'CLM_shadowwidth': 1,
+                    'CLM_shadowblur': 1,
+                    'CLM_shadowcolor': '#000000'
+                },
+                'displayData': {
+                    'DAB_bgcolor': {'background': 'white'},
+                    'DAiframeprop': {
+                        'src': '',
+                        'width': 500,
+                        'height': 200
+                    }
+                }
+            },
+            mounted: function () {
+                console.log('init');
+            },
+            computed: {},
+            methods: {
+                DisplayAreaSubmit: function () {
+                    console.log('DisplayAreaSubmit');
+                    this.displayData.DAiframeprop.src = location.toString().replace('TestV', 'Example');
+
+                },
+                DisplayAreaCancel: function () {
+                    console.log('DisplayAreaCancel');
+                },
+                DAIframeLoad: function () {
+                    if (!true) return false;
+                    css();
+                }
+            }
+        });
+
+
+        /*
+        let $iframe = $('#DisplayAreaIframe');
+        let $mask = $('#MaskForIframe');
+        let $Dargging = null;
+        let mouse_pos = null;
+
+        $(function() { 
+            iframeMask();
+        }); 
+
+        $('#DisplayAreaSubmit').on('click', () => {
+            $iframe.prop('src', location.toString().replace('TestV', 'Example'));
+            $iframe.css('width', (parseInt($('#DisplayAreaInput02').val()) || 500));
+            $iframe.css('height', (parseInt($('#DisplayAreaInput03').val()) || 200));
+
+            $iframe.one('load', function() {
+                ImportCSS();
+            });
+            iframeMask();
+        });
+        $('#DisplayAreaCancel').on('click', () => {
+            $iframe.prop('src', location.toString().replace('TestV', 'Example'));
+            $iframe.css('width', (parseInt($('#DisplayAreaInput02').val()) || 500));
+            $iframe.css('height', (parseInt($('#DisplayAreaInput03').val()) || 200));
+
+            $iframe.off('load');
+            iframeMask();
+        });
+        $mask.on('mousemove', function (e) {
+            if ($Dargging) {
+                let top_border = $iframe.parent().offset()['top'];
+                let right_border = $iframe.parent().offset()['left'] + $iframe.parent().outerWidth();
+                let buttom_border = $iframe.parent().offset()['top'] + $iframe.parent().outerHeight();
+                let left_border = $iframe.parent().offset()['left'];
+
+                if ($Dargging.offset()['top'] + (e.clientY - mouse_pos['top']) < top_border) {
+                    $Dargging.css('top', top_border);
+                    $iframe.css('top', 0);
+                } else if ($Dargging.offset()['top'] + (e.clientY - mouse_pos['top']) + $Dargging.outerHeight() > buttom_border) {
+                    $Dargging.css('top', buttom_border - $Dargging.outerHeight());
+                    $iframe.css('top', $iframe.parent().outerHeight() - $iframe.outerHeight());
+                } else {
+                    $Dargging.css('top', '+=' + (e.clientY - mouse_pos['top']));
+                    $iframe.css('top', '+=' + (e.clientY - mouse_pos['top']));
+                }
+
+                if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) < left_border) {
+                    $Dargging.css('left', left_border);
+                    $iframe.css('left', 0);
+                } else if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) + $Dargging.outerWidth() > right_border) {
+                    $Dargging.css('left', right_border - $Dargging.outerWidth());
+                    $iframe.css('left', $iframe.parent().outerWidth() - $iframe.outerWidth());
+                } else {
+                    $Dargging.css('left', '+=' + (e.clientX - mouse_pos['left']));
+                    $iframe.css('left', '+=' + (e.clientX - mouse_pos['left']));
+                }
+
+                mouse_pos = {
+                    'top': e.clientY,
+                    'left': e.clientX
+                };
+            }
+        });
+        $mask.on('mousedown', function (e) {
+            $Dargging = $(e.target);
+            mouse_pos = {
+                'top': e.clientY,
+                'left': e.clientX
+            };
+        });
+        $mask.on('mouseup', function (e) {
+            $Dargging = null;
+            mouse_pos = null;
+        });
+        $mask.on('mouseleave', function (e) {
+            $Dargging = null;
+            mouse_pos = null;
+        });
+        $('input[name="DisplayBGRadio"]').on('click', function (e) {
+            let element = $(e.target);
+            switch (element.val()) {
+                case 'black':
+                    $iframe.parent().css('background', 'black');
+                    break;
+                case 'white':
+                    $iframe.parent().css('background', 'white');
+                    break;
+                case 'yellow':
+                    $iframe.parent().css('background', 'yellow');
+                    break;
+                default:
+                    break;
+            }
+        });
+        $('#CSS_code_btn').on('click', () => {
+            if ($('#CSS_code').val()) {
+                $('#CSS_code').select();
+                document.execCommand("copy");
+            }
+        });
+
+        function iframeMask() {
+            $mask.css('top', $iframe.offset()['top']);
+            $mask.css('left', $iframe.offset()['left']);
+            $mask.css('width', $iframe.outerWidth());
+            $mask.css('height', $iframe.outerHeight());
+        }
+        function CreateCSS() {
+            let css = '';
+            css += '#chat_box {';
+            css += 'color: ' + ($('#CB_color').val() ||　'#D3D3D3') + ';';
+            css += 'background: ' + ($('#CB_bgcolor').val() ||　'transparent') + ';';
+            css += 'font-size: ' + ($('#CB_fontsize').val() ||　'13') + 'px;';
+            css += 'font-weight: ' + ($('#CB_fontwidth').val() ||　'normal') + ';';
+            css += 'font-family: ' + ($('#CB_fomefamily').val() ||　'"Helvetica Neue", Helvetica, Arial, sans-serif') + ';';
+            css += '}';
+
+            css += '.chat_line {';
+            css += 'display: ' + ($('#CL_display').val()) + ';';
+            css += 'margin: ' + ($('#CL_margin').val() ||　'2') + 'px;';
+            css += 'padding: 0;';
+            css += 'line-height: ' + ($('#CL_lineheight').val() ||　'1') + 'em;';
+            css += 'animation: ' + ($('#CL_animation').val() ||　'0') + ';';
+            css += '}';
+            
+            css += '.chat_line .nick {';
+            css += 'background: ' + ($('#CLN_bgcolor').val() ||　'transparent') + ';';
+            if ($('#CLN_shadow_cb').is(':checked')) {
+                let sw = ($('#CLN_shadowwidth').val() ||　'1') + 'px';
+                let sb = ($('#CLN_shadowblur').val() ||　'0') + 'px';
+                let sc = ($('#CLN_shadowcolor').val() ||　'black');
+                css += 'text-shadow: ';
+                css += `0 -${sw} ${sb} ${sc},`;
+                css += `${sw} -${sw} ${sb} ${sc},`;
+                css += `${sw} 0 ${sb} ${sc},`;
+                css += `${sw} ${sw} ${sb} ${sc},`;
+                css += `0 ${sw} ${sb} ${sc},`;
+                css += `-${sw} ${sw} ${sb} ${sc},`;
+                css += `-${sw} 0 ${sb} ${sc},`;
+                css += `-${sw} -${sw} ${sb} ${sc}`;
+                css += ';';
+            }
+            css += '}';
+
+            css += '.chat_line .message {';
+            css += 'color: ' + ($('#CLM_color').val() ||　'#D3D3D3') + ';';
+            css += 'background: ' + ($('#CLM_bgcolor').val() ||　'transparent') + ';';
+            if ($('#CLM_shadow_cb').is(':checked')) {
+                let sw = ($('#CLM_shadowwidth').val() ||　'1') + 'px';
+                let sb = ($('#CLM_shadowblur').val() ||　'0') + 'px';
+                let sc = ($('#CLM_shadowcolor').val() ||　'black');
+                css += 'text-shadow: ';
+                css += `0 -${sw} ${sb} ${sc},`;
+                css += `${sw} -${sw} ${sb} ${sc},`;
+                css += `${sw} 0 ${sb} ${sc},`;
+                css += `${sw} ${sw} ${sb} ${sc},`;
+                css += `0 ${sw} ${sb} ${sc},`;
+                css += `-${sw} ${sw} ${sb} ${sc},`;
+                css += `-${sw} 0 ${sb} ${sc},`;
+                css += `-${sw} -${sw} ${sb} ${sc}`;
+                css += ';';
+            }
+            css += '}';
+
+            return css;
+        }
+        function ImportCSS() {
+            let _c = CreateCSS();
+            $('#CSS_code').val(_c);
+            $('#CSS_code').select();
+            $('iframe').contents().find('head').append('<style>' + _c + '</style>');
+        }
+        */
+    </script>
+</body>
+
+</html>
