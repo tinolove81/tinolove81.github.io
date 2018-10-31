@@ -27,15 +27,13 @@
             position: relative;
             overflow: hidden;
         }
-
         body > div {
             height: calc(100%);
         }
-
         iframe {
             display: block;
             width: 500px;
-            height: 200px;
+            height: 300px;
         }
         input:not(:focus),
         select:not(:focus) {
@@ -62,12 +60,12 @@
             overflow: hidden;
         }
 
-        .mask_for_iframe {
+        #MaskForIframe {
             position: absolute;
             margin: 0;
             padding: 0;
             color: transparent;
-            background: rgba(255, 255, 255, 0);
+            background: rgba(255, 0, 0, 0);
             border: 0;
             z-index: 3;
         }
@@ -86,17 +84,17 @@
             <div id='ModifyArea' class='col-6 h-100'>
                 <div class='row mt-2'>
                     <div class='col-12'>
-                        <strong class='input-group-text'>聊天室本體(#chat_box)</strong>
+                        <strong class='h5'>聊天室本體(#chat_box)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字色</span></div>
                             <input type='text' class='form-control' placeholder='#D3D3D3' v-model.lazy='modifyData.CB_color'/>
                             <div class='input-group-append'>
-                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_color'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapse_color'>
                                     <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
                                 </button>
                             </div>
                         </div>
-                        <div id='collapseExample_color' class='collapse'>
+                        <div id='collapse_color' class='collapse'>
                             <div class='card card-body'>
                                 <table class='table table-sm table-bordered m-0'>
                                     <tr><td>顏色名稱(color name)</td><td>瀏覽器支援內建名稱(browsers support the 140 color names)<br/>(ex. red, blue, white, black, transparent...)</td></tr>
@@ -127,12 +125,12 @@
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字型</span></div>
                             <input type='text' class='form-control' placeholder='"Helvetica Neue", Helvetica, Arial, sans-serif' v-model.lazy='modifyData.CB_fomefamily'/>
                             <div class='input-group-append'>
-                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_fontfamily'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapse_fontfamily'>
                                     <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
                                 </button>
                             </div>
                         </div>
-                        <div id='collapseExample_fontfamily' class='collapse'>
+                        <div id='collapse_fontfamily' class='collapse'>
                             <div class='card card-body'>
                                 <table class='table table-sm table-bordered m-0'>
                                     <tr style='font-family: "Helvetica Neue";'><td>"Helvetica Neue"</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
@@ -148,7 +146,7 @@
                 </div>
                 <div class='row mt-2'>
                     <div class='col-12'>
-                        <strong class='input-group-text'>聊天室每一行(.chat_line)</strong>
+                        <strong class='h5'>聊天室每一行(.chat_line)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>單行分隔</span></div>
                             <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display'>
@@ -170,12 +168,12 @@
                             <div class='input-group-prepend'><span class='input-group-text'>單行動畫</span></div>
                             <input type='text' class='form-control' v-model.lazy='modifyData.CL_animation'/>
                             <div class='input-group-append'>
-                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseExample_animation'>
+                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapse_animation'>
                                     <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
                                 </button>
                             </div>
                         </div>
-                        <div id='collapseExample_animation' class='collapse'>
+                        <div id='collapse_animation' class='collapse'>
                             <div class='card card-body'>
                                 <table class='table table-sm table-bordered m-0'>
                                     <tr><td>想到再做</td></tr>
@@ -187,7 +185,7 @@
                 </div>
                 <div class='row mt-2'>
                     <div class='col-12'>
-                        <strong class='input-group-text'>單行暱稱(.nick)</strong>
+                        <strong class='h5'>單行暱稱(.nick)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
                             <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CLN_bgcolor'/>
@@ -216,7 +214,7 @@
                 </div>
                 <div class='row my-2'>
                     <div class='col-12'>
-                        <strong class='input-group-text'>聊天內容(.message)</strong>
+                        <strong class='h5'>聊天內容(.message)</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>字色</span></div>
                             <input type='text' class='form-control' placeholder='#D3D3D3' v-model.lazy='modifyData.CLM_color'/>
@@ -248,21 +246,7 @@
                     </div>
                 </div>
                 <div class='row mt-2 d-none'>
-                    <div class='col-12'>
-                        <textarea id='textarea02' class='w-100 h-100'>
-@keyframes slideInRight {
-    0% {
-        -webkit-transform: translateX(100%);
-        transform: translateX(100%);
-        visibility: visible;
-    }
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-                        </textarea>
-                    </div>
+                    <div class='col-12'></div>
                 </div>
             </div>
         <!-- /Detail Area -->
@@ -273,10 +257,10 @@
                     <div class='col-12'>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>Width</span></div>
-                            <input type='text' id='DisplayAreaInput02' class='form-control' placeholder='500' />
+                            <input type='text' class='form-control' placeholder='500' v-model.lazy='displayData.iframeProp.width'/>
                             <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
-                            <input type='text' id='DisplayAreaInput03' class='form-control' placeholder='200' />
-                            <button class='btn btn-success btn-sm' type='button' v-on:click='DisplayAreaSubmit'>Try it</button>
+                            <input type='text' class='form-control' placeholder='300' v-model.lazy='displayData.iframeProp.height'/>
+                            <button class='btn btn-success btn-sm' type='button' v-on:click='DisplayAreaSubmit'>Submit</button>
                             <button class='btn btn-warning btn-sm' type='button' v-on:click='DisplayAreaCancel'>Reset</button>
                         </div>
                     </div>
@@ -284,27 +268,27 @@
                 <div class='row mt-2'>
                     <div class='col-12'>
                         <div class='btn-group btn-group-sm btn-group-toggle'>
-                            <label class='btn btn-secondary' v-bind:class='[displayData.DAB_bgcolor.background == "white" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.DAB_bgcolor.background' value='white'/>White</label>
-                            <label class='btn btn-secondary' v-bind:class='[displayData.DAB_bgcolor.background == "black" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.DAB_bgcolor.background' value='black'/>Black</label>
-                            <label class='btn btn-secondary' v-bind:class='[displayData.DAB_bgcolor.background == "yellow" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.DAB_bgcolor.background' value='yellow'/>Yellow</label>
+                            <label class='btn btn-secondary' v-bind:class='[displayData.blockProp.bgcolor.background == "white" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='white'/>White</label>
+                            <label class='btn btn-secondary' v-bind:class='[displayData.blockProp.bgcolor.background == "black" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='black'/>Black</label>
+                            <label class='btn btn-secondary' v-bind:class='[displayData.blockProp.bgcolor.background == "yellow" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='yellow'/>Yellow</label>
                         </div>
                     </div>
                 </div>
                 <div class='row mt-2 flex-grow-1'>
                     <div class='col-12'>
-                        <div id='DisplayAreaBlock' class='position-relative w-100 h-100 border' v-bind:style='displayData.DAB_bgcolor'>
-                            <iframe id='DisplayAreaIframe' class='position-absolute border border-dotted' src='' v-on:load='DAIframeLoad'></iframe>
+                        <div id='DisplayAreaBlock' class='position-relative w-100 h-100 border' v-bind:style='displayData.blockProp.bgcolor'>
+                            <iframe id='DisplayAreaIframe' class='position-absolute border border-dotted' src='' v-on:load='DisplayAreaIframeLoad'></iframe>
                         </div>
                     </div>
                 </div>
                 <div class='row my-2'>
                     <div class='col-12'>
-                        <strong class='input-group-text'>複製代碼</strong>
+                        <strong class='h5'>複製程式碼</strong>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>自訂CSS</span></div>
-                            <input type='text' id='CSS_code' class='form-control' />
+                            <input type='text' id='CSS_code' class='form-control'/>
                             <div class='input-group-append'>
-                                <button id='CSS_code_btn' class='btn btn-primary' type='button'>複製(Copy)</button>
+                                <button class='btn btn-primary' type='button' v-on:click='DisplayAreaCopy'>Copy</button>
                             </div>
                         </div>
                     </div>
@@ -313,15 +297,15 @@
         <!-- /Display Area -->
 
         </div>
+        <div id='MaskForIframe' v-on:mousemove='MaskMouseMove' v-on:mousedown='MaskMouseDown' v-on:mouseup='MaskMouseUp' v-on:mouseleave='MaskMouseLeave'></div>
     </div>
-    <div id='MaskForIframe' class='mask_for_iframe'></div>
 
     <script>
         let app = new Vue({
             el: '#app',
             data: {
-                'dargging': null,
-                'mouse_pos': null,
+                '__elementDargging': null,
+                '__mousePos': null,
                 'modifyData': {
                     'CB_color': '#D3D3D3',
                     'CB_bgcolor': 'transparent',
@@ -345,17 +329,25 @@
                     'CLM_shadowcolor': '#000000'
                 },
                 'displayData': {
-                    'DAB_bgcolor': {'background': 'white'},
-                    'DAiframeprop': {
+                    'blockProp': {
+                        'top': '',
+                        'right': '',
+                        'bottom': '',
+                        'left': '',
+                        'bgcolor': {'background': 'white'},
+                    },
+                    'iframeProp': {
                         'onload': false,
                         'src': location.toString().replace(/Test(.*)\.html/, 'Example\.html'),
                         'width': 500,
-                        'height': 200
+                        'height': 300
                     }
                 }
             },
             mounted: function () {
                 console.log('init');
+                window.addEventListener('resize', this.WindowResize);
+                this.WindowResize();
             },
             computed: {
                 CreateCSS: function () {
@@ -414,56 +406,118 @@
                 }
             },
             methods: {
+                WindowResize: function (e) {
+                    let iframe = this.$el.querySelector('iframe');
+                    this.displayData.blockProp.top = iframe.parentElement.getBoundingClientRect().top;
+                    this.displayData.blockProp.right = iframe.parentElement.getBoundingClientRect().right;
+                    this.displayData.blockProp.bottom = iframe.parentElement.getBoundingClientRect().bottom;
+                    this.displayData.blockProp.left = iframe.parentElement.getBoundingClientRect().left;
+                    
+                    this.MaskPos();
+                },
                 DisplayAreaSubmit: function () {
                     console.log('DisplayAreaSubmit');
-                    this.displayData.DAiframeprop.onload = true;
-    	            this.$el.querySelector('iframe').src = this.displayData.DAiframeprop.src;
+                    let iframe = this.$el.querySelector('iframe');
+                    this.displayData.iframeProp.onload = true;
+    	            iframe.style.width = this.displayData.iframeProp.width + 'px';
+    	            iframe.style.height = this.displayData.iframeProp.height + 'px';
+    	            iframe.src = this.displayData.iframeProp.src;
                 },
                 DisplayAreaCancel: function () {
                     console.log('DisplayAreaCancel');
-                    this.displayData.DAiframeprop.onload = false;
-    	            this.$el.querySelector('iframe').src = this.displayData.DAiframeprop.src;
+                    let iframe = this.$el.querySelector('iframe');
+                    this.displayData.iframeProp.onload = false;
+    	            iframe.style.width = this.displayData.iframeProp.width + 'px';
+    	            iframe.style.height = this.displayData.iframeProp.height + 'px';
+    	            iframe.src = this.displayData.iframeProp.src;
                 },
-                DAIframeLoad: function () {
-                    console.log('DAIframeLoad');
-                    if (!this.displayData.DAiframeprop.onload) return false;
+                DisplayAreaIframeLoad: function () {
+                    if (!this.displayData.iframeProp.onload) return false;
                     let style = document.createElement('style');
                     let cssText = document.createTextNode(this.CreateCSS);
                     style.appendChild(cssText);
                     this.$el.querySelector('iframe').contentDocument.head.appendChild(style);
+                    this.$el.querySelector('#CSS_code').value = this.CreateCSS;
+                    this.$el.querySelector('#CSS_code').select();
                 },
-                
+                DisplayAreaCopy: function () {
+                    this.$el.querySelector('#CSS_code').select();
+                    document.execCommand('copy');
+                },
+                MaskPos: function () {
+                    let mask = this.$el.querySelector('#MaskForIframe');
+                    mask.style.top = this.displayData.blockProp.top + 'px';
+                    mask.style.left = this.displayData.blockProp.left + 'px';
+                    mask.style.width = this.displayData.iframeProp.width + 'px';
+                    mask.style.height = this.displayData.iframeProp.height + 'px';
+                },
+                MaskMouseMove: function (e) {
+                    if (this.__elementDargging) {
+                        let iframe = this.$el.querySelector('iframe');
+                        let mask = this.__elementDargging;
+                        let mp = this.__mousePos;
+                        let rangeTop = this.displayData.blockProp.top;
+                        let rangeBottom = this.displayData.blockProp.bottom;
+                        let rangeLeft = this.displayData.blockProp.left;
+                        let rangeRight = this.displayData.blockProp.right;
+                        if (mask.getBoundingClientRect().top + (e.clientY - mp['top']) < rangeTop) {
+                            mask.style.top = rangeTop + 'px';
+                            iframe.style.top = 0;
+                        } else if (mask.getBoundingClientRect().top + (e.clientY - mp['top']) + mask.clientHeight > rangeBottom) {
+                            mask.style.top = (rangeBottom - mask.clientHeight) + 'px';
+                            iframe.style.top = (iframe.parentElement.clientHeight - iframe.clientHeight) + 'px';
+                        } else {
+                            mask.style.top = mask.offsetTop + (e.clientY - mp['top']) + 'px';
+                            iframe.style.top = iframe.offsetTop + (e.clientY - mp['top']) + 'px';
+                        }
+
+                        if (mask.getBoundingClientRect().left + (e.clientX - mp['left']) < rangeLeft) {
+                            mask.style.left = rangeLeft + 'px';
+                            iframe.style.left = 0;
+                        } else if (mask.getBoundingClientRect().left + (e.clientX - mp['left']) + mask.clientWidth > rangeRight) {
+                            mask.style.left = (rangeRight - mask.clientWidth) + 'px';
+                            iframe.style.left = (iframe.parentElement.clientWidth - iframe.clientWidth) + 'px';
+                        } else {
+                            mask.style.left = mask.offsetLeft + (e.clientX - mp['left']) + 'px';
+                            iframe.style.left = iframe.offsetLeft + (e.clientX - mp['left']) + 'px';
+                        }
+                        
+                        // if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) < left_border) {
+                        //     $Dargging.css('left', left_border);
+                        //     $iframe.css('left', 0);
+                        // } else if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) + $Dargging.outerWidth() > right_border) {
+                        //     $Dargging.css('left', right_border - $Dargging.outerWidth());
+                        //     $iframe.css('left', $iframe.parent().outerWidth() - $iframe.outerWidth());
+                        // } else {
+                        //     $Dargging.css('left', '+=' + (e.clientX - mouse_pos['left']));
+                        //     $iframe.css('left', '+=' + (e.clientX - mouse_pos['left']));
+                        // }
+                        this.__mousePos = {
+                            'top': e.clientY,
+                            'left': e.clientX
+                        };
+                    }
+                },
+                MaskMouseDown: function (e) {
+                    this.__elementDargging = e.target;
+                    this.__mousePos = {
+                        'top': e.clientY,
+                        'left': e.clientX
+                    };
+                },
+                MaskMouseUp: function () {
+                    this.__elementDargging = null;
+                    this.__mousePos = null;
+                },
+                MaskMouseLeave: function () {
+                    this.__elementDargging = null;
+                    this.__mousePos = null;
+                },
             }
         });
 
 
         /*
-        let $iframe = $('#DisplayAreaIframe');
-        let $mask = $('#MaskForIframe');
-        let $Dargging = null;
-        let mouse_pos = null;
-
-        $(function() { 
-            iframeMask();
-        }); 
-
-        $('#DisplayAreaSubmit').on('click', () => {
-            $iframe.prop('src', location.toString().replace('TestV', 'Example'));
-            $iframe.css('width', (parseInt($('#DisplayAreaInput02').val()) || 500));
-            $iframe.css('height', (parseInt($('#DisplayAreaInput03').val()) || 200));
-
-            $iframe.one('load', function() {
-                ImportCSS();
-            });
-            iframeMask();
-        });
-        $('#DisplayAreaCancel').on('click', () => {
-            $iframe.prop('src', location.toString().replace('TestV', 'Example'));
-            $iframe.css('width', (parseInt($('#DisplayAreaInput02').val()) || 500));
-            $iframe.css('height', (parseInt($('#DisplayAreaInput03').val()) || 200));
-
-            iframeMask();
-        });
         $mask.on('mousemove', function (e) {
             if ($Dargging) {
                 let top_border = $iframe.parent().offset()['top'];
@@ -514,42 +568,6 @@
             $Dargging = null;
             mouse_pos = null;
         });
-        $('input[name="DisplayBGRadio"]').on('click', function (e) {
-            let element = $(e.target);
-            switch (element.val()) {
-                case 'black':
-                    $iframe.parent().css('background', 'black');
-                    break;
-                case 'white':
-                    $iframe.parent().css('background', 'white');
-                    break;
-                case 'yellow':
-                    $iframe.parent().css('background', 'yellow');
-                    break;
-                default:
-                    break;
-            }
-        });
-        $('#CSS_code_btn').on('click', () => {
-            if ($('#CSS_code').val()) {
-                $('#CSS_code').select();
-                document.execCommand("copy");
-            }
-        });
-
-        function iframeMask() {
-            $mask.css('top', $iframe.offset()['top']);
-            $mask.css('left', $iframe.offset()['left']);
-            $mask.css('width', $iframe.outerWidth());
-            $mask.css('height', $iframe.outerHeight());
-        }
-        
-        function ImportCSS() {
-            let _c = CreateCSS();
-            $('#CSS_code').val(_c);
-            $('#CSS_code').select();
-            $('iframe').contents().find('head').append('<style>' + _c + '</style>');
-        }
         */
     </script>
 </body>
