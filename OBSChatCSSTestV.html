@@ -254,24 +254,20 @@
         <!-- Display Area -->
             <div id='DisplayArea' class='col-6 d-flex flex-column'>
                 <div class='row mt-2'>
-                    <div class='col-12'>
+                    <div class='col-12 d-flex'>
+                        <div class='btn-group btn-group-sm btn-group-toggle'>
+                            <label class='btn btn-outline-primary' v-bind:class='[displayData.blockProp.bgcolor.background == "white" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='white'/>White</label>
+                            <label class='btn btn-outline-primary' v-bind:class='[displayData.blockProp.bgcolor.background == "black" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='black'/>Black</label>
+                            <label class='btn btn-outline-primary' v-bind:class='[displayData.blockProp.bgcolor.background == "yellow" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='yellow'/>Yellow</label>
+                        </div>
                         <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>Width</span></div>
+                            <div class='input-group-prepend ml-1'><span class='input-group-text'>Width</span></div>
                             <input type='text' class='form-control' placeholder='500' v-model.lazy='displayData.iframeProp.width'/>
                             <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
                             <input type='text' class='form-control' placeholder='300' v-model.lazy='displayData.iframeProp.height'/>
-                            <button class='btn btn-success btn-sm' type='button' v-on:click='DisplayAreaSubmit'>Submit</button>
-                            <button class='btn btn-warning btn-sm' type='button' v-on:click='DisplayAreaCancel'>Reset</button>
                         </div>
-                    </div>
-                </div>
-                <div class='row mt-2'>
-                    <div class='col-12'>
-                        <div class='btn-group btn-group-sm btn-group-toggle'>
-                            <label class='btn btn-secondary' v-bind:class='[displayData.blockProp.bgcolor.background == "white" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='white'/>White</label>
-                            <label class='btn btn-secondary' v-bind:class='[displayData.blockProp.bgcolor.background == "black" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='black'/>Black</label>
-                            <label class='btn btn-secondary' v-bind:class='[displayData.blockProp.bgcolor.background == "yellow" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='yellow'/>Yellow</label>
-                        </div>
+                        <button class='btn btn-success btn-sm ml-1' type='button' v-on:click='DisplayAreaSubmit'>Submit</button>
+                        <button class='btn btn-outline-warning btn-sm ml-1' type='button' v-on:click='DisplayAreaCancel'>Reset</button>
                     </div>
                 </div>
                 <div class='row mt-2 flex-grow-1'>
@@ -445,11 +441,14 @@
                     document.execCommand('copy');
                 },
                 MaskPos: function () {
+                    let iframe = this.$el.querySelector('iframe');
                     let mask = this.$el.querySelector('#MaskForIframe');
                     mask.style.top = this.displayData.blockProp.top + 'px';
                     mask.style.left = this.displayData.blockProp.left + 'px';
                     mask.style.width = this.displayData.iframeProp.width + 'px';
                     mask.style.height = this.displayData.iframeProp.height + 'px';
+                    iframe.style.top = 0;
+                    iframe.style.left = 0;
                 },
                 MaskMouseMove: function (e) {
                     if (this.__elementDargging) {
