@@ -347,7 +347,8 @@
                 'displayData': {
                     'DAB_bgcolor': {'background': 'white'},
                     'DAiframeprop': {
-                        'src': '',
+                        'onload': false,
+                        'src': location.toString().replace(/Test(.*)\.html/, 'Example\.html'),
                         'width': 500,
                         'height': 200
                     }
@@ -356,20 +357,82 @@
             mounted: function () {
                 console.log('init');
             },
-            computed: {},
+            computed: {
+                CreateCSS: function () {
+                    let css = '#chat_box {';
+                    css += `color: ${this.modifyData.CB_color || '#D3D3D3'};`;
+                    css += `background: ${this.modifyData.CB_bgcolor || 'transparent'};`;
+                    css += `font-size: ${this.modifyData.CB_fontsize || '13'}px;`;
+                    css += `font-weight: ${this.modifyData.CB_fontwidth || 'normal'};`;
+                    css += `font-family: ${this.modifyData.CB_fomefamily || '"Helvetica Neue", Helvetica, Arial, sans-serif'};`;
+                    css += '}';
+                    css += '.chat_line {';
+                    css += `display: ${this.modifyData.CL_display};`;
+                    css += `margin: ${this.modifyData.CL_margin || '2'}px;`;
+                    css += 'padding: 0;';
+                    css += `line-height: ${this.modifyData.CL_lineheight || '1'}em;`;
+                    css += `animation: ${this.modifyData.CL_animation || '0'};`;
+                    css += '}';
+                    css += '.chat_line .nick {';
+                    css += `background: ${this.modifyData.CLN_bgcolor || 'transparent'};`;
+                    if (this.modifyData.CLN_shadow_cb) {
+                        let sw = `${this.modifyData.CLN_shadowwidth || '1'}px`;
+                        let sb = `${this.modifyData.CLN_shadowblur || '1'}px`;
+                        let sc = `${this.modifyData.CLN_shadowcolor || 'black'}`;
+                        css += 'text-shadow: ';
+                        css += `0 -${sw} ${sb} ${sc},`;
+                        css += `${sw} -${sw} ${sb} ${sc},`;
+                        css += `${sw} 0 ${sb} ${sc},`;
+                        css += `${sw} ${sw} ${sb} ${sc},`;
+                        css += `0 ${sw} ${sb} ${sc},`;
+                        css += `-${sw} ${sw} ${sb} ${sc},`;
+                        css += `-${sw} 0 ${sb} ${sc},`;
+                        css += `-${sw} -${sw} ${sb} ${sc}`;
+                        css += ';';
+                    }
+                    css += '}';
+                    css += '.chat_line .message {';
+                    css += `color: ${this.modifyData.CLM_color || '#D3D3D3'};`;
+                    css += `background: ${this.modifyData.CLM_bgcolor || 'transparent'};`;
+                    if (this.modifyData.CLM_shadow_cb) {
+                        let sw = `${this.modifyData.CLM_shadowwidth || '1'}px`;
+                        let sb = `${this.modifyData.CLM_shadowblur || '1'}px`;
+                        let sc = `${this.modifyData.CLM_shadowcolor || 'black'}`;
+                        css += 'text-shadow: ';
+                        css += `0 -${sw} ${sb} ${sc},`;
+                        css += `${sw} -${sw} ${sb} ${sc},`;
+                        css += `${sw} 0 ${sb} ${sc},`;
+                        css += `${sw} ${sw} ${sb} ${sc},`;
+                        css += `0 ${sw} ${sb} ${sc},`;
+                        css += `-${sw} ${sw} ${sb} ${sc},`;
+                        css += `-${sw} 0 ${sb} ${sc},`;
+                        css += `-${sw} -${sw} ${sb} ${sc}`;
+                        css += ';';
+                    }
+                    css += '}';
+                    return css;
+                }
+            },
             methods: {
                 DisplayAreaSubmit: function () {
                     console.log('DisplayAreaSubmit');
-                    this.displayData.DAiframeprop.src = location.toString().replace('TestV', 'Example');
-
+                    this.displayData.DAiframeprop.onload = true;
+    	            this.$el.querySelector('iframe').src = this.displayData.DAiframeprop.src;
                 },
                 DisplayAreaCancel: function () {
                     console.log('DisplayAreaCancel');
+                    this.displayData.DAiframeprop.onload = false;
+    	            this.$el.querySelector('iframe').src = this.displayData.DAiframeprop.src;
                 },
                 DAIframeLoad: function () {
-                    if (!true) return false;
-                    css();
-                }
+                    console.log('DAIframeLoad');
+                    if (!this.displayData.DAiframeprop.onload) return false;
+                    let style = document.createElement('style');
+                    let cssText = document.createTextNode(this.CreateCSS);
+                    style.appendChild(cssText);
+                    this.$el.querySelector('iframe').contentDocument.head.appendChild(style);
+                },
+                
             }
         });
 
@@ -399,7 +462,6 @@
             $iframe.css('width', (parseInt($('#DisplayAreaInput02').val()) || 500));
             $iframe.css('height', (parseInt($('#DisplayAreaInput03').val()) || 200));
 
-            $iframe.off('load');
             iframeMask();
         });
         $mask.on('mousemove', function (e) {
@@ -481,65 +543,7 @@
             $mask.css('width', $iframe.outerWidth());
             $mask.css('height', $iframe.outerHeight());
         }
-        function CreateCSS() {
-            let css = '';
-            css += '#chat_box {';
-            css += 'color: ' + ($('#CB_color').val() ||　'#D3D3D3') + ';';
-            css += 'background: ' + ($('#CB_bgcolor').val() ||　'transparent') + ';';
-            css += 'font-size: ' + ($('#CB_fontsize').val() ||　'13') + 'px;';
-            css += 'font-weight: ' + ($('#CB_fontwidth').val() ||　'normal') + ';';
-            css += 'font-family: ' + ($('#CB_fomefamily').val() ||　'"Helvetica Neue", Helvetica, Arial, sans-serif') + ';';
-            css += '}';
-
-            css += '.chat_line {';
-            css += 'display: ' + ($('#CL_display').val()) + ';';
-            css += 'margin: ' + ($('#CL_margin').val() ||　'2') + 'px;';
-            css += 'padding: 0;';
-            css += 'line-height: ' + ($('#CL_lineheight').val() ||　'1') + 'em;';
-            css += 'animation: ' + ($('#CL_animation').val() ||　'0') + ';';
-            css += '}';
-            
-            css += '.chat_line .nick {';
-            css += 'background: ' + ($('#CLN_bgcolor').val() ||　'transparent') + ';';
-            if ($('#CLN_shadow_cb').is(':checked')) {
-                let sw = ($('#CLN_shadowwidth').val() ||　'1') + 'px';
-                let sb = ($('#CLN_shadowblur').val() ||　'0') + 'px';
-                let sc = ($('#CLN_shadowcolor').val() ||　'black');
-                css += 'text-shadow: ';
-                css += `0 -${sw} ${sb} ${sc},`;
-                css += `${sw} -${sw} ${sb} ${sc},`;
-                css += `${sw} 0 ${sb} ${sc},`;
-                css += `${sw} ${sw} ${sb} ${sc},`;
-                css += `0 ${sw} ${sb} ${sc},`;
-                css += `-${sw} ${sw} ${sb} ${sc},`;
-                css += `-${sw} 0 ${sb} ${sc},`;
-                css += `-${sw} -${sw} ${sb} ${sc}`;
-                css += ';';
-            }
-            css += '}';
-
-            css += '.chat_line .message {';
-            css += 'color: ' + ($('#CLM_color').val() ||　'#D3D3D3') + ';';
-            css += 'background: ' + ($('#CLM_bgcolor').val() ||　'transparent') + ';';
-            if ($('#CLM_shadow_cb').is(':checked')) {
-                let sw = ($('#CLM_shadowwidth').val() ||　'1') + 'px';
-                let sb = ($('#CLM_shadowblur').val() ||　'0') + 'px';
-                let sc = ($('#CLM_shadowcolor').val() ||　'black');
-                css += 'text-shadow: ';
-                css += `0 -${sw} ${sb} ${sc},`;
-                css += `${sw} -${sw} ${sb} ${sc},`;
-                css += `${sw} 0 ${sb} ${sc},`;
-                css += `${sw} ${sw} ${sb} ${sc},`;
-                css += `0 ${sw} ${sb} ${sc},`;
-                css += `-${sw} ${sw} ${sb} ${sc},`;
-                css += `-${sw} 0 ${sb} ${sc},`;
-                css += `-${sw} -${sw} ${sb} ${sc}`;
-                css += ';';
-            }
-            css += '}';
-
-            return css;
-        }
+        
         function ImportCSS() {
             let _c = CreateCSS();
             $('#CSS_code').val(_c);
