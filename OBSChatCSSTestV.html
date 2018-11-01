@@ -35,8 +35,8 @@
             width: 500px;
             height: 300px;
         }
-        input:not(:focus),
-        select:not(:focus) {
+        input:not(:focus):not(:disabled),
+        select:not(:focus):not(:disabled) {
             background-color: rgba(255, 255, 255, .7) !important;
         }
         input::placeholder {
@@ -70,6 +70,9 @@
             z-index: 3;
         }
 
+        p {
+            color: gr
+        }
         .border-dotted {
             border-style: dotted !important;
         }
@@ -89,8 +92,8 @@
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字色</span></div>
                             <input type='text' class='form-control' placeholder='#D3D3D3' v-model.lazy='modifyData.CB_color'/>
                             <div class='input-group-append'>
-                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapse_color'>
-                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                <button class='btn btn-outline-danger' type='button' data-toggle='collapse' data-target='#collapse_color'>
+                                    <span>ⓘ</span>
                                 </button>
                             </div>
                         </div>
@@ -125,20 +128,20 @@
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字型</span></div>
                             <input type='text' class='form-control' placeholder='"Helvetica Neue", Helvetica, Arial, sans-serif' v-model.lazy='modifyData.CB_fomefamily'/>
                             <div class='input-group-append'>
-                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapse_fontfamily'>
-                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                <button class='btn btn-outline-danger' type='button' data-toggle='collapse' data-target='#collapse_fontfamily'>
+                                    <span>ⓘ</span>
                                 </button>
                             </div>
                         </div>
                         <div id='collapse_fontfamily' class='collapse'>
                             <div class='card card-body'>
                                 <table class='table table-sm table-bordered m-0'>
-                                    <tr style='font-family: "Helvetica Neue";'><td>"Helvetica Neue"</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
-                                    <tr style='font-family: Arial;'><td>Arial</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
-                                    <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
-                                    <tr style='font-family: Meiryo;'><td>Meiryo</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
-                                    <tr style='font-family: "Microsoft JhengHei";'><td>"Microsoft JhengHei"</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
-                                    <tr style='font-family: "Microsoft YaHei";'><td>"Microsoft YaHei"</td><td>A sleeping cat. 有一隻正在睡覺的貓. 猫が眠ります.</td></tr>
+                                    <tr style='font-family: "Helvetica Neue";'><td>"Helvetica Neue"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: Arial;'><td>Arial</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: Meiryo;'><td>Meiryo</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: "Microsoft JhengHei";'><td>"Microsoft JhengHei"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: "Microsoft YaHei";'><td>"Microsoft YaHei"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
                                 </table>
                             </div>
                         </div>
@@ -148,28 +151,45 @@
                     <div class='col-12'>
                         <strong class='h5'>聊天室每一行(.chat_line)</strong>
                         <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>單行分隔</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>每行分隔</span></div>
                             <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display'>
                                 <option value='block' selected>預設</option>
                                 <option value='flex'>分隔暱稱及訊息</option>
                             </select>
                         </div>
+                        <div class='input-group input-group-sm' v-show='modifyData.CL_display == "flex"'>
+                            <div class='input-group-prepend'><span class='input-group-text'>每行訊息對齊</span></div>
+                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_M_align'>
+                                <option value='0' selected>預設無對齊</option>
+                                <option value='55'>每行訊息對齊，寬 55%</option>
+                                <option value='60'>每行訊息對齊，寬 60%</option>
+                                <option value='65'>每行訊息對齊，寬 65%</option>
+                                <option value='70'>每行訊息對齊，寬 70%</option>
+                                <option value='75'>每行訊息對齊，寬 75%</option>
+                                <option value='80'>每行訊息對齊，寬 80%</option>
+                            </select>
+                            <div class='input-group-prepend'><span class='input-group-text'>每行暱稱靠邊</span></div>
+                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_N_align'>
+                                <option value='left' selected>預設靠左</option>
+                                <option value='right'>暱稱靠右</option>
+                            </select>
+                        </div>
                         <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>單行邊界</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>每行邊界</span></div>
                             <input type='text' class='form-control' placeholder='2' v-model.lazy='modifyData.CL_margin'/>
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                         </div>
                         <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>單行字元間距</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>每行字行間距</span></div>
                             <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CL_lineheight'/>
                             <div class='input-group-append'><span class='input-group-text'>em</span></div>
                         </div>
                         <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>單行動畫</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>每行動畫</span></div>
                             <input type='text' class='form-control' v-model.lazy='modifyData.CL_animation'/>
                             <div class='input-group-append'>
-                                <button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapse_animation'>
-                                    <img src='data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNS40NyIgaGVpZ2h0PSIyNS40NyIgdmlld0JveD0iMCAwIDI1LjQ3IDI1LjQ3Ij48dGl0bGU+aWNvbi1pbmZvPC90aXRsZT48ZyBpZD0iU3ltYm9scyI+PGcgaWQ9IlV0aWxpdHktRHJhd2VyLVVyZ2VudC1DYXJlLUNhcmQiPjxnIGlkPSJVcmdlbnQtQ2FyZS1DYXJkIj48ZyBpZD0iVXJnZW50LTEiPjxnIGlkPSJVcmdlbnQtQ2FyZS1Ecm9wZG93bi1DVEEtIj48ZyBpZD0iQ1RBIj48ZyBpZD0ibW9yZS1pbmZvIj48cGF0aCBpZD0iQ29tYmluZWQtU2hhcGUiIGQ9Ik0xMy4xLDdhMS4zNCwxLjM0LDAsMSwwLDEuMjksMS4zMkExLjMsMS4zLDAsMCwwLDEzLjEsN1ptMCwxOC45QTEyLjQ2LDEyLjQ2LDAsMSwxLDI1LjU3LDEzLjQ2LDEyLjQ2LDEyLjQ2LDAsMCwxLDEzLjExLDI1LjkyWm0wLTEuNzFBMTAuNzUsMTAuNzUsMCwxLDAsMi4zNiwxMy40NiwxMC43NCwxMC43NCwwLDAsMCwxMy4xMSwyNC4yMVptMS4yOC01LjQ4YTEuMTgsMS4xOCwwLDAsMS0xLjI4LDEuMTgsMS4xOCwxLjE4LDAsMCwxLTEuMjktMS4xOFYxMi41YTEuMTcsMS4xNywwLDAsMSwxLjI2LTEuMTksMS4xOSwxLjE5LDAsMCwxLDEuMzEsMS4xOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM3IC0wLjczKSIgc3R5bGU9ImZpbGw6IzM3NWE4ZjtzdHJva2U6I2ZmZjtzdHJva2Utd2lkdGg6MC41NDgzMzgzNTM2MzM4ODA2cHgiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+' style='width: 1rem;'/>
+                                <button class='btn btn-outline-danger' type='button' data-toggle='collapse' data-target='#collapse_animation'>
+                                    <span>ⓘ</span>
                                 </button>
                             </div>
                         </div>
@@ -198,17 +218,17 @@
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>粗細</span>
                             </div>
-                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLN_shadowwidth'/>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLN_shadowwidth' v-bind:disabled='!modifyData.CLN_shadow_cb'/>
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>擴散</span>
                             </div>
-                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLN_shadowblur'/>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLN_shadowblur' v-bind:disabled='!modifyData.CLN_shadow_cb'/>
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>顏色</span>
                             </div>
-                            <input type='text' class='form-control' placeholder='#000000' v-model.lazy='modifyData.CLN_shadowcolor'/>
+                            <input type='text' class='form-control' placeholder='#000000' v-model.lazy='modifyData.CLN_shadowcolor' v-bind:disabled='!modifyData.CLN_shadow_cb'/>
                         </div>
                     </div>
                 </div>
@@ -231,17 +251,17 @@
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>粗細</span>
                             </div>
-                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLM_shadowwidth'/>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLM_shadowwidth' v-bind:disabled='!modifyData.CLM_shadow_cb'/>
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>擴散</span>
                             </div>
-                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLM_shadowblur'/>
+                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CLM_shadowblur' v-bind:disabled='!modifyData.CLM_shadow_cb'/>
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>顏色</span>
                             </div>
-                            <input type='text' class='form-control' placeholder='#000000' v-model.lazy='modifyData.CLM_shadowcolor'/>
+                            <input type='text' class='form-control' placeholder='#000000' v-model.lazy='modifyData.CLM_shadowcolor' v-bind:disabled='!modifyData.CLM_shadow_cb'/>
                         </div>
                     </div>
                 </div>
@@ -309,6 +329,8 @@
                     'CB_fontwidth': 'normal',
                     'CB_fomefamily': '"Helvetica Neue", Helvetica, Arial, sans-serif',
                     'CL_display': 'block',
+                    'CL_display_N_align': 'left',
+                    'CL_display_M_align': '0',
                     'CL_margin': 2,
                     'CL_lineheight': 1,
                     'CL_animation': '',
@@ -363,6 +385,17 @@
                     css += '}';
                     css += '.chat_line .nick {';
                     css += `background: ${this.modifyData.CLN_bgcolor || 'transparent'};`;
+                    if (this.modifyData.CL_display == 'flex') {
+                        if (this.modifyData.CL_display_M_align != '0') {
+                            css += `text-align: ${this.modifyData.CL_display_N_align || 'left'};`;
+                            css += `flex-basis: 0;`;
+                            css += `flex-grow: 1;`;
+                            css += `max-width: 100%;`;
+                            css += `overflow: hidden;`;
+                            css += `text-overflow: ellipsis;`;
+                            css += `white-space: nowrap;`;
+                        }
+                    }
                     if (this.modifyData.CLN_shadow_cb) {
                         let sw = `${this.modifyData.CLN_shadowwidth || '1'}px`;
                         let sb = `${this.modifyData.CLN_shadowblur || '1'}px`;
@@ -382,6 +415,12 @@
                     css += '.chat_line .message {';
                     css += `color: ${this.modifyData.CLM_color || '#D3D3D3'};`;
                     css += `background: ${this.modifyData.CLM_bgcolor || 'transparent'};`;
+                    if (this.modifyData.CL_display == 'flex') {
+                        if (this.modifyData.CL_display_M_align != '0') {
+                            css += `flex: 0 0 ${this.modifyData.CL_display_M_align}%;`;
+                            css += `max-width: ${this.modifyData.CL_display_M_align}%;`;
+                        }
+                    }
                     if (this.modifyData.CLM_shadow_cb) {
                         let sw = `${this.modifyData.CLM_shadowwidth || '1'}px`;
                         let sb = `${this.modifyData.CLM_shadowblur || '1'}px`;
@@ -481,16 +520,6 @@
                             iframe.style.left = iframe.offsetLeft + (e.clientX - mp['left']) + 'px';
                         }
                         
-                        // if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) < left_border) {
-                        //     $Dargging.css('left', left_border);
-                        //     $iframe.css('left', 0);
-                        // } else if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) + $Dargging.outerWidth() > right_border) {
-                        //     $Dargging.css('left', right_border - $Dargging.outerWidth());
-                        //     $iframe.css('left', $iframe.parent().outerWidth() - $iframe.outerWidth());
-                        // } else {
-                        //     $Dargging.css('left', '+=' + (e.clientX - mouse_pos['left']));
-                        //     $iframe.css('left', '+=' + (e.clientX - mouse_pos['left']));
-                        // }
                         this.__mousePos = {
                             'top': e.clientY,
                             'left': e.clientX
@@ -511,63 +540,9 @@
                 MaskMouseLeave: function () {
                     this.__elementDargging = null;
                     this.__mousePos = null;
-                },
+                }
             }
         });
-
-
-        /*
-        $mask.on('mousemove', function (e) {
-            if ($Dargging) {
-                let top_border = $iframe.parent().offset()['top'];
-                let right_border = $iframe.parent().offset()['left'] + $iframe.parent().outerWidth();
-                let buttom_border = $iframe.parent().offset()['top'] + $iframe.parent().outerHeight();
-                let left_border = $iframe.parent().offset()['left'];
-
-                if ($Dargging.offset()['top'] + (e.clientY - mouse_pos['top']) < top_border) {
-                    $Dargging.css('top', top_border);
-                    $iframe.css('top', 0);
-                } else if ($Dargging.offset()['top'] + (e.clientY - mouse_pos['top']) + $Dargging.outerHeight() > buttom_border) {
-                    $Dargging.css('top', buttom_border - $Dargging.outerHeight());
-                    $iframe.css('top', $iframe.parent().outerHeight() - $iframe.outerHeight());
-                } else {
-                    $Dargging.css('top', '+=' + (e.clientY - mouse_pos['top']));
-                    $iframe.css('top', '+=' + (e.clientY - mouse_pos['top']));
-                }
-
-                if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) < left_border) {
-                    $Dargging.css('left', left_border);
-                    $iframe.css('left', 0);
-                } else if ($Dargging.offset()['left'] + (e.clientX - mouse_pos['left']) + $Dargging.outerWidth() > right_border) {
-                    $Dargging.css('left', right_border - $Dargging.outerWidth());
-                    $iframe.css('left', $iframe.parent().outerWidth() - $iframe.outerWidth());
-                } else {
-                    $Dargging.css('left', '+=' + (e.clientX - mouse_pos['left']));
-                    $iframe.css('left', '+=' + (e.clientX - mouse_pos['left']));
-                }
-
-                mouse_pos = {
-                    'top': e.clientY,
-                    'left': e.clientX
-                };
-            }
-        });
-        $mask.on('mousedown', function (e) {
-            $Dargging = $(e.target);
-            mouse_pos = {
-                'top': e.clientY,
-                'left': e.clientX
-            };
-        });
-        $mask.on('mouseup', function (e) {
-            $Dargging = null;
-            mouse_pos = null;
-        });
-        $mask.on('mouseleave', function (e) {
-            $Dargging = null;
-            mouse_pos = null;
-        });
-        */
     </script>
 </body>
 
