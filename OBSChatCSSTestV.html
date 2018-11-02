@@ -14,11 +14,24 @@
     <script src='https://bootstrap.hexschool.com/dist/js/bootstrap.js'></script>
     <title>OBS Chat CSS Test</title>
     <style>
+        /*'Changa One'*/
+        @import url('https://fonts.googleapis.com/css?family=Changa One');
+        /*'Imprima'*/
+        @import url('https://fonts.googleapis.com/css?family=Imprima');
+        /*'Noto Sans JP'*/
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
+        /*'M PLUS Rounded 1c'*/
+        @import url('https://fonts.googleapis.com/css?family=M PLUS Rounded 1c');
+        /*'Nico Moji'*/
+        @import url('https://fonts.googleapis.com/earlyaccess/nicomoji.css');
+        /*'Noto Sans TC'*/
+        @import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css');
+
         html,
         body {
             width: 100%;
             height: 100%;
-            font-family: consolas, 'Microsoft JhengHei';
+            font-family: Imprima, Meiryo;
             background-image: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg');
             background-repeat: no-repeat;
             background-position:  left center;
@@ -70,9 +83,6 @@
             z-index: 3;
         }
 
-        p {
-            color: gr
-        }
         .border-dotted {
             border-style: dotted !important;
         }
@@ -126,7 +136,7 @@
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字型</span></div>
-                            <input type='text' class='form-control' placeholder='"Helvetica Neue", Helvetica, Arial, sans-serif' v-model.lazy='modifyData.CB_fomefamily'/>
+                            <input type='text' class='form-control' placeholder='"Helvetica Neue", Helvetica, Arial, sans-serif' v-model.lazy='modifyData.CB_fontfamily'/>
                             <div class='input-group-append'>
                                 <button class='btn btn-outline-danger' type='button' data-toggle='collapse' data-target='#collapse_fontfamily'>
                                     <span>ⓘ</span>
@@ -139,9 +149,15 @@
                                     <tr style='font-family: "Helvetica Neue";'><td>"Helvetica Neue"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
                                     <tr style='font-family: Arial;'><td>Arial</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
                                     <tr style='font-family: consolas;'><td>consolas</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: Imprima;'><td>Imprima</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: "Changa One";'><td>"Changa One"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
                                     <tr style='font-family: Meiryo;'><td>Meiryo</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: "Noto Sans JP";'><td>"Noto Sans JP"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: "M PLUS Rounded 1c";'><td>"M PLUS Rounded 1c"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: "Nico Moji";'><td>"Nico Moji"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
                                     <tr style='font-family: "Microsoft JhengHei";'><td>"Microsoft JhengHei"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
                                     <tr style='font-family: "Microsoft YaHei";'><td>"Microsoft YaHei"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
+                                    <tr style='font-family: "Noto Sans TC";'><td>"Noto Sans TC"</td><td>A sleeping cat. 有一隻睡著的貓. 眠れる猫.</td></tr>
                                 </table>
                             </div>
                         </div>
@@ -169,7 +185,7 @@
                                 <option value='80'>每行訊息對齊，寬 80%</option>
                             </select>
                             <div class='input-group-prepend'><span class='input-group-text'>每行暱稱靠邊</span></div>
-                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_N_align'>
+                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_N_align' v-bind:disabled='modifyData.CL_display_M_align == 0'>
                                 <option value='left' selected>預設靠左</option>
                                 <option value='right'>暱稱靠右</option>
                             </select>
@@ -186,7 +202,27 @@
                         </div>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>每行動畫</span></div>
-                            <input type='text' class='form-control' v-model.lazy='modifyData.CL_animation'/>
+                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_animation'>
+                                <option value='0' selected>無</option>
+                                <option value='slideInRight'>slideInRight</option>
+                            </select>
+                            <div class='input-group-prepend'><span class='input-group-text'>動畫持續時間</span></div>
+                            <select class='col-1 custom-select custom-select-sm' v-model.lazy='modifyData.CL_animation_time' v-bind:disabled='modifyData.CL_animation == 0'>
+                                <option value='.6' selected>0.6s</option>
+                                <option value='1'>1s</option>
+                                <option value='1.2'>1.2s</option>
+                                <option value='1.8'>1s</option>
+                                <option value='2'>2s</option>
+                                <option value='3'>3s</option>
+                            </select>
+                            <div class='input-group-prepend'><span class='input-group-text'>動畫曲線</span></div>
+                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_animation_fn' v-bind:disabled='modifyData.CL_animation == 0'>
+                                <option value='ease-in-out' selected>ease-in-out</option>
+                                <option value='ease-in'>ease-in</option>
+                                <option value='ease-out'>ease-out</option>
+                                <option value='linear'>linear</option>
+                                <option value='cubic-bezier(.2, 1, .3, 1)'>cubic-bezier(.2, 1, .3, 1)</option>
+                            </select>
                             <div class='input-group-append'>
                                 <button class='btn btn-outline-danger' type='button' data-toggle='collapse' data-target='#collapse_animation'>
                                     <span>ⓘ</span>
@@ -213,7 +249,7 @@
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
                             <div class='input-group-prepend'>
-                                <div class='input-group-text'><input type='checkbox' v-model.lazy='modifyData.CLN_shadow_cb'/></div>
+                                <div class='input-group-text bg-transparent'><input type='checkbox' v-model.lazy='modifyData.CLN_shadow_cb'/></div>
                             </div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>粗細</span>
@@ -246,7 +282,7 @@
                         <div class='input-group input-group-sm'>
                         <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
                             <div class='input-group-prepend'>
-                                <div class='input-group-text'><input type='checkbox' v-model.lazy='modifyData.CLM_shadow_cb' /></div>
+                                <div class='input-group-text bg-transparent'><input type='checkbox' v-model.lazy='modifyData.CLM_shadow_cb' /></div>
                             </div>
                             <div class='input-group-prepend'>
                                 <span class='input-group-text'>粗細</span>
@@ -327,13 +363,15 @@
                     'CB_bgcolor': 'transparent',
                     'CB_fontsize': 13,
                     'CB_fontwidth': 'normal',
-                    'CB_fomefamily': '"Helvetica Neue", Helvetica, Arial, sans-serif',
+                    'CB_fontfamily': '"Helvetica Neue", Helvetica, Arial, sans-serif',
                     'CL_display': 'block',
                     'CL_display_N_align': 'left',
                     'CL_display_M_align': '0',
                     'CL_margin': 2,
                     'CL_lineheight': 1,
-                    'CL_animation': '',
+                    'CL_animation': '0',
+                    'CL_animation_time': '.6',
+                    'CL_animation_fn': 'ease-in-out',
                     'CLN_bgcolor': 'transparent',
                     'CLN_shadow_cb': false,
                     'CLN_shadowwidth': 1,
@@ -369,12 +407,45 @@
             },
             computed: {
                 CreateCSS: function () {
-                    let css = '#chat_box {';
+                    let css = '';
+                    if (this.modifyData.CB_color) {
+                        let fonts = ['Changa One', 'Imprima', 'Noto Sans JP', 'M PLUS Rounded 1c', 'Nico Moji', 'Noto Sans TC'];
+                        let fontfamily = this.modifyData.CB_fontfamily.split(',');
+                        fontfamily.forEach((f, i) => {
+                            f = f.trim().replace(/(\")/g, '');
+                            console.log(f);
+                            console.log(fonts.indexOf(f));
+                            if (fonts.indexOf(f) > -1) {
+                                switch (f) {
+                                    case 'Changa One':
+                                        css += `@import url('https://fonts.googleapis.com/css?family=Changa One');`;
+                                        break;
+                                    case 'Imprima':
+                                        css += `@import url('https://fonts.googleapis.com/css?family=Imprima');`;
+                                        break;
+                                    case 'Noto Sans JP':
+                                        css += `@import url('https://fonts.googleapis.com/css?family=Noto Sans JP');`;
+                                        break;
+                                    case 'M PLUS Rounded 1c':
+                                        css += `@import url('https://fonts.googleapis.com/css?family=M PLUS Rounded 1c');`;
+                                        break;
+                                    case 'Nico Moji':
+                                        css += `@import url('https://fonts.googleapis.com/earlyaccess/nicomoji.css');`;
+                                        break;
+                                    case 'Noto Sans TC':
+                                        css += `@import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css');`;
+                                        break;
+                                }
+                            }
+                        });
+                    }
+
+                    css += '#chat_box {';
                     css += `color: ${this.modifyData.CB_color || '#D3D3D3'};`;
                     css += `background: ${this.modifyData.CB_bgcolor || 'transparent'};`;
                     css += `font-size: ${this.modifyData.CB_fontsize || '13'}px;`;
                     css += `font-weight: ${this.modifyData.CB_fontwidth || 'normal'};`;
-                    css += `font-family: ${this.modifyData.CB_fomefamily || '"Helvetica Neue", Helvetica, Arial, sans-serif'};`;
+                    css += `font-family: ${this.modifyData.CB_fontfamily || '"Helvetica Neue", Helvetica, Arial, sans-serif'};`;
                     css += '}';
                     css += '.chat_line {';
                     css += `display: ${this.modifyData.CL_display};`;
@@ -447,7 +518,6 @@
                     this.displayData.blockProp.right = iframe.parentElement.getBoundingClientRect().right;
                     this.displayData.blockProp.bottom = iframe.parentElement.getBoundingClientRect().bottom;
                     this.displayData.blockProp.left = iframe.parentElement.getBoundingClientRect().left;
-                    
                     this.MaskPos();
                 },
                 DisplayAreaSubmit: function () {
@@ -457,6 +527,7 @@
     	            iframe.style.width = this.displayData.iframeProp.width + 'px';
     	            iframe.style.height = this.displayData.iframeProp.height + 'px';
     	            iframe.src = this.displayData.iframeProp.src;
+                    this.MaskPos();
                 },
                 DisplayAreaCancel: function () {
                     console.log('DisplayAreaCancel');
