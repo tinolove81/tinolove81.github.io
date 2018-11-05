@@ -86,6 +86,12 @@
         .border-dotted {
             border-style: dotted !important;
         }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
 
     </style>
 </head>
@@ -95,12 +101,16 @@
         <div class='row h-100'>
         <!-- Detail Area -->
             <div id='ModifyArea' class='col-6 h-100'>
-                <div class='row mt-2'>
+                <div class='row my-2'>
                     <div class='col-12'>
                         <strong class='h5'>聊天室本體(#chat_box)</strong>
-                        <div class='input-group input-group-sm'>
+                    </div>
+                    <div class='col-12'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字色</span></div>
                             <input type='text' class='form-control' placeholder='#D3D3D3' v-model.lazy='modifyData.CB_color'/>
+                            <div class='input-group-prepend'><span class='input-group-text'>聊天室背景色</span></div>
+                            <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CB_bgcolor'/>
                             <div class='input-group-append'>
                                 <button class='btn btn-outline-danger' type='button' data-toggle='collapse' data-target='#collapse_color'>
                                     <span>ⓘ</span>
@@ -118,23 +128,19 @@
                                 </table>
                             </div>
                         </div>
-                        <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>聊天室背景色</span></div>
-                            <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CB_bgcolor'/>
-                        </div>
-                        <div class='input-group input-group-sm'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字體大小</span></div>
                             <input type='text' class='form-control' placeholder='13' v-model.lazy='modifyData.CB_fontsize'/>
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                         </div>
-                        <div class='input-group input-group-sm'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字體粗細</span></div>
                             <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CB_fontwidth'>
                                 <option value='normal' selected>預設</option>
                                 <option value='bold'>粗體</option>
                             </select>
                         </div>
-                        <div class='input-group input-group-sm'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>聊天室字型</span></div>
                             <input type='text' class='form-control' placeholder='"Helvetica Neue", Helvetica, Arial, sans-serif' v-model.lazy='modifyData.CB_fontfamily'/>
                             <div class='input-group-append'>
@@ -163,51 +169,99 @@
                         </div>
                     </div>
                 </div>
-                <div class='row mt-2'>
+                <div class='row mb-2'>
                     <div class='col-12'>
                         <strong class='h5'>聊天室每一行(.chat_line)</strong>
-                        <div class='input-group input-group-sm'>
+                    </div>
+                    <div class='col-12'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>每行分隔</span></div>
                             <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display'>
-                                <option value='block' selected>預設</option>
-                                <option value='flex'>分隔暱稱及訊息</option>
+                                <option value='0' selected>預設</option>
+                                <option value='1'>暱稱及訊息分隔</option>
+                                <option value='2'>暱稱及訊息分行</option>
                             </select>
                         </div>
-                        <div class='input-group input-group-sm' v-show='modifyData.CL_display == "flex"'>
-                            <div class='input-group-prepend'><span class='input-group-text'>每行訊息對齊</span></div>
-                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_M_align'>
-                                <option value='0' selected>預設無對齊</option>
-                                <option value='55'>每行訊息對齊，寬 55%</option>
-                                <option value='60'>每行訊息對齊，寬 60%</option>
-                                <option value='65'>每行訊息對齊，寬 65%</option>
-                                <option value='70'>每行訊息對齊，寬 70%</option>
-                                <option value='75'>每行訊息對齊，寬 75%</option>
-                                <option value='80'>每行訊息對齊，寬 80%</option>
-                            </select>
-                            <div class='input-group-prepend'><span class='input-group-text'>每行暱稱靠邊</span></div>
-                            <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_N_align' v-bind:disabled='modifyData.CL_display_M_align == 0'>
-                                <option value='left' selected>預設靠左</option>
-                                <option value='right'>暱稱靠右</option>
-                            </select>
-                        </div>
-                        <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend'><span class='input-group-text'>每行邊界</span></div>
-                            <input type='text' class='form-control' placeholder='2' v-model.lazy='modifyData.CL_margin'/>
+                        <transition name='fade'>
+                            <div class='input-group input-group-sm mb-1' v-if='modifyData.CL_display == "1"'>
+                                <div class='input-group-prepend'><span class='input-group-text'>訊息對齊</span></div>
+                                <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_1_M_align'>
+                                    <option value='0' selected>預設無對齊</option>
+                                    <option value='55'>每行訊息對齊，寬 55%</option>
+                                    <option value='60'>每行訊息對齊，寬 60%</option>
+                                    <option value='65'>每行訊息對齊，寬 65%</option>
+                                    <option value='70'>每行訊息對齊，寬 70%</option>
+                                    <option value='75'>每行訊息對齊，寬 75%</option>
+                                    <option value='80'>每行訊息對齊，寬 80%</option>
+                                </select>
+                                <div class='input-group-prepend'><span class='input-group-text'>暱稱水平對齊</span></div>
+                                <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_1_N_align' v-bind:disabled='modifyData.CL_display_1_M_align == 0'>
+                                    <option value='left' selected>預設靠左</option>
+                                    <option value='right'>暱稱靠右</option>
+                                </select>
+                            </div>
+                        </transition>
+                        <transition name='fade'>
+                            <div class='input-group input-group-sm mb-1' v-if='modifyData.CL_display == "2"'>
+                                <div class='input-group-prepend'><span class='input-group-text'>水平對齊</span></div>
+                                <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_2_align'>
+                                        <option value='left' selected>預設向左對齊</option>
+                                        <option value='right'>向右對齊</option>
+                                </select>
+                                <div class='input-group-prepend'><span class='input-group-text'>訊息水平對齊</span></div>
+                                <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_display_2_M_align'>
+                                    <option value='left' selected>預設向左對齊</option>
+                                    <option value='right'>向右對齊</option>
+                                </select>
+                            </div>
+                        </transition>
+                        <div class='input-group input-group-sm mb-1'>
+                            <div class='input-group-prepend'><span class='input-group-text'>外邊距</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>上</span></div>
+                            <input type='text' class='form-control' placeholder='2' v-model.lazy='modifyData.CL_margin_top'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>下</span></div>
+                            <input type='text' class='form-control' placeholder='3' v-model.lazy='modifyData.CL_margin_bottom'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>左</span></div>
+                            <input type='text' class='form-control' placeholder='3' v-model.lazy='modifyData.CL_margin_left'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>右</span></div>
+                            <input type='text' class='form-control' placeholder='3' v-model.lazy='modifyData.CL_margin_right'/>
                             <div class='input-group-append'><span class='input-group-text'>px</span></div>
                         </div>
-                        <div class='input-group input-group-sm'>
+                        <div class='input-group input-group-sm mb-1'>
+                            <div class='input-group-prepend'><span class='input-group-text'>內邊距</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>上</span></div>
+                            <input type='text' class='form-control' placeholder='2' v-model.lazy='modifyData.CL_padding_top'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>下</span></div>
+                            <input type='text' class='form-control' placeholder='3' v-model.lazy='modifyData.CL_padding_bottom'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>左</span></div>
+                            <input type='text' class='form-control' placeholder='3' v-model.lazy='modifyData.CL_padding_left'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>右</span></div>
+                            <input type='text' class='form-control' placeholder='3' v-model.lazy='modifyData.CL_padding_right'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                        </div>
+                        <div class='input-group input-group-sm mb-1'>
+                            <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
+                            <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CL_bgcolor'/>
+                        </div>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>每行字行間距</span></div>
-                            <input type='text' class='form-control' placeholder='1' v-model.lazy='modifyData.CL_lineheight'/>
+                            <input type='text' class='form-control' placeholder='1.2' v-model.lazy='modifyData.CL_lineheight'/>
                             <div class='input-group-append'><span class='input-group-text'>em</span></div>
                         </div>
-                        <div class='input-group input-group-sm'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>每行動畫</span></div>
                             <select class='custom-select custom-select-sm' v-model.lazy='modifyData.CL_animation'>
                                 <option value='0' selected>無</option>
                                 <option value='slideInRight'>slideInRight</option>
                             </select>
                             <div class='input-group-prepend'><span class='input-group-text'>動畫持續時間</span></div>
-                            <select class='col-1 custom-select custom-select-sm' v-model.lazy='modifyData.CL_animation_time' v-bind:disabled='modifyData.CL_animation == 0'>
+                            <select class='col-2 custom-select custom-select-sm' v-model.lazy='modifyData.CL_animation_time' v-bind:disabled='modifyData.CL_animation == 0'>
                                 <option value='.6' selected>0.6s</option>
                                 <option value='1'>1s</option>
                                 <option value='1.2'>1.2s</option>
@@ -239,14 +293,16 @@
                         </div>
                     </div>
                 </div>
-                <div class='row mt-2'>
+                <div class='row mb-2'>
                     <div class='col-12'>
                         <strong class='h5'>單行暱稱(.nick)</strong>
-                        <div class='input-group input-group-sm'>
+                    </div>
+                    <div class='col-12'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
                             <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CLN_bgcolor'/>
                         </div>
-                        <div class='input-group input-group-sm'>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
                             <div class='input-group-prepend'>
                                 <div class='input-group-text bg-transparent'><input type='checkbox' v-model.lazy='modifyData.CLN_shadow_cb'/></div>
@@ -268,18 +324,26 @@
                         </div>
                     </div>
                 </div>
-                <div class='row my-2'>
+                <div class='row mb-2'>
                     <div class='col-12'>
                         <strong class='h5'>聊天內容(.message)</strong>
-                        <div class='input-group input-group-sm'>
+                    </div>
+                    <div class='col-12'>
+                        <div class='input-group input-group-sm mb-1'>
+                            <div class='input-group-prepend'><span class='input-group-text'>外邊距</span></div>
+                            <input type='text' class='form-control' placeholder='0' v-model.lazy='modifyData.CLM_margin'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>內邊距</span></div>
+                            <input type='text' class='form-control' placeholder='0' v-model.lazy='modifyData.CLM_padding'/>
+                            <div class='input-group-append'><span class='input-group-text'>px</span></div>
+                        </div>
+                        <div class='input-group input-group-sm mb-1'>
                             <div class='input-group-prepend'><span class='input-group-text'>字色</span></div>
                             <input type='text' class='form-control' placeholder='#D3D3D3' v-model.lazy='modifyData.CLM_color'/>
-                        </div>
-                        <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>背景色</span></div>
                             <input type='text' class='form-control' placeholder='transparent' v-model.lazy='modifyData.CLM_bgcolor'/>
                         </div>
-                        <div class='input-group input-group-sm'>
+                        <div class='input-group input-group-sm mb-1'>
                         <div class='input-group-prepend'><span class='input-group-text'>陰影</span></div>
                             <div class='input-group-prepend'>
                                 <div class='input-group-text bg-transparent'><input type='checkbox' v-model.lazy='modifyData.CLM_shadow_cb' /></div>
@@ -301,7 +365,18 @@
                         </div>
                     </div>
                 </div>
-                <div class='row mt-2 d-none'>
+                <div class='row mb-2 text-right'>
+                    <div class='col-12'>
+                        <strong class='h5'>暫存程式碼 Save CSS Data</strong>
+                    </div>
+                    <div class='col-12'>
+                        <button class='btn btn-outline-warning btn-sm ml-auto' type='button' v-on:click='DisplayCodeClear'>Clear</button>
+                        <button class='btn btn-success btn-sm ml-1' type='button' v-on:click='DisplayCodeSave'>Save</button>
+                        <button class='btn btn-warning btn-sm ml-1' type='button' v-on:click='DisplayCodeLoad'>Load</button>
+                        <button class='btn btn-outline-danger btn-sm ml-1' type='button' v-on:click='DisplayCodeDelete'>Delete</button>
+                    </div>
+                </div>
+                <div class='row mb-2 d-none'>
                     <div class='col-12'></div>
                 </div>
             </div>
@@ -309,7 +384,10 @@
 
         <!-- Display Area -->
             <div id='DisplayArea' class='col-6 d-flex flex-column'>
-                <div class='row mt-2'>
+                <div class='row my-2'>
+                    <div class='col-12'>
+                        <strong class='h5'>預覽畫面 Preview</strong>
+                    </div>
                     <div class='col-12 d-flex'>
                         <div class='btn-group btn-group-sm btn-group-toggle'>
                             <label class='btn btn-outline-primary' v-bind:class='[displayData.blockProp.bgcolor.background == "white" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='white'/>White</label>
@@ -317,30 +395,32 @@
                             <label class='btn btn-outline-primary' v-bind:class='[displayData.blockProp.bgcolor.background == "yellow" ? "active" : ""]'><input type='radio' name='DisplayBGRadio' v-model='displayData.blockProp.bgcolor.background' value='yellow'/>Yellow</label>
                         </div>
                         <div class='input-group input-group-sm'>
-                            <div class='input-group-prepend ml-1'><span class='input-group-text'>Width</span></div>
+                            <div class='input-group-prepend ml-1'><span class='input-group-text'>寬度 Width</span></div>
                             <input type='text' class='form-control' placeholder='500' v-model.lazy='displayData.iframeProp.width'/>
-                            <div class='input-group-prepend'><span class='input-group-text'>Height</span></div>
+                            <div class='input-group-prepend'><span class='input-group-text'>高度 Height</span></div>
                             <input type='text' class='form-control' placeholder='300' v-model.lazy='displayData.iframeProp.height'/>
                         </div>
                         <button class='btn btn-success btn-sm ml-1' type='button' v-on:click='DisplayAreaSubmit'>Submit</button>
                         <button class='btn btn-outline-warning btn-sm ml-1' type='button' v-on:click='DisplayAreaCancel'>Reset</button>
                     </div>
                 </div>
-                <div class='row mt-2 flex-grow-1'>
+                <div class='row mb-2 flex-grow-1'>
                     <div class='col-12'>
                         <div id='DisplayAreaBlock' class='position-relative w-100 h-100 border' v-bind:style='displayData.blockProp.bgcolor'>
                             <iframe id='DisplayAreaIframe' class='position-absolute border border-dotted' src='' v-on:load='DisplayAreaIframeLoad'></iframe>
                         </div>
                     </div>
                 </div>
-                <div class='row my-2'>
+                <div class='row mb-2'>
                     <div class='col-12'>
-                        <strong class='h5'>複製程式碼</strong>
+                        <strong class='h5'>複製程式碼 Copy CSS Code</strong>
+                    </div>
+                    <div class='col-12 d-flex'>
                         <div class='input-group input-group-sm'>
                             <div class='input-group-prepend'><span class='input-group-text'>自訂CSS</span></div>
                             <input type='text' id='CSS_code' class='form-control'/>
                             <div class='input-group-append'>
-                                <button class='btn btn-primary' type='button' v-on:click='DisplayAreaCopy'>Copy</button>
+                                <button class='btn btn-primary' type='button' v-on:click='DisplayCodeCopy'>Copy</button>
                             </div>
                         </div>
                     </div>
@@ -353,6 +433,47 @@
     </div>
 
     <script>
+        const defaultModifyData = {
+            'CB_color': '#D3D3D3',
+            'CB_bgcolor': 'transparent',
+            'CB_fontsize': 13,
+            'CB_fontwidth': 'normal',
+            'CB_fontfamily': '"Helvetica Neue", Helvetica, Arial, sans-serif',
+
+            'CL_display': '0',
+            'CL_display_1_N_align': 'left',
+            'CL_display_1_M_align': '0',
+            'CL_display_2_align': 'left',
+            'CL_display_2_M_align': 'left',
+            'CL_margin_top': 0,
+            'CL_margin_bottom': 0,
+            'CL_margin_left': 3,
+            'CL_margin_right': 3,
+            'CL_padding_top': 2,
+            'CL_padding_bottom': 3,
+            'CL_padding_left': 0,
+            'CL_padding_right': 0,
+            'CL_bgcolor': 'transparent',
+            'CL_lineheight': 1.2,
+            'CL_animation': '0',
+            'CL_animation_time': '.6',
+            'CL_animation_fn': 'ease-in-out',
+
+            'CLN_bgcolor': 'transparent',
+            'CLN_shadow_cb': false,
+            'CLN_shadowwidth': 1,
+            'CLN_shadowblur': 1,
+            'CLN_shadowcolor': '#000000',
+
+            'CLM_margin': 0,
+            'CLM_padding': 0,
+            'CLM_color': '#D3D3D3',
+            'CLM_bgcolor': 'transparent',
+            'CLM_shadow_cb': false,
+            'CLM_shadowwidth': 1,
+            'CLM_shadowblur': 1,
+            'CLM_shadowcolor': '#000000'
+        };
         let app = new Vue({
             el: '#app',
             data: {
@@ -364,19 +485,34 @@
                     'CB_fontsize': 13,
                     'CB_fontwidth': 'normal',
                     'CB_fontfamily': '"Helvetica Neue", Helvetica, Arial, sans-serif',
-                    'CL_display': 'block',
-                    'CL_display_N_align': 'left',
-                    'CL_display_M_align': '0',
-                    'CL_margin': 2,
-                    'CL_lineheight': 1,
+
+                    'CL_display': '0',
+                    'CL_display_1_N_align': 'left',
+                    'CL_display_1_M_align': '0',
+                    'CL_display_2_align': 'left',
+                    'CL_display_2_M_align': 'left',
+                    'CL_margin_top': 0,
+                    'CL_margin_bottom': 0,
+                    'CL_margin_left': 3,
+                    'CL_margin_right': 3,
+                    'CL_padding_top': 2,
+                    'CL_padding_bottom': 3,
+                    'CL_padding_left': 0,
+                    'CL_padding_right': 0,
+                    'CL_bgcolor': 'transparent',
+                    'CL_lineheight': 1.2,
                     'CL_animation': '0',
                     'CL_animation_time': '.6',
                     'CL_animation_fn': 'ease-in-out',
+
                     'CLN_bgcolor': 'transparent',
                     'CLN_shadow_cb': false,
                     'CLN_shadowwidth': 1,
                     'CLN_shadowblur': 1,
                     'CLN_shadowcolor': '#000000',
+
+                    'CLM_margin': 0,
+                    'CLM_padding': 0,
                     'CLM_color': '#D3D3D3',
                     'CLM_bgcolor': 'transparent',
                     'CLM_shadow_cb': false,
@@ -408,13 +544,11 @@
             computed: {
                 CreateCSS: function () {
                     let css = '';
-                    if (this.modifyData.CB_color) {
+                    if (this.modifyData.CB_fontfamily) {
                         let fonts = ['Changa One', 'Imprima', 'Noto Sans JP', 'M PLUS Rounded 1c', 'Nico Moji', 'Noto Sans TC'];
                         let fontfamily = this.modifyData.CB_fontfamily.split(',');
                         fontfamily.forEach((f, i) => {
                             f = f.trim().replace(/(\")/g, '');
-                            console.log(f);
-                            console.log(fonts.indexOf(f));
                             if (fonts.indexOf(f) > -1) {
                                 switch (f) {
                                     case 'Changa One':
@@ -447,18 +581,26 @@
                     css += `font-weight: ${this.modifyData.CB_fontwidth || 'normal'};`;
                     css += `font-family: ${this.modifyData.CB_fontfamily || '"Helvetica Neue", Helvetica, Arial, sans-serif'};`;
                     css += '}';
+
                     css += '.chat_line {';
-                    css += `display: ${this.modifyData.CL_display};`;
-                    css += `margin: ${this.modifyData.CL_margin || '2'}px;`;
-                    css += 'padding: 0;';
-                    css += `line-height: ${this.modifyData.CL_lineheight || '1'}em;`;
+                    if (this.modifyData.CL_display == '1') {
+                        css += `display: flex;`;
+                    } else if (this.modifyData.CL_display == '2') {
+                        css += `text-align: ${this.modifyData.CL_display_2_align || 'left'};`;
+                    }
+                    css += `margin: ${this.modifyData.CL_margin_top || '0'}px ${this.modifyData.CL_margin_right || '3'}px `
+                        css += `${this.modifyData.CL_margin_bottom || '0'}px ${this.modifyData.CL_margin_left || '3'}px;`;
+                    css += `padding: ${this.modifyData.CL_padding_top || '2'}px ${this.modifyData.CL_padding_right || '0'}px `
+                        css += `${this.modifyData.CL_padding_bottom || '3'}px ${this.modifyData.CL_padding_left || '0'}px;`;
+                    css += `background: ${this.modifyData.CL_bgcolor || 'transparent'};`;
+                    css += `line-height: ${this.modifyData.CL_lineheight || '1.2'}em;`;
                     css += `animation: ${this.modifyData.CL_animation || '0'};`;
                     css += '}';
                     css += '.chat_line .nick {';
                     css += `background: ${this.modifyData.CLN_bgcolor || 'transparent'};`;
-                    if (this.modifyData.CL_display == 'flex') {
-                        if (this.modifyData.CL_display_M_align != '0') {
-                            css += `text-align: ${this.modifyData.CL_display_N_align || 'left'};`;
+                    if (this.modifyData.CL_display == '1') {
+                        if (this.modifyData.CL_display_1_M_align != '0') {
+                            css += `text-align: ${this.modifyData.CL_display_1_N_align || 'left'};`;
                             css += `flex-basis: 0;`;
                             css += `flex-grow: 1;`;
                             css += `max-width: 100%;`;
@@ -484,14 +626,19 @@
                     }
                     css += '}';
                     css += '.chat_line .message {';
+                    if (this.modifyData.CL_display == '1') {
+                        if (this.modifyData.CL_display_1_M_align != '0') {
+                            css += `flex: 0 0 ${this.modifyData.CL_display_1_M_align || '0'}%;`;
+                            css += `max-width: ${this.modifyData.CL_display_1_M_align || '0'}%;`;
+                        }
+                    } else if (this.modifyData.CL_display == '2') {
+                        css += `display: block;`;
+                        css += `text-align: ${this.modifyData.CL_display_2_M_align || 'left'};`;
+                    }
+                    css += `margin: ${this.modifyData.CLM_margin || '0'}px;`;
+                    css += `padding: ${this.modifyData.CLM_padding || '0'}px;`;
                     css += `color: ${this.modifyData.CLM_color || '#D3D3D3'};`;
                     css += `background: ${this.modifyData.CLM_bgcolor || 'transparent'};`;
-                    if (this.modifyData.CL_display == 'flex') {
-                        if (this.modifyData.CL_display_M_align != '0') {
-                            css += `flex: 0 0 ${this.modifyData.CL_display_M_align}%;`;
-                            css += `max-width: ${this.modifyData.CL_display_M_align}%;`;
-                        }
-                    }
                     if (this.modifyData.CLM_shadow_cb) {
                         let sw = `${this.modifyData.CLM_shadowwidth || '1'}px`;
                         let sb = `${this.modifyData.CLM_shadowblur || '1'}px`;
@@ -508,6 +655,12 @@
                         css += ';';
                     }
                     css += '}';
+                    if (this.modifyData.CL_display != '0') {
+                    css += '.chat_line .message .emoticon {';
+                    css += 'margin-bottom: 0;';
+                    css += 'vertical-align: top;';
+                    css += '}';
+                    }
                     return css;
                 }
             },
@@ -546,7 +699,28 @@
                     this.$el.querySelector('#CSS_code').value = this.CreateCSS;
                     this.$el.querySelector('#CSS_code').select();
                 },
-                DisplayAreaCopy: function () {
+                DisplayCodeSave: function () {
+                    if (confirm('儲存暫存檔數值?\nSave data to Web Storage?')) {
+                    localStorage.modifyData = JSON.stringify(this.modifyData);
+                    }
+                },
+                DisplayCodeLoad: function () {
+                    if (!localStorage.modifyData) return false;
+                    if (confirm('讀取暫存檔數值?\nLoad data from Web Storage?')) {
+                        this.modifyData = JSON.parse(localStorage.modifyData);
+                    }
+                },
+                DisplayCodeClear: function () {
+                    if (confirm('清除表單數值?\nClear data on form?')) {
+                        this.modifyData = defaultModifyData;
+                    }
+                },
+                DisplayCodeDelete: function () {
+                    if (confirm('刪除暫存檔數值?\nDelete data on Web Storage?')) {
+                        this.modifyData = defaultModifyData;
+                    }
+                },
+                DisplayCodeCopy: function () {
                     this.$el.querySelector('#CSS_code').select();
                     document.execCommand('copy');
                 },
