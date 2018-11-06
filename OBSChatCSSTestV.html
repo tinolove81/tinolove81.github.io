@@ -717,7 +717,7 @@
                 },
                 DisplayCodeDelete: function () {
                     if (confirm('刪除暫存檔數值?\nDelete data on Web Storage?')) {
-                        this.modifyData = defaultModifyData;
+                        localStorage.removeItem('modifyData');
                     }
                 },
                 DisplayCodeCopy: function () {
