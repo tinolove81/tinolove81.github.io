@@ -3,23 +3,29 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 
 
-request({
-    url: url,
-    method: 'GET',
-    headers: {
-        'User-Agent': `Mozilla/5.0 (Windows NT 6.1; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0`
-    },
-    followRedirect: false
-    }, function (err, resp, data) {
-        if (!err && resp.statusCode == 200) {
-        
-        // test(data);
-        parseCHARACTER(data);
+let web = 'http://pad.skyozora.com/pets/';
+let no = process.argv[2] || 1;
 
-        } else {
-            return err;
-        }
-});
+
+function startReq() {
+    request({
+        url: web + no,
+        method: 'GET',
+        headers: {
+            'User-Agent': `Mozilla/5.0 (Windows NT 6.1; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0`
+        },
+        followRedirect: false
+        }, function (err, resp, data) {
+            if (!err && resp.statusCode == 200) {
+            
+            // test(data);
+            parseCHARACTER(data);
+    
+            } else {
+                return err;
+            }
+    });
+}
 
 function parseCHARACTER(h) {
     let char = {};
@@ -39,14 +45,14 @@ function parseCHARACTER(h) {
             char['Type'].push(AllType.eq(i).attr('src').replace(/.*\//, '').replace(/\.png.*/, ''));
         }
 
+        keepData(char);
+        timerRepeat();
+
     } catch (error) {
         console.log(error);
-        fs.writeFile('html.txt', h, function (err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Write operation complete.');
-            }
+        fs.writeFile('error.txt', url + '\n\n\n\n\n\n' + h, function (err) {
+            if (err) { console.log(err); }
+            else { console.log('Error Report Write complete.'); }
         });
     }
     console.log(char);
@@ -59,12 +65,25 @@ function test(h) {
         char.push(AllType.eq(i).attr('src').replace(/.*\//, '').replace(/\.png.*/, ''));
     }
 
-    
     console.log(char);
 }
+function keepData(char) {
+    fs.open('char.txt', 'a', function (err, fd) {
+        fs.appendFile('char.txt', JSON.stringify(char) + ',\n', function (err) {
+            if (err) { console.log('Write Char Error.'); }
+        });
+    });
+}
+function timerRepeat() {
+    console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
+    console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} is got, count backward to next.///////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
+    console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
 
-
+    no = no + 1;
+    setTimeout(() => {
+        startReq();
+    }, 8000);    
+}
 
 console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
-console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
-console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
+startReq();
