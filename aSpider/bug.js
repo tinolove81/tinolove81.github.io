@@ -18,8 +18,8 @@ function startReq() {
         followRedirect: false
         }, function (err, resp, data) {
             if (!err) {
-                // test(data, resp.statusCode);
-                parseCHARACTER(data, resp.statusCode);
+                test(data, resp.statusCode);
+                // parseCHARACTER(data, resp.statusCode);
             } else {
                 return err;
             }
@@ -103,9 +103,13 @@ function test(html, code) {
     } else {
         const $ = cheerio.load(html);
         let Monster = $('div.monster');
+
+        /* 標題 編號 & 名字 一定有 */
         let NumberAndName = Monster.find('h2.title-bg').text().replace('No.', '').split(' ');
         char['Number'] = NumberAndName[0];
         char['Name'] = NumberAndName[1];
+
+        /* 第一欄 主副屬性 & 稀有度 & Cost & 繼承屬性 & 類型 一定有 */
         let Attribute = Monster.find('div.spacer').eq(0).find('img + p').contents();
         char['MainAttribute'] = Attribute.eq(0).attr('class').replace('icon-attr-', '');
         char['MainAttribute'] = char['MainAttribute'][0].toUpperCase() + char['MainAttribute'].substring(1);
@@ -120,18 +124,41 @@ function test(html, code) {
         for (let i = 0; i < AllType.length; i++) {
             char['Type'].push(AllType.eq(i).attr('class').replace('icon-mtype-', ''));
         }
-        let AllKakusei = Monster.find('div.spacer').eq(3).find('div.name');
-        char['Kakusei'] = [];
-        for (let i = 0; i < AllKakusei.length; i++) {
-            char['Kakusei'].push(AllKakusei.eq(i).text());
-        }
+
+        /* 主動技能 */
         let ActiveSkill = Monster.find('div.spacer').eq(1).find('p');
         char['SkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
         char['SkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
         char['SkillContent'] = ActiveSkill.eq(1).text();
         char['SkillTag'] = 'RRRRRRRRRR//TODO-List';
 
+        /* 寵物覺醒 */
+        let AllKakusei = Monster.find('div.spacer').eq(3).find('div.name');
+        char['Kakusei'] = [];
+        for (let i = 0; i < AllKakusei.length; i++) {
+            char['Kakusei'].push(AllKakusei.eq(i).text());
+        }
+
+        /*
+        有主動 沒覺醒 有隊長 1 (新手龍)
+        有主動 沒覺醒 沒隊長 21 (防龍)
+        沒主動 沒覺醒 沒隊長 36 (波利)
+        沒主動 沒覺醒 有隊長 176 (金屬龍)
+        有主動 有覺醒 沒隊長 3912 (火龍裝備)
+        
+        沒主動 有覺醒 沒隊長 
+        沒主動 有覺醒 有隊長 
+
+        有主動 有覺醒 有隊長 正常
+        */
+
+
         console.log(char);
+        
+        fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
+            if (err) { console.log(err); }
+            else { console.log('Test Report Write complete.'); }
+        });
     }
 }
 
@@ -148,8 +175,6 @@ function keepData(char) {
 }
 
 function timerRepeat() {
-
-    no = parseInt(no);
     no++;
     setTimeout(() => {
         startReq();
