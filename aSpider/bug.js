@@ -8,8 +8,9 @@ let no = process.argv[2] || 1;
 
 
 function startReq() {
+    console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
     request({
-        url: web + no,
+        url: createUrl(),
         method: 'GET',
         headers: {
             'User-Agent': `Mozilla/5.0 (Windows NT 6.1; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0`
@@ -17,29 +18,44 @@ function startReq() {
         followRedirect: false
         }, function (err, resp, data) {
             if (!err) {
-                test(data, resp.statusCode);
-                // parseCHARACTER(data, resp.statusCode);
+                // test(data, resp.statusCode);
+                parseCHARACTER(data, resp.statusCode);
             } else {
                 return err;
             }
     });
 }
+function createUrl() {
+    let url = web;
+    if (no < 100) {
+        for (let i = 3; i > (''+no).length; i--) {
+            url = url + '0';
+        }
+        return url + no;
+    } else {
+        return url + no;
+    }
+}
 
 function parseCHARACTER(html, code) {
     let char = {};
     try {
-        const $ = cheerio.load(html);
-
         if (code != 200) {
             char['Number'] = no;
             char['Name'] = '不明';
-            char['Rare'] = '';
             char['MainAttribute'] = '';
             char['SubAttribute'] = '';
+            char['Rare'] = '';
+            char['Cost'] = '';
+            char['Assist'] = '';
             char['Type'] = [];
             char['Kakusei'] = [];
+            char['SkillName'] = '';
+            char['SkillCD'] = '';
+            char['SkillContent'] = '';
+            char['SkillTag'] = '';
         } else {
-            const $ = cheerio.load(h);
+            const $ = cheerio.load(html);
             let Monster = $('div.monster');
             let NumberAndName = Monster.find('h2.title-bg').text().replace('No.', '').split(' ');
             char['Number'] = NumberAndName[0];
@@ -63,30 +79,29 @@ function parseCHARACTER(html, code) {
             for (let i = 0; i < AllKakusei.length; i++) {
                 char['Kakusei'].push(AllKakusei.eq(i).text());
             }
+            let ActiveSkill = Monster.find('div.spacer').eq(1).find('p');
+            char['SkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
+            char['SkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
+            char['SkillContent'] = ActiveSkill.eq(1).text();
+            char['SkillTag'] = 'RRRRRRRRRR//TODO-List';
     
         }
-        // keepData(char);
-        // timerRepeat();
+        keepData(char);
 
     } catch (error) {
         console.log(error);
-        fs.writeFile('error.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + h, function (err) {
+        fs.writeFile('error.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
             if (err) { console.log(err); }
             else { console.log('Error Report Write complete.'); }
         });
     }
     console.log(char);
-
-    // fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + h, function (err) {
-    //     if (err) { console.log(err); }
-    //     else { console.log('Test Report Write complete.'); }
-    // });
 }
-function test(h, code) {
+function test(html, code) {
     let char = {};
     if (code != 200) {
     } else {
-        const $ = cheerio.load(h);
+        const $ = cheerio.load(html);
         let Monster = $('div.monster');
         let NumberAndName = Monster.find('h2.title-bg').text().replace('No.', '').split(' ');
         char['Number'] = NumberAndName[0];
@@ -110,35 +125,35 @@ function test(h, code) {
         for (let i = 0; i < AllKakusei.length; i++) {
             char['Kakusei'].push(AllKakusei.eq(i).text());
         }
-
-
-
-
+        let ActiveSkill = Monster.find('div.spacer').eq(1).find('p');
+        char['SkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
+        char['SkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
+        char['SkillContent'] = ActiveSkill.eq(1).text();
+        char['SkillTag'] = 'RRRRRRRRRR//TODO-List';
 
         console.log(char);
     }
 }
 
-
-
 function keepData(char) {
     fs.open('char.txt', 'a', function (err, fd) {
-        fs.appendFile('char.txt', JSON.stringify(char) + ',\n', function (err) {
+        fs.appendFile('char.txt', JSON.stringify(char) + ',\r\n', function (err) {
             if (err) { console.log('Write Char Error.'); }
+
+            console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} is got, count backward to next.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
+            timerRepeat();
         });
     });
+
 }
+
 function timerRepeat() {
-    console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
-    console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} is got, count backward to next.///////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
-    console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
 
     no = parseInt(no);
     no++;
     setTimeout(() => {
         startReq();
-    }, 8000);    
+    }, 1000);    
 }
 
-console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
 startReq();
