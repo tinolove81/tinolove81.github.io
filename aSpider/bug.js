@@ -6,20 +6,21 @@ const fs = require('fs');
 let web = 'https://pd.appbank.net/m';
 let no = process.argv[2] || 1;
 
+let char;
 
 function startReq() {
     console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
     request({
         url: createUrl(),
         method: 'GET',
-        headers: {
-            'User-Agent': `Mozilla/5.0 (Windows NT 6.1; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0`
-        },
+        // headers: {
+        //     'User-Agent': `Mozilla/5.0 (Windows NT 6.1; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0`
+        // },
         followRedirect: false
         }, function (err, resp, data) {
             if (!err) {
-                test(data, resp.statusCode);
-                // parseCHARACTER(data, resp.statusCode);
+                // test(data, resp.statusCode);
+                parseCHARACTER(data, resp.statusCode);
             } else {
                 return err;
             }
@@ -38,22 +39,30 @@ function createUrl() {
 }
 
 function parseCHARACTER(html, code) {
-    let char = {};
+    char = {
+        'Number': '',
+        'Name': '',
+        'MainAttribute': '',
+        'SubAttribute': '',
+        'Rare': '',
+        'Cost': '',
+        'Assist': '',
+        'Type': [],
+        'ActiveSkillName': '',
+        'ActiveSkillCD': '',
+        'ActiveSkillContent': '',
+        'ActiveSkillTag': '',
+        
+        'LeaderSkillName': '',
+        'LeaderSkillContent': '',
+        'LeaderSkillTag': '',
+        
+        'Kakusei': [],
+    };
     try {
         if (code != 200) {
             char['Number'] = no;
             char['Name'] = '不明';
-            char['MainAttribute'] = '';
-            char['SubAttribute'] = '';
-            char['Rare'] = '';
-            char['Cost'] = '';
-            char['Assist'] = '';
-            char['Type'] = [];
-            char['Kakusei'] = [];
-            char['SkillName'] = '';
-            char['SkillCD'] = '';
-            char['SkillContent'] = '';
-            char['SkillTag'] = '';
         } else {
             const $ = cheerio.load(html);
             let Monster = $('div.monster');
@@ -74,18 +83,24 @@ function parseCHARACTER(html, code) {
             for (let i = 0; i < AllType.length; i++) {
                 char['Type'].push(AllType.eq(i).attr('class').replace('icon-mtype-', ''));
             }
-            let AllKakusei = Monster.find('div.spacer').eq(3).find('div.name');
-            char['Kakusei'] = [];
-            for (let i = 0; i < AllKakusei.length; i++) {
-                char['Kakusei'].push(AllKakusei.eq(i).text());
-            }
-            let ActiveSkill = Monster.find('div.spacer').eq(1).find('p');
-            char['SkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
-            char['SkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
-            char['SkillContent'] = ActiveSkill.eq(1).text();
-            char['SkillTag'] = 'RRRRRRRRRR//TODO-List';
-    
+            
+            Monster.find('div.spacer').find('h3').each(function (i, e) {
+                e = $(e);
+                if (e.text() == 'スキル') {
+                    findActiveSkill(e.parent());
+                    return;
+                }
+                if (e.text() == 'リーダースキル') {
+                    findLeaderSkill(e.parent());
+                    return;
+                }
+                if (e.text() == '覚醒スキル') {
+                    findKakusei(e.parent());
+                    return;
+                }
+            });
         }
+
         keepData(char);
 
     } catch (error) {
@@ -124,54 +139,94 @@ function test(html, code) {
         for (let i = 0; i < AllType.length; i++) {
             char['Type'].push(AllType.eq(i).attr('class').replace('icon-mtype-', ''));
         }
-
-        /* 主動技能 */
-        let ActiveSkill = Monster.find('div.spacer').eq(1).find('p');
-        char['SkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
-        char['SkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
-        char['SkillContent'] = ActiveSkill.eq(1).text();
-        char['SkillTag'] = 'RRRRRRRRRR//TODO-List';
-
-        /* 寵物覺醒 */
-        let AllKakusei = Monster.find('div.spacer').eq(3).find('div.name');
+        
+        char['ActiveSkillName'] = '';
+        char['ActiveSkillCD'] = '';
+        char['ActiveSkillContent'] = '';
+        char['ActiveSkillTag'] = '';
+        
+        char['LeaderSkillName'] = '';
+        char['LeaderSkillContent'] = '';
+        char['LeaderSkillTag'] = '';
+        
         char['Kakusei'] = [];
-        for (let i = 0; i < AllKakusei.length; i++) {
-            char['Kakusei'].push(AllKakusei.eq(i).text());
-        }
+
+        char['ps'] = '';
+
+        Monster.find('div.spacer').find('h3').each(function (i, e) {
+            e = $(e);
+            console.log(e.text());
+            if (e.text() == 'スキル') {
+                findActiveSkill(e.parent());
+                return;
+            }
+            if (e.text() == 'リーダースキル') {
+                findLeaderSkill(e.parent());
+                return;
+            }
+            if (e.text() == '覚醒スキル') {
+                findKakusei(e.parent());
+                return;
+            }
+        });
 
         /*
-        有主動 沒覺醒 有隊長 1 (新手龍)
-        有主動 沒覺醒 沒隊長 21 (防龍)
-        沒主動 沒覺醒 沒隊長 36 (波利)
-        沒主動 沒覺醒 有隊長 176 (金屬龍)
-        有主動 有覺醒 沒隊長 3338 (阿門裝備)
+        有主動 有隊長 有覺醒 正常
 
-        沒主動 有覺醒 沒隊長 
-        沒主動 有覺醒 有隊長 
+        有主動 有隊長 沒覺醒 1 (新手龍)
+        有主動 沒隊長 沒覺醒 21 (防龍)
+        有主動 沒隊長 有覺醒 3338 (阿門裝備)
 
-        有主動 有覺醒 有隊長 正常
+        沒主動 沒隊長 沒覺醒 36 (波利)
+        沒主動 有隊長 沒覺醒 3318 (神殺)
+        沒主動 有覺醒 沒隊長 ?
+        沒主動 有覺醒 有隊長 ?
         */
-
-
+        keepTest();
         console.log(char);
-        
-        fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
-            if (err) { console.log(err); }
-            else { console.log('Test Report Write complete.'); }
-        });
+
+    }
+}
+
+function findActiveSkill(mBlock) {
+    let ActiveSkill = mBlock.find('p');
+    char['ActiveSkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
+    char['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
+    char['ActiveSkillContent'] = ActiveSkill.eq(1).text();
+    char['ActiveSkillTag'] = 'RRRRRRRRRR//TODO-List';
+}
+
+function findLeaderSkill(mBlock) {
+    let LeaderSkill = mBlock.find('p');
+    char['LeaderSkillName'] = LeaderSkill.eq(0).find('strong').text();
+    char['LeaderSkillContent'] = LeaderSkill.eq(1).text();
+    char['LeaderSkillTag'] = 'RRRRRRRRRR//TODO-List';
+}
+
+function findKakusei(mBlock) {
+    let AllKakusei = mBlock.find('div.name');
+    char['Kakusei'] = [];
+    for (let i = 0; i < AllKakusei.length; i++) {
+        char['Kakusei'].push(AllKakusei.eq(i).text());
     }
 }
 
 function keepData(char) {
     fs.open('char.txt', 'a', function (err, fd) {
         fs.appendFile('char.txt', JSON.stringify(char) + ',\r\n', function (err) {
-            if (err) { console.log('Write Char Error.'); }
+            if (err) { console.log('\nWrite Char Error.'); }
 
             console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} is got, count backward to next.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
             timerRepeat();
         });
     });
+}
 
+function keepTest() {
+    fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
+        if (err) { console.log(err); }
+        else { console.log('\nTest Report Write complete.'); }
+    });
 }
 
 function timerRepeat() {
