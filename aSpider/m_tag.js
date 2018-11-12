@@ -9,10 +9,15 @@ function startReq() {
 
     console.log(`No.${CHAR[no]['Number']} ${CHAR[no]['Name']} ${CHAR[no]['MainAttribute']} ${CHAR[no]['SubAttribute']}`);
     console.log(`Skill: ${CHAR[no]['ActiveSkillContent']}`);
-    waitInput('Tag add: ', function (mData) {
-        process.stdin.pause();
-        keepData(CHAR[no]['Number'], mData);
-    });
+    if (CHAR[no]['ActiveSkillContent'] == '') {
+        console.log('Tag add: 00   (auto)');
+        keepData(CHAR[no]['Number'], '00');
+    } else {
+        waitInput('Tag add: ', function (mData) {
+            process.stdin.pause();
+            keepData(CHAR[no]['Number'], mData);
+        });
+    }
 }
 
 function waitInput(mOutput, callback) {
