@@ -31,8 +31,8 @@ function waitInput(mOutput, callback) {
 
 function keepData(mNumber, mData) {
     let tag = {"Number": mNumber, "ActiveSkillTag": mData};
-    fs.open('tag.txt', 'a', function (err, fd) {
-        fs.appendFile('tag.txt', JSON.stringify(tag) + ',\r\n', function (err) {
+    fs.open('./assist/tag.json', 'a', function (err, fd) {
+        fs.appendFile('./assist/tag.json', JSON.stringify(tag) + ',\r\n', function (err) {
             if (err) { console.log('\nWrite Char Error.'); }
 
             console.log('\x1b[36m%s\x1b[0m',`///  No. ${CHAR[no]['Number']} is got, count backward to next.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
