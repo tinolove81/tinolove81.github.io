@@ -67,8 +67,8 @@ function parseCHARACTER(html, code) {
             const $ = cheerio.load(html);
             let Monster = $('div.monster');
             let NumberAndName = Monster.find('h2.title-bg').text().replace('No.', '').split(' ');
-            char['Number'] = NumberAndName[0];
-            char['Name'] = NumberAndName[1];
+            char['Number'] = NumberAndName.shift();
+            char['Name'] = NumberAndName.join(' ');
             let Attribute = Monster.find('div.spacer').eq(0).find('img + p').contents();
             char['MainAttribute'] = Attribute.eq(0).attr('class').replace('icon-attr-', '');
             char['MainAttribute'] = char['MainAttribute'][0].toUpperCase() + char['MainAttribute'].substring(1);
