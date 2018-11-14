@@ -46,6 +46,8 @@ function parseCHARACTER(html, code) {
     };
     try {
         if (code != 200) {
+            char['Number'] = no;
+            char['Name'] = '不明';
             console.log('\x1b[1;36m%s\x1b[0m',`///  No. ${no} is 404, count backward to next.  ///`, '\x1b[0m');
         } else {
             const $ = cheerio.load(html);
@@ -70,7 +72,7 @@ function parseCHARACTER(html, code) {
 
 function findDifferent(mChar) {
     let char_org = CHAR[no -1];
-    if (char_org['Name'] != mChar['Name']) {
+    if (char_org['Name'] != mChar['Name'] && mChar['Name'] != '不明') {
         waitInput('\x1b[1;36m find Different at No.' + no + ' Name\x1b[0m\n Original: ' + char_org['Name'] + ', Newer: ' + mChar['Name'] + '\n Modify it? (Y/n)', function (mData) {
             if (mData == '' || mData == 'y') {
                 CHAR[no -1]['Name'] = mChar['Name'];
