@@ -30,10 +30,10 @@ function waitInput(mOutput, callback) {
 }
 
 function keepData(mNumber, mData) {
-    let tag = {"Number": mNumber, "ActiveSkillTag": mData};
+    let tag = {'Number': mNumber, 'ActiveSkillTag': mData};
     fs.open('./assist/tag.json', 'a', function (err, fd) {
         fs.appendFile('./assist/tag.json', JSON.stringify(tag) + ',\r\n', function (err) {
-            if (err) { console.log('\nWrite Char Error.'); }
+            if (err) { console.log('\r\nWrite Char Error.'); }
 
             console.log('\x1b[36m%s\x1b[0m',`///  No. ${CHAR[no]['Number']} is got, count backward to next.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
             timerRepeat();
@@ -42,9 +42,9 @@ function keepData(mNumber, mData) {
 }
 
 function keepTest() {
-    fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
+    fs.writeFile('test.txt', web + no + '\r\n'+ JSON.stringify(char) +'\r\n\r\n\r\n' + html, function (err) {
         if (err) { console.log(err); }
-        else { console.log('\nTest Report Write complete.'); }
+        else { console.log('\r\nTest Report Write complete.'); }
     });
 }
 

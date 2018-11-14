@@ -113,7 +113,26 @@ function parseCHARACTER(html, code) {
     console.log(char);
 }
 function test(html, code) {
-    let char = {};
+    char = {
+        'Number': '',
+        'Name': '',
+        'MainAttribute': '',
+        'SubAttribute': '',
+        'Rare': '',
+        'Cost': '',
+        'Assist': '',
+        'Type': [],
+        'ActiveSkillName': '',
+        'ActiveSkillCD': '',
+        'ActiveSkillContent': '',
+        'ActiveSkillTag': '',
+        
+        'LeaderSkillName': '',
+        'LeaderSkillContent': '',
+        'LeaderSkillTag': '',
+        
+        'Kakusei': [],
+    };
     if (code != 200) {
     } else {
         const $ = cheerio.load(html);
@@ -182,7 +201,7 @@ function test(html, code) {
         沒主動 有覺醒 沒隊長 ?
         沒主動 有覺醒 有隊長 ?
         */
-        keepTest();
+        keepTest(char);
         console.log(char);
 
     }
@@ -211,9 +230,9 @@ function findKakusei(mBlock) {
     }
 }
 
-function keepData(char) {
+function keepData(mChar) {
     fs.open('char.txt', 'a', function (err, fd) {
-        fs.appendFile('char.txt', JSON.stringify(char) + ',\r\n', function (err) {
+        fs.appendFile('char.txt', JSON.stringify(mChar) + ',\r\n', function (err) {
             if (err) { console.log('\nWrite Char Error.'); }
 
             console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} is got, count backward to next.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
@@ -222,8 +241,8 @@ function keepData(char) {
     });
 }
 
-function keepTest() {
-    fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
+function keepTest(mChar) {
+    fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(mChar) +'\n\n\n\n\n' + html, function (err) {
         if (err) { console.log(err); }
         else { console.log('\nTest Report Write complete.'); }
     });
