@@ -1,15 +1,18 @@
 const request = require('request');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const path = require('path');
 
 
 let web = 'https://pd.appbank.net/m';
 let no = process.argv[2] || 1;
 
 let char;
+let error_n = 0;
 
 function startReq() {
-    console.log('\x1b[36m%s\x1b[0m','/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////', '\x1b[0m');
+    if (error_n > 10) return false;
+    console.log('\x1b[36m%s\x1b[0m','/// Start ///', '\x1b[0m');
     request({
         url: createUrl(),
         method: 'GET',
@@ -61,9 +64,11 @@ function parseCHARACTER(html, code) {
     };
     try {
         if (code != 200) {
+            error_n += 1;
             char['Number'] = no;
             char['Name'] = '不明';
         } else {
+            error_n  = 0;
             const $ = cheerio.load(html);
             let Monster = $('div.monster');
             let NumberAndName = Monster.find('h2.title-bg').text().replace('No.', '').split(' ');
@@ -105,12 +110,11 @@ function parseCHARACTER(html, code) {
 
     } catch (error) {
         console.log(error);
-        fs.writeFile('error.txt', web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
+        fs.writeFile(path.join(__dirname, './error.txt'), web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
             if (err) { console.log(err); }
             else { console.log('Error Report Write complete.'); }
         });
     }
-    console.log(char);
 }
 function test(html, code) {
     char = {
@@ -231,18 +235,18 @@ function findKakusei(mBlock) {
 }
 
 function keepData(mChar) {
-    fs.open('char.txt', 'a', function (err, fd) {
-        fs.appendFile('char.txt', JSON.stringify(mChar) + ',\r\n', function (err) {
+    fs.open(path.join(__dirname, './char1116.json'), 'a', function (err, fd) {
+        fs.appendFile(path.join(__dirname, './char1116.json'), JSON.stringify(mChar) + ',\r\n', function (err) {
             if (err) { console.log('\nWrite Char Error.'); }
 
-            console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} is got, count backward to next.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////`, '\x1b[0m');
+            console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} ${mChar['Name']} is catched.  ///`, '\x1b[0m');
             timerRepeat();
         });
     });
 }
 
 function keepTest(mChar) {
-    fs.writeFile('test.txt', web + no + '\n'+ JSON.stringify(mChar) +'\n\n\n\n\n' + html, function (err) {
+    fs.writeFile(path.join(__dirname, './test.txt'), web + no + '\n'+ JSON.stringify(mChar) +'\n\n\n\n\n' + html, function (err) {
         if (err) { console.log(err); }
         else { console.log('\nTest Report Write complete.'); }
     });

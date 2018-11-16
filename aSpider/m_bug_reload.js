@@ -102,7 +102,7 @@ function keepData(mChar) {
 }
 
 function keepData2(mChar) {
-    fs.writeFile('char.txt', JSON.stringify(mChar), function (err) {
+    fs.writeFile('char.json', mChar, function (err) {
         if (err) { console.log(err); }
         else { console.log('\r\nData2 Write complete.'); }
     });
