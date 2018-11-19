@@ -1,7 +1,7 @@
-const request = require('request');
-const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const request = require('request');
+const cheerio = require('cheerio');
 
 
 let web = 'https://pd.appbank.net/m';
@@ -215,7 +215,25 @@ function findActiveSkill(mBlock) {
     let ActiveSkill = mBlock.find('p');
     char['ActiveSkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
     char['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
-    char['ActiveSkillContent'] = ActiveSkill.eq(1).text();
+    char['ActiveSkillContent'] = ActiveSkill.eq(1).text()
+        .replace('減少、', '減少。')
+        .replace('に変換。', 'に変化。')
+        .replace('に変化させ、', 'に変化。')
+        .replace('に変化させる', 'に変化。')
+        .replace(/全ドロップ[^を|の]/, '全ドロップを');
+    /*
+    技能敘述有變更!
+    "自分の攻撃力×10倍 => "敵全体に攻撃力×10倍 (有些)
+    ～に自分の攻撃力×30倍 => ～に攻撃力×30倍 (有些)
+    "敵一体に => 敵1体に
+    ～減少、 => ～減少。
+
+    ～に変換。 => ～に変化。
+    ～に変化させ、 => ～に変化。
+    ～に変化させる => ～に変化。
+    全ドロップ[^を|の] => 全ドロップを
+    
+    */
     char['ActiveSkillTag'] = 'RRRRRRRRRR//TODO-List';
 }
 
@@ -235,8 +253,10 @@ function findKakusei(mBlock) {
 }
 
 function keepData(mChar) {
-    fs.open(path.join(__dirname, './char1116.json'), 'a', function (err, fd) {
-        fs.appendFile(path.join(__dirname, './char1116.json'), JSON.stringify(mChar) + ',\r\n', function (err) {
+    let localpath = path.join(__dirname, './spider_'+now('s')+'.json');
+
+    fs.open(localpath, 'a', function (err, fd) {
+        fs.appendFile(localpath, JSON.stringify(mChar) + ',\r\n', function (err) {
             if (err) { console.log('\nWrite Char Error.'); }
 
             console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} ${mChar['Name']} is catched.  ///`, '\x1b[0m');
@@ -259,4 +279,14 @@ function timerRepeat() {
     }, 1000);    
 }
 
+function now(argv) {
+    if (argv == 'u') {
+        return Math.round(new Date().getTime() / 1000.0);
+    } else if (argv == 's') {
+        return new Date().toLocaleDateString(undefined, {hour12: false}).replace(/[\/|\-]/g, '');
+    } else if (!isNaN(parseInt(argv))) {
+        return new Date( parseInt(argv) * 1000).toLocaleString(undefined, {hour12: false});
+    }
+    return '' + new Date().toLocaleString(undefined, {hour12: false});
+}
 startReq();
