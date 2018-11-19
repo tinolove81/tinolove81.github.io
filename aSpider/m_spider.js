@@ -220,7 +220,7 @@ function findActiveSkill(mBlock) {
         .replace('に変換。', 'に変化。')
         .replace('に変化させ、', 'に変化。')
         .replace('に変化させる', 'に変化。')
-        .replace(/全ドロップ[^を|の]/, '全ドロップを');
+        .replace(/全ドロップ(?=[^を|の])/, '全ドロップを');
     /*
     技能敘述有變更!
     "自分の攻撃力×10倍 => "敵全体に攻撃力×10倍 (有些)
@@ -231,7 +231,7 @@ function findActiveSkill(mBlock) {
     ～に変換。 => ～に変化。
     ～に変化させ、 => ～に変化。
     ～に変化させる => ～に変化。
-    全ドロップ[^を|の] => 全ドロップを
+    全ドロップ(?=[^を|の]) => 全ドロップを
     
     */
     char['ActiveSkillTag'] = 'RRRRRRRRRR//TODO-List';

@@ -14,22 +14,21 @@ function startReq() {
             .replace('に変換。', 'に変化。')
             .replace('に変化させ、', 'に変化。')
             .replace('に変化させる', 'に変化。')
-            .replace(/全ドロップ[^を|の]/, '全ドロップを');
+            .replace(/全ドロップ(?=[^を|の])/, '全ドロップを');
     
     
         if (isReg(CHAR[no]['ActiveSkillContent'])) {
             let reg1 = /([^"|。]*)(を)([^"|。]*)(に変化)(?:[^"|。]*)/;
             let reg2 = /([^"|。]*)(を)([^"|。]*)(に、)([^"|。]*)/;
     
-            let match = CHAR[no]['ActiveSkillContent'].match(reg1);
-            let depiction = match.shift();
+            let match = CHAR[no]['ActiveSkillContent'].match(reg1).slice(1);
             if (reg2.test(match[0])) {
                 match = match[0].match(reg2).slice(1).concat(match.slice(1));
             }
     
-            keepData(CHAR[no]['Number'], match, depiction);
+            keepData(CHAR[no]['Number'], match);
         } else {
-            console.log('\x1b[31m%s\x1b[0m', '   ///Is not changed skill. ///////');
+            console.log('\x1b[31m%s\x1b[0m', '   /// Is not changed skill. //////');
             timerRepeat();
         }
     } else {
@@ -38,7 +37,7 @@ function startReq() {
             if (err) {
                 console.log(err);
             } else {
-                console.log('\x1b[33m%s\x1b[0m', '   /// Modify CHAR Write complete. ///////');
+                console.log('\x1b[33m%s\x1b[0m', '/// Data end. Modify CHAR Write complete. //////');
             }
         });
     }
@@ -57,14 +56,14 @@ function isReg(content) {
     return /([^"|。]*)(を)([^"|。]*)(に変化)(?:[^"|。]*)/.test(content);
 }
 
-function keepData(mNumber, mArray, mDepiction) {
+function keepData(mNumber, mArray) {
     let localpath = path.join(__dirname, './skill_reg_'+now('s')+'.json');
-    let tag = [mNumber, mArray, mDepiction];
+    let tag = {'no': mNumber, 'reg': mArray};
     fs.open(localpath, 'a', function (err, fd) {
         fs.appendFile(localpath, JSON.stringify(tag) + ',\r\n', function (err) {
             if (err) { console.log('\r\nWrite Char Error.'); }
 
-            console.log('\x1b[32m%s\x1b[0m', '   /// Write down. ///////');
+            console.log('\x1b[32m%s\x1b[0m', '   /// Write down. //////');
             timerRepeat();
         });
     });
