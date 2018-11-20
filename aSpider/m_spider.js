@@ -216,20 +216,22 @@ function findActiveSkill(mBlock) {
     char['ActiveSkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
     char['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
     char['ActiveSkillContent'] = ActiveSkill.eq(1).text()
-        .replace('+', '＋')
-        .replace(/生成(?=[^。])/, '生成。')
         .replace('減少、', '減少。')
+        .replace('+', '＋')
+        .replace(/生成(?=[^。]?)$/, '生成。')
         .replace('に変換。', 'に変化。')
         .replace('に変化させ、', 'に変化。')
         .replace('に変化させる', 'に変化。')
-        .replace(/全ドロップ(?=[^を|の])/, '全ドロップを');
+        .replace(/全ドロップ(?=[^をの]+)/, '全ドロップを');
     /*
     技能敘述有變更!
     "自分の攻撃力×10倍 => "敵全体に攻撃力×10倍 (有些)
     ～に自分の攻撃力×30倍 => ～に攻撃力×30倍 (有些)
     "敵一体に => 敵1体に
-    ～減少、 => ～減少。
 
+    ～減少、 => ～減少。
+    〇+〇 => 〇＋〇
+    ～生成 => ～生成。
     ～に変換。 => ～に変化。
     ～に変化させ、 => ～に変化。
     ～に変化させる => ～に変化。

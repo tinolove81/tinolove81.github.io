@@ -10,28 +10,33 @@ function startReq() {
         console.log('\x1b[36m%s\x1b[0m',`No.${CHAR[no]['Number']} ${CHAR[no]['Name']} ${CHAR[no]['MainAttribute']} / ${CHAR[no]['SubAttribute']} -Skill: ${CHAR[no]['ActiveSkillContent']}`);
     
         CHAR[no]['ActiveSkillContent'] = CHAR[no]['ActiveSkillContent']
-            .replace('+', '＋')
-            .replace(/生成(?=[^。])/, '生成。')
             .replace('減少、', '減少。')
+            .replace('+', '＋')
+            .replace(/生成(?=[^。]?)$/, '生成。')
             .replace('に変換。', 'に変化。')
             .replace('に変化させ、', 'に変化。')
             .replace('に変化させる', 'に変化。')
-            .replace(/全ドロップ(?=[^を|の])/, '全ドロップを');
-    
+            .replace(/全ドロップ(?=[^をの]+)/, '全ドロップを');
+            console.log(CHAR[no]['ActiveSkillContent']);
+            console.log(CHAR[no]['ActiveSkillContent'].replace(/生成(?=[^。])$/m, '生成。'));
     
         if (isReg(CHAR[no]['ActiveSkillContent'])) {
-            let match = [];
-            let reg1 = /([^\sを。]+)(を)([^に。]+)(に([、]|[変化]|[。])+)/g;  //多屬轉先分段
-            let reg2 = /([^\s|。]+)(を)([^。]+)(に[、]*[変化]*[。]*)/;
-    
-            let m1 = CHAR[no]['ActiveSkillContent'].match(reg1);
-            for (let i = 0; i < m1.length; i++) {
-                let m2 = m1[i].match(reg2).slice(1);
-                match = match.concat(m2);
+            function change() {
+                let match = [];
+                let reg1 = /([^\sを。]+)(を)([^に。]+)(に([、]|[変化]|[。])+)/g;  //多屬轉先分段
+                let reg2 = /([^\s。]+)(を)([^。]+)(に[、]*[変化]*[。]*)/;
+        
+                let m1 = CHAR[no]['ActiveSkillContent'].match(reg1);
+                for (let i = 0; i < m1.length; i++) {
+                    let m2 = m1[i].match(reg2).slice(1);
+                    match = match.concat(m2);
+                }
+                let chinese = solve(match);
+                
+                keepData(CHAR[no]['Number'], chinese, match);
             }
-            let chinese = solve(match);
-            
-            keepData(CHAR[no]['Number'], chinese, match);
+
+            keepTest(CHAR[no]['Number'], CHAR[no]['ActiveSkillContent']);
         } else {
             console.log('\x1b[31m%s\x1b[0m', '   /// Is not changed skill. //////');
             timerRepeat(10);
@@ -44,11 +49,8 @@ function startReq() {
             if (i != no - 1) data += ',\r\n';
         }
         fs.writeFile(localpath, data, function (err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('\x1b[33m%s\x1b[0m', '/// Data end. Modify CHAR Write complete. //////');
-            }
+            if (err) { console.log(err); }
+            console.log('\x1b[33m%s\x1b[0m', '/// Data end. Modify CHAR Write complete. //////');
         });
     }
 }
@@ -73,9 +75,10 @@ function isReg(mContent) {
     s23 = '下から2列目横1列を木に、最下段横1列を光ドロップに変化。';
     s24 = '左端縦1列を回復に、右端縦1列を水ドロップに変化。';
     s25 = '最上段横1列と最下段横1列をお邪魔ドロップに変化。';
-    s31 = "木以外からランダムで回復ドロップを2個生成。お邪魔と毒ドロップを木ドロップに変化。"
-    s32 = "ドロップのロック状態を解除。火以外のドロップから回復ドロップを5個生成。"
 
+    s31 = "木以外からランダムで回復ドロップを2個生成。お邪魔と毒ドロップを木ドロップに変化。"
+    s31 = "ランダムで光と闇を3個ずつ生成。自分以外の味方スキルが1ターン溜まる。"
+    s32 = "ドロップのロック状態を解除。火以外のドロップから回復ドロップを5個生成。"
     sEX01 = '十字型に光ドロップを生成。';  //1873
     sEX02 = '敵の最大HP5%分のダメージ。十字型に水ドロップを生成。';  //4691
 
@@ -84,9 +87,9 @@ function isReg(mContent) {
     個ずつ生成 137
     を生成 4
     */
-    let change =  /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
+    // let change =  /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
     let random =  /([^\s。]*)(を)([^。]*)(生成。)/.test(mContent);
-    return change || random;
+    return random;
 }
 
 function solve(mArray) {
@@ -110,12 +113,27 @@ function solve(mArray) {
 
 function keepData(mNumber, mChineseArr, mRegArr) {
     let localpath = path.join(__dirname, './skill_reg_'+now('s')+'.json');
-    let tag = {'no': mNumber, 'tag': mChineseArr, 'reg': mRegArr};
+    let data = {'no': mNumber, 'tag': mChineseArr, 'reg': mRegArr};
     fs.open(localpath, 'a', function (err, fd) {
-        fs.appendFile(localpath, JSON.stringify(tag) + ',\r\n', function (err) {
+        if (err) { console.log(err); }
+        fs.appendFile(localpath, JSON.stringify(data) + ',\r\n', function (err) {
             if (err) { console.log('\r\nWrite Char Error.'); }
 
             console.log('\x1b[32m%s\x1b[0m', '   /// Write down. //////');
+            timerRepeat(20);
+        });
+    });
+}
+
+function keepTest(mNumber,  mRegArr) {
+    let localpath = path.join(__dirname, './test_random_'+now('s')+'.json');
+    let data = JSON.stringify({'no': mNumber, 'reg': mRegArr}) + ',\r\n';
+    fs.open(localpath, 'a', function (err, fd) {
+        if (err) { console.log(err); }
+        fs.appendFile(localpath, data, function (err) {
+            if (err) { console.log(err); }
+
+            console.log('\x1b[32m%s\x1b[0m', '   /// Test Report Write complete. //////');
             timerRepeat(20);
         });
     });
