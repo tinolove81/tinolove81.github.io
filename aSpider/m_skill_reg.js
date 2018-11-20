@@ -11,6 +11,7 @@ function startReq() {
     
         CHAR[no]['ActiveSkillContent'] = CHAR[no]['ActiveSkillContent']
             .replace('+', '＋')
+            .replace(/生成(?=[^。])/, '生成。')
             .replace('減少、', '減少。')
             .replace('に変換。', 'に変化。')
             .replace('に変化させ、', 'に変化。')
@@ -18,7 +19,7 @@ function startReq() {
             .replace(/全ドロップ(?=[^を|の])/, '全ドロップを');
     
     
-        if (isReg(CHAR[no]['ActiveSkillContent'])) {   //找出轉珠技能
+        if (isReg(CHAR[no]['ActiveSkillContent'])) {
             let match = [];
             let reg1 = /([^\sを。]+)(を)([^に。]+)(に([、]|[変化]|[。])+)/g;  //多屬轉先分段
             let reg2 = /([^\s|。]+)(を)([^。]+)(に[、]*[変化]*[。]*)/;
@@ -37,7 +38,12 @@ function startReq() {
         }
     } else {
         let localpath = path.join(__dirname, './assist/CHAR_reg.json');
-        fs.writeFile(localpath, JSON.stringify(CHAR), function (err) {
+        let data = '';
+        for (let i = 0; i < no; i++) {
+            data += JSON.stringify(CHAR[i]);
+            if (i != no - 1) data += ',\r\n';
+        }
+        fs.writeFile(localpath, data, function (err) {
             if (err) {
                 console.log(err);
             } else {
@@ -67,11 +73,20 @@ function isReg(mContent) {
     s23 = '下から2列目横1列を木に、最下段横1列を光ドロップに変化。';
     s24 = '左端縦1列を回復に、右端縦1列を水ドロップに変化。';
     s25 = '最上段横1列と最下段横1列をお邪魔ドロップに変化。';
+    s31 = "木以外からランダムで回復ドロップを2個生成。お邪魔と毒ドロップを木ドロップに変化。"
+    s32 = "ドロップのロック状態を解除。火以外のドロップから回復ドロップを5個生成。"
 
     sEX01 = '十字型に光ドロップを生成。';  //1873
     sEX02 = '敵の最大HP5%分のダメージ。十字型に水ドロップを生成。';  //4691
+
+    生成 425
+    個生成 284
+    個ずつ生成 137
+    を生成 4
     */
-    return /([^\s|。]+)(を)([^。]+)(に変化。)/.test(mContent);
+    let change =  /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
+    let random =  /([^\s。]*)(を)([^。]*)(生成。)/.test(mContent);
+    return change || random;
 }
 
 function solve(mArray) {
@@ -111,17 +126,6 @@ function timerRepeat(ms) {
     setTimeout(() => {
         startReq();
     }, ms);    
-}
-
-function pause(mOutput, callback) {
-    'use strict';
-    mOutput = mOutput || 'Press any key to continue in nodejs.';
-    process.stdin.resume();
-    process.stdout.write(mOutput);
-    process.stdin.once('data', function (mData) {
-        process.stdin.pause();
-        callback && callback(mData);
-    });
 }
 
 function now(argv) {

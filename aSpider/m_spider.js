@@ -217,6 +217,7 @@ function findActiveSkill(mBlock) {
     char['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
     char['ActiveSkillContent'] = ActiveSkill.eq(1).text()
         .replace('+', '＋')
+        .replace(/生成(?=[^。])/, '生成。')
         .replace('減少、', '減少。')
         .replace('に変換。', 'に変化。')
         .replace('に変化させ、', 'に変化。')
