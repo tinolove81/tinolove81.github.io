@@ -17,8 +17,6 @@ function startReq() {
             .replace('に変化させ、', 'に変化。')
             .replace('に変化させる', 'に変化。')
             .replace(/全ドロップ(?=[^をの]+)/, '全ドロップを');
-            console.log(CHAR[no]['ActiveSkillContent']);
-            console.log(CHAR[no]['ActiveSkillContent'].replace(/生成(?=[^。])$/m, '生成。'));
     
         if (isReg(CHAR[no]['ActiveSkillContent'])) {
             function change() {
@@ -35,8 +33,12 @@ function startReq() {
                 
                 keepData(CHAR[no]['Number'], chinese, match);
             }
+            let match = [];
+            let reg1 =  /([^\s。]*)(を)([^。]*)(生成。)/g;
+            let m1 = CHAR[no]['ActiveSkillContent'].match(reg1);
+            match = match.concat(m1);
 
-            keepTest(CHAR[no]['Number'], CHAR[no]['ActiveSkillContent']);
+            keepTest(CHAR[no]['Number'], match, CHAR[no]['ActiveSkillContent']);
         } else {
             console.log('\x1b[31m%s\x1b[0m', '   /// Is not changed skill. //////');
             timerRepeat(10);
