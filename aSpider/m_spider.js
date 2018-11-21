@@ -54,11 +54,9 @@ function parseCHARACTER(html, code) {
         'ActiveSkillName': '',
         'ActiveSkillCD': '',
         'ActiveSkillContent': '',
-        'ActiveSkillTag': '',
         
         'LeaderSkillName': '',
         'LeaderSkillContent': '',
-        'LeaderSkillTag': '',
         
         'Kakusei': [],
     };
@@ -129,11 +127,9 @@ function test(html, code) {
         'ActiveSkillName': '',
         'ActiveSkillCD': '',
         'ActiveSkillContent': '',
-        'ActiveSkillTag': '',
         
         'LeaderSkillName': '',
         'LeaderSkillContent': '',
-        'LeaderSkillTag': '',
         
         'Kakusei': [],
     };
@@ -166,11 +162,9 @@ function test(html, code) {
         char['ActiveSkillName'] = '';
         char['ActiveSkillCD'] = '';
         char['ActiveSkillContent'] = '';
-        char['ActiveSkillTag'] = '';
         
         char['LeaderSkillName'] = '';
         char['LeaderSkillContent'] = '';
-        char['LeaderSkillTag'] = '';
         
         char['Kakusei'] = [];
 
@@ -238,14 +232,12 @@ function findActiveSkill(mBlock) {
     全ドロップ(?=[^を|の]) => 全ドロップを
     
     */
-    char['ActiveSkillTag'] = 'RRRRRRRRRR//TODO-List';
 }
 
 function findLeaderSkill(mBlock) {
     let LeaderSkill = mBlock.find('p');
     char['LeaderSkillName'] = LeaderSkill.eq(0).find('strong').text();
     char['LeaderSkillContent'] = LeaderSkill.eq(1).text();
-    char['LeaderSkillTag'] = 'RRRRRRRRRR//TODO-List';
 }
 
 function findKakusei(mBlock) {

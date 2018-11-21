@@ -163,14 +163,22 @@
     </div>
 
     <script>
-    function now(a) {
-        if (a == 'u') {
-            return Math.round(new Date().getTime() / 1000.0);
-        } else if (!isNaN(parseInt(a))) {
-            return new Date(parseInt(a) * 1000).toLocaleString(undefined, { hour12: false });
+        let monster;
+
+        $.getJSON('./assist/CHAR_modify.json', function (data) {
+            monster = data;
+            console.log(monster);
+        });
+
+
+        function now(a) {
+            if (a == 'u') {
+                return Math.round(new Date().getTime() / 1000.0);
+            } else if (!isNaN(parseInt(a))) {
+                return new Date(parseInt(a) * 1000).toLocaleString(undefined, { hour12: false });
+            }
+            return '' + new Date().toLocaleString(undefined, { hour12: false });
         }
-        return '' + new Date().toLocaleString(undefined, { hour12: false });
-    }
     </script>
 </body>
 
