@@ -19,6 +19,8 @@ function startReq() {
             .replace(/全ドロップ(?=[^をの]+)/, '全ドロップを');
     
         if (isReg(CHAR[no]['ActiveSkillContent'])) {
+            let tag = [];
+            change();
             function change() {
                 let match = [];
                 let reg1 = /([^\sを。]+)(を)([^に。]+)(に([、]|[変化]|[。])+)/g;  //多屬轉先分段
@@ -29,16 +31,18 @@ function startReq() {
                     let m2 = m1[i].match(reg2).slice(1);
                     match = match.concat(m2);
                 }
-                let chinese = solve(match);
+                tag = tag.concat(solve(match));
                 
-                keepData(CHAR[no]['Number'], chinese, match);
+                keepData(CHAR[no]['Number'], tag);
             }
-            let match = [];
-            let reg1 =  /([^\s。]*)(を)([^。]*)(生成。)/g;
-            let m1 = CHAR[no]['ActiveSkillContent'].match(reg1);
-            match = match.concat(m1);
+            function random() {
+                let match = [];
+                let reg1 =  /([^\s。]*)(を)([^。]*)(生成。)/g;
+                let m1 = CHAR[no]['ActiveSkillContent'].match(reg1);
+                match = match.concat(m1);
 
-            keepTest(CHAR[no]['Number'], match, CHAR[no]['ActiveSkillContent']);
+                keepTest(CHAR[no]['Number'], match, CHAR[no]['ActiveSkillContent']);
+            }
         } else {
             console.log('\x1b[31m%s\x1b[0m', '   /// Is not changed skill. //////');
             timerRepeat(10);
@@ -89,33 +93,41 @@ function isReg(mContent) {
     個ずつ生成 137
     を生成 4
     */
-    // let change =  /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
-    let random =  /([^\s。]*)(を)([^。]*)(生成。)/.test(mContent);
-    return random;
+    let change = /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
+    let random = false // /([^\s。]*)(を)([^。]*)(生成。)/.test(mContent);
+    return change || random;
 }
 
 function solve(mArray) {
     console.log('input:', mArray);
-    let ans = [];
-    let element = /(5属性)|(全)|(火)|(水)|(木)|(光)|(闇)|(回復)|(お邪魔)|([猛]*毒)|(横)|(縦)/g;
+    let ans_c = [];
+    let element = /(5属性)|(全)|(火)|(水)|(木)|(光)|(闇)|(回復)|(邪魔)|([猛]*毒)|(爆弾)|(横)|(縦)/g;
     if (mArray.length == 4) {
         let A = mArray[0].match(element);
         let B = mArray[2].match(element);
-        ans = A.concat(['を']).concat(B).concat(['に変化']);
+        for (let i = 0; i < A.length; i++) {
+            for (let j = 0; j < B.length; j++) {
+                if (B[j] == '5属性') {
+                    ans_c = ans_c.concat([`${A[i]}轉火`, `${A[i]}轉水`, `${A[i]}轉木`, `${A[i]}轉光`, `${A[i]}轉暗`]);
+                } else {
+                    ans_c.push(`${A[i]}轉${B[j]}`);
+                }
+            }
+        }
     } else if (mArray.length % 4 == 0) {
         let part = solve(mArray.slice(0, 4));
         for (let i = 0;i < 4; i++) mArray.shift();
-        ans = part.concat(solve(mArray));
+        ans_c = part.concat(solve(mArray));
     } else {
-        ans = 'NotFourArgsSkill???';
+        ans_c = 'NotFourArgsSkill???';
     }
-    console.log('solve:', ans);
-    return ans;
+    console.log('solve_c:', ans_c);
+    return ans_c;
 }
 
-function keepData(mNumber, mChineseArr, mRegArr) {
+function keepData(mNumber, mChineseArr) {
     let localpath = path.join(__dirname, './skill_reg_'+now('s')+'.json');
-    let data = {'no': mNumber, 'tag': mChineseArr, 'reg': mRegArr};
+    let data = {'no': mNumber, 'tag': mChineseArr};
     fs.open(localpath, 'a', function (err, fd) {
         if (err) { console.log(err); }
         fs.appendFile(localpath, JSON.stringify(data) + ',\r\n', function (err) {
