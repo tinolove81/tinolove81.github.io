@@ -31,6 +31,62 @@
     background: url('./icon_type_1god.png') no-repeat;
     background-size: 24px 24px;
 }
+.icon-type-dragon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('./icon_type_2dragon.png') no-repeat;
+    background-size: 24px 24px;
+}
+.icon-type-devil {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('./icon_type_3devil.png') no-repeat;
+    background-size: 24px 24px;
+}
+.icon-type-machine {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('./icon_type_4machine.png') no-repeat;
+    background-size: 24px 24px;
+}
+.icon-type-balance {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('./icon_type_5balance.png') no-repeat;
+    background-size: 24px 24px;
+}
+.icon-type-attack {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('./icon_type_6attack.png') no-repeat;
+    background-size: 24px 24px;
+}
+.icon-type-vitality {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('./icon_type_7vitality.png') no-repeat;
+    background-size: 24px 24px;
+}
+.icon-type-recovery {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('./icon_type_8recovery.png') no-repeat;
+    background-size: 24px 24px;
+}
 .icon-awaken {
     display: inline-block;
     width: 24px;
