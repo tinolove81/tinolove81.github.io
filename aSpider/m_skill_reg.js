@@ -20,7 +20,8 @@ function startReq() {
     
         if (isReg(CHAR[no]['ActiveSkillContent'])) {
             let tag = [];
-            change();
+            // change();
+            random();
             function change() {
                 let match = [];
                 let reg1 = /([^\sを。]+)(を)([^に。]+)(に([、]|[変化]|[。])+)/g;  //多屬轉先分段
@@ -93,8 +94,8 @@ function isReg(mContent) {
     個ずつ生成 137
     を生成 4
     */
-    let change = /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
-    let random = false // /([^\s。]*)(を)([^。]*)(生成。)/.test(mContent);
+    let change = false // /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
+    let random = /([^\s。]*)(を)([^。]*)(生成。)/.test(mContent);
     return change || random;
 }
 

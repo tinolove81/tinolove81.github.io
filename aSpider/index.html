@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <link rel='stylesheet' href='./assist/bootstrap.min.css' />
+    <link rel='stylesheet' href='./assist/index.css' />
+    <link rel='stylesheet' href='./assist/icon.css' />
+    <script src='./assist/jquery-3.2.1.min.js'></script>
+    <script src='./assist/bootstrap.bundle.min.js'></script>
+    <script src='./assist/all.js'></script>
+    <title>【パズドラ】Skill Database</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Imprima');
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: Imprima, Meiryo;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            opacity: .3;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <nav class='navbar shadow navbar-light bg-light'>
+        <a class='navbar-brand'>【パズドラ】Skill Database</a>
+    </nav>
+
+    <div class='container p-3 shadow rounded'>
+        <div class='row my-2 align-items-center'>
+            <div class='px-3'><span>主属性：</span></div>
+            <div class='col'>
+                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='none'/><i class='icon-none'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='fire'/><i class='icon-drop i-fire'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='water'/><i class='icon-drop i-water'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='wood'/><i class='icon-drop i-wood'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='light'/><i class='icon-drop i-light'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='dark'/><i class='icon-drop i-dark'></i></label>
+                </div>
+            </div>
+        </div>
+        <div class='row my-2 align-items-center'>
+            <div class='px-3'><span>副属性：</span></div>
+            <div class='col'>
+                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='none'/><i class='icon-none'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='fire'/><i class='icon-drop i-fire'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='water'/><i class='icon-drop i-water'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='wood'/><i class='icon-drop i-wood'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='light'/><i class='icon-drop i-light'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='dark'/><i class='icon-drop i-dark'></i></label>
+                </div>
+            </div>
+        </div>
+        <div class='row my-2 align-items-center'>
+            <div class='px-3'><span>タイプ：</span></div>
+            <div class='col'>
+                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value='none'/><i class='icon-none'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value='god'/><i class='icon-type-god'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value=''/><i class='icon-type-god'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value=''/><i class='icon-type-god'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value=''/><i class='icon-type-god'></i></label>
+                    <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value=''/><i class='icon-type-god'></i></label>
+                </div>
+            </div>
+        </div>
+        <div class='row my-2 align-items-center justify-content-end'>
+            <div class='px-3'><span>覚醒スキル：</span></div>
+            <div class='col'>
+                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken01'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken02'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken03'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken04'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken05'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken06'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken07'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken08'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken09'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken10'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken11'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken12'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken13'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken14'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken15'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken16'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken17'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken18'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken19'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken20'></i></label>
+                </div>
+                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken21'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken22'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken23'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken24'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken25'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken26'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken27'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken28'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken29'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken30'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken31'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken32'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken33'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken34'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken35'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken36'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken37'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken38'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken39'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken40'></i></label>
+                </div>
+                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken41'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken42'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken43'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken44'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken45'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken46'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken47'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken48'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken49'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken50'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken51'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken52'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken53'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken54'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken55'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken56'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken57'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken58'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken59'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken60'></i></label>
+                </div>
+                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken61'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken62'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken63'></i></label>
+                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken64'></i></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function now(a) {
+        if (a == 'u') {
+            return Math.round(new Date().getTime() / 1000.0);
+        } else if (!isNaN(parseInt(a))) {
+            return new Date(parseInt(a) * 1000).toLocaleString(undefined, { hour12: false });
+        }
+        return '' + new Date().toLocaleString(undefined, { hour12: false });
+    }
+    </script>
+</body>
+
+</html>
