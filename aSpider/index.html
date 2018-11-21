@@ -30,12 +30,68 @@
             background-position: center center;
             opacity: .3;
         }
+        .overlay {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #EFEFEF;
+            opacity: .5;
+            z-index: 2000;
+        }
+        .container .row {
+            min-height: 35px;
+        }
 
 
+        /*****************************
+        *   loading-ring             *
+        *****************************/
+        .loading-ring {
+            display: inline-block;
+            width: 90px;
+            height: 90px;
+        }
+        .loading-ring::before {
+            content: ' ';
+            display: block;
+            position: absolute;
+            margin: 30px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            border-color: #000 transparent #000 transparent;
+            animation: loading-ring-r .8s linear infinite;
+        }
+        .loading-ring::after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 15px solid #fff;
+            border-color: #000 transparent #000 transparent;
+            animation: loading-ring .8s linear infinite;
+        }
+        @keyframes loading-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes loading-ring-r {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
     </style>
 </head>
 
 <body>
+    <div class='overlay justify-content-center align-items-center' tabindex='-1'>
+        <div class='loading-ring'></div>
+    </div>
     <nav class='navbar shadow navbar-light bg-light'>
         <a class='navbar-brand'>【パズドラ】Skill Database</a>
     </nav>
@@ -84,7 +140,7 @@
             </div>
         </div>
         <div class='row my-2 align-items-center justify-content-end'>
-            <div class='px-3'><span>覚醒スキル：</span></div>
+            <div class='d-flex px-3 align-items-center mb-auto'><span>覚醒スキル：</span></div>
             <div class='col'>
                 <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                     <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken01'></i></label>
@@ -160,15 +216,47 @@
                 </div>
             </div>
         </div>
+        <div class='row my-2 align-items-center justify-content-end'>
+            <div class='d-flex px-3 align-items-center mb-auto'><span>スキル検索：</span></div>
+            <div class='col'>
+                <div class='row'><div class='col'>1</div></div>
+                <div class='row'><div class='col'>1</div></div>
+                <div class='row'><div class='col'>1</div></div>
+                <div class='row'><div class='col'>1</div></div>
+            </div>
+        </div>
     </div>
 
     <script>
+        let retry = 0;
         let monster;
+        let skilltag;
+        let a = ['全', '火', '水', '木', '光', '闇', '回復', '邪魔', '猛毒', '毒', '爆弾', '横', '縦'];
+        let b = ['火', '水', '木', '光', '闇', '回復', '邪魔', '猛毒', '毒', '爆弾'];
 
         $.getJSON('./assist/CHAR_modify.json', function (data) {
             monster = data;
-            console.log(monster);
         });
+        $.getJSON('./assist/TAG_change.json', function (data) {
+            skilltag = data;
+        });
+
+        (function loadDefault() {
+            console.log(monster, skilltag);
+            if (retry < 10) {
+                if (monster != undefined && skilltag != undefined) {
+                    $('.overlay').addClass('d-none');
+                } else {
+                    setTimeout(loadDefault, 300);
+                }
+                retry++;
+            } else {
+                alert('Connect database error.');
+            }
+        })();
+
+
+        
 
 
         function now(a) {
