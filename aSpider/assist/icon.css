@@ -3,6 +3,26 @@
     display: inline-block;
     margin-top: 2px;
 }
+.icon-all::before {
+    content: '全版';
+    display: inline-block;
+    margin-top: 2px;
+}
+.icon-row::before {
+    content: '横排';
+    display: inline-block;
+    margin-top: 2px;
+}
+.icon-col::before {
+    content: '縦列';
+    display: inline-block;
+    margin-top: 2px;
+}
+.icon-random::before {
+    content: '隨機';
+    display: inline-block;
+    margin-top: 2px;
+}
 .icon-drop {
     display: inline-block;
     width: 24px;
@@ -10,7 +30,10 @@
     vertical-align: middle;
     background-image: url('./icon_drop.png');
     background-repeat: no-repeat;
-    background-size: 120px 24px;
+    background-size: 240px 24px;
+}
+.i-fire {
+    background-position: 0 0;
 }
 .i-water {
     background-position: -24px 0;
@@ -23,6 +46,21 @@
 }
 .i-dark {
     background-position: -96px 0;
+}
+.i-heart {
+    background-position: -120px 0;
+}
+.i-trash {
+    background-position: -144px 0;
+}
+.i-poison {
+    background-position: -168px 0;
+}
+.i-mpoison {
+    background-position: -192px 0;
+}
+.i-bomb {
+    background-position: -216px 0;
 }
 .icon-type-god {
     display: inline-block;
