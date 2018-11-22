@@ -18,10 +18,12 @@ function startReq() {
             .replace('に変化させる', 'に変化。')
             .replace(/全ドロップ(?=[^をの]+)/, '全ドロップを');
     
-        if (isReg(CHAR[no]['ActiveSkillContent'])) {
+        if (w = isReg(CHAR[no]['ActiveSkillContent'])) {
             let tag = [];
-            // change();
-            random();
+            if (w[0]) change();
+            if (w[1]) random();
+            keepData(CHAR[no]['Number'], tag);
+
             function change() {
                 let match = [];
                 let reg1 = /([^\sを。]+)(を)([^に。]+)(に([、]|[変化]|[。])+)/g;  //多屬轉先分段
@@ -32,17 +34,18 @@ function startReq() {
                     let m2 = m1[i].match(reg2).slice(1);
                     match = match.concat(m2);
                 }
-                tag = tag.concat(solve(match));
+                tag = tag.concat(solve(match, 'change'));
                 
-                keepData(CHAR[no]['Number'], tag);
             }
             function random() {
                 let match = [];
                 let reg1 =  /([^\s。]*)(を)([^。]*)(生成。)/g;
+                let replace1 = /([^\s。]+)から/;
                 let m1 = CHAR[no]['ActiveSkillContent'].match(reg1);
+                m1[0] = m1[0].replace(replace1, '');
                 match = match.concat(m1);
 
-                keepTest(CHAR[no]['Number'], match, CHAR[no]['ActiveSkillContent']);
+                tag = tag.concat(solve(match, 'random'));
             }
         } else {
             console.log('\x1b[31m%s\x1b[0m', '   /// Is not changed skill. //////');
@@ -94,36 +97,53 @@ function isReg(mContent) {
     個ずつ生成 137
     を生成 4
     */
-    let change = false // /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
+    let change = /([^\s。]+)(を)([^。]+)(に変化。)/.test(mContent);
     let random = /([^\s。]*)(を)([^。]*)(生成。)/.test(mContent);
-    return change || random;
+    return (change || random) ? [change, random] : false;
 }
 
-function solve(mArray) {
-    console.log('input:', mArray);
-    let ans_c = [];
-    let element = /(5属性)|(全)|(火)|(水)|(木)|(光)|(闇)|(回復)|(邪魔)|([猛]*毒)|(爆弾)|(横)|(縦)/g;
-    if (mArray.length == 4) {
-        let A = mArray[0].match(element);
-        let B = mArray[2].match(element);
-        for (let i = 0; i < A.length; i++) {
-            for (let j = 0; j < B.length; j++) {
-                if (B[j] == '5属性') {
-                    ans_c = ans_c.concat([`${A[i]}轉火`, `${A[i]}轉水`, `${A[i]}轉木`, `${A[i]}轉光`, `${A[i]}轉暗`]);
-                } else {
-                    ans_c.push(`${A[i]}轉${B[j]}`);
+function solve(mArray, mKey) {
+    console.log('mKey:', mKey, ',input:', mArray);
+    if (mKey == 'change') {
+        let ans_c = [];
+        let element = /(5属性)|(全)|(火)|(水)|(木)|(光)|(闇)|(回復)|(邪魔)|([猛]*毒)|(爆弾)|(横)|(縦)/g;
+        if (mArray.length == 4) {
+            let A = mArray[0].match(element);
+            let B = mArray[2].match(element);
+            for (let i = 0; i < A.length; i++) {
+                for (let j = 0; j < B.length; j++) {
+                    if (B[j] == '5属性') {
+                        ans_c = ans_c.concat([`${A[i]}轉火`, `${A[i]}轉水`, `${A[i]}轉木`, `${A[i]}轉光`, `${A[i]}轉暗`]);
+                    } else {
+                        ans_c.push(`${A[i]}轉${B[j]}`);
+                    }
                 }
             }
+        } else if (mArray.length % 4 == 0) {
+            let part = solve(mArray.slice(0, 4), mKey);
+            for (let i = 0;i < 4; i++) mArray.shift();
+            ans_c = part.concat(solve(mArray, mKey));
+        } else {
+            ans_c = 'NotFourArgsSkill???';
         }
-    } else if (mArray.length % 4 == 0) {
-        let part = solve(mArray.slice(0, 4));
-        for (let i = 0;i < 4; i++) mArray.shift();
-        ans_c = part.concat(solve(mArray));
-    } else {
-        ans_c = 'NotFourArgsSkill???';
+        console.log('solve_c:', ans_c);
+        return ans_c;
+    } else if (mKey == 'random') {
+        let ans_c = [];
+        let element = /(十字)|(火)|(水)|(木)|(光)|(闇)|(回復)|(邪魔)|([猛]*毒)|(爆弾)/g;
+        let A = mArray[0].match(element);
+        
+        if (A[0] == '十字型') {
+            ans_c = ans_c.concat([`横轉${A[1]}`, `縦轉${A[1]}`]);
+        } else {
+            for (let i = 0; i < A.length; i++) {
+                ans_c.push(`隨機${A[i]}`);
+            }
+        }
+
+        console.log('solve_c:', ans_c);
+        return ans_c;
     }
-    console.log('solve_c:', ans_c);
-    return ans_c;
 }
 
 function keepData(mNumber, mChineseArr) {
@@ -143,13 +163,14 @@ function keepData(mNumber, mChineseArr) {
 function keepTest(mNumber,  mRegArr) {
     let localpath = path.join(__dirname, './test_random_'+now('s')+'.json');
     let data = JSON.stringify({'no': mNumber, 'reg': mRegArr}) + ',\r\n';
+    // let data = JSON.stringify(mRegArr) + ',\r\n';
     fs.open(localpath, 'a', function (err, fd) {
         if (err) { console.log(err); }
         fs.appendFile(localpath, data, function (err) {
             if (err) { console.log(err); }
 
             console.log('\x1b[32m%s\x1b[0m', '   /// Test Report Write complete. //////');
-            timerRepeat(20);
+            timerRepeat(50);
         });
     });
 }

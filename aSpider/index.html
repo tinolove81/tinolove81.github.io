@@ -13,6 +13,11 @@
     <title>【パズドラ】Skill Database</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Imprima');
+        @media (min-width: 1450px) {
+            .container {
+                max-width: 1380px;
+            }
+        }
         html,
         body {
             width: 100%;
@@ -25,7 +30,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg');
+            /* background-image: url('https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg'); */
             background-repeat: no-repeat;
             background-position: center center;
             opacity: .3;
@@ -41,7 +46,7 @@
             opacity: .5;
             z-index: 2000;
         }
-        .container .row {
+        .container .row > div.px-3 {
             min-height: 35px;
         }
 
@@ -98,7 +103,7 @@
 
     <div class='container p-3 shadow rounded'>
         <div class='row my-2 align-items-center'>
-            <div class='px-3'><span>主属性：</span></div>
+            <div class='d-flex px-3 align-items-center'><span>主属性：</span></div>
             <div class='col'>
                 <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                     <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='none'/><i class='icon-none'></i></label>
@@ -111,7 +116,7 @@
             </div>
         </div>
         <div class='row my-2 align-items-center'>
-            <div class='px-3'><span>副属性：</span></div>
+            <div class='d-flex px-3 align-items-center'><span>副属性：</span></div>
             <div class='col'>
                 <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                     <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='none'/><i class='icon-none'></i></label>
@@ -124,7 +129,7 @@
             </div>
         </div>
         <div class='row my-2 align-items-center'>
-            <div class='px-3'><span>タイプ：</span></div>
+            <div class='d-flex px-3 align-items-center'><span>タイプ：</span></div>
             <div class='col'>
                 <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                     <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value='none'/><i class='icon-none'></i></label>
@@ -139,84 +144,825 @@
                 </div>
             </div>
         </div>
-        <div class='row my-2 align-items-center justify-content-end'>
+        <div class='row my-2 align-items-center'>
             <div class='d-flex px-3 align-items-center mb-auto'><span>覚醒スキル：</span></div>
             <div class='col'>
-                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken01'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken02'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken03'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken04'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken05'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken06'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken07'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken08'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken09'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken10'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken11'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken12'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken13'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken14'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken15'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken16'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken17'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken18'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken19'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken20'></i></label>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken1 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
                 </div>
-                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken21'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken22'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken23'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken24'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken25'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken26'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken27'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken28'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken29'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken30'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken31'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken32'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken33'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken34'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken35'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken36'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken37'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken38'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken39'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken40'></i></label>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken2 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
                 </div>
-                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken41'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken42'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken43'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken44'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken45'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken46'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken47'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken48'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken49'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken50'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken51'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken52'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken53'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken54'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken55'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken56'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken57'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken58'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken59'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken60'></i></label>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken3 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
                 </div>
-                <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken61'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken62'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken63'></i></label>
-                    <label class='btn btn-outline-primary'><input type='checkbox' name='MonsterAwaken' value=''/><i class='icon-awaken i-awaken64'></i></label>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken4 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken5 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken6 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken7 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken8 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken9 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken10 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken11 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken12 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken13 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken14 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken15 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken16 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken17 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken18 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken19 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken20 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken21 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken22 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken23 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken24 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken25 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken26 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken27 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken28 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken29 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken30 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken31 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken32 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken33 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken34 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken35 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken36 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken37 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken38 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken39 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken40 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken41 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken42 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken43 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken45 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken46 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken47 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken48 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken49 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken50 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken51 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken52 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken53 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken54 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken55 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken56 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken57 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken58 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken59 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken60 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken61 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken62 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken63 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='btn-group btn-group-sm'>
+                    <label class='btn btn-outline-primary p-0 clearfix'>
+                        <i class='icon-awaken i-awaken64 m-1 float-left'></i>
+                        <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
+                            <option value='0' selected>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </label>
                 </div>
             </div>
         </div>
-        <div class='row my-2 align-items-center justify-content-end'>
+        <div class='row my-2 align-items-center'>
             <div class='d-flex px-3 align-items-center mb-auto'><span>スキル検索：</span></div>
             <div class='col'>
                 <div class='row'><div class='col'>1</div></div>
@@ -255,8 +1001,8 @@
             }
         })();
 
+$('.overlay').addClass('d-none');
 
-        
 
 
         function now(a) {

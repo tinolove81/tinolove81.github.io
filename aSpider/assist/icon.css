@@ -8,7 +8,8 @@
     width: 24px;
     height: 24px;
     vertical-align: middle;
-    background: url('./icon_drop.png') no-repeat;
+    background-image: url('./icon_drop.png');
+    background-repeat: no-repeat;
     background-size: 120px 24px;
 }
 .i-water {
@@ -87,40 +88,38 @@
     background: url('./icon_type_8recovery.png') no-repeat;
     background-size: 24px 24px;
 }
+
+/******
+01: HP增加  02: ATK增加  03: REC增加  04: 火減輕  05: 水減輕  06: 木減輕  07: 光減輕
+*/
 .icon-awaken {
     display: inline-block;
     width: 24px;
     height: 25px;
     vertical-align: middle;
-    background: url('./icon_awaken.png') no-repeat;
+    background-image: url('./icon_awaken.png');
+    background-repeat: no-repeat;
     background-size: 24px 1600px;
 }
 .i-awaken01 {
-    /* HP增加 */
     background-position: 0 0;
 }
 .i-awaken02 {
-    /* ATK增加 */
     background-position: 0 -25px;
 }
 .i-awaken03 {
-    /* REC增加 */
     background-position: 0 -50px;
 }
 .i-awaken04 {
-    /* 火減輕 */
     background-position: 0 -75px;
 }
 .i-awaken05 {
-    /* 水減輕 */
     background-position: 0 -100px;
 }
 .i-awaken06 {
-    /* 木減輕 */
     background-position: 0 -125px;
 }
 .i-awaken07 {
-    /* 光減輕 */
     background-position: 0 -150px;
 }
 .i-awaken08 {
