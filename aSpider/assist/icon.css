@@ -28,103 +28,74 @@
     width: 24px;
     height: 24px;
     vertical-align: middle;
-    background-image: url('./icon_drop.png');
+    background-image: url('./icon_drop_test.png');
     background-repeat: no-repeat;
+    background-position: top left;
     background-size: 240px 24px;
 }
-.i-fire {
+.id-fire {
     background-position: 0 0;
 }
-.i-water {
+.id-water {
     background-position: -24px 0;
 }
-.i-wood {
+.id-wood {
     background-position: -48px 0;
 }
-.i-light {
+.id-light {
     background-position: -72px 0;
 }
-.i-dark {
+.id-dark {
     background-position: -96px 0;
 }
-.i-heart {
+.id-heart {
     background-position: -120px 0;
 }
-.i-trash {
+.id-trash {
     background-position: -144px 0;
 }
-.i-poison {
+.id-poison {
     background-position: -168px 0;
 }
-.i-mpoison {
+.id-mpoison {
     background-position: -192px 0;
 }
-.i-bomb {
+.id-bomb {
     background-position: -216px 0;
 }
-.icon-type-god {
+.icon-type {
     display: inline-block;
     width: 24px;
     height: 24px;
     vertical-align: middle;
-    background: url('./icon_type_1god.png') no-repeat;
-    background-size: 24px 24px;
+    background-image: url('./icon_type.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 192px 24px;
 }
-.icon-type-dragon {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    background: url('./icon_type_2dragon.png') no-repeat;
-    background-size: 24px 24px;
+.it-god {
+    background-position: 0 0;
 }
-.icon-type-devil {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    background: url('./icon_type_3devil.png') no-repeat;
-    background-size: 24px 24px;
+.it-dragon {
+    background-position: -24px 0;
 }
-.icon-type-machine {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    background: url('./icon_type_4machine.png') no-repeat;
-    background-size: 24px 24px;
+.it-devil {
+    background-position: -48px 0;
 }
-.icon-type-balance {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    background: url('./icon_type_5balance.png') no-repeat;
-    background-size: 24px 24px;
+.it-machine {
+    background-position: -72px 0;
 }
-.icon-type-attack {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    background: url('./icon_type_6attack.png') no-repeat;
-    background-size: 24px 24px;
+.it-balance {
+    background-position: -96px 0;
 }
-.icon-type-vitality {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    background: url('./icon_type_7vitality.png') no-repeat;
-    background-size: 24px 24px;
+.it-attack {
+    background-position: -120px 0;
 }
-.icon-type-recovery {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    background: url('./icon_type_8recovery.png') no-repeat;
-    background-size: 24px 24px;
+.it-vitality {
+    background-position: -144px 0;
+}
+.it-recovery {
+    background-position: -168px 0;
 }
 
 /******
@@ -135,7 +106,7 @@
     width: 24px;
     height: 25px;
     vertical-align: middle;
-    background-image: url('./icon_awaken.png');
+    background-image: url('./icon_awaken_test.png');
     background-repeat: no-repeat;
     background-size: 24px 1600px;
 }
