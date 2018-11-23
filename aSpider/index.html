@@ -48,7 +48,10 @@
             z-index: 2000;
         }
         .container .puretext {
+            display: flex;
+            padding: 0 1rem;
             min-height: 35px;
+            align-items: center;
         }
 
 
@@ -104,7 +107,7 @@
 
     <div class='container p-3 shadow rounded'>
         <div class='row my-2 align-items-center'>
-            <div class='puretext d-flex px-3 align-items-center'><span>主属性：</span></div>
+            <div class='puretext'><span>主属性：</span></div>
             <div class='col'>
                 <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                     <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_A' value='none'/><i class='icon-none'></i></label>
@@ -117,7 +120,7 @@
             </div>
         </div>
         <div class='row mb-2 align-items-center'>
-            <div class='puretext d-flex px-3 align-items-center'><span>副属性：</span></div>
+            <div class='puretext'><span>副属性：</span></div>
             <div class='col'>
                 <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                     <label class='btn btn-outline-primary'><input type='radio' name='MonsterAttr_B' value='none'/><i class='icon-none'></i></label>
@@ -130,7 +133,7 @@
             </div>
         </div>
         <div class='row mb-2 align-items-center'>
-            <div class='puretext d-flex px-3 align-items-center'><span>タイプ：</span></div>
+            <div class='puretext'><span>タイプ：</span></div>
             <div class='col'>
                 <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                     <label class='btn btn-outline-primary'><input type='radio' name='MonsterType' value='none'/><i class='icon-none'></i></label>
@@ -150,7 +153,7 @@
             <div class='col'>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken1 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken01 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -163,7 +166,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken2 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken02 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -176,7 +179,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken3 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken03 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -189,7 +192,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken4 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken04 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -202,7 +205,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken5 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken05 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -215,7 +218,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken6 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken06 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -228,7 +231,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken7 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken07 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -241,7 +244,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken8 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken08 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -254,7 +257,7 @@
                 </div>
                 <div class='btn-group btn-group-sm'>
                     <label class='btn btn-outline-primary p-0 clearfix'>
-                        <i class='icon-awaken i-awaken9 m-1 float-left'></i>
+                        <i class='icon-awaken i-awaken09 m-1 float-left'></i>
                         <select class='pl-0 py-0 w-auto h-100 custom-select border-0 float-right' autocomplete='off'>
                             <option value='0' selected>0</option>
                             <option value='1'>1</option>
@@ -299,6 +302,8 @@
                             <option value='1'>1</option>
                             <option value='2'>2</option>
                             <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
                         </select>
                     </label>
                 </div>
@@ -375,6 +380,8 @@
                             <option value='1'>1</option>
                             <option value='2'>2</option>
                             <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
                         </select>
                     </label>
                 </div>
@@ -464,6 +471,8 @@
                             <option value='1'>1</option>
                             <option value='2'>2</option>
                             <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
                         </select>
                     </label>
                 </div>
@@ -964,12 +973,14 @@
             </div>
         </div>
         <div class='row mb-2 align-items-center'>
-            <div class='puretext d-flex px-3 align-items-center mb-auto'><span>スキル検索：</span></div>
-            <div id='keywords' class='col'>
-                <div class='puretext d-flex mb-3 align-items-center'><span>Add some rule...</span></div>
-                <div class='px-3 py-2 border border-dark rounded shadow'>
-                    <div class='row mb-2 align-items-center'>
-                        <div class='puretext d-flex px-3 align-items-center'><span>変換元：</span></div>
+            <div class='puretext mb-auto'><span>スキル検索：</span></div>
+            <div class='col'>
+                <div id='keywords' class='mb-2'>
+                    <div id='kwtips' class='puretext mb-1 border border-info rounded'><span>スキル検索条件を作成する</span></div>
+                </div>
+                <div class='px-3 py-2 border border-warning rounded shadow'>
+                    <div id='changeAarea' class='row align-items-center'>
+                        <div class='puretext'><span>変換元：</span></div>
                         <div class='col'>
                             <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
                                 <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='none'/><i class='icon-none'></i></label>
@@ -990,37 +1001,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class='row mb-2 align-items-center'>
-                        <div class='puretext d-flex px-3 align-items-center'><span>変換先：</span></div>
+                    <div id='changeBarea' class='row mt-2 align-items-center'>
+                        <div class='puretext'><span>変換先：</span></div>
                         <div class='col'>
                             <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='none'/><i class='icon-none'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='fire'/><i class='icon-drop id-fire'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='water'/><i class='icon-drop id-water'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='wood'/><i class='icon-drop id-wood'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='light'/><i class='icon-drop id-light'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='dark'/><i class='icon-drop id-dark'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='heart'/><i class='icon-drop id-heart'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='trash'/><i class='icon-drop id-trash'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='poison'/><i class='icon-drop id-poison'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='mpoison'/><i class='icon-drop id-mpoison'></i></label>
-                                <label class='btn btn-outline-primary'><input type='radio' name='Change_A' value='bomb'/><i class='icon-drop id-bomb'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='fire'/><i class='icon-drop id-fire'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='water'/><i class='icon-drop id-water'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='wood'/><i class='icon-drop id-wood'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='light'/><i class='icon-drop id-light'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='dark'/><i class='icon-drop id-dark'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='heart'/><i class='icon-drop id-heart'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='trash'/><i class='icon-drop id-trash'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='poison'/><i class='icon-drop id-poison'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='mpoison'/><i class='icon-drop id-mpoison'></i></label>
+                                <label class='btn btn-outline-primary'><input type='radio' name='Change_B' value='bomb'/><i class='icon-drop id-bomb'></i></label>
                             </div>
                         </div>
-                        <button class='btn btn-success ml-auto mr-3'>＋</button>
+                        <button id='btnAddRule' class='btn btn-success btn-sm ml-auto mr-3'>＋</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class='row'><div class='col text-right'>&#64;&#116;&#105;&#110;&#111;&#108;&#111;&#118;&#101;&#56;&#49;</div></div>
+        <div class='row mt-5'><div class='col text-right'>&#64;&#116;&#105;&#110;&#111;&#108;&#111;&#118;&#101;&#56;&#49;</div></div>
     </div>
 
     <script>
         let retry = 0;
         let monster;
         let skilltag;
-        let a = ['不限', '全', '横', '縦', '隨機', '火', '水', '木', '光', '闇', '回復', '邪魔', '猛毒', '毒', '爆弾'];
-        let b = ['火', '水', '木', '光', '闇', '回復', '邪魔', '猛毒', '毒', '爆弾'];
+        let element = {
+            'none': '(.*)', 'all': '全', 'row': '横', 'col': '縦', 'random': '隨機', 'fire': '火',
+            'water': '水', 'wood': '木', 'light': '光', 'dark': '闇', 'heart': '回復', 'trash': '邪魔', 
+            'poison': '毒', 'mpoison': '猛毒', 'bomb': '爆弾' };
+        let AllTag = [];
+        let SearchMonster = [];
+        let nRules = 0;
 
         $.getJSON('./assist/CHAR_modify.json', function (data) {
             monster = data;
@@ -1030,9 +1045,10 @@
         });
 
         (function loadDefault() {
-            console.log(monster, skilltag);
             if (retry < 10) {
                 if (monster != undefined && skilltag != undefined) {
+                    $('input').prop('checked', false);
+                    $('select').prop('value', 0);
                     $('.overlay').addClass('d-none');
                 } else {
                     setTimeout(loadDefault, 300);
@@ -1043,9 +1059,102 @@
             }
         })();
 
-        $('.overlay').addClass('d-none');
+        // $('#changeAarea label').on('click', function (e) {
+        //     let ival = $(e.currentTarget).find('input').val();
+        //     if (ival == 'none'||ival == 'all'||ival == 'row'||ival == 'col'||ival == 'random') {
+        //         $('#changeBarea label').removeClass('active');
+        //         $('#changeBarea input').prop('checked', false);
+        //         $('#changeBarea input').prop('type', 'checkbox');
+        //     } else {
+        //         $('#changeBarea label').removeClass('active');
+        //         $('#changeBarea input').prop('checked', false);
+        //         $('#changeBarea input').prop('type', 'radio');
+        //     }
+        // });
+        $('#btnAddRule').on('click', function (e) {
+            let input_A = $('input[name="Change_A"]:checked');
+            let A = input_A.val();
+            let input_B = $('input[name="Change_B"]:checked');
+            let B = [];
+            input_B.each((i, e) => {
+                B.push(e.value);
+            });
+            if (A && B.length) {
+                for (let i = 0; i < B.length; i++) {
+                    AllTag.push(`${element[A]}轉${element[B[i]]}`);
+                }
+                let rules = `${A}-${B.join(',')}`;
+                console.log(AllTag);
+                modifyRule('add', rules);
+            } else {
+                alert('選項缺失!');
+            }
+        });
 
+        function modifyRule(tag, data) {
+            let cotainer = $('#keywords');
+            if (tag == 'add') {
+                let rule_tpl = `<div id='rule${nRules}' class='puretext mb-1 border border-info rounded'>{{RuleDetail}}</div>`;
+                let A = iconTpl(data.split('-')[0]);
+                let B = data.split('-')[1].split(',');
+                let h = [`${A}`, '<span>＞＞＞</span>'];
+                B.forEach((e, i) => {
+                    h.push(iconTpl(e));
+                });
+                h.push(`<button id='btnDelRule${nRules}-${B.length}' class='btn btn-danger btn-sm ml-auto'>－</button>`);
+                
+                cotainer.append(rule_tpl.replace('{{RuleDetail}}', h.join(''))).children(':last').hide().fadeIn();
+                $(`#btnDelRule${nRules}-${B.length}`).on('click', function (e) {
+                    $(e.target).closest('.puretext').fadeOut('fast', function() {
+                        let n = e.target.id.slice(10).split('-')[0];
+                        let m = e.target.id.slice(10).split('-')[1];
+                        AllTag.splice(n, m);
+                        $(this).remove();
+                        nRules -= m;
+                    });
+                });
+                $('#kwtips').hide();
+                nRules += B.length;
+            }
+        }
+        function searchFromTag() {
+            if (!!AllTag.length) {
+                let m = [];
+                let tmp = [];
+                for (let i = 0; i < AllTag.length; i++) {
+                    if (i == 0) {
+                        for (let j = 0; j < skilltag.length; j++) {
+                            let item = skilltag[j];
+                            if (new RegExp(AllTag[i]).test(item['tag'])) {
+                                m.push(item);
+                            }
+                        }
+                    } else {
+                        for (let j = 0; j < m.length; j++) {
+                            let item = m[j];
+                            if (new RegExp(AllTag[i]).test(item['tag'])) {
+                                tmp.push(item);
+                            }
+                        }
+                        m = tmp;
+                        tmp = [];
+                    }
+                }
+                m.forEach((e, i) => {
+                    SearchMonster = [];
+                    SearchMonster.push(e['no']);
+                });
+                console.log(SearchMonster);
+            }
+        }
 
+        function iconTpl(n) {
+            if (n == 'none'||n == 'all'||n == 'row'||n == 'col'||n == 'random') {
+                return `<i class="icon-${n}"></i>`;
+            } else {
+                return `<i class="icon-drop id-${n}"></i>`;
+            }
+        }
 
         function now(a) {
             if (a == 'u') {
