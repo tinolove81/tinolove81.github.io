@@ -53,6 +53,53 @@
             min-height: 35px;
             align-items: center;
         }
+        .charpic {
+            position: relative;
+            margin: 0.25rem;
+            width: 48px;
+            height: 48px;
+            border: 2px solid #ACF;
+            border-radius: 5%;
+        }
+        .charpic.charalt::before {
+            content : attr(alt);
+            position : absolute;
+            opacity : 0;
+            /* customizable */
+            bottom: 0;
+            margin-bottom: 30px;
+            margin-left: -3px;
+            padding: 4px;
+            width: 250px;
+            transition: all 0.15s;
+            border-radius: 3px;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .charpic.charalt:hover::before {
+            opacity : 1;
+            /* customizable */
+            margin-bottom: 50px;
+            color: white;
+            background: black;
+            border: 1px solid black;
+        }
+        .charpic.charalt::after {
+            content : '';
+            position : absolute;
+            top: 0;
+            margin-top: 13px;
+            margin-left: 3px;
+            border-top: 7px solid black;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            transition: all 0.1s ease;
+            opacity : 0;
+        }
+        .charpic.charalt:hover::after {
+            margin-top: -7px;
+            opacity : 1;
+        }
 
 
         /*****************************
@@ -978,7 +1025,7 @@
                 <div id='keywords' class='mb-2'>
                     <div id='kwtips' class='puretext mb-1 border border-info rounded'><span>スキル検索条件を作成する</span></div>
                 </div>
-                <div class='px-3 py-2 border border-warning rounded shadow'>
+                <div class='px-3 py-2 border border-warning rounded'>
                     <div id='changeAarea' class='row align-items-center'>
                         <div class='puretext'><span>変換元：</span></div>
                         <div class='col'>
@@ -1019,6 +1066,14 @@
                         </div>
                         <button id='btnAddRule' class='btn btn-success btn-sm ml-auto mr-3'>＋</button>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class='row mb-2 align-items-center'>
+            <div class='puretext mb-auto'><span>結果：</span></div>
+            <div class='col'>
+                <div id='searchresult' class='puretext mb-2 py-1 border border-info rounded flex-wrap'>
+                    
                 </div>
             </div>
         </div>
@@ -1091,36 +1146,60 @@
             }
         });
 
+/*
+<div class='input-group input-group-sm mb-1'>
+    <div class='input-group-prepend'>
+        <span class='input-group-text'>Small</span>
+    </div>
+    <div class='form-control'></div>
+    <div class='input-group-append'>
+        <button class='btn btn-outline-secondary' type='button'>Button</button>
+    </div>
+</div>
+
+*/
+
         function modifyRule(tag, data) {
             let cotainer = $('#keywords');
             if (tag == 'add') {
-                let rule_tpl = `<div id='rule${nRules}' class='puretext mb-1 border border-info rounded'>{{RuleDetail}}</div>`;
+                let rule_tpl = `<div id='rule${nRules}' class='input-group input-group-sm mb-1'>{{RuleDetail}}</div>`;
                 let A = iconTpl(data.split('-')[0]);
                 let B = data.split('-')[1].split(',');
-                let h = [`${A}`, '<span>＞＞＞</span>'];
+                let h = [`<div class='input-group-prepend'>`, `<span class='input-group-text'>検索条件 ${nRules + 1}</span>`,
+                    `</div>`, `<div class='form-control'>`, `${A}`, '<span>　－＞　</span>'];
                 B.forEach((e, i) => {
                     h.push(iconTpl(e));
                 });
-                h.push(`<button id='btnDelRule${nRules}-${B.length}' class='btn btn-danger btn-sm ml-auto'>－</button>`);
+                h = h.concat([`</div>`, `<div class='input-group-append'>`]);
+                h = h.concat([`<button id='btnDelRule${nRules}-${B.length}' class='btn btn-danger'>－</button>`, `</div>`, `</div>`]);
                 
                 cotainer.append(rule_tpl.replace('{{RuleDetail}}', h.join(''))).children(':last').hide().fadeIn();
                 $(`#btnDelRule${nRules}-${B.length}`).on('click', function (e) {
-                    $(e.target).closest('.puretext').fadeOut('fast', function() {
+                    $(e.target).closest('.input-group').fadeOut('fast', function() {
                         let n = e.target.id.slice(10).split('-')[0];
                         let m = e.target.id.slice(10).split('-')[1];
                         AllTag.splice(n, m);
                         $(this).remove();
                         nRules -= m;
+                        if (nRules == 0) {
+                            $('#kwtips').fadeIn();
+                            $('#searchresult').html('');
+                        } else {
+                            searchFromTag();
+                        }
                     });
                 });
                 $('#kwtips').hide();
                 nRules += B.length;
+
+                searchFromTag();
             }
         }
         function searchFromTag() {
             if (!!AllTag.length) {
                 let m = [];
                 let tmp = [];
+                SearchMonster = [];
                 for (let i = 0; i < AllTag.length; i++) {
                     if (i == 0) {
                         for (let j = 0; j < skilltag.length; j++) {
@@ -1141,10 +1220,9 @@
                     }
                 }
                 m.forEach((e, i) => {
-                    SearchMonster = [];
-                    SearchMonster.push(e['no']);
+                    SearchMonster.push(`<div class='charpic charalt' alt='${monster[e['no'] - 1 ]['Name']}'><div>${e['no']}</div></div>`);
                 });
-                console.log(SearchMonster);
+                $('#searchresult').html(SearchMonster.join(''));
             }
         }
 

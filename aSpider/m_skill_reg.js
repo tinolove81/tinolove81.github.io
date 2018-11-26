@@ -133,11 +133,11 @@ function solve(mArray, mKey) {
         let element = /(十字)|(火)|(水)|(木)|(光)|(闇)|(回復)|(邪魔)|([猛]*毒)|(爆弾)/g;
         let A = mArray[0].match(element);
         
-        if (A[0] == '十字型') {
+        if (A[0] == '十字') {
             ans_c = ans_c.concat([`横轉${A[1]}`, `縦轉${A[1]}`]);
         } else {
             for (let i = 0; i < A.length; i++) {
-                ans_c.push(`隨機${A[i]}`);
+                ans_c.push(`隨機轉${A[i]}`);
             }
         }
 
