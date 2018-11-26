@@ -28,7 +28,7 @@
     width: 24px;
     height: 24px;
     vertical-align: middle;
-    background-image: url('./icon_drop_all.png');
+    background-image: url('./img/icon_drop_all.png');
     background-repeat: no-repeat;
     background-position: top left;
     background-size: 240px 24px;
@@ -68,7 +68,7 @@
     width: 24px;
     height: 24px;
     vertical-align: middle;
-    background-image: url('./icon_type.png');
+    background-image: url('./img/icon_type.png');
     background-repeat: no-repeat;
     background-position: top left;
     background-size: 192px 24px;
@@ -106,7 +106,7 @@
     width: 24px;
     height: 25px;
     vertical-align: middle;
-    background-image: url('./icon_awaken_test.png');
+    background-image: url('./img/icon_awaken.png');
     background-repeat: no-repeat;
     background-size: 24px 1600px;
 }
