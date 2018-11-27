@@ -14,6 +14,7 @@
     <title>【パズドラ】Skill Database</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Imprima');
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
         @media (min-width: 1450px) {
             .container {
                 max-width: 1380px;
@@ -23,7 +24,7 @@
         body {
             width: 100%;
             height: 100%;
-            font-family: Imprima, Meiryo;
+            font-family: Imprima, 'Noto Sans JP';
         }
         body::before {
             content: '';
@@ -53,56 +54,60 @@
             min-height: 35px;
             align-items: center;
         }
-        .charpic {
+        .charicon {
             position: relative;
             margin: 0.25rem;
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 74px;
+            border-radius: 5%;
+        }
+        .charpic {
+            width: 50px;
+            height: 50px;
             border: 2px solid #ACF;
             border-radius: 5%;
         }
-        .charpic.charalt::before {
-            content : attr(alt);
+        .charicon.charalt::before {
+            content : attr(data-name);
             position : absolute;
             opacity : 0;
             /* customizable */
             bottom: 0;
-            margin-bottom: 30px;
+            margin-bottom: 61px;
             margin-left: -3px;
-            padding: 4px;
-            width: 250px;
-            transition: all 0.15s;
+            padding: 4px 8px;
+            transition: all 0.15s ease;
             border-radius: 3px;
+            white-space: nowrap;
             z-index: 3;
             pointer-events: none;
         }
-        .charpic.charalt:hover::before {
+        .charicon.charalt:hover::before {
             opacity : 1;
             /* customizable */
-            margin-bottom: 50px;
+            margin-bottom: 81px;
             color: white;
             background: black;
             border: 1px solid black;
         }
-        .charpic.charalt::after {
+        .charicon.charalt::after {
             content : '';
             position : absolute;
-            top: 0;
-            margin-top: 13px;
+            bottom: 0;
+            margin-bottom: 54px;
             margin-left: 3px;
             border-top: 7px solid black;
             border-left: 7px solid transparent;
             border-right: 7px solid transparent;
-            transition: all 0.1s ease;
+            transition: all 0.15s ease;
             opacity : 0;
         }
-        .charpic.charalt:hover::after {
-            margin-top: -7px;
+        .charicon.charalt:hover::after {
+            margin-bottom: 74px;
             opacity : 1;
         }
-        .charpic div {
-            width: 100%;
-            height: 100%;
+        .charicon.charalt div {
+            text-align: center;
         }
 
 
@@ -1026,8 +1031,8 @@
         <div class='row mb-2 align-items-center'>
             <div class='puretext mb-auto'><span>スキル検索：</span></div>
             <div class='col'>
-                <div id='keywords' class='mb-2'>
-                    <div id='kwtips' class='puretext mb-1 border border-info rounded'><span>スキル検索条件を作成する</span></div>
+                <div id='rulelibrary' class='mb-2'>
+                    <div id='ruletips' class='puretext mb-1 border border-info rounded'><span>スキル検索条件を作成する</span></div>
                 </div>
                 <div class='px-3 py-2 border border-warning rounded'>
                     <div id='changeAarea' class='row align-items-center'>
@@ -1076,14 +1081,87 @@
         <div class='row mb-2 align-items-center'>
             <div class='puretext mb-auto'><span>結果：</span></div>
             <div class='col'>
-                <div id='searchresult' class='puretext mb-2 py-1 border border-info rounded flex-wrap'>
-                    
+                <div id='resultconfig' class='puretext bg-light border border-info rounded-top flex-wrap'>
+                    <div class='row align-items-center flex-fill'>
+                        <div class='col'>{{MonsterName}}</div>
+                        <div class='w-25 mr-2'>
+                            <div class='input-group'>
+                                <select id='resultconfig_sort' class='custom-select custom-select-sm' autocomplete='off'>
+                                    <option value='number' selected>編號</option>
+                                    <option value='rare'>稀有度</option>
+                                    <option value='weight'>綜合能力</option>
+                                    <option value='skillcdmin'>技能初始</option>
+                                    <option value='skillcdmax'>技能最大</option>
+                                </select>
+                                <select id='resultconfig_sortorder' class='custom-select custom-select-sm' autocomplete='off'>
+                                    <option value='asc' selected>升序</option>
+                                    <option value='desc'>降序</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='ml-auto'>
+                            <div class='btn-group btn-group-sm btn-group-toggle' data-toggle='buttons'>
+                                <label class='btn btn-outline-primary active'>
+                                    <input type='radio' name='resultconfig_style' value='icon' autocomplete='off' checked>
+                                    <span> Icon </span>
+                                </label>
+                                <label class='btn btn-outline-primary'>
+                                    <input type='radio' name='resultconfig_style' value='list' autocomplete='off'>
+                                    <span> List </span>
+                                </label>
+                              </div>
+                        </div>
+                    </div>
                 </div>
+                <div id='resultarea' class='puretext mb-2 py-1 border border-top-0 border-info rounded-bottom flex-wrap'></div>
             </div>
         </div>
         <div class='row mt-5'><div class='col text-right'>&#64;&#116;&#105;&#110;&#111;&#108;&#111;&#118;&#101;&#56;&#49;</div></div>
     </div>
 
+    <!-- Rule template 開始 -->
+    <script type='text/template' id='rule-library-tpl'>
+        <div id='rule{{nRules}}' class='input-group input-group-sm mb-1'>
+            <div class='input-group-prepend'>
+                <span class='input-group-text'>検索条件 {{nRules+1}}</span>
+            </div>
+            <div class='form-control'>{{A}}<span>　－＞　</span>{{B}}</div>
+            <div class='input-group-append'>
+                <button id='btnDelRule{{nRules}}' class='btn btn-danger' type='button'>－</button>
+            </div>
+        </div>
+    </script>
+    <!-- /Rule template 結束 -->
+    <!-- Result Area Min template 開始 -->
+    <script type='text/template' id='result-area-min-tpl'>
+        <div class='sort-item charicon charalt' data-number='{{DataNumber}}' data-name='{{DataName}}' data-rare='{{DataRare}}' data-skillcdmin='{{DataSkillCDMin}}' data-skillcdmax='{{DataSkillCDMax}}'>
+            <div class='charpic' src='' alt='img'></div>
+            <div class='sortdata'>{{MonsterNumber}}</div>
+        </div>
+    </script>
+    <!-- /Result Area Min template 結束 -->
+    <!-- Result Area Detail template 開始 -->
+    <script type='text/template' id='result-area-detail-tpl'>
+        <div class='sort-item card pl-1 pr-2 w-100 flex-row align-items-center' data-number='{{DataNumber}}' data-rare='{{DataRare}}' data-skillcdmin='{{DataSkillCDMin}}' data-skillcdmax='{{DataSkillCDMax}}'>
+            <div class='card-img charpic mx-1'></div>
+            <div class='card-text d-flex px-3 flex-column flex-fill'>
+                <div class='row border-bottom'>
+                    <div class='col-2 border-left'>No. {{MonsterNumber}}</div>
+                    <div class='col border-left'>{{MonsterName}}</div>
+                    <div class='ml-auto'>{{MonsterRare}}</div>
+                </div>
+                <div class='row border-bottom'>
+                    <div class='col border-left'>{{MonsterSkillName}}</div>
+                    <div class='col border-left'>{{MonsterSkillCD}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col border-left'>{{MonsterSkill}}</div>
+                </div>
+            </div>
+        </div>
+        
+    </script>
+    <!-- /Result Area Detail template 結束 -->
     <script>
         let retry = 0;
         let monster;
@@ -1092,9 +1170,9 @@
             'none': '(.*)', 'all': '全', 'row': '横', 'col': '縦', 'random': '隨機', 'fire': '火',
             'water': '水', 'wood': '木', 'light': '光', 'dark': '闇', 'heart': '回復', 'trash': '邪魔', 
             'poison': '毒', 'mpoison': '猛毒', 'bomb': '爆弾' };
-        let AllTag = [];
         let SearchMonster = [];
-        let nRules = 0;
+        let ruleLibrary = new RuleLibrary('#rulelibrary', '#rule-library-tpl');
+        let resultArea = new ResultArea('#resultarea', '#result-area-min-tpl', '#result-area-detail-tpl', '#resultconfig');
 
         $.getJSON('./assist/CHAR_modify.json', function (data) {
             monster = data;
@@ -1106,8 +1184,8 @@
         (function loadDefault() {
             if (retry < 10) {
                 if (monster != undefined && skilltag != undefined) {
-                    $('input').prop('checked', false);
-                    $('select').prop('value', 0);
+                    $('input').not('#resultconfig input').prop('checked', false);
+                    $('select').not('#resultconfig select').prop('value', 0);
                     $('.overlay').addClass('d-none');
                 } else {
                     setTimeout(loadDefault, 300);
@@ -1118,115 +1196,171 @@
             }
         })();
 
-        // $('#changeAarea label').on('click', function (e) {
-        //     let ival = $(e.currentTarget).find('input').val();
-        //     if (ival == 'none'||ival == 'all'||ival == 'row'||ival == 'col'||ival == 'random') {
-        //         $('#changeBarea label').removeClass('active');
-        //         $('#changeBarea input').prop('checked', false);
-        //         $('#changeBarea input').prop('type', 'checkbox');
-        //     } else {
-        //         $('#changeBarea label').removeClass('active');
-        //         $('#changeBarea input').prop('checked', false);
-        //         $('#changeBarea input').prop('type', 'radio');
-        //     }
-        // });
         $('#btnAddRule').on('click', function (e) {
-            let input_A = $('input[name="Change_A"]:checked');
-            let A = input_A.val();
-            let input_B = $('input[name="Change_B"]:checked');
-            let B = [];
-            input_B.each((i, e) => {
-                B.push(e.value);
-            });
-            if (A && B.length) {
-                for (let i = 0; i < B.length; i++) {
-                    AllTag.push(`${element[A]}轉${element[B[i]]}`);
-                }
-                let rules = `${A}-${B.join(',')}`;
-                modifyRule('add', rules);
+            let A = $('input[name="Change_A"]:checked').val();
+            let B = $('input[name="Change_B"]:checked').val();
+            if (A && B) {
+                ruleLibrary.addRule(`${A}-${B}`);
             } else {
                 alert('選項缺失!');
             }
         });
 
-/*
-<div class='input-group input-group-sm mb-1'>
-    <div class='input-group-prepend'>
-        <span class='input-group-text'>Small</span>
-    </div>
-    <div class='form-control'></div>
-    <div class='input-group-append'>
-        <button class='btn btn-outline-secondary' type='button'>Button</button>
-    </div>
-</div>
+        function RuleLibrary(mCotainer, mTemplate) {
+            this.cotainer = $(mCotainer);
+            this.template = $(mTemplate);
 
-*/
+            this.AllRule = {};
 
-        function modifyRule(tag, data) {
-            let cotainer = $('#keywords');
-            if (tag == 'add') {
-                let rule_tpl = `<div id='rule${nRules}' class='input-group input-group-sm mb-1'>{{RuleDetail}}</div>`;
-                let A = iconTpl(data.split('-')[0]);
-                let B = data.split('-')[1].split(',');
-                let h = [`<div class='input-group-prepend'>`, `<span class='input-group-text'>検索条件 ${nRules + 1}</span>`,
-                    `</div>`, `<div class='form-control'>`, `${A}`, '<span>　－＞　</span>'];
-                B.forEach((e, i) => {
-                    h.push(iconTpl(e));
-                });
-                h = h.concat([`</div>`, `<div class='input-group-append'>`]);
-                h = h.concat([`<button id='btnDelRule${nRules}-${B.length}' class='btn btn-danger'>－</button>`, `</div>`, `</div>`]);
-                
-                cotainer.append(rule_tpl.replace('{{RuleDetail}}', h.join(''))).children(':last').hide().fadeIn();
-                $(`#btnDelRule${nRules}-${B.length}`).on('click', function (e) {
-                    $(e.target).closest('.input-group').fadeOut('fast', function() {
-                        let n = e.target.id.slice(10).split('-')[0];
-                        let m = e.target.id.slice(10).split('-')[1];
-                        AllTag.splice(n, m);
-                        $(this).remove();
-                        nRules -= m;
-                        if (nRules == 0) {
-                            $('#kwtips').fadeIn();
-                            $('#searchresult').html('');
+            this.addRule = (mData) => {
+                let tpl = this.template.html();
+                let nRules = this.getTag().length;
+                let A = mData.split('-')[0];
+                let B = mData.split('-')[1];
+                this.AllRule['k' + nRules] = `${element[A]}轉${element[B]}`;
+                this.cotainer.append(tpl
+                    .replace(/{{nRules}}/g, 'k' + nRules)
+                    .replace('{{nRules+1}}', nRules + 1)
+                    .replace('{{A}}', iconTpl(A))
+                    .replace('{{B}}', iconTpl(B))
+                    ).children(':last').hide().fadeIn();
+                    
+                $(`#btnDelRule${'k' + nRules}`).on('click', (e) => {
+                    $(e.target).closest('.input-group').fadeOut('fast', () => {
+                        let key = e.target.id.slice(10);
+                        delete this.AllRule[key];
+                        $(e.target).closest('.input-group').remove();
+                        if (this.getTag().length == 0) {
+                            $('#ruletips').fadeIn();
+                            $('#resultarea').html('');
                         } else {
-                            searchFromTag();
+                            resultArea.search();
                         }
                     });
                 });
-                $('#kwtips').hide();
-                nRules += B.length;
-
-                searchFromTag();
-            }
+                $('#ruletips').hide();
+                resultArea.search();
+            };
+            this.getTag = () => {
+                return Object.values(this.AllRule);
+            };
         }
-        function searchFromTag() {
-            if (!!AllTag.length) {
-                let m = [];
-                let tmp = [];
-                SearchMonster = [];
-                for (let i = 0; i < AllTag.length; i++) {
-                    if (i == 0) {
-                        for (let j = 0; j < skilltag.length; j++) {
-                            let item = skilltag[j];
-                            if (new RegExp(AllTag[i]).test(item['tag'])) {
-                                m.push(item);
-                            }
-                        }
-                    } else {
-                        for (let j = 0; j < m.length; j++) {
-                            let item = m[j];
-                            if (new RegExp(AllTag[i]).test(item['tag'])) {
-                                tmp.push(item);
-                            }
-                        }
-                        m = tmp;
-                        tmp = [];
-                    }
-                }
-                m.forEach((e, i) => {
-                    SearchMonster.push(`<div class='charpic charalt' alt='${monster[e['no'] - 1 ]['Name']}'><div>${e['no']}</div></div>`);
+
+        function ResultArea(mCotainer, mMinTemplate, mDetailTemplate, mControl) {
+            this.cotainer = $(mCotainer);
+            this.mtpl = $(mMinTemplate);
+            this.dtpl = $(mDetailTemplate);
+            this.control = $(mControl);
+
+            this.sort = 'number';
+            this.sortorder = 'asc';
+            this.style = 'icon';
+            this.searchresult = [];
+
+            this.init = (() => {
+                this.control.find('#resultconfig_sort').on('change', (e) => {
+                    this.sort = $(e.target).val();
+                    this.sorter();
                 });
-                $('#searchresult').html(SearchMonster.join(''));
-            }
+                this.control.find('#resultconfig_sortorder').on('change', (e) => {
+                    this.sortorder = $(e.target).val();
+                    this.sorter();
+                });
+                this.control.find('input[name="resultconfig_style"]').on('change', (e) => {
+                    this.style = $(e.target).val();
+                    this.export();
+                });
+
+            })();
+
+            this.search = () => {
+                let tag = ruleLibrary.getTag();
+                if (tag.length) {
+                    let mon = [];
+                    let tmp = [];
+                    for (let i = 0; i < tag.length; i++) {
+                        if (i == 0) {
+                            for (let j = 0; j < skilltag.length; j++) {
+                                let item = skilltag[j];
+                                if (new RegExp(tag[i]).test(item['tag'])) {
+                                    mon.push(item);
+                                }
+                            }
+                        } else {
+                            for (let j = 0; j < mon.length; j++) {
+                                let item = mon[j];
+                                if (new RegExp(tag[i]).test(item['tag'])) {
+                                    tmp.push(item);
+                                }
+                            }
+                            mon = tmp;
+                            tmp = [];
+                        }
+                    }
+                    this.searchresult = mon;
+                    this.export();
+                }
+            };
+            this.export = () => {
+                if (this.searchresult.length) {
+                    this.cotainer.html('');
+                    if (this.style == 'icon') {
+                        this.cotainer.removeClass('flex-column');
+                        this.searchresult.forEach((e, i) => {
+                            let tpl = this.mtpl.html();
+                            let M = monster[e['no'] - 1 ];
+                            this.cotainer.append(tpl
+                                .replace('{{DataNumber}}', e['no'])
+                                .replace('{{DataName}}', M['Name'])
+                                .replace('{{DataRare}}', M['Rare'].replace('★', ''))
+                                .replace('{{DataSkillCDMin}}', M['ActiveSkillCD'].replace('）', '').split('（')[0])
+                                .replace('{{DataSkillCDMax}}', M['ActiveSkillCD'].replace('）', '').split('（')[1])
+                                .replace('{{MonsterNumber}}', e['no'])
+                            );
+                        });
+                    } else if (this.style == 'list') {
+                        this.cotainer.addClass('flex-column');
+                        this.searchresult.forEach((e, i) => {
+                            let tpl = this.dtpl.html();
+                            let M = monster[e['no'] - 1 ];
+                            this.cotainer.append(tpl
+                                .replace('{{DataNumber}}', e['no'])
+                                .replace('{{DataRare}}', M['Rare'].replace('★', ''))
+                                .replace('{{DataSkillCDMin}}', M['ActiveSkillCD'].replace('）', '').split('（')[0])
+                                .replace('{{DataSkillCDMax}}', M['ActiveSkillCD'].replace('）', '').split('（')[1])
+                                .replace('{{MonsterNumber}}', e['no'])
+                                .replace('{{MonsterName}}', M['Name'])
+                                .replace('{{MonsterRare}}', M['Rare'].replace('★', ''))
+                                .replace('{{MonsterSkillName}}', M['ActiveSkillName'])
+                                .replace('{{MonsterSkillCD}}', M['ActiveSkillCD'])
+                                .replace('{{MonsterSkill}}', M['ActiveSkillContent'])
+                            );
+                        });
+                    }
+                    this.sorter();
+                }
+            };
+            this.sorter = () => {
+                let fn = this.sort;
+                let order = this.sortorder;
+                let list = this.cotainer.find('.sort-item').sort(function (a, b) {
+                    if (order == 'asc') {
+                        return +a['dataset'][fn] - +b['dataset'][fn];
+                    } else if (order == 'desc') {
+                        return +b['dataset'][fn] - +a['dataset'][fn];
+                    }
+                });
+                if (this.style == 'icon') {
+                    $.each(list, (i, e) => {
+                        $(e).find('.sortdata').html(e['dataset'][fn]);
+                        this.cotainer.append(e).children(':last').hide().fadeIn();
+                    });
+                } else if (this.style == 'list') {
+                    $.each(list, (i, e) => {
+                        this.cotainer.append(e).children(':last').hide().fadeIn();
+                    });
+                }
+            };
         }
 
         function iconTpl(n) {

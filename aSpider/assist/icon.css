@@ -2,26 +2,31 @@
     content: '不限';
     display: inline-block;
     margin-top: 2px;
+    font-style: normal;
 }
 .icon-all::before {
     content: '全版';
     display: inline-block;
     margin-top: 2px;
+    font-style: normal;
 }
 .icon-row::before {
     content: '横排';
     display: inline-block;
     margin-top: 2px;
+    font-style: normal;
 }
 .icon-col::before {
     content: '縦列';
     display: inline-block;
     margin-top: 2px;
+    font-style: normal;
 }
 .icon-random::before {
     content: '隨機';
     display: inline-block;
     margin-top: 2px;
+    font-style: normal;
 }
 .icon-drop {
     display: inline-block;
