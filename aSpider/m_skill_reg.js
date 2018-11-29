@@ -113,7 +113,7 @@ function solve(mArray, mKey) {
             for (let i = 0; i < A.length; i++) {
                 for (let j = 0; j < B.length; j++) {
                     if (B[j] == '5属性') {
-                        ans_c = ans_c.concat([`${A[i]}轉火`, `${A[i]}轉水`, `${A[i]}轉木`, `${A[i]}轉光`, `${A[i]}轉暗`]);
+                        ans_c = ans_c.concat([`${A[i]}轉火`, `${A[i]}轉水`, `${A[i]}轉木`, `${A[i]}轉光`, `${A[i]}轉闇`]);
                     } else {
                         ans_c.push(`${A[i]}轉${B[j]}`);
                     }
