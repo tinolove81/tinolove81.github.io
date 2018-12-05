@@ -3,15 +3,41 @@ const path = require('path');
 const request = require('request');
 const cheerio = require('cheerio');
 
+let _MONSTER = require('./MONSTER.json');
 
-let web = 'https://pd.appbank.net/m';
-let no = process.argv[2] || 1;
+let _WEB = 'https://pd.appbank.net/m';
+let _NUMBER;
 
+let monster = [];
 let char;
 let error_n = 0;
 
-function startReq() {
-    if (error_n > 10) return false;
+// startRequest();
+
+(function init() {
+    if (!process.argv[2]) {
+        console.log(`'find': 尋找新的資料`);
+        console.log(`'find': 尋找新的資料`);
+    } else if (process.argv[2] == 'find') {
+        for (let i = 0; i < _MONSTER.length; i++) {
+            const m = _MONSTER[i];
+            if (m['Name'] == '不明') {
+                monster.push(m['Number']);
+            }
+        }
+    } else if (!isNaN(parseInt(process.argv[2]))) {
+        for (let i = 0; i < _MONSTER.length; i++) {
+            const m = _MONSTER[i];
+            if (m['Number'] == process.argv[2]) {
+                monster.push(m['Number']);
+            }
+        }
+    }
+    console.log(monster);
+})();
+
+function startRequest() {
+    if (error_n > 50) return false;
     console.log('\x1b[36m%s\x1b[0m','/// Start ///', '\x1b[0m');
     request({
         url: createUrl(),
@@ -30,14 +56,12 @@ function startReq() {
     });
 }
 function createUrl() {
-    let url = web;
-    if (no < 100) {
-        for (let i = 3; i > (''+no).length; i--) {
-            url = url + '0';
-        }
-        return url + no;
+    let url = _WEB;
+    if (_NUMBER < 100) {
+        for (let i = 3; i > _NUMBER.length; i--) { url += '0'; }
+        return url + _NUMBER;
     } else {
-        return url + no;
+        return url + _NUMBER;
     }
 }
 
@@ -63,7 +87,7 @@ function parseCHARACTER(html, code) {
     try {
         if (code != 200) {
             error_n += 1;
-            char['Number'] = no;
+            char['Number'] = '' + _NUMBER
             char['Name'] = '不明';
         } else {
             error_n  = 0;
@@ -108,7 +132,7 @@ function parseCHARACTER(html, code) {
 
     } catch (error) {
         console.log(error);
-        fs.writeFile(path.join(__dirname, './error.txt'), web + no + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
+        fs.writeFile(path.join(__dirname, './error.txt'), _WEB + _NUMBER + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
             if (err) { console.log(err); }
             else { console.log('Error Report Write complete.'); }
         });
@@ -277,23 +301,23 @@ function keepData(mChar) {
         fs.appendFile(localpath, JSON.stringify(mChar) + ',\r\n', function (err) {
             if (err) { console.log('\nWrite Char Error.'); }
 
-            console.log('\x1b[36m%s\x1b[0m',`///  No. ${no} ${mChar['Name']} is catched.  ///`, '\x1b[0m');
+            console.log('\x1b[36m%s\x1b[0m',`///  No. ${_NUMBER} ${mChar['Name']} is catched.  ///`, '\x1b[0m');
             timerRepeat();
         });
     });
 }
 
 function keepTest(mChar) {
-    fs.writeFile(path.join(__dirname, './test.txt'), web + no + '\n'+ JSON.stringify(mChar) +'\n\n\n\n\n' + html, function (err) {
+    fs.writeFile(path.join(__dirname, './test.txt'), _WEB + _NUMBER + '\n'+ JSON.stringify(mChar) +'\n\n\n\n\n' + html, function (err) {
         if (err) { console.log(err); }
         else { console.log('\nTest Report Write complete.'); }
     });
 }
 
 function timerRepeat() {
-    no++;
+    _NUMBER++;
     setTimeout(() => {
-        startReq();
+        startRequest();
     }, 1000);    
 }
 
@@ -307,4 +331,3 @@ function now(argv) {
     }
     return '' + new Date().toLocaleString(undefined, {hour12: false});
 }
-startReq();
