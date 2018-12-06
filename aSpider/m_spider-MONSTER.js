@@ -3,42 +3,49 @@ const path = require('path');
 const request = require('request');
 const cheerio = require('cheerio');
 
-let _MONSTER = require('./MONSTER.json');
+let _MONSTER;
+try {
+    _MONSTER = require('./MONSTER.json');
+} catch (err) {
+    _MONSTER = [];
+}
 
 let _WEB = 'https://pd.appbank.net/m';
-let _NUMBER;
-
-let monster = [];
+let _NUMBER = '0';
+let _INPUT = [];
 let char;
 let error_n = 0;
 
-// startRequest();
 
 (function init() {
     if (!process.argv[2]) {
         console.log(`'find': 尋找新的資料`);
-        console.log(`'find': 尋找新的資料`);
     } else if (process.argv[2] == 'find') {
         for (let i = 0; i < _MONSTER.length; i++) {
-            const m = _MONSTER[i];
-            if (m['Name'] == '不明') {
-                monster.push(m['Number']);
+            let _M = _MONSTER[i];
+            if (_M['Name'] == '不明') {
+                _INPUT.push(_M['Number']);
             }
         }
+        startRequest();
     } else if (!isNaN(parseInt(process.argv[2]))) {
         for (let i = 0; i < _MONSTER.length; i++) {
-            const m = _MONSTER[i];
-            if (m['Number'] == process.argv[2]) {
-                monster.push(m['Number']);
+            let _M = _MONSTER[i];
+            if (_M['Number'] == process.argv[2]) {
+                _INPUT.push(_M['Number']);
             }
         }
+        startRequest();
     }
-    console.log(monster);
 })();
 
 function startRequest() {
-    if (error_n > 50) return false;
-    console.log('\x1b[36m%s\x1b[0m','/// Start ///', '\x1b[0m');
+    if (error_n > 50) {
+        console.log('不明 > 50, 即將結束.');
+        keepData();
+        return false;
+    }
+    console.log('\x1b[36m%s\x1b[0m','/// StartRequest ///', '\x1b[0m');
     request({
         url: createUrl(),
         method: 'GET',
@@ -48,8 +55,7 @@ function startRequest() {
         followRedirect: false
         }, function (err, resp, data) {
             if (!err) {
-                // test(data, resp.statusCode);
-                parseCHARACTER(data, resp.statusCode);
+                parseChar(data, resp.statusCode);
             } else {
                 return err;
             }
@@ -57,6 +63,11 @@ function startRequest() {
 }
 function createUrl() {
     let url = _WEB;
+    if (_INPUT.length > 0) {
+        _NUMBER = _INPUT.shift();
+    } else {
+        _NUMBER = '' + (parseInt(_NUMBER) + 1);
+    }
     if (_NUMBER < 100) {
         for (let i = 3; i > _NUMBER.length; i--) { url += '0'; }
         return url + _NUMBER;
@@ -65,7 +76,8 @@ function createUrl() {
     }
 }
 
-function parseCHARACTER(html, code) {
+function parseChar(html, code) {
+    console.log('\x1b[36m%s\x1b[0m',`/// ParseChar ${_NUMBER} ///`, '\x1b[0m');
     char = {
         'Number': '',
         'Name': '',
@@ -78,10 +90,8 @@ function parseCHARACTER(html, code) {
         'ActiveSkillName': '',
         'ActiveSkillCD': '',
         'ActiveSkillContent': '',
-        
         'LeaderSkillName': '',
         'LeaderSkillContent': '',
-        
         'Kakusei': [],
     };
     try {
@@ -127,9 +137,7 @@ function parseCHARACTER(html, code) {
                 }
             });
         }
-
-        keepData(char);
-
+        visualDiff();
     } catch (error) {
         console.log(error);
         fs.writeFile(path.join(__dirname, './error.txt'), _WEB + _NUMBER + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
@@ -138,95 +146,19 @@ function parseCHARACTER(html, code) {
         });
     }
 }
-function test(html, code) {
-    char = {
-        'Number': '',
-        'Name': '',
-        'MainAttribute': '',
-        'SubAttribute': '',
-        'Rare': '',
-        'Cost': '',
-        'Assist': '',
-        'Type': [],
-        'ActiveSkillName': '',
-        'ActiveSkillCD': '',
-        'ActiveSkillContent': '',
-        
-        'LeaderSkillName': '',
-        'LeaderSkillContent': '',
-        
-        'Kakusei': [],
-    };
-    if (code != 200) {
-    } else {
-        const $ = cheerio.load(html);
-        let Monster = $('div.monster');
+function test() {
+/*
+有主動 有隊長 有覺醒 正常
 
-        /* 標題 編號 & 名字 一定有 */
-        let NumberAndName = Monster.find('h2.title-bg').text().replace('No.', '').split(' ');
-        char['Number'] = NumberAndName[0];
-        char['Name'] = NumberAndName[1];
+有主動 有隊長 沒覺醒 1 (新手龍)
+有主動 沒隊長 沒覺醒 21 (防龍)
+有主動 沒隊長 有覺醒 3338 (阿門裝備)
 
-        /* 第一欄 主副屬性 & 稀有度 & Cost & 繼承屬性 & 類型 一定有 */
-        let Attribute = Monster.find('div.spacer').eq(0).find('img + p').contents();
-        char['MainAttribute'] = Attribute.eq(0).attr('class').replace('icon-attr-', '');
-        char['MainAttribute'] = char['MainAttribute'][0].toUpperCase() + char['MainAttribute'].substring(1);
-        char['SubAttribute'] = (Attribute.length == 3) ? Attribute.eq(1).attr('class').replace('icon-attr-', '') : 'none';
-        char['SubAttribute'] = char['SubAttribute'][0].toUpperCase() + char['SubAttribute'].substring(1);
-        let RareAndAttr = Attribute.eq(-1).text().split(' / ');
-        char['Rare'] = RareAndAttr[1];
-        char['Cost'] = RareAndAttr[2].replace('コスト:', '');
-        char['Assist'] = RareAndAttr[3].replace('アシスト: ', '').replace('◯', '○');
-        let AllType = Monster.find('div.spacer').eq(0).find('p.icon-mtype').find('i');
-        char['Type'] = [];
-        for (let i = 0; i < AllType.length; i++) {
-            char['Type'].push(AllType.eq(i).attr('class').replace('icon-mtype-', ''));
-        }
-        
-        char['ActiveSkillName'] = '';
-        char['ActiveSkillCD'] = '';
-        char['ActiveSkillContent'] = '';
-        
-        char['LeaderSkillName'] = '';
-        char['LeaderSkillContent'] = '';
-        
-        char['Kakusei'] = [];
-
-        char['ps'] = '';
-
-        Monster.find('div.spacer').find('h3').each(function (i, e) {
-            e = $(e);
-            console.log(e.text());
-            if (e.text() == 'スキル') {
-                findActiveSkill(e.parent());
-                return;
-            }
-            if (e.text() == 'リーダースキル') {
-                findLeaderSkill(e.parent());
-                return;
-            }
-            if (e.text() == '覚醒スキル') {
-                findKakusei(e.parent());
-                return;
-            }
-        });
-
-        /*
-        有主動 有隊長 有覺醒 正常
-
-        有主動 有隊長 沒覺醒 1 (新手龍)
-        有主動 沒隊長 沒覺醒 21 (防龍)
-        有主動 沒隊長 有覺醒 3338 (阿門裝備)
-
-        沒主動 沒隊長 沒覺醒 36 (波利)
-        沒主動 有隊長 沒覺醒 3318 (神殺)
-        沒主動 有覺醒 沒隊長 ?
-        沒主動 有覺醒 有隊長 ?
-        */
-        keepTest(char);
-        console.log(char);
-
-    }
+沒主動 沒隊長 沒覺醒 36 (波利)
+沒主動 有隊長 沒覺醒 3318 (神殺)
+沒主動 有覺醒 沒隊長 ?
+沒主動 有覺醒 有隊長 ?
+*/
 }
 
 function findActiveSkill(mBlock) {
@@ -254,7 +186,6 @@ function findActiveSkill(mBlock) {
     ～に変化させ、 => ～に変化。
     ～に変化させる => ～に変化。
     全ドロップ(?=[^を|の]) => 全ドロップを
-    
     */
 }
 
@@ -293,39 +224,84 @@ function findKakusei(mBlock) {
         char['Kakusei'].push(AllKakusei.eq(i).text());
     }
 }
-
-function keepData(mChar) {
-    let localpath = path.join(__dirname, './spider_'+now('s')+'.json');
-
-    fs.open(localpath, 'a', function (err, fd) {
-        fs.appendFile(localpath, JSON.stringify(mChar) + ',\r\n', function (err) {
-            if (err) { console.log('\nWrite Char Error.'); }
-
-            console.log('\x1b[36m%s\x1b[0m',`///  No. ${_NUMBER} ${mChar['Name']} is catched.  ///`, '\x1b[0m');
+function visualDiff() {
+    console.log('\x1b[36m%s\x1b[0m',`/// VisualDiff ${char['Name']} ///`, '\x1b[0m');
+    if (_MONSTER[_NUMBER - 1] != undefined) {
+        let M = _MONSTER[_NUMBER - 1];
+        if (M['Number'] == char['Number']) {
+            M['Name'] = char['Name'];
+            M['MainAttribute'] = char['MainAttribute'];
+            M['SubAttribute'] = char['SubAttribute'];
+            M['Rare'] = char['Rare'];
+            M['Cost'] = char['Cost'];
+            M['Assist'] = char['Assist'];
+            M['Type'] = char['Type'];
+            M['ActiveSkillName'] = char['ActiveSkillName'];
+            M['ActiveSkillCD'] = char['ActiveSkillCD'];
+            M['ActiveSkillContent'] = char['ActiveSkillContent'];
+            M['LeaderSkillName'] = char['LeaderSkillName'];
+            M['LeaderSkillContent'] = char['LeaderSkillContent'];
+            M['Kakusei'] = char['Kakusei'];
             timerRepeat();
-        });
+        } else {
+            console.error('visualDiff Error');
+            console.error('_NUMBER: ', _NUMBER);
+            console.error('_MONSTER: ');
+            console.error(_MONSTER[_NUMBER - 1]);
+            console.error('char: ');
+            console.error(char);
+        }
+    } else {
+        _MONSTER[_NUMBER - 1] = char;
+        timerRepeat();
+    }
+}
+function keepData() {
+    let localpath = path.join(__dirname, './MONSTER-'+now('s')+'.json');
+    fs.open(localpath, 'a', function (err, fd) {
+        if (!err) {
+            for (let i = 0, j = _MONSTER.length; i < j; i++) {
+                let _M = _MONSTER[i];
+                let data;
+                if (i == 0) {
+                    data = '[' + JSON.stringify(_M) + ',\r\n';
+                } else if (i == j - 1) {
+                    data = JSON.stringify(_M) + ']';
+                } else {
+                    data = JSON.stringify(_M) + ',\r\n';
+                }
+                try {
+                    fs.appendFileSync(localpath, data);
+                } catch (err) {
+                    console.log('\nWrite Char Error.');
+                    console.log(err);
+                }
+            }
+        } else { console.log(err); }
     });
+    console.log('\x1b[36m%s\x1b[0m','/// FinishKeepData ///', '\x1b[0m');
+    console.log('\x1b[36m%s\x1b[0m',`Localfile: ${localpath}`, '\x1b[0m');
+    console.log('\x1b[36m%s\x1b[0m',`完整轉譯成: MONSTER.json +> 加參數名稱: const MONSTER = MONSTER.js`, '\x1b[0m');
 }
 
 function keepTest(mChar) {
-    fs.writeFile(path.join(__dirname, './test.txt'), _WEB + _NUMBER + '\n'+ JSON.stringify(mChar) +'\n\n\n\n\n' + html, function (err) {
+    fs.writeFile(path.join(__dirname, './MONSTER-test.txt'), _WEB + _NUMBER + '\n'+ JSON.stringify(mChar) +'\n\n\n\n\n' + html, function (err) {
         if (err) { console.log(err); }
         else { console.log('\nTest Report Write complete.'); }
     });
 }
 
 function timerRepeat() {
-    _NUMBER++;
     setTimeout(() => {
         startRequest();
-    }, 1000);    
+    }, 500);    
 }
 
 function now(argv) {
     if (argv == 'u') {
         return Math.round(new Date().getTime() / 1000.0);
     } else if (argv == 's') {
-        return new Date().toLocaleDateString(undefined, {hour12: false}).replace(/[\/|\-]/g, '');
+        return new Date().toLocaleDateString(undefined, {year:'numeric', month:'2-digit', day:'2-digit',hour12: false}).replace(/[\/|\-]/g, '');
     } else if (!isNaN(parseInt(argv))) {
         return new Date( parseInt(argv) * 1000).toLocaleString(undefined, {hour12: false});
     }
