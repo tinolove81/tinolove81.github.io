@@ -3,10 +3,12 @@
 
 <head>
     <meta charset='UTF-8'>
-    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-    <!-- <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script> -->
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no'>
+    <link rel='stylesheet' href='./asset/css/bootstrap.min.css' />
     <link rel='icon' href='./favicon.ico' type='image/x-icon'>
+    <script src='./asset/js/jquery-3.2.1.min.js'></script>
+    <script src='./asset/js/bootstrap.bundle.min.js'></script>
     <title>Goodbye world !</title>
     <style>
         html,
@@ -107,29 +109,19 @@
         $('._control.left').on('click', (e) => {
             let idx = col.index( $('._card ._item.active') );
             col.removeClass('active');
-            if (idx - 1 < 0) {
-                idx = col.length - 1;
-            } else {
-                idx = idx - 1;
-            }
-            showslow( $('._card ._item:nth('+ idx +')') );
+            showslow( $(`._card ._item:nth(${(idx - 1 < 0) ? (col.length - 1) : (idx - 1)}`) );
         });
         $('._control.right').on('click', (e) => {
             let idx = col.index( $('._card ._item.active') );
             col.removeClass('active');
-            if (idx + 1 >= col.length) {
-                idx = 0;
-            } else {
-                idx = idx + 1;
-            }
-            showslow( $('._card ._item:nth('+ idx +')') );
+            showslow( $(`._card ._item:nth(${(idx + 1 >= col.length) ? 0 : (idx + 1)}`) );
         });
         
         function showslow(element) {
                 element.addClass('in');
             setTimeout( () => {
                 element.addClass('active').removeClass('in');
-            }, 100);
+            }, 150);
         }
     </script>
 </body>

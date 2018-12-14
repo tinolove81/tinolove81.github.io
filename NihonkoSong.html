@@ -8,6 +8,7 @@
     <link rel='stylesheet' href='./asset/css/bootstrap.min.css' />
     <link rel='icon' href='./favicon.ico' type='image/x-icon'>
     <script src='./asset/js/jquery-3.2.1.min.js'></script>
+    <script src='./asset/js/bootstrap.bundle.min.js'></script>
     <title>Goodbye world !</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Imprima');
@@ -22,41 +23,64 @@
             -ms-user-select: none;
             user-select: none;
         }
+        p {
+            margin: 0;
+            padding: 0;
+        }
         .song {
-            font-size: 1.2rem;
+            position: relative;
+            display: none;
+            font-size: 1.5rem;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
-        p {
-            margin: 0 0 0 0;
-            padding: 0;
+        .song.fadein {
+            transition: opacity .15s ease-in;
+        }
+        .song.in {
+            display: block;
+        }
+        .song.active {
+            display: block;
+            opacity: 1;
+        }
+        .title {
+            font-size: 2rem;
+        }
+        .artist {
+            font-size: 1.75rem;
+        }
+        .song p {
             cursor: pointer;
         }
-        p rt {
+        .song p rt {
             opacity: 0;
-            transition: all 0.5s;
+            transition: all .15s ease-in;
         }
-        p.clicked rt {
+        .song p.clicked rt {
             opacity: 1 !important;
         }
 
     </style>
 </head>
 
-<body>
+<body class='bg-dark'>
     <nav class='navbar navbar-dark bg-dark'>
         <a class='navbar-brand' href='#'><ruby>音楽<rt>おんがく</rt></ruby></a>
-        <button class='navbar-toggler' type='button'>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarMenu'>
             <span class='navbar-toggler-icon'></span>
         </button>
+        <div id='navbarMenu' class='collapse navbar-collapse text-light'>
+            <p><span class='text-warning'>LAST STARDUST</span>ー<span class='text-danger'>Aimer</span></p>
+        </div>
     </nav>
-    <div class='song p-2 text-light bg-dark'>
+    <div class='song p-2 text-light bg-dark fadein active'>
         <p class='d-inline-block w-auto text-right'>
-            <span class='h5 mb-0 text-warning'>LAST STARDUST</span>
+            <span class='title text-warning'>LAST STARDUST</span>
             <br/>
-            <span class='h5 mb-0 text-danger'>Aimer</span>
+            <span class='artist text-danger'>Aimer</span>
         </p>
         <br/>
         <p>ふりしきる<ruby>強<rt>つよ</rt></ruby>い<ruby>雨<rt>あめ</rt></ruby></p>
@@ -117,7 +141,7 @@
 </template>
 
     <script>
-        $('p').on('click', (e) => {
+        $('.song p').on('click', (e) => {
             let col = $(e.currentTarget);
             let checked = col.hasClass('clicked');
             if (checked) {
