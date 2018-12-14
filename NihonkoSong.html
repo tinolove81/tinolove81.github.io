@@ -36,16 +36,6 @@
             -ms-user-select: none;
             user-select: none;
         }
-        .song.fadein {
-            transition: opacity .15s ease-in;
-        }
-        .song.in {
-            display: block;
-        }
-        .song.active {
-            display: block;
-            opacity: 1;
-        }
         .title {
             font-size: 2rem;
         }
@@ -59,7 +49,9 @@
             opacity: 0;
             transition: all .15s ease-in;
         }
-        .song p.clicked rt {
+        .song p:hover rt,
+        .song p:active rt,
+        .song p:focus rt {
             opacity: 1 !important;
         }
 
@@ -67,96 +59,170 @@
 </head>
 
 <body class='bg-dark'>
-    <nav class='navbar navbar-dark bg-dark'>
+    <nav class='navbar navbar-expand-lg navbar-dark'>
         <a class='navbar-brand' href='#'><ruby>音楽<rt>おんがく</rt></ruby></a>
         <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarMenu'>
             <span class='navbar-toggler-icon'></span>
         </button>
-        <div id='navbarMenu' class='collapse navbar-collapse text-light'>
-            <p><span class='text-warning'>LAST STARDUST</span>ー<span class='text-danger'>Aimer</span></p>
+        <div id='navbarMenu' class='collapse navbar-collapse nav text-light'>
+            <div class='navbar-nav nav'>
+                <a class='nav-item nav-link' data-toggle='tab' href='#tab-song01'><span class='text-warning'>LAST STARDUST</span>ー<span class='text-danger'>Aimer</span></a>
+                <a class='nav-item nav-link' data-toggle='tab' href='#tab-song02'><span class='text-warning'>会いたくて 会いたくて</span>ー<span class='text-danger'>西野カナ</span></a>
+            </div>
         </div>
     </nav>
-    <div class='song p-2 text-light bg-dark fadein active'>
-        <p class='d-inline-block w-auto text-right'>
-            <span class='title text-warning'>LAST STARDUST</span>
+
+    <div class='tab-content'>
+        <div id='tab-song01' class='song tab-pane p-2 text-light fade show active'>
+            <p class='d-inline-block w-auto text-right'>
+                <span class='title text-warning'>LAST STARDUST</span>
+                <br/>
+                <span class='artist text-danger'>Aimer</span>
+            </p>
             <br/>
-            <span class='artist text-danger'>Aimer</span>
-        </p>
-        <br/>
-        <p>ふりしきる<ruby>強<rt>つよ</rt></ruby>い<ruby>雨<rt>あめ</rt></ruby></p>
-        <p><ruby>描<rt>えが</rt></ruby>いた<ruby>理想<rt>ゆめ</rt></ruby>の<ruby>果<rt>は</rt></ruby>て</p>
-        <p><ruby>震<rt>ふる</rt></ruby>える<ruby>肩<rt>かた</rt></ruby><ruby>濡<rt>ぬ</rt></ruby>らし</p>
-        <p><ruby>歩<rt>ある</rt></ruby>き<ruby>続<rt>つづ</rt></ruby>けた</p>
-        <br/>
-        <p><ruby>擦<rt>す</rt></ruby>り<ruby>切<rt>き</rt></ruby>れた<ruby>小<rt>ちい</rt></ruby>さな<ruby>手<rt>て</rt></ruby></p>
-        <p><ruby>隙間<rt>すきま</rt></ruby>を<ruby>埋<rt>う</rt></ruby>めるまで</p>
-        <p><ruby>色<rt>いろ</rt></ruby>の<ruby>消<rt>き</rt></ruby>えた<ruby>記憶<rt>きおく</rt></ruby></p>
-        <p><ruby>拾<rt>ひろ</rt></ruby>い<ruby>集<rt>あつ</rt></ruby>めた</p>
-        <br/>
-        <p><ruby>愛<rt>いと</rt></ruby>しさ　<ruby>優<rt>やさ</rt></ruby>しさ</p>
-        <p>すべて<ruby>投<rt>な</rt></ruby>げ<ruby>出<rt>だ</rt></ruby>してもいい</p>
-        <p><ruby>失<rt>な</rt></ruby>くしたもの<ruby>見<rt>み</rt></ruby>つけたなら</p>
-        <br/>
-        <p><ruby>傷<rt>きず</rt></ruby>つくのが<ruby>運命<rt>さだめ</rt></ruby>だとしても</p>
-        <p><ruby>心<rt>こころ</rt></ruby>はまだ<ruby>彩<rt>いろ</rt></ruby>を<ruby>放<rt>はな</rt></ruby>つ</p>
-        <p><ruby>最後<rt>さいご</rt></ruby>のStardust <ruby>舞<rt>ま</rt></ruby>いあがれ</p>
-        <p>Dust to Dust, Ash to Ash <ruby>彼方<rt>かなた</rt></ruby>へ</p>
-        <p><ruby>願<rt>ねが</rt></ruby>いの<ruby>破片<rt>はへん</rt></ruby>よ<ruby>届<rt>とど</rt></ruby>け</p>
-        <br/>
-        <p><ruby>遠<rt>とお</rt></ruby>ざかる<ruby>通<rt>とお</rt></ruby>り<ruby>雨<rt>あめ</rt></ruby></p>
-        <p><ruby>消<rt>き</rt></ruby>えてく<ruby>夜<rt>よる</rt></ruby>の<ruby>風<rt>かぜ</rt></ruby></p>
-        <br/>
-        <p><ruby>孤独<rt>こどく</rt></ruby>だけが<ruby></p>
-        <p><ruby>傍<rt>そば</rt></ruby>にたたずんでいた</p>
-        <br/>
-        <p><ruby>選<rt>えら</rt></ruby>んだ<ruby>正<rt>ただ</rt></ruby>しさ</p>
-        <p>すべて<ruby>間違<rt>まちが</rt></ruby>いでもいい</p>
-        <p><ruby>信<rt>しん</rt></ruby>じたもの</p>
-        <p><ruby>守<rt>まも</rt></ruby>れたなら</p>
-        <br/>
-        <p><ruby>傷<rt>きず</rt></ruby>だらけの<ruby>硝子<rt>がらす</rt></ruby>の<ruby>心<rt>こころ</rt></ruby>が</p>
-        <p><ruby>忘<rt>わす</rt></ruby>れかけた<ruby>熱<rt>ねつ</rt></ruby>を<ruby>灯<rt>とも</rt></ruby>す</p>
-        <p><ruby>最後<rt>さいご</rt></ruby>のStardust <ruby>舞<rt>ま</rt></ruby>いあがれ</p>
-        <p>Dust to Dust, Earth to Earth <ruby>彼方<rt>かなた</rt></ruby>へ</p>
-        <p><ruby>願<rt>ねが</rt></ruby>いの<ruby>破片<rt>はへん</rt></ruby>よ　<ruby>永遠<rt>とわ</rt></ruby>へ</p>
-        <br/>
-        <p>Brave shine, stay the night</p>
-        <p>Stay the night, your brave shine</p>
-        <p>Brave shine</p>
-        <br/>
-        <p><ruby>傷<rt>きず</rt></ruby>つくのが<ruby>運命<rt>さだめ</rt></ruby>だとしても</p>
-        <p><ruby>心<rt>こころ</rt></ruby>はまだ<ruby>彩<rt>いろ</rt></ruby>を<ruby>放<rt>はな</rt></ruby>つ</p>
-        <p>さよなら Judas <ruby>灰<rt>はい</rt></ruby>になれ</p>
-        <p>Dust to Dust いつかの<ruby>弱<rt>よわ</rt></ruby>さへ</p>
-        <p><ruby>傷<rt>きず</rt></ruby>だらけの<ruby>硝子<rt>がらす</rt></ruby>の<ruby>心<rt>こころ</rt></ruby>が</p>
-        <p><ruby>忘<rt>わす</rt></ruby>れかけた<ruby>熱<rt>ねつ</rt></ruby>を<ruby>灯<rt>とも</rt></ruby>す</p>
-        <p><ruby>最後<rt>さいご</rt></ruby>のStardust <ruby>舞<rt>ま</rt></ruby>いあがれ</p>
-        <p>Dust to Dust, Ash to Ash <ruby>彼方<rt>かなた</rt></ruby>へ</p>
-        <br/>
-        <p><ruby>願<rt>ねが</rt></ruby>いの<ruby>破片<rt>はへん</rt></ruby>よ　<ruby>永遠<rt>とわ</rt></ruby>へ</p>
-        <br/>
+            <p>ふりしきる<ruby>強<rt>つよ</rt></ruby>い<ruby>雨<rt>あめ</rt></ruby></p>
+            <p><ruby>描<rt>えが</rt></ruby>いた<ruby>理想<rt>ゆめ</rt></ruby>の<ruby>果<rt>は</rt></ruby>て</p>
+            <p><ruby>震<rt>ふる</rt></ruby>える<ruby>肩<rt>かた</rt></ruby><ruby>濡<rt>ぬ</rt></ruby>らし</p>
+            <p><ruby>歩<rt>ある</rt></ruby>き<ruby>続<rt>つづ</rt></ruby>けた</p>
+            <br/>
+            <p><ruby>擦<rt>す</rt></ruby>り<ruby>切<rt>き</rt></ruby>れた<ruby>小<rt>ちい</rt></ruby>さな<ruby>手<rt>て</rt></ruby></p>
+            <p><ruby>隙間<rt>すきま</rt></ruby>を<ruby>埋<rt>う</rt></ruby>めるまで</p>
+            <p><ruby>色<rt>いろ</rt></ruby>の<ruby>消<rt>き</rt></ruby>えた<ruby>記憶<rt>きおく</rt></ruby></p>
+            <p><ruby>拾<rt>ひろ</rt></ruby>い<ruby>集<rt>あつ</rt></ruby>めた</p>
+            <br/>
+            <p><ruby>愛<rt>いと</rt></ruby>しさ　<ruby>優<rt>やさ</rt></ruby>しさ</p>
+            <p>すべて<ruby>投<rt>な</rt></ruby>げ<ruby>出<rt>だ</rt></ruby>してもいい</p>
+            <p><ruby>失<rt>な</rt></ruby>くしたもの<ruby>見<rt>み</rt></ruby>つけたなら</p>
+            <br/>
+            <p><ruby>傷<rt>きず</rt></ruby>つくのが<ruby>運命<rt>さだめ</rt></ruby>だとしても</p>
+            <p><ruby>心<rt>こころ</rt></ruby>はまだ<ruby>彩<rt>いろ</rt></ruby>を<ruby>放<rt>はな</rt></ruby>つ</p>
+            <p><ruby>最後<rt>さいご</rt></ruby>のStardust <ruby>舞<rt>ま</rt></ruby>いあがれ</p>
+            <p>Dust to Dust, Ash to Ash <ruby>彼方<rt>かなた</rt></ruby>へ</p>
+            <p><ruby>願<rt>ねが</rt></ruby>いの<ruby>破片<rt>はへん</rt></ruby>よ<ruby>届<rt>とど</rt></ruby>け</p>
+            <br/>
+            <p><ruby>遠<rt>とお</rt></ruby>ざかる<ruby>通<rt>とお</rt></ruby>り<ruby>雨<rt>あめ</rt></ruby></p>
+            <p><ruby>消<rt>き</rt></ruby>えてく<ruby>夜<rt>よる</rt></ruby>の<ruby>風<rt>かぜ</rt></ruby></p>
+            <br/>
+            <p><ruby>孤独<rt>こどく</rt></ruby>だけが<ruby></p>
+            <p><ruby>傍<rt>そば</rt></ruby>にたたずんでいた</p>
+            <br/>
+            <p><ruby>選<rt>えら</rt></ruby>んだ<ruby>正<rt>ただ</rt></ruby>しさ</p>
+            <p>すべて<ruby>間違<rt>まちが</rt></ruby>いでもいい</p>
+            <p><ruby>信<rt>しん</rt></ruby>じたもの</p>
+            <p><ruby>守<rt>まも</rt></ruby>れたなら</p>
+            <br/>
+            <p><ruby>傷<rt>きず</rt></ruby>だらけの<ruby>硝子<rt>がらす</rt></ruby>の<ruby>心<rt>こころ</rt></ruby>が</p>
+            <p><ruby>忘<rt>わす</rt></ruby>れかけた<ruby>熱<rt>ねつ</rt></ruby>を<ruby>灯<rt>とも</rt></ruby>す</p>
+            <p><ruby>最後<rt>さいご</rt></ruby>のStardust <ruby>舞<rt>ま</rt></ruby>いあがれ</p>
+            <p>Dust to Dust, Earth to Earth <ruby>彼方<rt>かなた</rt></ruby>へ</p>
+            <p><ruby>願<rt>ねが</rt></ruby>いの<ruby>破片<rt>はへん</rt></ruby>よ　<ruby>永遠<rt>とわ</rt></ruby>へ</p>
+            <br/>
+            <p>Brave shine, stay the night</p>
+            <p>Stay the night, your brave shine</p>
+            <p>Brave shine</p>
+            <br/>
+            <p><ruby>傷<rt>きず</rt></ruby>つくのが<ruby>運命<rt>さだめ</rt></ruby>だとしても</p>
+            <p><ruby>心<rt>こころ</rt></ruby>はまだ<ruby>彩<rt>いろ</rt></ruby>を<ruby>放<rt>はな</rt></ruby>つ</p>
+            <p>さよなら Judas <ruby>灰<rt>はい</rt></ruby>になれ</p>
+            <p>Dust to Dust いつかの<ruby>弱<rt>よわ</rt></ruby>さへ</p>
+            <p><ruby>傷<rt>きず</rt></ruby>だらけの<ruby>硝子<rt>がらす</rt></ruby>の<ruby>心<rt>こころ</rt></ruby>が</p>
+            <p><ruby>忘<rt>わす</rt></ruby>れかけた<ruby>熱<rt>ねつ</rt></ruby>を<ruby>灯<rt>とも</rt></ruby>す</p>
+            <p><ruby>最後<rt>さいご</rt></ruby>のStardust <ruby>舞<rt>ま</rt></ruby>いあがれ</p>
+            <p>Dust to Dust, Ash to Ash <ruby>彼方<rt>かなた</rt></ruby>へ</p>
+            <br/>
+            <p><ruby>願<rt>ねが</rt></ruby>いの<ruby>破片<rt>はへん</rt></ruby>よ　<ruby>永遠<rt>とわ</rt></ruby>へ</p>
+            <br/>
+        </div>
+
+        <div id='tab-song02' class='song tab-pane p-2 text-light fade'>
+            <p class='d-inline-block w-auto text-right'>
+                <span class='title text-warning'>会いたくて 会いたくて</span>
+                <br/>
+                <span class='artist text-danger'>西野カナ</span>
+            </p>
+            <br/>
+            <p><ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>震</rb><rt>ふる</rt></ruby>える</p>
+            <p><ruby><rb>君</rb><rt>きみ</rt></ruby><ruby><rb>想</rb><rt>おも</rt></ruby>うほど<ruby><rb>遠</rb><rt>とお</rt></ruby>く<ruby><rb>感</rb><rt>かん</rt></ruby>じて</p>
+            <p>もう<ruby><rb>一度</rb><rt>いちど</rt></ruby><ruby><rb>聞</rb><rt>き</rt></ruby>かせて<ruby><rb>嘘</rb><rt>うそ</rt></ruby>でも</p>
+            <p>あの<ruby><rb>日</rb><rt>ひ</rt></ruby>のように'<ruby><rb>好</rb><rt>す</rt></ruby>きだよ'って…</p>
+            <br/>
+            <p><ruby><rb>今日</rb><rt>きょう</rt></ruby>は<ruby><rb>記念日</rb><rt>きねんび</rt></ruby>　<ruby><rb>本当</rb><rt>ほんとう</rt></ruby>だったら</p>
+            <p><ruby><rb>二人</rb><rt>ふたり</rt></ruby><ruby><rb>過</rb><rt>す</rt></ruby>ごしていたかな</p>
+            <p>きっと<ruby><rb>君</rb><rt>きみ</rt></ruby>は<ruby><rb>全部</rb><rt>ぜんぶ</rt></ruby><ruby><rb>忘</rb><rt>わす</rt></ruby>れて</p>
+            <p>あの<ruby><rb>子</rb><rt>こ</rt></ruby>と<ruby><rb>笑</rb><rt>わら</rt></ruby>いあってるの？</p>
+            <br/>
+            <p>ずっと<ruby><rb>私</rb><rt>わたし</rt></ruby>だけにくれてた<ruby><rb>言葉</rb><rt>ことば</rt></ruby>も<ruby><rb>優</rb><rt>やさ</rt></ruby>しさも</p>
+            <p><ruby><rb>大好</rb><rt>だいす</rt></ruby>きだった<ruby><rb>笑顔</rb><rt>えがお</rt></ruby>も<ruby><rb>全部</rb><rt>ぜんぶ</rt></ruby></p>
+            <p>あの<ruby><rb>子</rb><rt>こ</rt></ruby>にも<ruby><rb>見</rb><rt>み</rt></ruby>せてるの？</p>
+            <br/>
+            <p>Baby I know</p>
+            <p><ruby><rb>君</rb><rt>きみ</rt></ruby>はもう<ruby><rb>私</rb><rt>わたし</rt></ruby>のものじゃないことくらい</p>
+            <p>でもどうしても<ruby><rb>君</rb><rt>きみ</rt></ruby>じゃなきゃダメだから</p>
+            <p>You are the one</p>
+            <br/>
+            <p><ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>震</rb><rt>ふる</rt></ruby>える</p>
+            <p><ruby><rb>君</rb><rt>きみ</rt></ruby><ruby><rb>想</rb><rt>おも</rt></ruby>うほど<ruby><rb>遠</rb><rt>とお</rt></ruby>く<ruby><rb>感</rb><rt>かん</rt></ruby>じて</p>
+            <p>もう<ruby><rb>一度</rb><rt>いちど</rt></ruby><ruby><rb>二人</rb><rt>ふたり</rt></ruby><ruby><rb>戻</rb><rt>もど</rt></ruby>れたら…</p>
+            <p><ruby><rb>届</rb><rt>とど</rt></ruby>かない<ruby><rb>想</rb><rt>おも</rt></ruby>い, my heart and feelings</p>
+            <p><ruby><rb>会</rb><rt>あ</rt></ruby>いたいって<ruby><rb>願</rb><rt>ねが</rt></ruby>っても<ruby><rb>会</rb><rt>あ</rt></ruby>えない</p>
+            <p><ruby><rb>強</rb><rt>つよ</rt></ruby>く<ruby><rb>想</rb><rt>おも</rt></ruby>うほど<ruby><rb>辛</rb><rt>つら</rt></ruby>くなって</p>
+            <p>もう<ruby><rb>一度</rb><rt>いちど</rt></ruby><ruby><rb>聞</rb><rt>き</rt></ruby>かせて<ruby><rb>嘘</rb><rt>うそ</rt></ruby>でも</p>
+            <p>あの<ruby><rb>日</rb><rt>ひ</rt></ruby>のように'<ruby><rb>好</rb><rt>す</rt></ruby>きだよ'って…</p>
+            <br/>
+            <p>I love you　<ruby><rb>本当</rb><rt>ほんとう</rt></ruby>は</p>
+            <p>I'm in love with you baby</p>
+            <p>I love you</p>
+            <p>But still I can't tell my words of love</p>
+            <br/>
+            <p>「<ruby><rb>幸</rb><rt>しあわ</rt></ruby>せになってね」と</p>
+            <p><ruby><rb>君</rb><rt>きみ</rt></ruby>の<ruby><rb>前</rb><rt>まえ</rt></ruby>じゃ<ruby><rb>大人</rb><rt>おとな</rt></ruby>ぶって</p>
+            <p>そんなこと<ruby><rb>心</rb><rt>こころ</rt></ruby>の<ruby><rb>中</rb><rt>なか</rt></ruby>じゃ</p>
+            <p><ruby><rb>絶対</rb><rt>ぜったい</rt></ruby>に<ruby><rb>思</rb><rt>おも</rt></ruby>わない</p>
+            <br/>
+            <p>Baby I know</p>
+            <p><ruby><rb>誰</rb><rt>だれ</rt></ruby>より<ruby><rb>君</rb><rt>きみ</rt></ruby>の<ruby><rb>全</rb><rt>すべ</rt></ruby>てを<ruby><rb>知</rb><rt>し</rt></ruby>ってるのに
+            <p>でもどうしてもあの<ruby><rb>子</rb><rt>こ</rt></ruby>じゃなきゃダメなの？</p>
+            <p>So tell me why</p>
+            <br/>
+            <p><ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>震</rb><rt>ふる</rt></ruby>える</p>
+            <p><ruby><rb>君</rb><rt>きみ</rt></ruby><ruby><rb>想</rb><rt>おも</rt></ruby>うほど<ruby><rb>遠</rb><rt>とお</rt></ruby>く<ruby><rb>感</rb><rt>かん</rt></ruby>じて</p>
+            <p>もう<ruby><rb>一度</rb><rt>いちど</rt></ruby><ruby><rb>二人</rb><rt>ふたり</rt></ruby><ruby><rb>戻</rb><rt>もど</rt></ruby>れたら…</p>
+            <p><ruby><rb>届</rb><rt>とど</rt></ruby>かない<ruby><rb>想</rb><rt>おも</rt></ruby>い, my heart and feelings</p>
+            <p><ruby><rb>会</rb><rt>あ</rt></ruby>いたいって<ruby><rb>願</rb><rt>ねが</rt></ruby>っても<ruby><rb>会</rb><rt>あ</rt></ruby>えない</p>
+            <p><ruby><rb>強</rb><rt>つよ</rt></ruby>く<ruby><rb>想</rb><rt>おも</rt></ruby>うほど<ruby><rb>辛</rb><rt>つら</rt></ruby>くなって</p>
+            <p>もう<ruby><rb>一度聞</rb><rt>いちどき</rt></ruby>かせて<ruby><rb>嘘</rb><rt>うそ</rt></ruby>でも</p>
+            <p>あの<ruby><rb>日</rb><rt>ひ</rt></ruby>のように'<ruby><rb>好</rb><rt>す</rt></ruby>きだよ'って…</p>
+            <br/>
+            <p><ruby><rb>何度</rb><rt>なんど</rt></ruby>も<ruby><rb>愛</rb><rt>あい</rt></ruby>してると</p>
+            <p><ruby><rb>言</rb><rt>い</rt></ruby>ってたのにどうして</p>
+            <p><ruby><rb>抱</rb><rt>だ</rt></ruby>きしめてやさしい<ruby><rb>声</rb><rt>こえ</rt></ruby>で</p>
+            <p><ruby><rb>名前</rb><rt>なまえ</rt></ruby>を<ruby><rb>呼</rb><rt>よ</rt></ruby>んで　もう<ruby><rb>一度</rb><rt>いちど</rt></ruby></p>
+            <br/>
+            <p><ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>会</rb><rt>あ</rt></ruby>いたくて　<ruby><rb>震</rb><rt>ふる</rt></ruby>える</p>
+            <p><ruby><rb>君</rb><rt>きみ</rt></ruby><ruby><rb>想</rb><rt>おも</rt></ruby>うほど<ruby><rb>遠</rb><rt>とお</rt></ruby>く<ruby><rb>感</rb><rt>かん</rt></ruby>じて</p>
+            <p>もう<ruby><rb>一度</rb><rt>いちど</rt></ruby><ruby><rb>二人</rb><rt>ふたり</rt></ruby><ruby><rb>戻</rb><rt>もど</rt></ruby>れたら…</p>
+            <p><ruby><rb>届</rb><rt>とど</rt></ruby>かない<ruby><rb>想</rb><rt>おも</rt></ruby>い, my heart and feelings</p>
+            <p><ruby><rb>会</rb><rt>あ</rt></ruby>いたいって<ruby><rb>願</rb><rt>ねが</rt></ruby>っても<ruby><rb>会</rb><rt>あ</rt></ruby>えない</p>
+            <p><ruby><rb>強</rb><rt>つよ</rt></ruby>く<ruby><rb>想</rb><rt>おも</rt></ruby>うほど<ruby><rb>辛</rb><rt>つら</rt></ruby>くなって</p>
+            <p>もう<ruby><rb>一度</rb><rt>いちど</rt></ruby><ruby><rb>聞</rb><rt>き</rt></ruby>かせて<ruby><rb>嘘</rb><rt>うそ</rt></ruby>でも</p>
+            <p>あの<ruby><rb>日</rb><rt>ひ</rt></ruby>のように'<ruby><rb>好</rb><rt>す</rt></ruby>きだよ'って…</p>
+            <br/>
+        </div>
     </div>
 
 <template>
 </template>
 
     <script>
-        $('.song p').on('click', (e) => {
-            let col = $(e.currentTarget);
-            let checked = col.hasClass('clicked');
-            if (checked) {
-                col.removeClass('clicked');
-            } else {
-                col.addClass('clicked');
-            }
-        });
-        
-        function showslow(element) {
-                element.addClass('in');
-            setTimeout( () => {
-                element.addClass('active').removeClass('in');
-            }, 100);
-        }
+        // $('.song p').on('click', (e) => {
+        //     let col = $(e.currentTarget);
+        //     let checked = col.hasClass('clicked');
+        //     if (checked) {
+        //         col.removeClass('clicked');
+        //     } else {
+        //         col.addClass('clicked');
+        //     }
+        // });
     </script>
 </body>
 
