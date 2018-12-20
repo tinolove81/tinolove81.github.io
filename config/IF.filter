@@ -1,3 +1,21 @@
+### ------------------------ #
+### https://pathofexile.gamepedia.com/Item_filter
+### https://pathofexile.gamepedia.com/Item_filter_guide
+### ------------------------ #
+### 顏色 = 基本色
+### 邊框 = 字色
+### 圖示形狀 = 類型
+###     Diamond : 傳奇,
+###     Star    : 裝備,
+###     Triangle: 地圖,
+###     Square  : 卡片,
+###     Circle  : 通貨,
+###     Hexagon : 其他
+### 圖示顏色 = 稀有度
+###     Brown > Red > Yellow > White
+### 
+### ------------------------ #
+
 #---- Custom Fillter
 Show
     BaseType "Sorcerer Boots" "Occultist's Vestment" "Vaal Regalia"
@@ -13,10 +31,9 @@ Show
     SetFontSize 35
     SetBorderColor 175 96 37
     SetBackgroundColor 255 255 255
-    PlayAlertSound 7
     MinimapIcon 0 Brown Diamond
     PlayEffect Brown
-
+    PlayAlertSound 7
 ### ------------------------ #
 ###    Special Condition     #
 ### ------------------------ #
@@ -24,27 +41,32 @@ Show
 Show
     LinkedSockets = 6
     SetFontSize 35
-    SetBorderColor 255 128 128
-    PlayAlertSound 7
-    MinimapIcon 0 Brown Star
+    SetBorderColor 255 0 0
+    SetBackgroundColor 0 0 0
+    MinimapIcon 0 Brown Diamond
     PlayEffect Brown
+    PlayAlertSound 7
 #---- Six Sockets
 Show
     Sockets = 6
     SetFontSize 35
     SetBorderColor 255 128 128
-    MinimapIcon 0 Red Star
+    MinimapIcon 0 Brown Star
     PlayEffect Brown
 #---- Five Linked
 Show
     LinkedSockets = 5
     SetBorderColor 128 255 128
-    MinimapIcon 2 White Circle
+    MinimapIcon 2 Red Star
+    PlayEffect White
 #---- RGB Linked
 Show
+    Width <= 2
+    Height <= 3
     SocketGroup RGB
     SetBorderColor 128 128 128
-    MinimapIcon 2 Yellow Circle
+    MinimapIcon 2 Yellow Star
+    PlayEffect White
 
 ### ------------------------ #
 ###    Misc. Item            #
@@ -67,6 +89,7 @@ Show
     SetBackgroundColor 0 255 0
     PlayAlertSound 7
     MinimapIcon 2 Brown Star
+    PlayEffect White
 #---- Special Skill
 Show
     Class "Skill Gems"
@@ -79,20 +102,20 @@ Show
     Class "Skill Gems"
     Corrupted true
     SetBorderColor 27 162 155
-    MinimapIcon 2 Blue Circle
+    MinimapIcon 2 Blue Hexagon
     PlayEffect Red
 #---- High Quality Skill
 Show
     Class "Skill Gems"
     Quality >= 10
     SetBorderColor 27 162 155
-    MinimapIcon 2 Blue Circle
+    MinimapIcon 2 Blue Hexagon
 #---- High Level Skill
 Show
     Class "Skill Gems"
     GemLevel >= 18
     SetBorderColor 27 162 155
-    MinimapIcon 2 Blue Circle
+    MinimapIcon 2 Blue Hexagon
 #---- Card
 Show
     Class "Divination Card"
@@ -176,7 +199,7 @@ Show
     Class "Currency"
     SetFontSize 32
     SetBorderColor 170 158 130 128
-     MinimapIcon 2 White Circle
+    MinimapIcon 2 White Circle
 
 ### ------------------------ #
 ###    特殊物品               #
@@ -207,7 +230,7 @@ Show
     MinimapIcon 1 Yellow Circle
 
 ### ------------------------ #
-###    等級調整地圖顯示        #
+###    Map                   #
 ### ------------------------ #
 #---- Shaped Map
 Show
@@ -315,6 +338,7 @@ Show
 Hide
     Class "Amulet" "Ring" "Belt" "Quiver"
     Rarity < Rare
+    Identified False
     SetFontSize 30
     SetBackgroundColor 50 50 50 100
 ### ------------------------ #
