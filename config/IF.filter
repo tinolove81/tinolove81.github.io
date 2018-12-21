@@ -15,7 +15,6 @@
 ###     Brown > Red > Yellow > White
 ### 
 ### ------------------------ #
-
 #---- Custom Fillter
 Show
     BaseType "Sorcerer Boots" "Occultist's Vestment" "Vaal Regalia"
@@ -43,7 +42,7 @@ Show
     SetFontSize 35
     SetBorderColor 255 0 0
     SetBackgroundColor 0 0 0
-    MinimapIcon 0 Brown Diamond
+    MinimapIcon 0 Brown Star
     PlayEffect Brown
     PlayAlertSound 7
 #---- Six Sockets
@@ -51,13 +50,13 @@ Show
     Sockets = 6
     SetFontSize 35
     SetBorderColor 255 128 128
-    MinimapIcon 0 Brown Star
+    MinimapIcon 0 Red Star
     PlayEffect Brown
 #---- Five Linked
 Show
     LinkedSockets = 5
     SetBorderColor 128 255 128
-    MinimapIcon 2 Red Star
+    MinimapIcon 2 White Circle
     PlayEffect White
 #---- RGB Linked
 Show
@@ -71,6 +70,12 @@ Show
 ### ------------------------ #
 ###    Misc. Item            #
 ### ------------------------ #
+#---- Explicit Type
+Show
+    HasExplicitMod "Veil"
+    SetBorderColor 255 0 0 200
+    MinimapIcon 1 Red Diamond
+    PlayEffect Red
 #---- Elder Type
 Show
     ElderItem True
@@ -87,9 +92,9 @@ Show
 Show
     BaseType "Steel Ring" "Opal Ring" "Blue Pearl Amulet" "Marble Amulet" "Vanguard Belt" "Crystal Belt" "Bone Helmet" "Two-Toned Boots" "Spiked Gloves" "Gripped Gloves" "Fingerless Silk Gloves" "Divine Vessel"
     SetBackgroundColor 0 255 0
-    PlayAlertSound 7
     MinimapIcon 2 Brown Star
     PlayEffect White
+    PlayAlertSound 7
 #---- Special Skill
 Show
     Class "Skill Gems"
@@ -103,7 +108,7 @@ Show
     Corrupted true
     SetBorderColor 27 162 155
     MinimapIcon 2 Blue Hexagon
-    PlayEffect Red
+    PlayEffect Blue
 #---- High Quality Skill
 Show
     Class "Skill Gems"
@@ -116,6 +121,9 @@ Show
     GemLevel >= 18
     SetBorderColor 27 162 155
     MinimapIcon 2 Blue Hexagon
+Hide
+    Class "Skill Gems"
+    SetBackgroundColor 50 50 50 150
 #---- Card
 Show
     Class "Divination Card"
@@ -145,27 +153,28 @@ Show
     Class "Currency"
     SetFontSize 35
     SetBorderColor 30 144 255
-    PlayAlertSound 7
     MinimapIcon 0 Brown Star
     PlayEffect Brown
+    PlayAlertSound 7
 #---- SR Currency
 Show
     BaseType "Vaal Orb" "Orb of Regret" "Orb of Scouring" "Regal Orb" "Orb of Alchemy" "Orb of Chance" "Orb of Fusing" "Jeweller's Orb" "Chromatic Orb" "Orb of Annulment" "Gemcutter's Prism" "Cartographer's Chisel" "Glassblower's Bauble" "Perandus Coin" "Silver Coin" "Stacked Deck" "Sextant"
     Class "Currency"
     SetFontSize 33
     SetBorderColor 30 144 255
-    PlayAlertSound 4
     MinimapIcon 1 Yellow Circle
     PlayEffect Yellow
+    PlayAlertSound 4
 #---- 裂痕碎片
 Show
     BaseType "Splinter of Chayula" "Splinter of Esh" "Splinter of Tul" "Splinter of Uul-Netol" "Splinter of Xoph"
+    Class "Currency"
     SetFontSize 33
     SetTextColor 144 30 255 255
     SetBorderColor 144 30 255 255
-    PlayAlertSound 4
     MinimapIcon 1 Yellow Circle
     PlayEffect Yellow
+    PlayAlertSound 4
 #---- 裂痕石
 Show
     BaseType "Chayula's Breachstone" "Esh's Breachstone" "Tul's Breachstone" "Uul-Netol's Breachstone" "Xoph's Breachstone"
@@ -173,33 +182,34 @@ Show
     SetFontSize 33
     SetTextColor 144 30 255 255
     SetBorderColor 144 30 255 255
-    PlayAlertSound 4
     MinimapIcon 1 Yellow Circle
     PlayEffect Yellow
+    PlayAlertSound 4
 #---- 裂痕祝福
 Show
     BaseType "Blessing of Chayula" "Blessing of Esh" "Blessing of Tul" "Blessing of Uul-Netol" "Blessing of Xoph"
+    Class "Currency"
     SetFontSize 33
     SetTextColor 144 30 255 255
     SetBorderColor 144 30 255 255
-    PlayAlertSound 4
     MinimapIcon 0 Brown Star
     PlayEffect Brown
+    PlayAlertSound 4
 #---- 神諭通貨
 Show
     BaseType "Ancient" "Annulment" "Binding" "Chaos Shard" "Engineer's" "Exalted Shard" "Harbinger's" "Horizon" "Mirror Shard" "Regal Shard"
     Class "Currency"
     SetFontSize 33
     SetBorderColor 30 144 255
-    PlayAlertSound 4
     MinimapIcon 1 Yellow Circle
     PlayEffect Yellow
+    PlayAlertSound 4
 #---- 其他通貨防止線
 Show
     Class "Currency"
     SetFontSize 32
     SetBorderColor 170 158 130 128
-    MinimapIcon 2 White Circle
+     MinimapIcon 2 White Circle
 
 ### ------------------------ #
 ###    特殊物品               #
@@ -208,11 +218,12 @@ Show
 #---- 掘獄相關 化石 鑄新儀
 Show
     BaseType "Fossil" "Resonator"
+    Class "Currency"
     SetFontSize 33
     SetBorderColor 30 144 255
-    PlayAlertSound 4
     MinimapIcon 1 Yellow Circle
     PlayEffect Yellow
+    PlayAlertSound 4
 #---- 穿越道具
 Show
     Class "Incursion Item"
@@ -230,7 +241,7 @@ Show
     MinimapIcon 1 Yellow Circle
 
 ### ------------------------ #
-###    Map                   #
+###    等級調整地圖顯示        #
 ### ------------------------ #
 #---- Shaped Map
 Show
@@ -338,7 +349,6 @@ Show
 Hide
     Class "Amulet" "Ring" "Belt" "Quiver"
     Rarity < Rare
-    Identified False
     SetFontSize 30
     SetBackgroundColor 50 50 50 100
 ### ------------------------ #
