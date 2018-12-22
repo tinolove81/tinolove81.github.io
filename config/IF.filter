@@ -7,9 +7,9 @@
 ### 圖示形狀 = 類型
 ###     Diamond : 傳奇,
 ###     Star    : 裝備,
-###     Triangle: 地圖,
 ###     Square  : 卡片,
 ###     Circle  : 通貨,
+###     Triangle: 地圖,
 ###     Hexagon : 其他
 ### 圖示顏色 = 稀有度
 ###     Brown > Red > Yellow > White
@@ -21,10 +21,10 @@ Show
     Rarity = Normal
     SetFontSize 32
     SetBackgroundColor 255 0 0 100
-
 ### ------------------------ #
 ###    Unique                #
 ### ------------------------ #
+#---- 傳奇
 Show
     Rarity = Unique
     SetFontSize 35
@@ -34,118 +34,173 @@ Show
     PlayEffect Brown
     PlayAlertSound 7
 ### ------------------------ #
-###    Special Condition     #
+###    Equipments 裝備相關
 ### ------------------------ #
-#---- Six Linked
+#---- 六連裝備
 Show
     LinkedSockets = 6
     SetFontSize 35
     SetBorderColor 255 0 0
     SetBackgroundColor 0 0 0
-    MinimapIcon 0 Brown Star
+    MinimapIcon 0 Brown Diamond
     PlayEffect Brown
     PlayAlertSound 7
-#---- Six Sockets
+#---- 六洞裝備
 Show
     Sockets = 6
     SetFontSize 35
     SetBorderColor 255 128 128
-    MinimapIcon 0 Red Star
+    MinimapIcon 0 Red Diamond
     PlayEffect Brown
-#---- Five Linked
+#---- 五連裝備
 Show
     LinkedSockets = 5
     SetBorderColor 128 255 128
-    MinimapIcon 2 White Circle
+    MinimapIcon 2 White Star
     PlayEffect White
-#---- RGB Linked
+#---- 三色相連裝備
 Show
     Width <= 2
     Height <= 3
     SocketGroup RGB
     SetBorderColor 128 128 128
     MinimapIcon 2 Yellow Star
-    PlayEffect White
-
-### ------------------------ #
-###    Misc. Item            #
-### ------------------------ #
-#---- Explicit Type
+    PlayEffect Yellow
+#---- 隱匿詞裝備
 Show
     HasExplicitMod "Veil"
     SetBorderColor 255 0 0 200
-    MinimapIcon 1 Red Diamond
+    MinimapIcon 1 Red Star
     PlayEffect Red
-#---- Elder Type
+#---- 尊師裝備
 Show
     ElderItem True
     SetBorderColor 255 0 0 200
-    MinimapIcon 1 Red Diamond
+    MinimapIcon 1 Red Star
     PlayEffect Red
-#---- Shaper Type
+#---- 朔界裝備
 Show
     ShaperItem True
+    ShapedMap False
     SetBorderColor 255 0 0 200
-    MinimapIcon 1 Red Diamond
+    MinimapIcon 1 Red Star
     PlayEffect Red
-#---- Special Base Type
+#---- 高等新基底 - 飾品
 Show
-    BaseType "Steel Ring" "Opal Ring" "Blue Pearl Amulet" "Marble Amulet" "Vanguard Belt" "Crystal Belt" "Bone Helmet" "Two-Toned Boots" "Spiked Gloves" "Gripped Gloves" "Fingerless Silk Gloves" "Divine Vessel"
+    BaseType "Steel Ring" "Opal Ring" "Blue Pearl Amulet" "Marble Amulet" "Vanguard Belt" "Crystal Belt"
     SetBackgroundColor 0 255 0
-    MinimapIcon 2 Brown Star
-    PlayEffect White
+    MinimapIcon 0 Brown Star
+    PlayEffect Brown
     PlayAlertSound 7
-#---- Special Skill
+#---- 高等新基底 - 裝備
+Show
+    BaseType "Bone Helmet" "Two-Toned Boots" "Spiked Gloves" "Gripped Gloves" "Fingerless Silk Gloves"
+    SetBackgroundColor 0 255 0
+    MinimapIcon 2 Yellow Star
+    PlayEffect White
+#---- Fishing Rods
+Show
+    Class "Fishing Rods"
+    SetBorderColor 255 255 255 128
+    SetBackgroundColor 255 255 255 128
+    MinimapIcon 0 Brown Diamond
+    PlayEffect Brown
+    PlayAlertSound 7
+
+#---- 裝備防止線 - 武器 裝備
+Hide
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    DropLevel <= 35
+    ItemLevel >= 35
+    Rarity <= Rare
+    Identified False
+    SetFontSize 12
+    SetBackgroundColor 50 250 50 30
+Hide
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    DropLevel <= 58
+    ItemLevel >= 58
+    Rarity <= Rare
+    Identified False
+    SetFontSize 12
+    SetBackgroundColor 50 50 250 30
+Hide
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    Rarity < Rare
+    Identified False
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
+Show
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    Rarity >= Rare
+    SetBackgroundColor 50 50 50 100
+Show
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    Identified False
+    SetBackgroundColor 50 50 50 100
+#---- 裝備防止線 - 飾品
+Hide
+    Class "Amulet" "Ring" "Belt" "Quiver"
+    Rarity < Rare
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
+Show
+    Class "Amulet" "Ring" "Belt" "Quiver"
+    Rarity >= Rare
+    SetBackgroundColor 50 50 50 100
+### ------------------------ #
+###    Skill Gem 技能
+### ------------------------ #
+#---- 特殊技能石
 Show
     Class "Skill Gems"
-    BaseType "Enlighten" "Empower" "Enhance" "Portal" "Detonate Mines"
+    BaseType "Enlighten" "Empower" "Enhance" "Portal" "Detonate Mines" "Vaal Breach"
     SetBorderColor 27 162 155
     MinimapIcon 0 Red Diamond
     PlayEffect Red
-#---- Vaal Skill
+#---- 瓦爾技能石
 Show
     Class "Skill Gems"
     Corrupted true
     SetBorderColor 27 162 155
     MinimapIcon 2 Blue Hexagon
     PlayEffect Blue
-#---- High Quality Skill
+#---- 高品質技能石
 Show
     Class "Skill Gems"
     Quality >= 10
     SetBorderColor 27 162 155
     MinimapIcon 2 Blue Hexagon
-#---- High Level Skill
-Show
-    Class "Skill Gems"
-    GemLevel >= 18
-    SetBorderColor 27 162 155
-    MinimapIcon 2 Blue Hexagon
+#---- 技能石防止線
 Hide
     Class "Skill Gems"
     SetBackgroundColor 50 50 50 150
-#---- Card
+
+### ------------------------ #
+###    Item 道具相關
+### ------------------------ #
+#---- 命運卡
 Show
     Class "Divination Card"
     SetBorderColor 14 186 255
     MinimapIcon 1 Blue Square
     PlayEffect Blue
-#---- Jewel
+#---- 深淵寶珠
+Show
+    Class "Abyss Jewel"
+    SetFontSize 32
+    SetBorderColor 255 128 255
+    MinimapIcon 2 Red Circle
+    PlayEffect Red
+#---- 寶珠
 Show
     Class "Jewel"
     SetFontSize 32
     SetBorderColor 255 128 255
     MinimapIcon 2 Blue Circle
-#---- Fishing Rods?
-Show
-    Class "Fishing Rods"
-    SetBorderColor 255 255 255 128
-    SetBackgroundColor 255 255 255 128
-    PlayAlertSound 7
-    MinimapIcon 0 Brown Circle
 
 ### ------------------------ #
-###    Currency & Item       #
+###    Currency 通貨相關
 ### ------------------------ #
 #---- UR Currency
 Show
@@ -153,7 +208,7 @@ Show
     Class "Currency"
     SetFontSize 35
     SetBorderColor 30 144 255
-    MinimapIcon 0 Brown Star
+    MinimapIcon 0 Brown Diamond
     PlayEffect Brown
     PlayAlertSound 7
 #---- SR Currency
@@ -162,8 +217,8 @@ Show
     Class "Currency"
     SetFontSize 33
     SetBorderColor 30 144 255
-    MinimapIcon 1 Yellow Circle
-    PlayEffect Yellow
+    MinimapIcon 1 Red Circle
+    PlayEffect Red
     PlayAlertSound 4
 #---- 裂痕碎片
 Show
@@ -172,8 +227,8 @@ Show
     SetFontSize 33
     SetTextColor 144 30 255 255
     SetBorderColor 144 30 255 255
-    MinimapIcon 1 Yellow Circle
-    PlayEffect Yellow
+    MinimapIcon 1 Red Circle
+    PlayEffect Red
     PlayAlertSound 4
 #---- 裂痕石
 Show
@@ -182,8 +237,8 @@ Show
     SetFontSize 33
     SetTextColor 144 30 255 255
     SetBorderColor 144 30 255 255
-    MinimapIcon 1 Yellow Circle
-    PlayEffect Yellow
+    MinimapIcon 1 Brown Diamond
+    PlayEffect Brown
     PlayAlertSound 4
 #---- 裂痕祝福
 Show
@@ -201,6 +256,22 @@ Show
     Class "Currency"
     SetFontSize 33
     SetBorderColor 30 144 255
+    MinimapIcon 1 Red Circle
+    PlayEffect Red
+    PlayAlertSound 4
+#---- 穿越通貨
+Show
+    BaseType "Vial"
+    Class "Currency"
+    SetBorderColor 74 230 58
+    MinimapIcon 1 Red Circle
+    PlayEffect Red
+    PlayAlertSound 4
+#---- 掘獄通貨 - 化石 鑄新儀
+Show
+    BaseType "Fossil" "Resonator"
+    Class "Currency"
+    SetBorderColor 30 144 255
     MinimapIcon 1 Yellow Circle
     PlayEffect Yellow
     PlayAlertSound 4
@@ -209,74 +280,78 @@ Show
     Class "Currency"
     SetFontSize 32
     SetBorderColor 170 158 130 128
-     MinimapIcon 2 White Circle
+    MinimapIcon 2 Green Hexagon
+    PlayEffect Green
+    PlayAlertSound 7
 
 ### ------------------------ #
-###    特殊物品               #
-### ------------------------ #
-#---- 掘獄道具
-#---- 掘獄相關 化石 鑄新儀
-Show
-    BaseType "Fossil" "Resonator"
-    Class "Currency"
-    SetFontSize 33
-    SetBorderColor 30 144 255
-    MinimapIcon 1 Yellow Circle
-    PlayEffect Yellow
-    PlayAlertSound 4
-#---- 穿越道具
-Show
-    Class "Incursion Item"
-    SetBorderColor 74 230 58
-    MinimapIcon 1 Yellow Circle
-#---- 迷宮道具
-Show
-    Class "Labyrinth Item"
-    SetBorderColor 74 230 58
-    MinimapIcon 1 Yellow Circle
-#---- 聯盟道具
-Show
-    Class "Leaguestones"
-    SetBorderColor 74 230 58
-    MinimapIcon 1 Yellow Circle
-
-### ------------------------ #
-###    等級調整地圖顯示        #
+###    Maps 地圖
 ### ------------------------ #
 #---- Shaped Map
 Show
     ShapedMap True
     SetBorderColor 210 0 0 200
-    MinimapIcon 1 Yellow Triangle
+    MinimapIcon 1 Red Triangle
+    PlayEffect Red
 #---- Map Fragments
+Show
+    BaseType "Divine Vessel"
+    SetBackgroundColor 0 255 0
+    MinimapIcon 0 Brown Triangle
+    PlayEffect Brown
+    PlayAlertSound 7
 Show
     Class "Map Fragments"
     SetBorderColor 210 0 0 200
+    MinimapIcon 1 Brown Triangle
+    PlayEffect Brown
+#---- T12+ 紅圖
+Show
+    Class Map
+    MapTier >= 12
+    SetFontSize 35
+    SetBorderColor 255 128 255
+    MinimapIcon 0 Red Triangle
+    PlayEffect Red
+#---- T6-T11 黃圖
+Show
+    Class Map
+    MapTier < 11
+    MapTier >= 7
+    SetFontSize 32
+    SetBorderColor 255 128 255
     MinimapIcon 1 Yellow Triangle
+    PlayEffect Yellow
 #---- T1-T6 白圖
 Show
     Class Map
-    DropLevel < 73
+    MapTier < 7
     SetFontSize 29
     SetBackgroundColor 50 50 50 50
     SetBorderColor 255 128 255 200
     MinimapIcon 2 White Triangle
-#---- T6-T11 黃圖
+
+### ------------------------ #
+###    特殊物品               #
+### ------------------------ #
+#---- 穿越道具
 Show
-    Class Map
-    DropLevel >= 73
-    DropLevel < 78
-    SetFontSize 32
-    SetBorderColor 255 128 255
-    MinimapIcon 1 Yellow Triangle
-#---- T12+ 紅圖
+    Class "Incursion Item"
+    SetBorderColor 74 230 58
+    MinimapIcon 1 Yellow Circle
+    PlayEffect Yellow
+#---- 迷宮道具
 Show
-    Class Map
-    DropLevel >= 78
-    SetFontSize 35
-    SetBorderColor 255 128 255
-    MinimapIcon 0 Brown Triangle
-    PlayEffect Brown
+    Class "Labyrinth"
+    SetBorderColor 74 230 58
+    MinimapIcon 1 Yellow Circle
+    PlayEffect Yellow
+#---- 聯盟道具
+Show
+    Class "Leaguestones"
+    SetBorderColor 74 230 58
+    MinimapIcon 1 Yellow Circle
+    PlayEffect Yellow
 
 ### ------------------------ #
 ###    等級調整藥劑顯示        #
@@ -309,52 +384,9 @@ Show
     SetBackgroundColor 30 30 255 100
 
 ### ------------------------ #
-###    等級調整裝備顯示        #
-### ------------------------ #
-Hide
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    DropLevel <= 25
-    ItemLevel >= 25
-    Rarity <= Rare
-    SetFontSize 12
-    SetBackgroundColor 50 50 250 30
-Hide
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    DropLevel <= 40
-    ItemLevel >= 40
-    Rarity <= Rare
-    SetFontSize 12
-    SetBackgroundColor 50 250 50 90
-Hide
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    DropLevel <= 55
-    ItemLevel >= 55
-    Rarity <= Rare
-    SetFontSize 12
-    SetBackgroundColor 250 50 50 150
-Show
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    Rarity >= Rare
-    SetBackgroundColor 50 50 50 100
-Hide
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    Rarity < Rare
-    SetFontSize 30
-    SetBackgroundColor 50 50 50 100
-#---- 飾品
-Show
-    Class "Amulet" "Ring" "Belt" "Quiver"
-    Rarity >= Rare
-    SetBackgroundColor 50 50 50 100
-Hide
-    Class "Amulet" "Ring" "Belt" "Quiver"
-    Rarity < Rare
-    SetFontSize 30
-    SetBackgroundColor 50 50 50 100
-### ------------------------ #
-###    其他類型防止線          #
+###    Others 其他類型防止線
 ### ------------------------ #
 Show
     SetFontSize 30
-    MinimapIcon 0 Red Star
-    PlayEffect Red
+    MinimapIcon 0 Green Hexagon
+    PlayEffect Green
