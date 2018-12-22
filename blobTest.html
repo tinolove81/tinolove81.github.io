@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no'>
+    <link rel='stylesheet' href='./asset/css/bootstrap.min.css' />
+    <link rel='icon' href='./favicon.ico' type='image/x-icon'>
+    <script src='./asset/js/jquery-3.2.1.min.js'></script>
+    <script src='./asset/js/bootstrap.bundle.min.js'></script>
+    <title>Goodbye world !</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Imprima');
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
+        html,
+        body {
+            height: 100%;
+            font-family: Imprima, 'Noto Sans JP';
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div id='myDiv' class=''></div>
+
+    <script>
+    // Data to Blob
+        let blob = new Blob(['Array', 'Blob', 'DOMString'], {type: 'text/csv;charset=utf-8;'});
+    // Blob to Object URL
+        let filename = 'ArrayOrBlob.csv';
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            // FF need real DOM to trigger
+            let link = document.querySelector('#QuerypageInputBtn03'); 
+            link.setAttribute('href', URL.createObjectURL(blob));
+            link.setAttribute('target', '_blank');
+            link.setAttribute('download', filename);
+            link.click();
+        }
+
+    /* 拆包
+        var objectURL = document.querySelector('video').src;
+        var data;
+        var URL_o = Object.assign({}, URL);
+        URL = {
+            'createObjectURL': function (e) {
+                console.log('createObjectURL: #START###############################################');
+                console.log(e);
+                console.log('createObjectURL: #END#################################################');
+                data = e;
+                return URL_o.createObjectURL(e);
+            },
+            'revokeObjectURL': function (e) {
+                console.log('revokeObjectURL: #START###############################################');
+                console.log(e);
+                console.log('revokeObjectURL: #END#################################################');
+            }
+        }
+    */
+
+
+    // Get Data from Blob
+        let reader = new FileReader();
+        reader.addEventListener('loadend', function() {
+            base64data = reader.result;                
+            console.log(base64data);
+        });
+        reader.readAsArrayBuffer(blob);
+
+    // Get Blob from Object URL
+        let objectURL = document.querySelector('video').src;
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', URL, true);
+        xhr.responseType = 'blob';
+        xhr.onload = function(e) {
+            if (this.status == 200) {
+                var myBlob = this.response;
+                console.log(myBlob);
+            }
+        };
+        xhr.send();
+
+
+    </script>
+</body>
+
+</html>
