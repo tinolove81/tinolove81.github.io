@@ -46,8 +46,8 @@
         }
 
     /* 拆包
-        var objectURL = document.querySelector('video').src;
-        var data;
+        var blobUrl = document.querySelector('video').src;
+        var data, blobUrl;
         var URL_o = Object.assign({}, URL);
         URL = {
             'createObjectURL': function (e) {
@@ -55,7 +55,8 @@
                 console.log(e);
                 console.log('createObjectURL: #END#################################################');
                 data = e;
-                return URL_o.createObjectURL(e);
+                blobUrl = URL_o.createObjectURL(e);
+                return blobUrl;
             },
             'revokeObjectURL': function (e) {
                 console.log('revokeObjectURL: #START###############################################');
@@ -63,6 +64,12 @@
                 console.log('revokeObjectURL: #END#################################################');
             }
         }
+
+        var setTimeout_o = setTimeout;
+        setTimeout=(f, t)=>{if(t>2000)console.log(f, t);setTimeout_o(f, t);}
+
+        _yt_player.Vo.getInstance()??
+        _yt_player.E=()=>{return 2599999999999;}
     */
 
 
@@ -75,9 +82,9 @@
         reader.readAsArrayBuffer(blob);
 
     // Get Blob from Object URL
-        let objectURL = document.querySelector('video').src;
+        let blobUrl = document.querySelector('video').src;
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', URL, true);
+        xhr.open('GET', blobUrl);
         xhr.responseType = 'blob';
         xhr.onload = function(e) {
             if (this.status == 200) {
@@ -87,6 +94,37 @@
         };
         xhr.send();
 
+    (fx=()=>{
+        var gm = (window.yt && window.yt.config_ || window.ytcfg && window.ytcfg.data_)['EXPERIMENT_FLAGS'];
+        var m = `### Youtube Config Test ###\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n`;
+            m += ` window['_lact'] = ${window['_lact']}  (${new Date(window['_lact']).toLocaleString()})\t\t\t\t\t\t\n`;
+            m += ` window['_fact'] = ${window['_fact']}\t\t\t\t\t\t\t\t\t\t\t\t\n`;
+            m += ` Last activity pass: ${new Date(+new Date-window['_lact']).toISOString().substr(11, 8)}\t\t\t\t\t\t\t\t\t\t\t\t\t\n`;
+            m += ` gm['user_engagement_enable_autoplay_pause_feature']: ${gm['user_engagement_enable_autoplay_pause_feature']}\t\t\t\t\t\n`;
+            m += ` gm['is_part_of_any_user_engagement_experiment']: ${gm['is_part_of_any_user_engagement_experiment']}\t\t\t\t\t\t\t\n`;
+            m += ` gm['enable_watch_next_pause_autoplay_lact']: ${gm['enable_watch_next_pause_autoplay_lact']}\t\t\t\t\t\t\t\t\n`;
+            m += ` gm['watch_next_pause_autoplay_lact_sec']: ${gm['watch_next_pause_autoplay_lact_sec']} (s)\t\t\t\t\t\t\t\t\n`;
+            m += ` gm['autoplay_pause_by_lact_sec']: ${gm['autoplay_pause_by_lact_sec']} (s)\t\t\t\t\t\t\t\t\t\t\n`;
+
+            m += ` Next expected pause time: ${new Date(window['_lact']+gm['watch_next_pause_autoplay_lact_sec']*1E3).toLocaleString()}\t\t\t\t\t\t\t\t\n`;
+        console.log('%c'+m, 'background:#222;color:#CFA');
+    })()
+
+/*
+    enable_autoplay_pause_by_lact
+
+    new Date(window["_lact"])
+    gm = (window.yt && window.yt.config_ || window.ytcfg && window.ytcfg.data_)['EXPERIMENT_FLAGS'];
+
+    gm["user_engagement_enable_autoplay_pause_feature"]
+    gm["is_part_of_any_user_engagement_experiment"]
+    gm["enable_watch_next_pause_autoplay_lact"]
+    gm["watch_next_pause_autoplay_lact_sec"]
+
+    gm["autoplay_pause_by_lact_sec"]
+
+    _yt_player.M.prototype.Tu()
+*/
 
     </script>
 </body>
