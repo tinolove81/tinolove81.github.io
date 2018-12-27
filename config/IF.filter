@@ -92,6 +92,14 @@ Show
     MinimapIcon 0 Brown Star
     PlayEffect Brown
     PlayAlertSound 7
+#---- 高等基底 - 武器
+Show
+    BaseType "Kris" "Opal Wand" "Prophecy Wand" "Jewelled Foil"
+    ItemLevel > 85
+    Rarity <= Rare
+    SetBackgroundColor 255 255 0 30
+    MinimapIcon 2 White Star
+    PlayEffect White
 #---- 高等新基底 - 裝備
 Show
     BaseType "Bone Helmet" "Two-Toned Boots" "Spiked Gloves" "Gripped Gloves" "Fingerless Silk Gloves"
@@ -107,41 +115,66 @@ Show
     PlayEffect Brown
     PlayAlertSound 7
 
-#---- 裝備防止線 - 武器 裝備
+#---- 裝備防止線 - 單手武器
 Hide
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    DropLevel <= 35
-    ItemLevel >= 35
-    Rarity <= Rare
-    Identified False
-    SetFontSize 12
-    SetBackgroundColor 50 250 50 30
-Hide
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace"
     DropLevel <= 58
     ItemLevel >= 58
     Rarity <= Rare
     Identified False
     SetFontSize 12
-    SetBackgroundColor 50 50 250 30
-Hide
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    Rarity < Rare
-    Identified False
+    SetBackgroundColor 50 250 50 30
+Show
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace"
+    Rarity > Normal
+    Identified true
     SetFontSize 30
     SetBackgroundColor 50 50 50 100
+#---- 裝備防止線 - 雙手武器
+Hide
+    Class "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow"
+    DropLevel <= 58
+    ItemLevel >= 58
+    Rarity <= Rare
+    Identified False
+    SetFontSize 12
+    SetBackgroundColor 50 250 50 30
+Show
+    Class "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow"
+    Rarity > Normal
+    Identified true
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
+#---- 裝備防止線 - 裝備
+Hide
+    Class "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    DropLevel <= 58
+    ItemLevel >= 58
+    Rarity <= Rare
+    Identified False
+    SetFontSize 12
+    SetBackgroundColor 50 250 50 30
+Show
+    Class "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    Rarity > Normal
+    Identified true
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
+#---- 裝備防止線 - 武器+裝備
 Show
     Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
     Rarity >= Rare
-    SetBackgroundColor 50 50 50 100
-Show
-    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    Identified False
     SetBackgroundColor 50 50 50 100
 #---- 裝備防止線 - 飾品
 Hide
     Class "Amulet" "Ring" "Belt" "Quiver"
     Rarity < Rare
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
+Show
+    Class "Amulet" "Ring" "Belt" "Quiver"
+    Rarity > Normal
+    Identified true
     SetFontSize 30
     SetBackgroundColor 50 50 50 100
 Show
