@@ -126,6 +126,11 @@ Hide
     SetBackgroundColor 50 250 50 30
 Show
     Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace"
+    Rarity = Rare
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
+Show
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace"
     Rarity > Normal
     Identified true
     SetFontSize 30
@@ -136,9 +141,13 @@ Hide
     DropLevel <= 57
     ItemLevel >= 57
     Rarity <= Rare
-    Identified False
     SetFontSize 12
     SetBackgroundColor 50 250 50 30
+Show
+    Class "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow"
+    Rarity = Rare
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
 Show
     Class "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow"
     Rarity > Normal
@@ -151,9 +160,13 @@ Hide
     DropLevel <= 57
     ItemLevel >= 57
     Rarity <= Rare
-    Identified False
     SetFontSize 12
     SetBackgroundColor 50 250 50 30
+Show
+    Class "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    Rarity = Rare
+    SetFontSize 30
+    SetBackgroundColor 50 50 50 100
 Show
     Class "Glove" "Boot" "Body Armour" "Helmet" "Shield"
     Rarity > Normal
@@ -161,9 +174,11 @@ Show
     SetFontSize 30
     SetBackgroundColor 50 50 50 100
 #---- 裝備防止線 - 武器+裝備
-Show
+Hide
     Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    Rarity >= Rare
+    Rarity < Rare
+    ItemLevel < 85
+    Identified false
     SetBackgroundColor 50 50 50 100
 #---- 裝備防止線 - 飾品
 Hide
