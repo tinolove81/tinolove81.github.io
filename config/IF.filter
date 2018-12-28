@@ -133,8 +133,8 @@ Show
 #---- 裝備防止線 - 雙手武器
 Hide
     Class "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow"
-    DropLevel <= 58
-    ItemLevel >= 58
+    DropLevel <= 57
+    ItemLevel >= 57
     Rarity <= Rare
     Identified False
     SetFontSize 12
@@ -148,8 +148,8 @@ Show
 #---- 裝備防止線 - 裝備
 Hide
     Class "Glove" "Boot" "Body Armour" "Helmet" "Shield"
-    DropLevel <= 58
-    ItemLevel >= 58
+    DropLevel <= 57
+    ItemLevel >= 57
     Rarity <= Rare
     Identified False
     SetFontSize 12
@@ -191,6 +191,7 @@ Show
     SetBorderColor 27 162 155
     MinimapIcon 0 Red Diamond
     PlayEffect Red
+    PlayAlertSound 7
 #---- 瓦爾技能石
 Show
     Class "Skill Gems"
@@ -246,7 +247,7 @@ Show
     PlayAlertSound 7
 #---- SR Currency
 Show
-    BaseType "Vaal Orb" "Orb of Regret" "Orb of Scouring" "Regal Orb" "Orb of Alchemy" "Orb of Chance" "Orb of Fusing" "Jeweller's Orb" "Chromatic Orb" "Orb of Annulment" "Gemcutter's Prism" "Cartographer's Chisel" "Glassblower's Bauble" "Perandus Coin" "Silver Coin" "Stacked Deck" "Sextant"
+    BaseType "Vaal Orb" "Orb of Regret" "Orb of Scouring" "Regal Orb" "Orb of Alchemy" "Orb of Chance" "Orb of Fusing" "Jeweller's Orb" "Chromatic Orb" "Orb of Annulment" "Gemcutter's Prism" "Cartographer's Chisel" "Glassblower's Bauble" "Perandus Coin" "Silver Coin" "Stacked Deck" "Sextant" "Orb of Alteration"
     Class "Currency"
     SetFontSize 33
     SetBorderColor 30 144 255
@@ -309,6 +310,13 @@ Show
     PlayEffect Yellow
     PlayAlertSound 4
 #---- 其他通貨防止線
+Show
+    BaseType "Scroll of Wisdom" "Portal Scroll" "Orb of Transmutation" "Armourer's Scrap" "Blacksmith's Whetstone" "Orb of Augmentation"
+    Class "Currency"
+    SetFontSize 32
+    SetBorderColor 170 158 130 128
+    MinimapIcon 2 White Circle
+    PlayEffect White
 Show
     Class "Currency"
     SetFontSize 32
