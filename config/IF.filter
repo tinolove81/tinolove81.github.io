@@ -118,8 +118,8 @@ Show
 #---- 裝備防止線 - 單手武器
 Hide
     Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace"
-    DropLevel <= 58
-    ItemLevel >= 58
+    DropLevel <= 57
+    ItemLevel >= 57
     Rarity <= Rare
     Identified False
     SetFontSize 12
