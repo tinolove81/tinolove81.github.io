@@ -177,6 +177,12 @@ Show
 Hide
     Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
     Rarity < Rare
+    ItemLevel >= 85
+    SetBackgroundColor 50 50 50 100
+    SetBorderColor 0 255 0 200
+Hide
+    Class "Claw" "Dagger" "Wand" "One Hand Sword" "Thrusting One Hand Sword" "One Hand Axe" "One Hand Mace" "Sceptre" "Stave" "Two Hand Sword" "Two Hand Axe" "Two Hand Mace" "Bow" "Glove" "Boot" "Body Armour" "Helmet" "Shield"
+    Rarity < Rare
     ItemLevel < 85
     Identified false
     SetBackgroundColor 50 50 50 100
