@@ -38,7 +38,8 @@
             navigator.msSaveBlob(blob, filename);
         } else {
             // FF need real DOM to trigger
-            let link = document.querySelector('#QuerypageInputBtn03'); 
+            // let link = document.querySelector('#QuerypageInputBtn03'); 
+            let link = document.createElement('a'); 
             link.setAttribute('href', URL.createObjectURL(blob));
             link.setAttribute('target', '_blank');
             link.setAttribute('download', filename);
@@ -82,17 +83,19 @@
         reader.readAsArrayBuffer(blob);
 
     // Get Blob from Object URL
-        let blobUrl = document.querySelector('video').src;
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', blobUrl);
-        xhr.responseType = 'blob';
-        xhr.onload = function(e) {
-            if (this.status == 200) {
-                var myBlob = this.response;
-                console.log(myBlob);
-            }
-        };
-        xhr.send();
+function b() {
+let blobUrl = document.querySelector('video').src;
+let xhr = new XMLHttpRequest();
+xhr.open('GET', blobUrl);
+xhr.responseType = 'blob';
+xhr.onload = function(e) {
+    if (this.status == 200) {
+        var myBlob = this.response;
+        console.log(myBlob);
+    }
+};
+xhr.send();
+}
 
     (fx=()=>{
         var gm = (window.yt && window.yt.config_ || window.ytcfg && window.ytcfg.data_)['EXPERIMENT_FLAGS'];
