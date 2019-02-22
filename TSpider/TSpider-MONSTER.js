@@ -4,8 +4,9 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 let _WEB = 'https://pd.appbank.net/m';
-let _NUMBER = 'CMD Input';
-let _MONSTER;
+let _INPUT = 'CMD Input';
+let _NUMBER = 0;
+let _MONSTER = {};
 let _NONAME = [];
 let CHAR;
 let numTry = 0;
@@ -16,14 +17,12 @@ let numTry = 0;
         console.log(`arg -> [number] = search`);
         console.log(`arg -> 'find' = find NoName`);
     } else if (!isNaN(parseInt(process.argv[2]))) {
-        _NUMBER = parseInt(process.argv[2]);
+        _INPUT = parseInt(process.argv[2]);
         startRequest();
     }
 })();
 
 function startRequest() {
-    console.log(_NUMBER);
-    console.log('43 startRequest');
     if (numTry > 50) {
         console.log('不明 > 50, 即將結束.');
         keepData();
@@ -44,11 +43,12 @@ function startRequest() {
 }
 function createUrl() {
     let url = _WEB;
-    _NUMBER = (_NONAME.length > 0) ? _NONAME.shift() : parseInt(_NUMBER);
+    _NUMBER = (_NONAME.length > 0) ? _NONAME.shift() : ((_NUMBER == _INPUT) ? ++_INPUT : _INPUT);
     if (_NUMBER <= 0) {
-        return url + '001';
+        _NUMBER = 1;
+        return url + '00' + _NUMBER;
     } else if (_NUMBER < 100) {
-        return url + ('00' + (parseInt(_NUMBER) + 1)).substr(-3);
+        return url + ('00' + _NUMBER).substr(-3);
     } else {
         return url + _NUMBER;
     }
@@ -56,77 +56,89 @@ function createUrl() {
 
 function parseChar(html, code) {
     console.log('\x1b[36m%s\x1b[0m',`/// ParseChar ${_NUMBER} ///`, '\x1b[0m');
-    char = {
-        'Number': '',
+    CHAR = {
+        'Number': '' + _NUMBER,
         'Name': '',
         'MainAttribute': '',
         'SubAttribute': '',
         'Rare': '',
         'Cost': '',
         'Assist': '',
+        'Lv': {},
         'Type': [],
+        'Kakusei': [],
+        'SuperKakusei': [],
         'ActiveSkillName': '',
         'ActiveSkillCD': '',
         'ActiveSkillContent': '',
         'LeaderSkillName': '',
-        'LeaderSkillContent': '',
-        'Kakusei': [],
+        'LeaderSkillContent': ''
     };
     try {
         if (code != 200) {
-            error_n += 1;
-            char['Number'] = '' + _NUMBER
-            char['Name'] = '不明';
+            numTry += 1;
+            CHAR['Name'] = '不明';
         } else {
-            error_n  = 0;
+            numTry  = 0;
             const $ = cheerio.load(html);
-            let Monster = $('div.monster');
-            let NumberAndName = Monster.find('h2.title-bg').text().replace('No.', '').split(' ');
-            char['Number'] = NumberAndName.shift();
-            char['Name'] = NumberAndName.join(' ');
-            let Attribute = Monster.find('div.spacer').eq(0).find('img + p').contents();
-            char['MainAttribute'] = Attribute.eq(0).attr('class').replace('icon-attr-', '');
-            char['MainAttribute'] = char['MainAttribute'][0].toUpperCase() + char['MainAttribute'].substring(1);
-            char['SubAttribute'] = (Attribute.length == 3) ? Attribute.eq(1).attr('class').replace('icon-attr-', '') : 'none';
-            char['SubAttribute'] = char['SubAttribute'][0].toUpperCase() + char['SubAttribute'].substring(1);
+            let Monster = $('div.monster div.spacer').eq(0);
+            let Name = $('div.monster h2.title-bg').text().replace('No.', '').split(' ').slice(1).join(' ');
+            CHAR['Name'] = Name;
+            let Attribute = Monster.find('img + p').contents();
+            CHAR['MainAttribute'] = Attribute.eq(0).attr('class').replace('icon-attr-', '');
+            CHAR['MainAttribute'] = CHAR['MainAttribute'][0].toUpperCase() + CHAR['MainAttribute'].substring(1);
+            CHAR['SubAttribute'] = (Attribute.length == 3) ? Attribute.eq(1).attr('class').replace('icon-attr-', '') : 'none';
+            CHAR['SubAttribute'] = CHAR['SubAttribute'][0].toUpperCase() + CHAR['SubAttribute'].substring(1);
             let RareAndAttr = Attribute.eq(-1).text().split(' / ');
-            char['Rare'] = RareAndAttr[1];
-            char['Cost'] = RareAndAttr[2].replace('コスト:', '');
-            char['Assist'] = RareAndAttr[3].replace('アシスト: ', '').replace('◯', '○');
-            let AllType = Monster.find('div.spacer').eq(0).find('p.icon-mtype').find('i');
-            char['Type'] = [];
-            for (let i = 0; i < AllType.length; i++) {
-                char['Type'].push(AllType.eq(i).attr('class').replace('icon-mtype-', ''));
+            CHAR['Rare'] = RareAndAttr[1];
+            CHAR['Cost'] = RareAndAttr[2].replace('コスト:', '');
+            CHAR['Assist'] = RareAndAttr[3].replace('アシスト: ', '').replace('◯', '○');
+            let Lv1 = Monster.find('.table-monster-status tr').eq(1);
+            CHAR['Lv'][$('td', Lv1).eq(0).text()] = [$('td', Lv1).eq(1).text(), $('td', Lv1).eq(2).text(), $('td', Lv1).eq(3).text()];
+            let Lv2 = Monster.find('.table-monster-status tr').eq(3);
+            if (Lv2.length > 0) {
+                CHAR['Lv'][$('td', Lv2).eq(0).text()] = [$('td', Lv2).eq(1).text(), $('td', Lv2).eq(2).text(), $('td', Lv2).eq(3).text()];
             }
-            
-            Monster.find('div.spacer').find('h3').each(function (i, e) {
-                e = $(e);
-                if (e.text() == 'スキル') {
-                    findActiveSkill(e.parent());
-                    return;
-                }
-                if (e.text() == 'リーダースキル') {
-                    findLeaderSkill(e.parent());
-                    return;
-                }
-                if (e.text() == '覚醒スキル') {
-                    findKakusei(e.parent());
-                    return;
+            let Type = Monster.find('p.icon-mtype').find('i');
+            for (let i = 0; i < Type.length; i++) {
+                CHAR['Type'].push(Type.eq(i).attr('class').replace('icon-mtype-', ''));
+            }
+
+            let Block = $('div.monster div.spacer h3');
+            Block.each((idx, element) => {
+                switch ($(element).text()) {
+                    case '覚醒スキル':
+                        findKakusei($(element).parent());
+                        break;
+                    case '超覚醒スキル':
+                        findSuperKakusei($(element).parent());
+                        break;
+                    case 'スキル':
+                        findActiveSkill($(element).parent());
+                        break;
+                    case 'リーダースキル':
+                        findLeaderSkill($(element).parent());
+                        break;
+                    default:
+                        // console.log($(element).text())
+                        break;
                 }
             });
         }
-        visualDiff();
+        console.log('\x1b[36m%s\x1b[0m',`/// ParseChar ${CHAR['Name']} Complete ///`, '\x1b[0m');
+        _MONSTER[_NUMBER - 1] = CHAR;
+        timerRepeat();
     } catch (error) {
         console.log(error);
-        fs.writeFile(path.join(__dirname, './error.txt'), _WEB + _NUMBER + '\n'+ JSON.stringify(char) +'\n\n\n\n\n' + html, function (err) {
+        fs.writeFile(path.join(__dirname, './error.txt'), _WEB + _NUMBER + '\n'+ JSON.stringify(CHAR) +'\n\n\n\n\n' + html, function (err) {
             if (err) { console.log(err); }
             else { console.log('Error Report Write complete.'); }
         });
     }
 }
-function test() {
+function info() {
 /*
-有主動 有隊長 有覺醒 正常
+有主動 有隊長 有覺醒 正常 5082
 
 有主動 有隊長 沒覺醒 1 (新手龍)
 有主動 沒隊長 沒覺醒 21 (防龍)
@@ -138,12 +150,23 @@ function test() {
 沒主動 有覺醒 有隊長 ?
 */
 }
-
+function findKakusei(mBlock) {
+    let AllKakusei = mBlock.find('div.name');
+    for (let i = 0; i < AllKakusei.length; i++) {
+        CHAR['Kakusei'].push(AllKakusei.eq(i).text());
+    }
+}
+function findSuperKakusei(mBlock) {
+    let AllKakusei = mBlock.find('div.name');
+    for (let i = 0; i < AllKakusei.length; i++) {
+        CHAR['SuperKakusei'].push(AllKakusei.eq(i).text());
+    }
+}
 function findActiveSkill(mBlock) {
     let ActiveSkill = mBlock.find('p');
-    char['ActiveSkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
-    char['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '');
-    char['ActiveSkillContent'] = ActiveSkill.eq(1).text()
+    CHAR['ActiveSkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
+    CHAR['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '').replace('（', '/').replace('）', '');
+    CHAR['ActiveSkillContent'] = ActiveSkill.eq(1).text()
         .replace('減少、', '減少。')
         .replace('+', '＋')
         .replace(/生成(?=[^。]?)$/, '生成。')
@@ -166,74 +189,12 @@ function findActiveSkill(mBlock) {
     全ドロップ(?=[^を|の]) => 全ドロップを
     */
 }
-
 function findLeaderSkill(mBlock) {
     let LeaderSkill = mBlock.find('p');
-    char['LeaderSkillName'] = LeaderSkill.eq(0).find('strong').text();
-    char['LeaderSkillContent'] = LeaderSkill.eq(1).text();
+    CHAR['LeaderSkillName'] = LeaderSkill.eq(0).find('strong').text();
+    CHAR['LeaderSkillContent'] = LeaderSkill.eq(1).text();
 }
 
-function findKakusei(mBlock) {
-/**
-    list = [];
-    $('a[href*="/kakusei"]').each((i, e)=>{
-        key = $(e).find('i.awakenicon').attr('class').split('-')[1];
-        list[key] = $(e).find('div.name').html();
-    });
-    KAKUSEI = {};
-    list.forEach((e, i) => {KAKUSEI[e] = i});
-*//*
-    let KAKUSEI = {
-        "HP強化": 1, "攻撃強化": 2, "回復強化": 3, "火ダメージ軽減": 4, "水ダメージ軽減": 5, "木ダメージ軽減": 6, "光ダメージ軽減": 7,
-        "闇ダメージ軽減": 8, "自動回復": 9, "バインド耐性": 10, "暗闇耐性": 11, "お邪魔耐性": 12, "毒耐性": 13, "火ドロップ強化": 14,
-        "水ドロップ強化": 15, "木ドロップ強化": 16, "光ドロップ強化": 17, "闇ドロップ強化": 18, "操作時間延長": 19, "バインド回復": 20,
-        "スキルブースト": 21, "火属性強化": 22, "水属性強化": 23, "木属性強化": 24, "光属性強化": 25, "闇属性強化": 26, "2体攻撃": 27,
-        "封印耐性": 28, "回復ドロップ強化": 29, "マルチブースト": 30, "神キラー": 31, "マシンキラー": 32, "悪魔キラー": 33, "ドラゴンキラー": 34,
-        "回復キラー": 35, "攻撃キラー": 36, "体力キラー": 37, "バランスキラー": 38, "能力覚醒用キラー": 39, "売却用キラー": 40, "強化合成用キラー": 41,
-        "進化用キラー": 42, "コンボ強化": 43, "ガードブレイク": 44, "追加攻撃": 45, "チームHP強化": 46, "チーム回復強化": 47, "ダメージ無効貫通": 48,
-        "覚醒アシスト": 49, "超追加攻撃": 50, "スキルチャージ": 51, "バインド耐性+": 52, "操作時間延長+": 53, "雲耐性": 54, "操作不可耐性": 55,
-        "スキルブースト+": 56, "HP80％以上強化": 57, "HP50％以下強化": 58, "L字消し軽減": 59, "L字消し攻撃": 60, "超コンボ強化": 61,
-        "コンボドロップ": 62, "スキルボイス": 63, "ダンジョンボーナス": 64
-    };
-*/
-    let AllKakusei = mBlock.find('div.name');
-    char['Kakusei'] = [];
-    for (let i = 0; i < AllKakusei.length; i++) {
-        char['Kakusei'].push(AllKakusei.eq(i).text());
-    }
-}
-function visualDiff() {
-    console.log('\x1b[36m%s\x1b[0m',`/// VisualDiff ${char['Name']} ///`, '\x1b[0m');
-    if (_MONSTER[_NUMBER - 1] != undefined) {
-        let M = _MONSTER[_NUMBER - 1];
-        if (M['Number'] == char['Number']) {
-            M['Name'] = char['Name'];
-            M['MainAttribute'] = char['MainAttribute'];
-            M['SubAttribute'] = char['SubAttribute'];
-            M['Rare'] = char['Rare'];
-            M['Cost'] = char['Cost'];
-            M['Assist'] = char['Assist'];
-            M['Type'] = char['Type'];
-            M['ActiveSkillName'] = char['ActiveSkillName'];
-            M['ActiveSkillCD'] = char['ActiveSkillCD'];
-            M['ActiveSkillContent'] = char['ActiveSkillContent'];
-            M['LeaderSkillName'] = char['LeaderSkillName'];
-            M['LeaderSkillContent'] = char['LeaderSkillContent'];
-            M['Kakusei'] = char['Kakusei'];
-            timerRepeat();
-        } else {
-            console.error('visualDiff Error');
-            console.error('_NUMBER: ', _NUMBER);
-            console.error('_MONSTER: ');
-            console.error(_MONSTER[_NUMBER - 1]);
-            console.error('char: ');
-            console.error(char);
-        }
-    } else {
-        _MONSTER[_NUMBER - 1] = char;
-        timerRepeat();
-    }
-}
 function keepData() {
     let localpath = path.join(__dirname, './MONSTER-'+now('s')+'.json');
     fs.open(localpath, 'a', function (err, fd) {
@@ -272,7 +233,7 @@ function keepTest(mChar) {
 function timerRepeat() {
     setTimeout(() => {
         startRequest();
-    }, 500);    
+    }, 100);    
 }
 
 function now(argv) {
