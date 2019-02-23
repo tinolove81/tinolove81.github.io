@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
 let _WEB = 'https://pd.appbank.net/m';
 let _INPUT = 'CMD Input';
 let _NUMBER = 0;
-let _MONSTER = {};
+let _MONSTER = [];
 let _NONAME = [];
 let CHAR;
 let numTry = 0;
