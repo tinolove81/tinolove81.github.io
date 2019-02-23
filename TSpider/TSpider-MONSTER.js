@@ -170,6 +170,7 @@ function findActiveSkill(mBlock) {
         .replace('減少、', '減少。')
         .replace('+', '＋')
         .replace(/生成(?=[^。]?)$/, '生成。')
+        .replace(/に変化$/, 'に変化。')
         .replace('に変換。', 'に変化。')
         .replace('に変化させ、', 'に変化。')
         .replace('に変化させる', 'に変化。')
@@ -183,6 +184,7 @@ function findActiveSkill(mBlock) {
     ～減少、 => ～減少。
     〇+〇 => 〇＋〇
     ～生成 => ～生成。
+    ～に変化 => ～に変化。
     ～に変換。 => ～に変化。
     ～に変化させ、 => ～に変化。
     ～に変化させる => ～に変化。
