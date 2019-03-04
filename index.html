@@ -4,17 +4,177 @@
 <head>
     <meta charset='UTF-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='Pragma' Content='No-cache'>
     <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
-    <title>Hello world !</title>
+    <link rel='stylesheet' href='./asset/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='./asset/css/all.css' />
+    <script src='./asset/js/jquery-3.2.1.min.js'></script>
+    <script src='./asset/js/bootstrap.bundle.min.js'></script>
+    <title>Tinolove81's Info</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Imprima');
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
+        body {
+            height: 100%;
+            font-family: Imprima, 'Noto Sans JP';
+        }
+        #frontBlock {
+            padding-top: 25px;
+            background-image: linear-gradient(141deg, #9fb8ad 0%, #aaccff 50%, #2cb5e8 75%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
+        }
+
+        
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) {
+            #frontBlock {
+                padding-top: 25px;
+                padding-bottom: 10px;
+            }
+        }
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) {
+            #frontBlock {
+                padding-top: 75px;
+                padding-bottom: 55px;
+            }
+        }
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) {
+            #frontBlock {
+                padding-top: 150px;
+                padding-bottom: 125px;
+            }
+        }
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            #frontBlock {
+                padding-top: 225px;
+                padding-bottom: 175px;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <nav class='navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow'>
+        <div class='container justify-content-between'>
+            <a class='navbar-brand position-absolute' href='#'>Tinolove81</a>
+            <div class=''></div>
+            <button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#collapseNav'>
+                <span class='navbar-toggler-icon'></span>
+            </button>
+            <div id='collapseNav' class='collapse navbar-collapse'>
+                <div class='navbar-nav mx-auto'>
+                    <a class='nav-item nav-link' href='#'><span id='f_about' class='i18n'>About</span></a>
+                    <a class='nav-item nav-link' href='#'><span id='f_education' class='i18n'>Graduation</span></a>
+                    <a class='nav-item nav-link' href='#'><span id='f_skills' class='i18n'>Skills</span></a>
+                    <a class='nav-item nav-link' href='#'><span id='f_works' class='i18n'>Works</span></a>
+                    <a class='nav-item nav-link' href='#'><span id='f_projects' class='i18n'>Projects</span></a>
+                    <a class='nav-item nav-link' href='#'><span id='f_contact' class='i18n'>Contact</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id='frontBlock' class='container-fluid mb-1 bg-transparent align-middle'>
+        <div class='row justify-content-center align-items-center'>
+            <div class='col-auto'>
+                <img class='rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
+            </div>
+            <div class='col-auto'>
+                <div class='row flex-column'>
+                    <div class='col-auto'><span class='h2'>Henry Chen</span></div>
+                    <div class='col-auto'><span id='f_worktype' class='i18n'>Front-End Engineer</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container mb-1'>
+        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>About Me</span></div></div>
+    </div>
+    <div class='container mb-1'>
+        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_education' class='i18n'>Education Background</span></div></div>
+    </div>
+    <div class='container mb-1'>
+        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>Skills</span></div></div>
+        <div class='row border-bottom'>
+            <div class='col-6'>
+                <div class='card m-1'>
+                    <div class='card-header'><span id='f_skills_conversant' class='i18n'>Conversant</span></div>
+                    <div class='card-body'>
+                        <p class='card-text'><a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank' rel='noopener'>HTML</a></p>
+                        <p class='card-text'>CSS、SCSS、Boostrap</p>
+                        <p class='card-text'>JavaScript、jQuery、Ajax</p>
+                        <p class='card-text'>Vue.js</p>
+                        <p class='card-text'>Socket.io</p>
+                    </div>
+                </div>
+            </div>
+            <div class='col-6'>
+                <div class='card m-1'>
+                    <div class='card-header'><span id='f_skills_understand' class='i18n'>Understand</span></div>
+                    <div class='card-body'>
+                            <p class='card-text'>Node.js</p>
+                            <p class='card-text'>SQLite</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container mb-1'>
+        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-briefcase fa-fw'></i><span id='f_works' class='i18n'>Work Experience</span></div></div>
+    </div>
+    <div class='container mb-1'>
+        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Contact Me</span></div></div>
+    </div>
+    <div class='container mb-1'>
+        <div class='row border-bottom'><div class='col-auto'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>Contact</span></div></div>
+    </div>
+    <div class='container mb-1'>
+        <ul class='list-group'>
+            <li class='list-group-item'><a href='../pad-ss/index.html'>PaD Skill Search</a></li>
+            <li class='list-group-item'><a href='http://localhost:714/Monster/'>PaD Monster Info</a></li>
+            <li class='list-group-item'>Morbi leo risus</li>
+            <li class='list-group-item'>Porta ac consectetur ac</li>
+            <li class='list-group-item'>Vestibulum at eros</li>
+        </ul>
+    </div>
+
     <script>
-        window.location.href = '/pad-ss/'
+        // window.location.href = '/pad-ss/';
+        const lang_en = {
+            'f_about': 'About Me',
+            'f_education': 'Education Background',
+            'f_skills': 'Skills',
+            'f_skills_conversant': 'Conversant',
+            'f_skills_understand': 'Understand',
+            'f_works': 'Work Experience',
+            'f_projects': 'Projects',
+            'f_contact': 'Contact Me',
+            'f_worktype': 'Front-End Engineer',
+        };
+        const lang_tw = {
+            'f_about': '關於我',
+            'f_education': '學歷',
+            'f_skills': '專業技能',
+            'f_skills_conversant': '熟悉',
+            'f_skills_understand': '了解',
+            'f_works': '工作經驗',
+            'f_projects': '個人專案',
+            'f_contact': '聯繫我',
+            'f_worktype': '前端網頁工程師',
+        };
+        const lang_jp = {
+            'f_worktype': 'ウェブエンジニア'
+        };
+        $('span.i18n').each((i, e) => {
+            let id = $(e).attr('id');
+            if (lang_tw[id] != undefined) {
+                $(e).text(lang_tw[id]);
+            }
+        });
     </script>
 </body>
 
