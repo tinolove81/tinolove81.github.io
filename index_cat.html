@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+    <link rel='stylesheet' href='./asset/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='./asset/css/all.css' />
+    <script src='./asset/js/jquery-3.2.1.min.js'></script>
+    <script src='./asset/js/bootstrap.bundle.min.js'></script>
+    <title>Mini's Info</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Imprima');
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans TC');
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
+        body {
+            position: relative;
+            height: 100%;
+            font-family: Imprima, 'Noto Sans TC', 'Noto Sans JP';
+        }
+        #frontBlock {
+            padding-top: 25px;
+        }
+        .bg-blueliner {
+            background-image: linear-gradient(141deg, #9fb8ad 0%, #aaccff 50%, #2cb5e8 75%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: 0 0;
+            transition: .1s ease-in-out;
+        }
+        .bg-pos-999 {
+            background-position: 0 100px;
+        }
+        .text-transparent {
+            color: transparent !important;
+        }
+
+        
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) {
+            #frontBlock {
+                padding-top: 25px;
+                padding-bottom: 10px;
+            }
+        }
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) {
+            #frontBlock {
+                padding-top: 75px;
+                padding-bottom: 55px;
+            }
+        }
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) {
+            #frontBlock {
+                padding-top: 150px;
+                padding-bottom: 125px;
+            }
+        }
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            #frontBlock {
+                padding-top: 225px;
+                padding-bottom: 175px;
+            }
+        }
+    </style>
+</head>
+
+<body data-spy='scroll' data-target='#navBlock'>
+    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-transparent bg-blueliner bg-pos-999 fixed-top shadow'>
+        <div class='container justify-content-between'>
+            <a class='navbar-brand position-absolute' href='#'>Mini</a>
+            <div class=''></div>
+            <button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#collapseNav'>
+                <span class='navbar-toggler-icon'></span>
+            </button>
+            <div id='collapseNav' class='collapse navbar-collapse'>
+                <div class='navbar-nav mx-auto'>
+                    <a class='nav-item nav-link' href='#aboutBlock'><span id='f_about' class='i18n'>關於喵</span></a>
+                    <a class='nav-item nav-link' href='#infoBlock'><span id='f_info' class='i18n'>喵資訊</span></a>
+                    <a class='nav-item nav-link' href='#skillsBlock'><span id='f_skills' class='i18n'>喵嗜好</span></a>
+                    <!-- <a class='nav-item nav-link' href='#'><span id='f_projects' class='i18n'>Projects</span></a> -->
+                    <a class='nav-item nav-link' href='#contactBlock'><span id='f_contact' class='i18n'>聯繫喵</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id='frontBlock' class='container-fluid bg-transparent bg-blueliner align-middle'>
+        <div class='row justify-content-center align-items-center'>
+            <div class='col-auto'>
+                <img class='border rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
+            </div>
+            <div class='col-auto'>
+                <div class='row flex-column'>
+                    <div class='col-auto'><span class='h2'>Mini Chen</span></div>
+                    <div class='col-auto'><span id='f_title' class='i18n'>喵喵叫的貓貓</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='aboutBlock' class='container py-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto h4'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>關於喵</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row'>
+            <div class='col'>
+                <span id='f_about_contain' class='i18n'>
+                    一隻無憂無慮的貓貓。<br/>
+                    <br/>
+                    出生於台中，被撈到台中流浪動物之家。<br/>
+                    在三個月的時候被領回新家，現居於台北，是一隻北漂貓貓！<br/>
+                    <br/>
+                    興趣是吃飯、睡覺、喵喵叫。<br/>
+                    沒事就在家閒晃，偶爾去陽台看路人看車子看鳥。<br/>
+                    <br/>
+                    個性穩重，半夜不會開運動會，有好奇心但不會貿然行動。追逗貓棒會追到很喘。<br/>
+                    有點內向，不喜歡陌生人，只會欺負室友。<br/>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div id='infoBlock' class='container pb-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto h4 m-0'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_info' class='i18n'>喵資訊</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row'>
+            <div class='col'>
+                <ul class='m-0'>
+                    <li><span id='f_info_birth' class='i18n'>生日：2013年6月某日</span></li>
+                    <li><span id='f_info_sex' class='i18n'>性別：女生</span></li>
+                    <li><span id='f_info_weight' class='i18n'>體重：秘密！</span><span id='f_info_weight_2' class='i18n text-transparent'>6Kg(看屁看啊！)</span></li>
+                    <li><span id='f_info_type' class='i18n'>種類：米克斯</span></li>
+                    <li><span id='f_info_color' class='i18n'>毛色：虎斑、白色</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id='skillsBlock' class='container pb-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto h4'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>喵嗜好</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row'>
+            <div class='col-4'>
+                <span class='badge badge-pill badge-success'><span id='f_skills_like' class='i18n'>喜歡</span></span>
+                <div class='card card-body'>
+                    <div class='card-text row'>
+                        <div class='col-6'>罐罐</div><div class='col-6'>討摸摸</div>
+                        <div class='col-6'>零食</div><div class='col-6'></div>
+                        <div class='col-6'>睡覺</div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-4'>
+                <span class='badge badge-pill badge-warning'><span id='f_skills_dislike' class='i18n'>不喜歡</span></span>
+                <div class='card card-body'>
+                    <div class='card-text row'>
+                        <div class='col-6'>陌生人</div><div class='col-6'></div>
+                        <div class='col-6'>剪指甲</div><div class='col-6'></div>
+                        <div class='col-6'>嚕毛</div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-4'>
+                <span class='badge badge-pill badge-danger'><span id='f_skills_hate' class='i18n'>討厭</span></span>
+                <div class='card card-body'>
+                    <div class='card-text row'><div class='col-6'>吹風機</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='projectBlock' class='container pb-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+    </div>
+    <div id='contactBlock' class='container pb-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto h4'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>聯繫喵</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row'><div class='col-12'>沒事不要找我，有事找我室友 <a href='../index.html'>Tinolove81</a> ！</div></div>
+    </div>
+
+    <script>
+        // window.location.href = '/pad-ss/';
+        const lang_tw = {
+            'f_title': '喵喵叫的貓貓',
+            'f_about': '關於喵',
+            'f_info': '喵資訊',
+            'f_info_birth': '生日：2013年6月某日',
+            'f_info_sex': '性別：女生',
+            'f_info_weight': '體重：秘密！',
+            'f_info_type': '種類：米克斯',
+            'f_info_color': '毛色：虎斑、白色',
+            'f_skills': '喵嗜好',
+            'f_skills_like': '喜歡',
+            'f_skills_dislike': '不喜歡',
+            'f_skills_hate': '討厭',
+            'f_contact': '聯繫喵',
+        };
+        const lang_jp = {
+            'f_title': 'ニャニャニャ！猫だよ！'
+        };
+        let changeLanguage = function () {
+            $('span.i18n').each((i, e) => {
+                let id = $(e).attr('id');
+                if (lang_tw[id] != undefined) {
+                    $(e).text(lang_tw[id]);
+                }
+            });
+        }
+        $('nav a').on('click', function (e) {
+            e.preventDefault();
+            let target = $(e.currentTarget.hash);
+            if (target.length == 1) {
+                let top = target.offset().top - $('#navBlock').outerHeight();
+                if (top > 0) {
+                    $('html').animate({'scrollTop': top}, 100);
+                }
+            } else {
+                $('html').animate({'scrollTop': 0}, 100);
+            }
+        });
+
+        $(window).on('scroll', function (e) {
+            let scrollY = e.currentTarget.scrollY;
+            let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 4 );
+            if (scrollY < frontH) {
+                $('#navBlock').addClass('bg-pos-999');
+            } else {
+                $('#navBlock').removeClass('bg-pos-999');
+            }
+        });
+    </script>
+</body>
+
+</html>
