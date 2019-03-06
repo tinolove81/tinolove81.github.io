@@ -58,7 +58,7 @@
     </style>
 </head>
 
-<body>
+<body data-spy='scroll' data-target='#navBlock'>
     <nav class='navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow'>
         <div class='container justify-content-between'>
             <a class='navbar-brand position-absolute' href='#'>Tinolove81</a>
@@ -68,12 +68,12 @@
             </button>
             <div id='collapseNav' class='collapse navbar-collapse'>
                 <div class='navbar-nav mx-auto'>
-                    <a class='nav-item nav-link' href='#'><span id='f_about' class='i18n'>About</span></a>
-                    <a class='nav-item nav-link' href='#'><span id='f_education' class='i18n'>Graduation</span></a>
-                    <a class='nav-item nav-link' href='#'><span id='f_skills' class='i18n'>Skills</span></a>
-                    <a class='nav-item nav-link' href='#'><span id='f_works' class='i18n'>Works</span></a>
-                    <a class='nav-item nav-link' href='#'><span id='f_projects' class='i18n'>Projects</span></a>
-                    <a class='nav-item nav-link' href='#'><span id='f_contact' class='i18n'>Contact</span></a>
+                    <a class='nav-item nav-link' href='#aboutBlock'><span id='f_about' class='i18n'>About</span></a>
+                    <a class='nav-item nav-link' href='#educationBlock'><span id='f_education' class='i18n'>Graduation</span></a>
+                    <a class='nav-item nav-link' href='#skillsBlock'><span id='f_skills' class='i18n'>Skills</span></a>
+                    <a class='nav-item nav-link' href='#worksBlock'><span id='f_works' class='i18n'>Works</span></a>
+                    <a class='nav-item nav-link' href='#projectsBlock'><span id='f_projects' class='i18n'>Projects</span></a>
+                    <a class='nav-item nav-link' href='#contactBlock'><span id='f_contact' class='i18n'>Contact</span></a>
                 </div>
             </div>
         </div>
@@ -91,18 +91,27 @@
             </div>
         </div>
     </div>
-    <div class='container mb-1'>
-        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>About Me</span></div></div>
+    <div id='aboutBlock' class='container py-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>About Me</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
     </div>
-    <div class='container mb-1'>
-        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_education' class='i18n'>Education Background</span></div></div>
+    <div id='educationBlock' class='container py-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_education' class='i18n'>Education Background</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
     </div>
-    <div class='container mb-1'>
-        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>Skills</span></div></div>
-        <div class='row border-bottom'>
-            <div class='col-6'>
+    <div id='skillsBlock' class='container py-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>Skills</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row'>
+            <div class='col-12 col-sm-6'>
+                <span class='badge badge-pill badge-success'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                 <div class='card card-body m-1'>
-                    <div class='card-text'><span id='f_skills_conversant' class='i18n'>Conversant</span></div>
                     <div class='card-text row'>
                         <div class='col-6'><a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank' rel='noopener'>HTML</a></div>
                         <div class='col-6'>CSS、SCSS、Boostrap</div>
@@ -112,28 +121,35 @@
                     </div>
                 </div>
             </div>
-            <div class='col-6'>
-                <div class='card m-1'>
-                    <div class='card-header'><span id='f_skills_understand' class='i18n'>Understand</span></div>
-                    <div class='card-body'>
-                            <p class='card-text'>Node.js</p>
-                            <p class='card-text'>SQLite</p>
-                            <p class='card-text'>PHP</p>
-                    </div>
+            <div class='col-12 col-sm-6'>
+                <span class='badge badge-pill badge-warning'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                <div class='card card-body m-1'>
+                        <div class='card-text'>Node.js</div>
+                        <div class='card-text'>SQLite</div>
+                        <div class='card-text'>PHP</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class='container mb-1'>
-        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-briefcase fa-fw'></i><span id='f_works' class='i18n'>Work Experience</span></div></div>
+    <div id='worksBlock' class='container py-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto'><i class='fas fa-briefcase fa-fw'></i><span id='f_works' class='i18n'>Work Experience</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
     </div>
-    <div class='container mb-1'>
-        <div class='row border-bottom'><div class='col-auto'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div></div>
+    <div id='projectsBlock' class='container py-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
     </div>
-    <div class='container mb-1'>
-        <div class='row border-bottom'><div class='col-auto'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>Contact</span></div></div>
+    <div id='contactBlock' class='container py-3 bg-light'>
+        <div class='row'>
+            <div class='col-auto'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>Contact</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
     </div>
-    <div class='container mb-1'>
+    <div class='container py-3 bg-light'>
         <ul class='list-group'>
             <li class='list-group-item'><a href='../pad-ss/index.html'>PaD Skill Search</a></li>
             <li class='list-group-item'><a href='http://localhost:714/Monster/'>PaD Monster Info</a></li>
