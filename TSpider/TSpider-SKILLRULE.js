@@ -92,7 +92,7 @@ function solve(mArray, mKey) {
             ans_c = 'NotFourArgsSkill???';
         }
     } else if (mKey == 'random') {
-        let element = /(十字)|(L字)|(火)|(水)|(木)|(光)|(闇)|(回復)|(邪魔)|([猛]*毒)|(爆弾)/g;
+        let element = /(十字)|(L字)|(火)|(水)|(木)|(光)|(闇)|(回復)|(邪魔)|([猛]*毒)|(爆弾)|(5属性)/g;
         let A = mArray[0].match(element);
         
         if (A[0] == '十字') {
@@ -109,6 +109,9 @@ function solve(mArray, mKey) {
             }
         } else {
             for (let i = 0; i < A.length; i++) {
+                if (A[i] == '5属性') {
+                    ans_c = ans_c.concat(['隨機轉火', '隨機轉水', '隨機轉木', '隨機轉光', '隨機轉闇']);
+                } else {
                 ans_c.push(`隨機轉${A[i]}`);
             }
         }

@@ -22,8 +22,8 @@
         #frontBlock {
             padding-top: 25px;
         }
-        .bg-blueliner {
-            background-image: linear-gradient(141deg, #9fb8ad 0%, #aaccff 50%, #2cb5e8 75%);
+        .bg-frontliner {
+            background-image: linear-gradient(141deg, #b8a39f 0%, #ffaaccd3 50%, #ffc8c8 75%);
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -69,8 +69,8 @@
     </style>
 </head>
 
-<body data-spy='scroll' data-target='#navBlock'>
-    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-transparent bg-blueliner bg-pos-999 fixed-top shadow'>
+<body class='bg-transparent bg-frontliner' data-spy='scroll' data-target='#navBlock'>
+    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-frontliner fixed-top shadow'>
         <div class='container justify-content-between'>
             <a class='navbar-brand position-absolute' href='#'>Mini</a>
             <div class=''></div>
@@ -88,26 +88,26 @@
             </div>
         </div>
     </nav>
-    <div id='frontBlock' class='container-fluid bg-transparent bg-blueliner align-middle'>
+    <div id='frontBlock' class='container-fluid bg-transparent align-middle'>
         <div class='row justify-content-center align-items-center'>
             <div class='col-auto'>
                 <img class='border rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
             </div>
             <div class='col-auto'>
                 <div class='row flex-column'>
-                    <div class='col-auto'><span class='h2'>Mini Chen</span></div>
+                    <div class='col-auto'><span class='h2'>Mini Meow</span></div>
                     <div class='col-auto'><span id='f_title' class='i18n'>喵喵叫的貓貓</span></div>
                 </div>
             </div>
         </div>
     </div>
-    <div id='aboutBlock' class='container py-3 bg-light'>
+    <div id='aboutBlock' class='container my-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto h4'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>關於喵</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>關於喵</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
-        <div class='row'>
-            <div class='col'>
+        <div class='row pl-3'>
+            <div class='col-12'>
                 <span id='f_about_contain' class='i18n'>
                     一隻無憂無慮的貓貓。<br/>
                     <br/>
@@ -123,12 +123,12 @@
             </div>
         </div>
     </div>
-    <div id='infoBlock' class='container pb-3 bg-light'>
+    <div id='infoBlock' class='container mb-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto h4 m-0'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_info' class='i18n'>喵資訊</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_info' class='i18n'>喵資訊</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
-        <div class='row'>
+        <div class='row pl-3'>
             <div class='col'>
                 <ul class='m-0'>
                     <li><span id='f_info_birth' class='i18n'>生日：2013年6月某日</span></li>
@@ -140,12 +140,12 @@
             </div>
         </div>
     </div>
-    <div id='skillsBlock' class='container pb-3 bg-light'>
+    <div id='skillsBlock' class='container mb-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto h4'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>喵嗜好</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>喵嗜好</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
-        <div class='row'>
+        <div class='row pl-3'>
             <div class='col-4'>
                 <span class='badge badge-pill badge-success'><span id='f_skills_like' class='i18n'>喜歡</span></span>
                 <div class='card card-body'>
@@ -174,18 +174,18 @@
             </div>
         </div>
     </div>
-    <div id='projectBlock' class='container pb-3 bg-light'>
+    <div id='projectBlock' class='container mb-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
     </div>
-    <div id='contactBlock' class='container pb-3 bg-light'>
+    <div id='contactBlock' class='container mb-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto h4'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>聯繫喵</span></div>
+            <div class='col-auto h4 my-1'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>聯繫喵</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
-        <div class='row'><div class='col-12'>沒事不要找我，有事找我室友 <a href='./index.html'>Tinolove81</a> ！</div></div>
+        <div class='row pl-3'><div class='col-12'>沒事不要找我，有事找我室友 <a href='./index.html'>Tinolove81</a> ！</div></div>
     </div>
 
     <script>
@@ -231,7 +231,7 @@
 
         $(window).on('scroll', function (e) {
             let scrollY = e.currentTarget.scrollY;
-            let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 4 );
+            let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
             if (scrollY < frontH) {
                 $('#navBlock').addClass('bg-pos-999');
             } else {

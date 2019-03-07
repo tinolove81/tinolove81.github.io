@@ -14,19 +14,28 @@
         @import url('https://fonts.googleapis.com/css?family=Imprima');
         @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
         body {
+            position: relative;
             height: 100%;
-            font-family: Imprima, 'Noto Sans JP';
+            font-family: Imprima, 'Noto Sans TC', 'Noto Sans JP';
         }
         #frontBlock {
             padding-top: 25px;
-            background-image: linear-gradient(141deg, #9fb8ad 0%, #aaccff 50%, #2cb5e8 75%);
+        }
+        .bg-frontliner {
+            background-image: linear-gradient(141deg, #a39fb8 0%, #aaccffd3 50%, #c8c8ff 75%);
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: center center;
+            background-position: 0 0;
+            transition: .1s ease-in-out;
+        }
+        .bg-pos-999 {
+            background-position: 0 100px;
+        }
+        .text-transparent {
+            color: transparent !important;
         }
 
-        
         /* Small devices (landscape phones, 576px and up) */
         @media (min-width: 576px) {
             #frontBlock {
@@ -58,8 +67,8 @@
     </style>
 </head>
 
-<body data-spy='scroll' data-target='#navBlock'>
-    <nav class='navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow'>
+<body class='bg-transparent bg-frontliner' data-spy='scroll' data-target='#navBlock'>
+    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-frontliner fixed-top shadow'>
         <div class='container justify-content-between'>
             <a class='navbar-brand position-absolute' href='#'>Tinolove81</a>
             <div class=''></div>
@@ -78,7 +87,7 @@
             </div>
         </div>
     </nav>
-    <div id='frontBlock' class='container-fluid mb-1 bg-transparent align-middle'>
+    <div id='frontBlock' class='container-fluid bg-transparent align-middle'>
         <div class='row justify-content-center align-items-center'>
             <div class='col-auto'>
                 <img class='rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
@@ -91,72 +100,124 @@
             </div>
         </div>
     </div>
-    <div id='aboutBlock' class='container py-3 bg-light'>
+    <div id='aboutBlock' class='container my-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>About Me</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>About Me</span></div>
             <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row pl-3'>
+            <div class='col-12'>台湾の台北で働くWebエンジニアです</div>
         </div>
     </div>
-    <div id='educationBlock' class='container py-3 bg-light'>
+    <div id='educationBlock' class='container my-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_education' class='i18n'>Education Background</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_education' class='i18n'>Education Background</span></div>
             <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row pl-3'>
+            <div class='col-12'>
+                <ul class='list-group list-group-flush'>
+                    <li class='list-group-item card'>
+                        <span class='h5'>國立台中科技大學</span> <small><i class='far fa-clock'></i> 2010.09 - 2014.07</small><br/>
+                        <span>資訊工程系 學士</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div id='skillsBlock' class='container py-3 bg-light'>
+    <div id='skillsBlock' class='container my-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>Skills</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>Skills</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
-        <div class='row'>
+        <div class='row pl-3'>
             <div class='col-12 col-sm-6'>
                 <span class='badge badge-pill badge-success'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                 <div class='card card-body m-1'>
                     <div class='card-text row'>
                         <div class='col-6'><a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank' rel='noopener'>HTML</a></div>
-                        <div class='col-6'>CSS、SCSS、Boostrap</div>
-                        <div class='col-6'>JavaScript、jQuery、Ajax</div>
-                        <div class='col-6'>Vue.js</div>
-                        <div class='col-6'>Socket.io</div>
+                        <div class='col-6'><a href='http://vanilla-js.com/' target='_blank' rel='noopener'>JavaScript</a></div>
+                        <div class='col-6'><a href='https://developer.mozilla.org/en-US/docs/Web/CSS' target='_blank' rel='noopener'>CSS</a></div>
+                        <div class='col-6'><a href='https://jquery.com/' target='_blank' rel='noopener'>jQuery</a></div>
+                        <div class='col-6'><a href='https://getbootstrap.com/' target='_blank' rel='noopener'>Boostrap</a></div>
+                        <div class='col-6'><a href='https://sass-lang.com/' target='_blank' rel='noopener'>SCSS</a></div>
+                        <div class='col-6'><a href='https://en.wikipedia.org/wiki/Responsive_web_design' target='_blank' rel='noopener'>RWD</a></div>
+                        <div class='col-6'><a href='https://vuejs.org/' target='_blank' rel='noopener'>Vue.js</a></div>
+                        <div class='col-6'><a href='https://socket.io/' target='_blank' rel='noopener'>Socket.io</a></div>
                     </div>
                 </div>
             </div>
             <div class='col-12 col-sm-6'>
                 <span class='badge badge-pill badge-warning'><span id='f_skills_understand' class='i18n'>Understand</span></span>
                 <div class='card card-body m-1'>
-                        <div class='card-text'>Node.js</div>
-                        <div class='card-text'>SQLite</div>
-                        <div class='card-text'>PHP</div>
+                    <div class='card-text row'>
+                        <div class='col-6'><a href='https://nodejs.org/' target='_blank' rel='noopener'>Node.js</a></div>
+                        <div class='col-6'><a href='http://expressjs.com/' target='_blank' rel='noopener'>Express</a></div>
+                        <div class='col-6'><a href='https://www.sqlite.org/' target='_blank' rel='noopener'>SQLite</a></div>
+                        <div class='col-6'><a href='https://webpack.js.org/' target='_blank' rel='noopener'>Webpack</a></div>
+                        <div class='col-6'><a href='http://www.php.net/' target='_blank' rel='noopener'>PHP</a></div>
+                        <div class='col-6'><a href='https://git-scm.com/' target='_blank' rel='noopener'>Git</a></div>
+                        <div class='col-6'><a href='https://www.linux.org/' target='_blank' rel='noopener'>Linux</a></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id='worksBlock' class='container py-3 bg-light'>
+    <div id='worksBlock' class='container my-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto'><i class='fas fa-briefcase fa-fw'></i><span id='f_works' class='i18n'>Work Experience</span></div>
-            <div class='col-12'><hr class='m-1' /></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-briefcase fa-fw'></i><span id='f_works' class='i18n'>Work Experience</span></div>
+            <div class='col-12'><hr class='m-1'/></div>
+        </div>
+        <div class='row pl-3'>
+            <div class='col-12'>
+                <div class='card card-body border rounded'>
+                    <span class='card-text h5 m-0'>科技公司</span><br/>
+                    <span><i class='far fa-clock'></i> 2017年03月 - 現</span>
+                    <hr class='m-1'/>
+                </div>
+            </div>
+            <div class='col-12'>
+                <div class='card card-body border rounded'>
+                    <span class='card-text h5 m-0'>川訊系統控制</span><br/>
+                    <span class='card-text'><i class='far fa-clock'></i> 2014年08月 - 2016年09月</span>
+                    <hr class='m-1'/>
+                </div>
+            </div>
+            <div class='col-12'>
+                <div class='card card-body border rounded'>
+                    <span class='card-text h5 m-0'>國立台中科技大學</span><br/>
+                    <span class='card-text'><i class='far fa-clock'></i> 2014年09月 - 2014年07月</span>
+                    <hr class='m-1'/>
+                </div>
+            </div>
         </div>
     </div>
-    <div id='projectsBlock' class='container py-3 bg-light'>
+    <div id='projectsBlock' class='container my-2 py-1 bg-light rounded'>
         <div class='row'>
-            <div class='col-auto'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
-    </div>
-    <div id='contactBlock' class='container py-3 bg-light'>
-        <div class='row'>
-            <div class='col-auto'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>Contact</span></div>
-            <div class='col-12'><hr class='m-1' /></div>
+        <div class='row pl-3'>
+            <div class='col'>
+                <ul class='list-group list-group-flush'>
+                    <li class='list-group-item'><a href='https://tinolove81.github.io/index_cat.html' target='_blank' rel='noopener'>うちにねこがいます！</a></li>
+                    <li class='list-group-item'><a href='https://tinolove81.github.io/pad-ss/' target='_blank' rel='noopener'>PaD Skill Search</a></li>
+                    <li class='list-group-item'><a href='http://localhost:714/Monster/' target='_blank' rel='noopener'>PaD Monster Info</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class='container py-3 bg-light'>
-        <ul class='list-group'>
-            <li class='list-group-item'><a href='../pad-ss/index.html'>PaD Skill Search</a></li>
-            <li class='list-group-item'><a href='http://localhost:714/Monster/'>PaD Monster Info</a></li>
-            <li class='list-group-item'>Morbi leo risus</li>
-            <li class='list-group-item'>Porta ac consectetur ac</li>
-            <li class='list-group-item'>Vestibulum at eros</li>
-        </ul>
+    <div id='contactBlock' class='container my-2 py-1 bg-light rounded'>
+        <div class='row'>
+            <div class='col-auto h4 my-1'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>Contact</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row pl-3'>
+            <div class='col-12'>陳 冠志(Chen Kuan-chih)</div>
+            <div class='col-12'>Tel : +886 921 314 020</div>
+            <div class='col-12'>Mail : <a href='mailto:tinolove81@gmail.com' target='_blank' rel='noopener'>tinolove81＠gmail.com</a></div>
+            <div class='col-12'><a href='https://github.com/tinolove81' target='_blank' rel='noopener'><i class='fab fa-github text-dark'></i></a></div>
+        </div>
     </div>
 
     <script>
@@ -190,6 +251,28 @@
             let id = $(e).attr('id');
             if (lang_tw[id] != undefined) {
                 $(e).text(lang_tw[id]);
+            }
+        });
+        $('nav a').on('click', function (e) {
+            e.preventDefault();
+            let target = $(e.currentTarget.hash);
+            if (target.length == 1) {
+                let top = target.offset().top - $('#navBlock').outerHeight();
+                if (top > 0) {
+                    $('html').animate({'scrollTop': top}, 100);
+                }
+            } else {
+                $('html').animate({'scrollTop': 0}, 100);
+            }
+        });
+
+        $(window).on('scroll', function (e) {
+            let scrollY = e.currentTarget.scrollY;
+            let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
+            if (scrollY < frontH) {
+                $('#navBlock').addClass('bg-pos-999');
+            } else {
+                $('#navBlock').removeClass('bg-pos-999');
             }
         });
     </script>
