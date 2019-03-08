@@ -23,7 +23,7 @@
             padding-top: 25px;
         }
         .bg-frontliner {
-            background-image: linear-gradient(141deg, #b8a39f 0%, #ffaaccd3 50%, #ffc8c8 75%);
+            background-image: linear-gradient(141deg, #b8a39f 0%, #ffaaccd3 40%, #ffc8c8 75%);
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -69,7 +69,7 @@
     </style>
 </head>
 
-<body class='bg-transparent bg-frontliner' data-spy='scroll' data-target='#navBlock'>
+<body class='bg-transparent' data-spy='scroll' data-target='#navBlock'>
     <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-frontliner fixed-top shadow'>
         <div class='container justify-content-between'>
             <a class='navbar-brand position-absolute' href='#'>Mini</a>
@@ -85,17 +85,22 @@
                     <!-- <a class='nav-item nav-link' href='#'><span id='f_projects' class='i18n'>Projects</span></a> -->
                     <a class='nav-item nav-link' href='#contactBlock'><span id='f_contact' class='i18n'>聯繫喵</span></a>
                 </div>
+                <select class='custom-select custom-select-sm w-auto' autocomplete='off'>
+                    <option value='tw' selected>繁體中文</option>
+                    <option value='jp'>日本語</option>
+                    <option value='en'>English</option>
+                </select>
             </div>
         </div>
     </nav>
-    <div id='frontBlock' class='container-fluid bg-transparent align-middle'>
+    <div id='frontBlock' class='container-fluid bg-transparent bg-frontliner align-middle'>
         <div class='row justify-content-center align-items-center'>
             <div class='col-auto'>
                 <img class='border rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
             </div>
             <div class='col-auto'>
                 <div class='row flex-column'>
-                    <div class='col-auto'><span class='h2'>Mini Meow</span></div>
+                    <div class='col-auto'><span class='h2'>Mini Chen</span></div>
                     <div class='col-auto'><span id='f_title' class='i18n'>喵喵叫的貓貓</span></div>
                 </div>
             </div>
@@ -206,17 +211,33 @@
             'f_contact': '聯繫喵',
         };
         const lang_jp = {
-            'f_title': 'ニャニャニャ！猫だよ！'
+            'f_title': 'ニャニャニャ！猫だよ！',
+            'f_about': 'にゃんについて',
+            'f_info': 'にゃんの情報',
+            'f_info_birth': 'お誕生日：2013年6月のある日',
+            'f_info_sex': '性別：女生',
+            'f_info_weight': '體重：秘密！',
+            'f_info_type': '種類：米克斯',
+            'f_info_color': '毛色：虎斑、白色',
+            'f_skills': '喵嗜好',
+            'f_skills_like': '喜歡',
+            'f_skills_dislike': '不喜歡',
+            'f_skills_hate': '討厭',
+            'f_contact': '聯繫喵',
         };
-        let changeLanguage = function () {
+        const lang_en = {
+            'f_title': 'A cat.'
+        };
+        let changeLanguage = (mLang) => {
+            let Lang = {'tw': lang_tw, 'jp': lang_jp, 'en': lang_en};
             $('span.i18n').each((i, e) => {
                 let id = $(e).attr('id');
-                if (lang_tw[id] != undefined) {
-                    $(e).text(lang_tw[id]);
+                if (Lang[mLang][id] != undefined) {
+                    $(e).text(Lang[mLang][id]);
                 }
             });
-        }
-        $('nav a').on('click', function (e) {
+        };
+        $('nav a').on('click', (e) => {
             e.preventDefault();
             let target = $(e.currentTarget.hash);
             if (target.length == 1) {
@@ -228,8 +249,11 @@
                 $('html').animate({'scrollTop': 0}, 100);
             }
         });
+        $('nav select').on('change', (e) => {
+            changeLanguage(e.target.value);
+        });
 
-        $(window).on('scroll', function (e) {
+        $(window).on('scroll', (e) => {
             let scrollY = e.currentTarget.scrollY;
             let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
             if (scrollY < frontH) {
