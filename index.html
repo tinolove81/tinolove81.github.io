@@ -36,6 +36,18 @@
         .text-transparent {
             color: transparent !important;
         }
+        ruby {
+            cursor: pointer;
+        }
+        ruby rt {
+            opacity: 1;
+            transition: all .15s ease-in;
+        }
+        ruby:hover rt,
+        ruby:active rt,
+        ruby:focus rt {
+            opacity: 1 !important;
+        }
 
         /* Small devices (landscape phones, 576px and up) */
         @media (min-width: 576px) {
@@ -88,15 +100,29 @@
             </div>
         </div>
     </nav>
-    <div id='frontBlock' class='container-fluid bg-transparent bg-frontliner align-middle'>
-        <div class='row justify-content-center align-items-center'>
-            <div class='col-auto'>
-                <img class='rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
+    <div id='frontBlock' class='container-fluid bg-transparent bg-frontliner'>
+        <div class='row'>
+            <div class='col-7 d-flex justify-content-center'>
+                <div class='row align-items-center'>
+                    <div class='col-auto'>
+                        <img class='rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
+                    </div>
+                    <div class='col-auto'>
+                        <div class='row flex-column'>
+                            <div class='col-auto'><span class='h2'>Henry Chen</span></div>
+                            <div class='col-auto'><span id='f_worktype' class='i18n'>Front-End Engineer</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class='col-auto'>
-                <div class='row flex-column'>
-                    <div class='col-auto'><span class='h2'>Henry Chen</span></div>
-                    <div class='col-auto'><span id='f_worktype' class='i18n'>Front-End Engineer</span></div>
+            <div class='col-5'>
+                <div class='row'>
+                    <div class='col-12'><ruby><rb>何</rb><rt>なに</rt></ruby>もしなければ<ruby><rb>何</rb><rt>なに</rt></ruby>も<ruby><rb>起</rb><rt>お</rt></ruby>きない。</div>
+                    <div class='col-12'><ruby><rb>行</rb><rt>い</rt></ruby>かなければそれはやってこない。</div>
+                    <div class='col-12'><ruby><rb>飛</rb><rt>と</rt></ruby>び<ruby><rb>出</rb><rt>だ</rt></ruby>さなければ<ruby><rb>世界</rb><rt>せかい</rt></ruby>は<ruby><rb>変</rb><rt>か</rt></ruby>わらない。</div>
+                    <div class='col-12'>すべてのひとの<ruby><rb>心</rb><rt>こころ</rt></ruby>に<ruby><rb>翼</rb><rt>つばさ</rt></ruby>はある。</div>
+                    <div class='col-12'><ruby><rb>使</rb><rt>つか</rt></ruby>うか、<ruby><rb>使</rb><rt>つか</rt></ruby>わないか。</div>
+                    <div class='col-12'><ruby><rb>世界</rb><rt>せかい</rt></ruby>は<ruby><rb>待</rb><rt>ま</rt></ruby>っている。</div>
                 </div>
             </div>
         </div>
