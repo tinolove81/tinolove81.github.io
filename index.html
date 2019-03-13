@@ -19,22 +19,25 @@
             height: 100%;
             font-family: Imprima, 'Noto Sans TC', 'Noto Sans JP';
         }
+        #collapseNav {
+            position: absolute;
+            top: 0; left: 0;
+            margin-top: 56px;
+            padding: 2rem;
+            width: 100%;
+            min-height: 100%;
+            background-color: rgba(0, 0, 0, .7);
+            z-index: 1001;
+        }
+        #collapseNav select {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23f8f9fa' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
         #frontBlock {
-            padding-top: 25px;
-        }
-        .bg-frontliner {
-            background-image: linear-gradient(141deg, #a39fb8 0%, #aaccffc8 40%, #c8c8ff 75%);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: 0 0;
-            transition: .1s ease-in-out;
-        }
-        .bg-pos-999 {
-            background-position: 0 100px;
-        }
-        .text-transparent {
-            color: transparent !important;
+            padding-top: 125px;
+            padding-bottom: 100px;
         }
         ruby {
             cursor: pointer;
@@ -49,60 +52,92 @@
             opacity: 1 !important;
         }
 
+        .bg-frontliner {
+            background-image: linear-gradient(141deg, #a39fb8 0%, #aaccffc8 40%, #c8c8ff 75%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: 0 0;
+            transition: .1s ease-in-out;
+        }
+        .op-0 { opacity: 0; }
+        .op-3 { opacity: .3; }
+        .op-5 { opacity: .5; }
+        .op-8 { opacity: .8; }
+        .op-9 { opacity: .9; }
+
         /* Small devices (landscape phones, 576px and up) */
         @media (min-width: 576px) {
+            #collapseNav {
+                position: absolute;
+            }
             #frontBlock {
-                padding-top: 25px;
-                padding-bottom: 10px;
+                padding-top: 125px;
+                padding-bottom: 100px;
             }
         }
         /* Medium devices (tablets, 768px and up) */
         @media (min-width: 768px) {
-            #frontBlock {
-                padding-top: 75px;
-                padding-bottom: 55px;
+            #collapseNav {
+                position: relative;
+                top: initial; left: initial;
+                margin-top: initial;
+                padding: initial;
+                width: initial;
+                min-height: initial;
+                background-color: initial;
+                z-index: initial;
             }
-        }
-        /* Large devices (desktops, 992px and up) */
-        @media (min-width: 992px) {
             #frontBlock {
                 padding-top: 150px;
                 padding-bottom: 125px;
             }
         }
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) {
+            #frontBlock {
+                padding-top: 175px;
+                padding-bottom: 150px;
+            }
+        }
         /* Extra large devices (large desktops, 1200px and up) */
         @media (min-width: 1200px) {
             #frontBlock {
-                padding-top: 225px;
+                padding-top: 200px;
                 padding-bottom: 175px;
             }
         }
     </style>
 </head>
-
-<body data-spy='scroll' data-target='#navBlock'>
-    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-frontliner fixed-top shadow'>
-        <div class='container justify-content-between'>
-            <a class='navbar-brand position-absolute' href='#'>Tinolove81</a>
-            <div class=''></div>
+<body>
+    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-dark shadow'>
+        <div class='container justify-content-between align-items-start'>
+            <a class='navbar-brand' href='#frontBlock'>Tinolove81</a>
             <button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#collapseNav'>
                 <span class='navbar-toggler-icon'></span>
             </button>
-            <div id='collapseNav' class='collapse navbar-collapse'>
-                <div class='navbar-nav mx-auto'>
-                    <a class='nav-item nav-link' href='#aboutBlock'><span id='f_about' class='i18n'>About</span></a>
-                    <a class='nav-item nav-link' href='#educationBlock'><span id='f_education' class='i18n'>Graduation</span></a>
-                    <a class='nav-item nav-link' href='#skillsBlock'><span id='f_skills' class='i18n'>Skills</span></a>
-                    <a class='nav-item nav-link' href='#worksBlock'><span id='f_works' class='i18n'>Works</span></a>
-                    <a class='nav-item nav-link' href='#projectsBlock'><span id='f_projects' class='i18n'>Projects</span></a>
-                    <a class='nav-item nav-link' href='#contactBlock'><span id='f_contact' class='i18n'>Contact</span></a>
+            <div id='collapseNav' class='collapse navbar-collapse justify-content-around'>
+                <div class='navbar-nav'>
+                    <a class='nav-item nav-link' href='#worksBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_works' class='i18n align-middle'>Experience</span></a>
+                    <a class='nav-item nav-link' href='#educationBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_education' class='i18n align-middle'>Education</span></a>
+                    <a class='nav-item nav-link' href='#skillsBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_skills' class='i18n align-middle'>Skills</span></a>
+                    <a class='nav-item nav-link' href='#projectsBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_projects' class='i18n align-middle'>Projects</span></a>
+                    <a class='nav-item nav-link' href='#contactBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_contact' class='i18n align-middle'>Contact</span></a>
+                </div>
+                <div class='text-right'>
+                <select class='custom-select custom-select-sm bg-dark text-light' autocomplete='off'>
+                    <option value='none' selected disabled>Language</option>
+                    <option value='tw'>繁體中文</option>
+                    <option value='jp'>日本語</option>
+                    <option value='en'>English</option>
+                </select>
                 </div>
             </div>
         </div>
     </nav>
     <div id='frontBlock' class='container-fluid bg-transparent bg-frontliner'>
         <div class='row'>
-            <div class='col-7 d-flex justify-content-center'>
+            <div class='col-12 col-md-7 d-flex justify-content-center'>
                 <div class='row align-items-center'>
                     <div class='col-auto'>
                         <img class='rounded-circle' width='150px' height='150px' src='https://pics.prcm.jp/a538fc10cb21a/47076940/jpeg/47076940.jpeg' alt='Front Icon'/>
@@ -115,7 +150,7 @@
                     </div>
                 </div>
             </div>
-            <div class='col-5'>
+            <div class='col-5 d-none d-md-block'>
                 <div class='row'>
                     <div class='col-12'><ruby><rb>何</rb><rt>なに</rt></ruby>もしなければ<ruby><rb>何</rb><rt>なに</rt></ruby>も<ruby><rb>起</rb><rt>お</rt></ruby>きない。</div>
                     <div class='col-12'><ruby><rb>行</rb><rt>い</rt></ruby>かなければそれはやってこない。</div>
@@ -129,70 +164,16 @@
     </div>
     <div id='aboutBlock' class='container my-2 py-1'>
         <div class='row'>
-            <div class='col-auto h4 my-1'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>About Me</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-info fa-fw'></i><span id='f_about' class='i18n'>Personal ​info​​​​</span></div>
             <div class='col-12'><hr class='m-1' /></div>
         </div>
         <div class='row pl-3'>
             <div class='col-12'>台湾の台北で働くWebエンジニアです</div>
         </div>
     </div>
-    <div id='educationBlock' class='container my-2 py-1'>
-        <div class='row'>
-            <div class='col-auto h4 my-1'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_education' class='i18n'>Education Background</span></div>
-            <div class='col-12'><hr class='m-1' /></div>
-        </div>
-        <div class='row pl-3'>
-            <div class='col-12'>
-                <ul class='list-group list-group-flush'>
-                    <li class='list-group-item card'>
-                        <span class='h5'>國立台中科技大學</span> <small><i class='far fa-clock'></i> 2010.09 - 2014.07</small><br/>
-                        <span>資訊工程系 學士</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div id='skillsBlock' class='container my-2 py-1'>
-        <div class='row'>
-            <div class='col-auto h4 my-1'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>Skills</span></div>
-            <div class='col-12'><hr class='m-1' /></div>
-        </div>
-        <div class='row pl-3'>
-            <div class='col-12 col-sm-6'>
-                <span class='badge badge-pill badge-success'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
-                <div class='card card-body m-1'>
-                    <div class='card-text row'>
-                        <div class='col-6'><a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank' rel='noopener'>HTML</a></div>
-                        <div class='col-6'><a href='http://vanilla-js.com/' target='_blank' rel='noopener'>JavaScript</a></div>
-                        <div class='col-6'><a href='https://developer.mozilla.org/en-US/docs/Web/CSS' target='_blank' rel='noopener'>CSS</a></div>
-                        <div class='col-6'><a href='https://jquery.com/' target='_blank' rel='noopener'>jQuery</a></div>
-                        <div class='col-6'><a href='https://getbootstrap.com/' target='_blank' rel='noopener'>Boostrap</a></div>
-                        <div class='col-6'><a href='https://sass-lang.com/' target='_blank' rel='noopener'>SCSS</a></div>
-                        <div class='col-6'><a href='https://en.wikipedia.org/wiki/Responsive_web_design' target='_blank' rel='noopener'>RWD</a></div>
-                        <div class='col-6'><a href='https://vuejs.org/' target='_blank' rel='noopener'>Vue.js</a></div>
-                        <div class='col-6'><a href='https://socket.io/' target='_blank' rel='noopener'>Socket.io</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class='col-12 col-sm-6'>
-                <span class='badge badge-pill badge-warning'><span id='f_skills_understand' class='i18n'>Understand</span></span>
-                <div class='card card-body m-1'>
-                    <div class='card-text row'>
-                        <div class='col-6'><a href='https://nodejs.org/' target='_blank' rel='noopener'>Node.js</a></div>
-                        <div class='col-6'><a href='http://expressjs.com/' target='_blank' rel='noopener'>Express</a></div>
-                        <div class='col-6'><a href='https://www.sqlite.org/' target='_blank' rel='noopener'>SQLite</a></div>
-                        <div class='col-6'><a href='https://webpack.js.org/' target='_blank' rel='noopener'>Webpack</a></div>
-                        <div class='col-6'><a href='http://www.php.net/' target='_blank' rel='noopener'>PHP</a></div>
-                        <div class='col-6'><a href='https://git-scm.com/' target='_blank' rel='noopener'>Git</a></div>
-                        <div class='col-6'><a href='https://www.linux.org/' target='_blank' rel='noopener'>Linux</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id='worksBlock' class='container my-2 py-1'>
         <div class='row'>
-            <div class='col-auto h4 my-1'><i class='fas fa-briefcase fa-fw'></i><span id='f_works' class='i18n'>Work Experience</span></div>
+            <div class='col-auto h4 my-1'><i class='fas fa-briefcase fa-fw'></i><span id='f_works' class='i18n'>Experience</span></div>
             <div class='col-12'><hr class='m-1'/></div>
         </div>
         <div class='row pl-3'>
@@ -219,6 +200,139 @@
             </div>
         </div>
     </div>
+    <div id='educationBlock' class='container my-2 py-1'>
+        <div class='row'>
+            <div class='col-auto h4 my-1'><i class='fas fa-graduation-cap fa-fw'></i><span id='f_education' class='i18n'>Education</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='row pl-3'>
+            <div class='col-12'>
+                <ul class='list-group list-group-flush'>
+                    <li class='list-group-item card'>
+                        <span class='h5'>國立台中科技大學</span> <small><i class='far fa-clock'></i> 2010.09 - 2014.07</small><br/>
+                        <span>資訊工程系 學士</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id='skillsBlock' class='container my-2 py-1'>
+        <div class='row'>
+            <div class='col-auto h4 my-1'><i class='fas fa-tools fa-fw'></i><span id='f_skills' class='i18n'>Skills</span></div>
+            <div class='col-12'><hr class='m-1' /></div>
+        </div>
+        <div class='d-flex d-md-block pl-3 card-columns flex-column'>
+            <div class='card card-body m-1 order-1'>
+                <strong class='card-text mb-1'>Language</strong>
+                <div class='card-text row'>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank' rel='noopener'>HTML</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='http://vanilla-js.com/' target='_blank' rel='noopener'>JavaScript</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://developer.mozilla.org/en-US/docs/Web/CSS' target='_blank' rel='noopener'>CSS</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='http://www.php.net/' target='_blank' rel='noopener'>PHP</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class='card card-body m-1 order-3'>
+                <strong class='card-text mb-1 order-3'>インフラ</strong>
+                <div class='card-text row'>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://nodejs.org/' target='_blank' rel='noopener'>Node.js</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://nodejs.org/' target='_blank' rel='noopener'>Nginx</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://www.linux.org/' target='_blank' rel='noopener'>Linux</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class='card card-body m-1 order-2'>
+                <strong class='card-text mb-1'>Framework</strong>
+                <div class='card-text row'>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://jquery.com/' target='_blank' rel='noopener'>jQuery</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://sass-lang.com/' target='_blank' rel='noopener'>SCSS</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://getbootstrap.com/' target='_blank' rel='noopener'>Boostrap</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://vuejs.org/' target='_blank' rel='noopener'>Vue.js</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='http://expressjs.com/' target='_blank' rel='noopener'>Express</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://webpack.js.org/' target='_blank' rel='noopener'>Webpack</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class='card card-body m-1 order-5'>
+                <strong class='card-text mb-1'>Others</strong>
+                <div class='card-text row'>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://www.sqlite.org/' target='_blank' rel='noopener'>SQLite</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://git-scm.com/' target='_blank' rel='noopener'>Git</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://en.wikipedia.org/wiki/Responsive_web_design' target='_blank' rel='noopener'>RWD</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://socket.io/' target='_blank' rel='noopener'>Socket.io</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class='card card-body m-1 order-4'>
+                <strong class='card-text mb-1'>Database</strong>
+                <div class='card-text row'>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://www.sqlite.org/' target='_blank' rel='noopener'>SQLite</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://git-scm.com/' target='_blank' rel='noopener'>Git</a>
+                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://en.wikipedia.org/wiki/Responsive_web_design' target='_blank' rel='noopener'>RWD</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://socket.io/' target='_blank' rel='noopener'>Socket.io</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id='projectsBlock' class='container my-2 py-1'>
         <div class='row'>
             <div class='col-auto h4 my-1'><i class='fas fa-folder-open fa-fw'></i><span id='f_projects' class='i18n'>Projects</span></div>
@@ -234,7 +348,7 @@
             </div>
         </div>
     </div>
-    <div id='contactBlock' class='container my-2 py-1 bg-light rounded'>
+    <div id='contactBlock' class='container my-2 py-1'>
         <div class='row'>
             <div class='col-auto h4 my-1'><i class='far fa-envelope fa-fw'></i><span id='f_contact' class='i18n'>Contact</span></div>
             <div class='col-12'><hr class='m-1' /></div>
@@ -250,41 +364,57 @@
     <script>
         // window.location.href = '/pad-ss/';
         const lang_en = {
-            'f_about': 'About Me',
-            'f_education': 'Education Background',
+            'f_about': 'Personal ​info​​​​',
+            'f_works': 'Experience​',
+            'f_education': 'Education',
             'f_skills': 'Skills',
             'f_skills_conversant': 'Conversant',
             'f_skills_understand': 'Understand',
-            'f_works': 'Work Experience',
             'f_projects': 'Projects',
-            'f_contact': 'Contact Me',
+            'f_contact': 'Contact',
             'f_worktype': 'Front-End Engineer',
         };
         const lang_tw = {
-            'f_about': '關於我',
+            'f_about': '個人檔案',
+            'f_works': '工作經驗',
             'f_education': '學歷',
             'f_skills': '專業技能',
             'f_skills_conversant': '熟悉',
             'f_skills_understand': '了解',
-            'f_works': '工作經驗',
             'f_projects': '個人專案',
             'f_contact': '聯繫我',
             'f_worktype': '前端網頁工程師',
         };
         const lang_jp = {
-            'f_worktype': 'ウェブエンジニア'
+            'f_about': '自己紹介',
+            'f_works': '職歴​',
+            'f_education': '学歴',
+            'f_skills': 'スキル',
+            'f_skills_conversant': '熟悉',
+            'f_skills_understand': '了解',
+            'f_projects': 'プロジェクト',
+            'f_contact': '聯繫我',
+            'f_worktype': 'Webエンジニア'
         };
-        $('span.i18n').each((i, e) => {
-            let id = $(e).attr('id');
-            if (lang_tw[id] != undefined) {
-                $(e).text(lang_tw[id]);
-            }
-        });
+        let changeLanguage = (mLang) => {
+            let Lang = {'tw': lang_tw, 'jp': lang_jp, 'en': lang_en};
+            let i = $('span.i18n').length;
+            let Timer = setInterval(() => {
+                if (i <= 0) { return clearInterval(Timer); }
+                $('span.i18n').each((idx, e) => {
+                    let id = $(e).attr('id');
+                    if (Lang[mLang][id] != undefined) {
+                        $(e).text(Lang[mLang][id]);
+                    }
+                    i--;
+                });
+            }, 0);
+        };
         $('nav a').on('click', function (e) {
             e.preventDefault();
             let target = $(e.currentTarget.hash);
             if (target.length == 1) {
-                let top = target.offset().top - $('#navBlock').outerHeight();
+                let top = target.offset().top;
                 if (top > 0) {
                     $('html').animate({'scrollTop': top}, 100);
                 }
@@ -292,16 +422,21 @@
                 $('html').animate({'scrollTop': 0}, 100);
             }
         });
-
-        $(window).on('scroll', function (e) {
-            let scrollY = e.currentTarget.scrollY;
-            let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
-            if (scrollY < frontH) {
-                $('#navBlock').addClass('bg-pos-999');
-            } else {
-                $('#navBlock').removeClass('bg-pos-999');
-            }
+        $('nav select').on('change', (e) => {
+            changeLanguage(e.target.value);
         });
+
+        // $(window).on('scroll', function (e) {
+        //     let scrollY = e.currentTarget.scrollY;
+        //     let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
+        //     if (scrollY < frontH) {
+        //         $('#navBlock').addClass('bg-pos-999');
+        //     } else {
+        //         $('#navBlock').removeClass('bg-pos-999');
+        //     }
+        // });
+        // $(window).on('resize', function (e) {
+        // });
     </script>
 </body>
 
