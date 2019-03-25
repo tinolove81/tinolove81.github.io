@@ -208,7 +208,7 @@
             'f_skills_hate': '討厭',
             'f_contact': '聯繫喵',
         };
-        const lang_jp = {
+        const lang_ja = {
             'f_title': 'ニャニャニャ！猫だよ！',
             'f_about': 'にゃんについて',
             'f_info': 'にゃんの情報',
@@ -227,13 +227,16 @@
             'f_title': 'A cat.'
         };
         let changeLanguage = (mLang) => {
-            let Lang = {'tw': lang_tw, 'jp': lang_jp, 'en': lang_en};
-            $('span.i18n').each((i, e) => {
-                let id = $(e).attr('id');
-                if (Lang[mLang][id] != undefined) {
-                    $(e).text(Lang[mLang][id]);
-                }
-            });
+            let Lang = {'tw': lang_tw, 'ja': lang_ja, 'en': lang_en};
+            if (Object.keys(Lang).indexOf(mLang) > -1) {
+                let Timer = setInterval(() => {
+                    $('span.i18n').each((idx, e) => {
+                        let id = $(e).attr('id');
+                        $(e).text(Lang[mLang][id]);
+                    });
+                    return clearInterval(Timer);
+                }, 100);
+            }
         };
         $('nav a').on('click', (e) => {
             e.preventDefault();
@@ -251,15 +254,27 @@
             changeLanguage(e.target.value);
         });
 
-        $(window).on('scroll', (e) => {
-            let scrollY = e.currentTarget.scrollY;
-            let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
-            if (scrollY < frontH) {
-                $('#navBlock').addClass('bg-pos-999');
+        $(function () {
+            let language = (navigator.language || navigator.browserLanguage).toLowerCase();
+            if (language == 'zh-tw') {
+                changeLanguage('tw');
+            } else if (language == 'ja' || language == 'ja-jp') {
+                changeLanguage('ja');
+            } else if (language == 'en' || language == 'en-us') {
+                changeLanguage('en');
             } else {
-                $('#navBlock').removeClass('bg-pos-999');
+                changeLanguage('en');
             }
         });
+        // $(window).on('scroll', (e) => {
+        //     let scrollY = e.currentTarget.scrollY;
+        //     let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
+        //     if (scrollY < frontH) {
+        //         $('#navBlock').addClass('bg-pos-999');
+        //     } else {
+        //         $('#navBlock').removeClass('bg-pos-999');
+        //     }
+        // });
     </script>
 </body>
 

@@ -84,17 +84,17 @@
 
     // Get Blob from Object URL
 function b() {
-let blobUrl = document.querySelector('video').src;
-let xhr = new XMLHttpRequest();
-xhr.open('GET', blobUrl);
-xhr.responseType = 'blob';
-xhr.onload = function(e) {
-    if (this.status == 200) {
-        var myBlob = this.response;
-        console.log(myBlob);
-    }
-};
-xhr.send();
+    let blobUrl = document.querySelector('video').src;
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', blobUrl);
+    xhr.responseType = 'blob';
+    xhr.onload = function(e) {
+        if (this.status == 200) {
+            var myBlob = this.response;
+            console.log(myBlob);
+        }
+    };
+    xhr.send();
 }
 
     (fx=()=>{

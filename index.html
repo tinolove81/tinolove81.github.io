@@ -16,6 +16,7 @@
         @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
         body {
             position: relative;
+            margin-top: 56px;
             height: 100%;
             font-family: Imprima, 'Noto Sans TC', 'Noto Sans JP';
         }
@@ -53,7 +54,7 @@
         }
 
         .bg-frontliner {
-            background-image: linear-gradient(141deg, #a39fb8 0%, #aaccffc8 40%, #c8c8ff 75%);
+            background-image: linear-gradient(142deg, #a39fb8 0%, #aaccffc8 38.9%, coral 39%, #aaccffc8 39.1%, #c8c8ff 75%);
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -110,7 +111,7 @@
     </style>
 </head>
 <body>
-    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-dark shadow'>
+    <nav id='navBlock' class='navbar navbar-expand-md navbar-dark bg-dark fixed-top shadow'>
         <div class='container justify-content-between align-items-start'>
             <a class='navbar-brand' href='#frontBlock'>Tinolove81</a>
             <button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#collapseNav'>
@@ -118,17 +119,17 @@
             </button>
             <div id='collapseNav' class='collapse navbar-collapse justify-content-around'>
                 <div class='navbar-nav'>
-                    <a class='nav-item nav-link' href='#worksBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_works' class='i18n align-middle'>Experience</span></a>
-                    <a class='nav-item nav-link' href='#educationBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_education' class='i18n align-middle'>Education</span></a>
-                    <a class='nav-item nav-link' href='#skillsBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_skills' class='i18n align-middle'>Skills</span></a>
-                    <a class='nav-item nav-link' href='#projectsBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_projects' class='i18n align-middle'>Projects</span></a>
-                    <a class='nav-item nav-link' href='#contactBlock' data-toggle='collapse' data-target='#collapseNav'><span id='f_contact' class='i18n align-middle'>Contact</span></a>
+                    <a class='nav-item nav-link' href='#worksBlock'><span id='f_works' class='i18n align-middle'>Experience</span></a>
+                    <a class='nav-item nav-link' href='#educationBlock'><span id='f_education' class='i18n align-middle'>Education</span></a>
+                    <a class='nav-item nav-link' href='#skillsBlock'><span id='f_skills' class='i18n align-middle'>Skills</span></a>
+                    <a class='nav-item nav-link' href='#projectsBlock'><span id='f_projects' class='i18n align-middle'>Projects</span></a>
+                    <a class='nav-item nav-link' href='#contactBlock'><span id='f_contact' class='i18n align-middle'>Contact</span></a>
                 </div>
                 <div class='text-right'>
-                <select class='custom-select custom-select-sm bg-dark text-light' autocomplete='off'>
+                <select class='custom-select custom-select-sm bg-dark text-light w-auto' autocomplete='off'>
                     <option value='none' selected disabled>Language</option>
                     <option value='tw'>繁體中文</option>
-                    <option value='jp'>日本語</option>
+                    <option value='ja'>日本語</option>
                     <option value='en'>English</option>
                 </select>
                 </div>
@@ -210,7 +211,11 @@
                 <ul class='list-group list-group-flush'>
                     <li class='list-group-item card'>
                         <span class='h5'>國立台中科技大學</span> <small><i class='far fa-clock'></i> 2010.09 - 2014.07</small><br/>
-                        <span>資訊工程系 學士</span>
+                        <span>資訊工程系</span> <span>學士</span> <span>畢業</span>
+                    </li>
+                    <li class='list-group-item card'>
+                        <span class='h5'>國立台中高級工業職業學校</span> <small><i class='far fa-clock'></i> 2007.09 - 2010.07</small><br/>
+                        <span>電機科</span> <span>畢業</span>
                     </li>
                 </ul>
             </div>
@@ -223,10 +228,10 @@
         </div>
         <div class='d-flex d-md-block pl-3 card-columns flex-column'>
             <div class='card card-body m-1 order-1'>
-                <strong class='card-text mb-1'>Language</strong>
+                <strong class='card-text mb-1'><span id='f_skills_h1' class='i18n'>Language</span></strong>
                 <div class='card-text row'>
                     <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank' rel='noopener'>HTML</a>
+                        <a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank' rel='noopener'>HTML5</a>
                         <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
@@ -234,7 +239,11 @@
                         <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://developer.mozilla.org/en-US/docs/Web/CSS' target='_blank' rel='noopener'>CSS</a>
+                        <a href='https://developer.mozilla.org/en-US/docs/Web/CSS' target='_blank' rel='noopener'>CSS3</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://www.json.org/' target='_blank' rel='noopener'>JSON</a>
                         <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
@@ -244,14 +253,14 @@
                 </div>
             </div>
             <div class='card card-body m-1 order-3'>
-                <strong class='card-text mb-1 order-3'>インフラ</strong>
+                <strong class='card-text mb-1 order-3'><span id='f_skills_h3' class='i18n'>Infrastructure</span></strong>
                 <div class='card-text row'>
                     <div class='col-12 d-flex justify-content-between'>
                         <a href='https://nodejs.org/' target='_blank' rel='noopener'>Node.js</a>
                         <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://nodejs.org/' target='_blank' rel='noopener'>Nginx</a>
+                        <a href='http://nginx.org/' target='_blank' rel='noopener'>Nginx</a>
                         <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
@@ -261,7 +270,7 @@
                 </div>
             </div>
             <div class='card card-body m-1 order-2'>
-                <strong class='card-text mb-1'>Framework</strong>
+                <strong class='card-text mb-1'><span id='f_skills_h2' class='i18n'>Framework</span></strong>
                 <div class='card-text row'>
                     <div class='col-12 d-flex justify-content-between'>
                         <a href='https://jquery.com/' target='_blank' rel='noopener'>jQuery</a>
@@ -273,6 +282,10 @@
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
                         <a href='https://getbootstrap.com/' target='_blank' rel='noopener'>Boostrap</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://socket.io/' target='_blank' rel='noopener'>Socket.io</a>
                         <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
@@ -289,32 +302,24 @@
                     </div>
                 </div>
             </div>
-            <div class='card card-body m-1 order-5'>
-                <strong class='card-text mb-1'>Others</strong>
+            <div class='card card-body m-1 order-4'>
+                <strong class='card-text mb-1'><span id='f_skills_h4' class='i18n'>Database</span></strong>
                 <div class='card-text row'>
                     <div class='col-12 d-flex justify-content-between'>
                         <a href='https://www.sqlite.org/' target='_blank' rel='noopener'>SQLite</a>
-                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
-                    </div>
-                    <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://git-scm.com/' target='_blank' rel='noopener'>Git</a>
-                        <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
-                    </div>
-                    <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://en.wikipedia.org/wiki/Responsive_web_design' target='_blank' rel='noopener'>RWD</a>
-                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
-                    </div>
-                    <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://socket.io/' target='_blank' rel='noopener'>Socket.io</a>
                         <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                     </div>
                 </div>
             </div>
-            <div class='card card-body m-1 order-4'>
-                <strong class='card-text mb-1'>Database</strong>
+            <div class='card card-body m-1 order-5'>
+                <strong class='card-text mb-1'><span id='f_skills_h5' class='i18n'>Others</span></strong>
                 <div class='card-text row'>
                     <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://www.sqlite.org/' target='_blank' rel='noopener'>SQLite</a>
+                        <a href='https://en.wikipedia.org/wiki/Responsive_web_design' target='_blank' rel='noopener'>RWD</a>
+                        <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
+                    </div>
+                    <div class='col-12 d-flex justify-content-between'>
+                        <a href='https://www.restapitutorial.com/' target='_blank' rel='noopener'>REST</a>
                         <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
@@ -322,11 +327,11 @@
                         <span class='badge badge-pill badge-success align-self-center op-5'><span id='f_skills_understand' class='i18n'>Understand</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://en.wikipedia.org/wiki/Responsive_web_design' target='_blank' rel='noopener'>RWD</a>
+                        <a href='https://products.office.com/zh-tw/excel' target='_blank' rel='noopener'>Excel</a>
                         <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                     </div>
                     <div class='col-12 d-flex justify-content-between'>
-                        <a href='https://socket.io/' target='_blank' rel='noopener'>Socket.io</a>
+                        <a href='https://products.office.com/zh-tw/PowerPoint' target='_blank' rel='noopener'>PowerPoint</a>
                         <span class='badge badge-pill badge-success align-self-center op-9'><span id='f_skills_conversant' class='i18n'>Conversant</span></span>
                     </div>
                 </div>
@@ -356,7 +361,7 @@
         <div class='row pl-3'>
             <div class='col-12'>陳 冠志(Chen Kuan-chih)</div>
             <div class='col-12'>Tel : +886 921 314 020</div>
-            <div class='col-12'>Mail : tinolove81＠gmail.com</div>
+            <div class='col-12'>Mail : tinolove81<u>＠</u>gmail.com</div>
             <div class='col-12'><a href='https://github.com/tinolove81' target='_blank' rel='noopener'><i class='fab fa-github text-dark'></i> Github</a></div>
         </div>
     </div>
@@ -370,6 +375,11 @@
             'f_skills': 'Skills',
             'f_skills_conversant': 'Conversant',
             'f_skills_understand': 'Understand',
+            'f_skills_h1': 'Language',
+            'f_skills_h2': 'Framework',
+            'f_skills_h3': 'Infrastructure',
+            'f_skills_h4': 'Database',
+            'f_skills_h5': 'Others',
             'f_projects': 'Projects',
             'f_contact': 'Contact',
             'f_worktype': 'Front-End Engineer',
@@ -381,6 +391,11 @@
             'f_skills': '專業技能',
             'f_skills_conversant': '熟悉',
             'f_skills_understand': '了解',
+            'f_skills_h1': '程式語言',
+            'f_skills_h2': '框架',
+            'f_skills_h3': '後端',
+            'f_skills_h4': '資料庫',
+            'f_skills_h5': '其他',
             'f_projects': '個人專案',
             'f_contact': '聯繫我',
             'f_worktype': '前端網頁工程師',
@@ -390,42 +405,55 @@
             'f_works': '職歴​',
             'f_education': '学歴',
             'f_skills': 'スキル',
-            'f_skills_conversant': '熟悉',
-            'f_skills_understand': '了解',
+            'f_skills_conversant': '熟知',
+            'f_skills_understand': '理解',
+            'f_skills_h1': '言語',
+            'f_skills_h2': 'フレームワーク',
+            'f_skills_h3': 'インフラ',
+            'f_skills_h4': 'データベース',
+            'f_skills_h5': 'その他',
             'f_projects': 'プロジェクト',
-            'f_contact': '聯繫我',
+            'f_contact': '連絡先',
             'f_worktype': 'Webエンジニア'
         };
         let changeLanguage = (mLang) => {
-            let Lang = {'tw': lang_tw, 'jp': lang_jp, 'en': lang_en};
-            let i = $('span.i18n').length;
-            let Timer = setInterval(() => {
-                if (i <= 0) { return clearInterval(Timer); }
-                $('span.i18n').each((idx, e) => {
-                    let id = $(e).attr('id');
-                    if (Lang[mLang][id] != undefined) {
+            let Lang = {'tw': lang_tw, 'ja': lang_jp, 'en': lang_en};
+            if (Object.keys(Lang).indexOf(mLang) > -1) {
+                let Timer = setInterval(() => {
+                    $('span.i18n').each((idx, e) => {
+                        let id = $(e).attr('id');
                         $(e).text(Lang[mLang][id]);
-                    }
-                    i--;
-                });
-            }, 0);
+                    });
+                    return clearInterval(Timer);
+                }, 100);
+            }
         };
         $('nav a').on('click', function (e) {
             e.preventDefault();
             let target = $(e.currentTarget.hash);
+            console.log(target);
             if (target.length == 1) {
-                let top = target.offset().top;
-                if (top > 0) {
-                    $('html').animate({'scrollTop': top}, 100);
-                }
-            } else {
-                $('html').animate({'scrollTop': 0}, 100);
+                $('#collapseNav').collapse('hide')
+                let top = target.offset().top - $('#navBlock').outerHeight();
+                $('html').animate({'scrollTop': top}, 100);
             }
         });
         $('nav select').on('change', (e) => {
             changeLanguage(e.target.value);
         });
 
+        $(function () {
+            let language = (navigator.language || navigator.browserLanguage).toLowerCase();
+            if (language == 'zh-tw') {
+                changeLanguage('tw');
+            } else if (language == 'ja' || language == 'ja-jp') {
+                changeLanguage('ja');
+            } else if (language == 'en' || language == 'en-us') {
+                changeLanguage('en');
+            } else {
+                changeLanguage('en');
+            }
+        });
         // $(window).on('scroll', function (e) {
         //     let scrollY = e.currentTarget.scrollY;
         //     let frontH = $('#frontBlock').outerHeight() - ( $('#navBlock').outerHeight() / 2 );
