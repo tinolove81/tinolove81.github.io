@@ -81,22 +81,22 @@
 
 <body class='d-flex'>
     <div class='_card m-auto'>
-        <a class='_control left' href='#'><span class='carousel-control-prev-icon'></span></a>
-        <a class='_control right' href='#'><span class='carousel-control-next-icon'></span></a>
+        <a class='_control left' href='#' style='z-index: 99;'><span class='carousel-control-prev-icon'></span></a>
+        <a class='_control right' href='#' style='z-index: 99;'><span class='carousel-control-next-icon'></span></a>
 
         <div class='_item fadein active'>
-            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
+            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>じ</rt></ruby>に　　　</p>
             <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
             <span class='d-none'>誰も見てない時にあなたは誰ですか？</span>
             <span class='d-none'>誰でも = 誰も = 誰都～ 、 誰でも + 肯定 、 誰も + 否定</span>
             <span class='d-none'>時に = ～的時候～</span>
         </div>
         <div class='_item fadein'>
-            <p><ruby>誰<rt>だれ</rt></ruby>も<span class='text-danger'><ruby>見<rt>み</rt></ruby>てない</span><ruby>時<rt>とき</rt></ruby>に　　　</p>
+            <p><ruby>誰<rt>だれ</rt></ruby>も<span class='text-danger'><ruby>見<rt>み</rt></ruby>てない</span><ruby>時<rt>じ</rt></ruby>に　　　</p>
             <p>　　　　あなたは<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
         </div>
         <div class='_item fadein'>
-            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>とき</rt></ruby>に　　　</p>
+            <p><ruby>誰<rt>だれ</rt></ruby>も<ruby>見<rt>み</rt></ruby>てない<ruby>時<rt>じ</rt></ruby>に　　　</p>
             <p>　　　　<span class='text-danger'>あなた</span>は<ruby>誰<rt>だれ</rt></ruby>ですか？</p>
         </div>
 
@@ -109,12 +109,12 @@
         $('._control.left').on('click', (e) => {
             let idx = col.index( $('._card ._item.active') );
             col.removeClass('active');
-            showslow( $(`._card ._item:nth(${(idx - 1 < 0) ? (col.length - 1) : (idx - 1)}`) );
+            showslow( $(`._card ._item:nth(${(idx - 1 < 0) ? (col.length - 1) : (idx - 1)})`) );
         });
         $('._control.right').on('click', (e) => {
             let idx = col.index( $('._card ._item.active') );
             col.removeClass('active');
-            showslow( $(`._card ._item:nth(${(idx + 1 >= col.length) ? 0 : (idx + 1)}`) );
+            showslow( $(`._card ._item:nth(${(idx + 1 >= col.length) ? 0 : (idx + 1)})`) );
         });
         
         function showslow(element) {

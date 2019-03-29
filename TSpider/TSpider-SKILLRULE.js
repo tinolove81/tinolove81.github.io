@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-let _MONSTER = require('./MONSTER-20190223.json');
+let _MONSTER = require('./MONSTER-20190327.json');
 let _INPUT = 'CMD Input';
 let _NUMBER = 0;
 let _RULE = [];
@@ -25,7 +25,7 @@ function startRequest() {
             let rule = [];
             if (regArr[0]) { // 變化
                 let match = [];
-                let reg1 = /([^\sを。]+)(を)([^に。]+)(に([、]|[変化]|[。])+)/g;  //多屬轉先分段
+                let reg1 = /([^\sを。]+)(を)([^に。]+)(に(、|変化|。)+)/g;  //多屬轉先分段
                 let reg2 = /([^\s。]+)(を)([^。]+)(に[、]*[変化]*[。]*)/;
                 let m1 = M['ActiveSkillContent'].match(reg1);
                 for (let i = 0; i < m1.length; i++) {
@@ -112,7 +112,8 @@ function solve(mArray, mKey) {
                 if (A[i] == '5属性') {
                     ans_c = ans_c.concat(['隨機轉火', '隨機轉水', '隨機轉木', '隨機轉光', '隨機轉闇']);
                 } else {
-                ans_c.push(`隨機轉${A[i]}`);
+                    ans_c.push(`隨機轉${A[i]}`);
+                }
             }
         }
     }
