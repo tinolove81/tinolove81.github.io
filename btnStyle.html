@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no'>
+    <link rel='stylesheet' href='./asset/css/bootstrap.min.css' />
+    <link rel='icon' href='./favicon.ico' type='image/x-icon'>
+    <script src='./asset/js/jquery-3.2.1.min.js'></script>
+    <script src='./asset/js/bootstrap.bundle.min.js'></script>
+    <title>Goodbye world !</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Imprima');
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
+        html,
+        body {
+            height: 100%;
+            font-family: Imprima, 'Noto Sans JP';
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .showcase-block {
+            display: flex;
+            height: 250px;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        button {
+            position: relative;
+            margin: 0;
+            padding: 15px 30px;
+            min-height: 45px;
+            min-width: 150px;
+            border: none;
+            cursor: pointer;
+            outline: none !important;
+        }
+        #BTN_A01_block > button {
+            color: crimson;
+            background: white;
+            animation: pulse 1.6s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+                transform: scale(1);
+            }
+            60% {
+                transform: scale(1);
+            }
+            70% {
+                box-shadow: 0 0 0 0 rgba(255, 170, 204, 1);
+                transform: scale(.98);
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 .5em 1.6em rgba(255, 170, 204, 0);
+                transform: scale(1);
+            }
+        }
+
+        #BTN_B01_block > button {
+            color: crimson;
+            background: white;
+            overflow: hidden;
+        }
+        #BTN_B01_block > button::before,
+        #BTN_B01_block > button::after {
+            content: attr(data-start);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            border: 2px solid #FFFFFF;
+            color: crimson;
+            background: #FFAACC;
+            overflow: hidden;
+            transition: transform .3s cubic-bezier(.2, 1, .3, 1);
+        }
+        #BTN_B01_block > button::before {
+            top: 0;
+            height: 50%;
+            border-bottom: none;
+            line-height: 3.1;
+        }
+        #BTN_B01_block > button::after {
+            top: 50%;
+            height: 50%;
+            border-top: none;
+            line-height: .1;
+        }
+        #BTN_B01_block > button:hover::before {
+            transform: translate3d(0, -100%, 0);
+        }
+
+        #BTN_B01_block > button:hover::after {
+            transform: translate3d(0, 100%, 0);
+        }
+        #BTN_B01_block > button > span {
+            display: block;
+            opacity: 0;
+            transform: scale3d(.2, .2, 1);
+            transition: transform 300ms, opacity 300ms cubic-bezier(.2, 1, .3, 1);
+            outline: none;
+        }
+        #BTN_B01_block > button:hover span {
+            opacity: 1;
+            transform: scale3d(1, 1, 1);
+        }
+
+        #BTN_B02_block > button {
+            border: 1px solid #FFC107;
+            border-radius: .25rem !important;
+            color: #FFC107;
+            background: transparent;
+            overflow: hidden;
+            z-index: 1;
+        }
+        #BTN_B02_block > button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: coral;
+            z-index: -1;
+            transition: height 0.13s cubic-bezier(0, 0, 1, 0);
+        }
+        #BTN_B02_block > button:hover::after {
+            height: 100%;
+        }
+
+        #BTN_B03_block > button {
+            border: 1px solid white;
+            border-radius: .25rem !important;
+            color: white;
+            background: transparent;
+            overflow: hidden;
+        }
+        #BTN_B03_block > button::before,
+        #BTN_B03_block > button::after {
+            content: attr(data-start);
+            position: absolute;
+            top: 25%;
+            width: 100%;
+            height: 50%;
+            color: white;
+            border: 0;
+            transition: all .3s cubic-bezier(0.680, -0.550, 0.265, 1.550);
+        }
+        #BTN_B03_block > button::before {
+            left: -100%;
+        }
+        #BTN_B03_block > button::after {
+            left: 0;
+        }
+        #BTN_B03_block > button:hover::before {
+            left: 0;
+        }
+        #BTN_B03_block > button:hover::after {
+            left: 100%;
+        }
+
+    </style>
+</head>
+
+<body class='container-fluid bg-dark'>
+    <div class='d-flex flex-column p-3 h-100 text-light'>
+        <h3>主動</h3>
+        <div class='row text-center'>
+            <div id='BTN_A01_block' class='col-4 showcase-block'>
+                <button><span>Heartbeat!</span></button>
+                <!-- Acknowledgements: the button is pretty much recycled from http://sparetime.arkivert.no/en -->
+            </div>
+            <div id='BTN_A02_block' class='col-4 showcase-block'>
+                <button data-start='Hover me!'><span>Done!</span></button>
+                <!-- Acknowledgements: the button is pretty much recycled from http://sparetime.arkivert.no/en -->
+            </div>
+            <div id='BTN_A03_block' class='col-4 showcase-block'>
+                <iframe src='https://www.nightdev.com/hosted/obschat/?channel=tinolove81&fade=false&bot_activity=true&prevent_clipping=false'></iframe>
+            </div>
+        </div>
+        <h3>被動</h3>
+        <div class='row text-center'>
+            <div id='BTN_B01_block' class='col-4 showcase-block'>
+                <button data-start='Hover me!'><span>Done!</span></button>
+            </div>
+            <div id='BTN_B02_block' class='col-4 showcase-block'>
+                <button class=''><span>This is a button</span></button>
+            </div>
+            <div id='BTN_B03_block' class='col-4 showcase-block'>
+                <button class='' data-start='View ->'></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('button').on('click', (e) => {
+            let id = $(e.target).parent().attr('id');
+            alert(id);
+        });
+    </script>
+</body>
+
+</html>
