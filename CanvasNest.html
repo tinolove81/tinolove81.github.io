@@ -177,9 +177,9 @@
                 return {
                     l: script_len, //长度，用于生成id用
                     z: get_attribute(script, 'zIndex', -1), //z-index
-                    o: get_attribute(script, 'opacity', 0.9), //opacity
+                    o: get_attribute(script, 'opacity', .5), //opacity
                     c: get_attribute(script, 'color', '0,255,0'), //color
-                    n: get_attribute(script, 'count', 200) //count
+                    n: get_attribute(script, 'count', 100) //count
                 };
             }
             //设置canvas的高宽
@@ -232,7 +232,7 @@
                 current_point = {
                     x: null, //当前鼠标x
                     y: null, //当前鼠标y
-                    max: 20000 // 圈半径的平方
+                    max: 2000 // 圈半径的平方
                 },
                 all_array;
             the_canvas.id = canvas_id;
@@ -263,7 +263,7 @@
                     y: y,
                     xa: xa,
                     ya: ya,
-                    max: 40001 //沾附距离
+                    max: 60001 //沾附距离
                 });
             }
             all_array = random_points.concat([current_point]);

@@ -13,63 +13,48 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Imprima');
         @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
-        html,
-        body {
+        html, body {
             height: 100%;
             font-family: Imprima, 'Noto Sans JP';
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
         }
-        #myDiv01 {
+        .showcase {
             position: relative;
             padding: 28px 15px 15px 15px;
             font-size: 26px;
-            background-image: linear-gradient(45deg,#6178F0 0%,#F880F0 45%,#FFCC70 100%);
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            word-break: normal !important;
         }
-        #myDiv01::before {
-            content: '#myDiv01';
+        .showcase::before {
+            content: attr(id);
             position: absolute;
             padding: 1px;
-            top: 0;left: 0;
+            top: -1px; left: -1px;
             font-size: 16px;
             color: white;
-            background: #09bb09;
+            -webkit-text-fill-color: initial;
+            background: #09BB09;
             border: 1px solid white;
-            -webkit-text-fill-color: white;
+            border-radius: .25rem;
+        }
+        #Div01 {
+            background-image: linear-gradient(135deg, #6688FF 10%, #FF80FF 50%, #FFCC00 90%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
 
 <body class='bg-dark'>
-    <div class='container d-flex flex-column h-100 justify-content-center'>
-        <div id='myDiv01' class='border align-self-center'>
+    <div class='container d-flex flex-column pt-4'>
+        <div id='Div01' class='showcase border rounded align-self-center'>
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. 
         </div>
-        <pre class='mt-5 p-3 bg-light border'>
-#myDiv01 {
-    background-image: linear-gradient(43deg,#6178F0 0%,#F880F0 44%,#FFCC70 100%);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    word-break: normal !important;
-}</pre>
+        <pre class='d-flex flex-column mt-5 p-3 bg-light border rounded' style='overflow: visible;'>
+            <span>#Div01 {</span>
+            <span>    background-image: linear-gradient(43deg,#6178F0 0%,#F880F0 44%,#FFCC70 100%);</span>
+            <span>    background-clip: text;</span>
+            <span>    -webkit-text-fill-color: transparent;</span>
+            <span>}</span>
+        </pre>
     </div>
-    <div class='container d-flex flex-column h-100 justify-content-center'>
-            <pre class='mt-5 p-3 bg-light border'>
-    #myDiv01 {
-        background-image: linear-gradient(43deg,#6178F0 0%,#F880F0 44%,#FFCC70 100%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        word-break: normal !important;
-    }</pre>
-    </div>
-
-    <script>
-    </script>
 </body>
 
 </html>
