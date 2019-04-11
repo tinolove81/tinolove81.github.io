@@ -24,69 +24,80 @@
     </style>
 </head>
 
-<body class='container'>
+<body class='container-fluid bg-dark text-light'>
     <table class='table table-sm table-bordered mt-3'>
         <tbody>
             <tr>
-                <td><canvas id='canvasText' class='d-block mx-auto bg-dark'></canvas></td>
-                <td><video id='videoLyric' class='d-block mx-auto bg-dark'></video></td>
+                <td><canvas id='canvasText' class='d-block mx-auto bg-dark border border-danger rounded'></canvas></td>
             </tr>
             <tr>
-                <td colspan='2'><video id='audioLyric' class='d-block mx-auto bg-dark'></video></td>
+                <td><video id='videoLyric' class='d-block mx-auto bg-dark border border-success rounded'></video></td>
+            </tr>
+            <tr>
+                <td><video id='audioLyric' class='d-block mx-auto bg-dark border border-warning rounded'></video></td>
             </tr>
         </tbody>
     </table>
-    <div id='myDiv' class=''></div>
+    <div id='myDiv' class=''>中文字</div>
 
     <script>
         let canvas = document.querySelector('#canvasText');
         let ctx = canvas.getContext('2d');
-        canvas.width = 480; canvas.height = 50;
-
         let video = document.querySelector('#videoLyric');
-        video.width = 480; video.height = 50;
-
         let audio = document.querySelector('#audioLyric');
-        audio.width = 960; audio.height = 50;
-
+        let recorder;
+        let blob;
+        
         init();
 
         function init() {
-            video.controls = false;
-            video.autoplay = true;
-            audio.controls = false;
-            audio.autoplay = true;
-            audio.ontimeupdate = function () {
+            canvas.width = 700; canvas.height = 100;
+            ctx.font = '50px "Noto Sans JP"';
+            ctx.fillStyle = 'white';
+            ctx.fillText('test', 5, 40);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            video.width = 700; video.height = 100;
+            video.controls = true; video.autoplay = true;
+            audio.width = 960; audio.height = 54; audio.volume = 0.2;
+            audio.controls = true; audio.autoplay = false;
+            audio.onplay = () => {
+                startRecording();
+            };
+            audio.ontimeupdate = () => {
                 animaLyric(audio.currentTime.toFixed(2));
             };
+            audio.onpause = () => {
+                if (recorder.state =='recording') recorder.stop();
+            };
+            audio.onended = () => {
+                if (recorder.state =='recording') recorder.stop();
+            }
             audio.src = './asset/lib/Aimer - LAST STARDUST.mp3';
         }
 
         function animaLyric(mLyric) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.beginPath();
-            ctx.font = '20px Georgia';
-            ctx.fillStyle = 'white';
-            ctx.fillText(mLyric.toString(), 5, 35);
-            ctx.stroke();
-            startRecording();
+            ctx.fillText(mLyric.toString(), 1, 43);
+            ctx.fillText(mLyric.toString(), 1, 93);
         }
 
         function startRecording() {
             let chunks = []; // here we will store our recorded media chunks (Blobs)
             let stream = canvas.captureStream(); // grab our canvas MediaStream
-            let rec = new MediaRecorder(stream); // init the recorder
+            recorder = new MediaRecorder(stream); // init the recorder
             // every time the recorder has new data, we will store it in our array
-            rec.ondataavailable = (e) => chunks.push(e.data);
-            rec.onstop = (e) => exportVid(new Blob(chunks, { type: 'video/webm' }));
-            rec.start();
-            setTimeout(() => rec.stop(), 50); // stop recording in 3s
+            recorder.ondataavailable = (e) => {
+                chunks.push(e.data);
+            }
+            recorder.onstop = (e) => {
+                blob = new Blob(chunks, { type: 'video/webm' })
+                exportVid(blob);
+            }
+            recorder.start();
         }
 
         function exportVid(blob) {
             video.src = URL.createObjectURL(blob);
-            video.controls = false;
-            video.autoplay = true;
         }
 
         let x = 0;
