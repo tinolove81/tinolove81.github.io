@@ -15,7 +15,6 @@
         @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
         html,
         body {
-            height: 100%;
             font-family: Imprima, 'Noto Sans JP';
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -25,11 +24,89 @@
     </style>
 </head>
 
-<body>
-    
+<body class='container'>
+    <table class='table table-sm table-bordered mt-3'>
+        <tbody>
+            <tr>
+                <td><canvas id='canvasText' class='d-block mx-auto bg-dark'></canvas></td>
+                <td><video id='videoLyric' class='d-block mx-auto bg-dark'></video></td>
+            </tr>
+            <tr>
+                <td colspan='2'><video id='audioLyric' class='d-block mx-auto bg-dark'></video></td>
+            </tr>
+        </tbody>
+    </table>
     <div id='myDiv' class=''></div>
 
     <script>
+        let canvas = document.querySelector('#canvasText');
+        let ctx = canvas.getContext('2d');
+        canvas.width = 480; canvas.height = 50;
+
+        let video = document.querySelector('#videoLyric');
+        video.width = 480; video.height = 50;
+
+        let audio = document.querySelector('#audioLyric');
+        audio.width = 960; audio.height = 50;
+
+        init();
+
+        function init() {
+            video.controls = false;
+            video.autoplay = true;
+            audio.controls = false;
+            audio.autoplay = true;
+            audio.ontimeupdate = function () {
+                animaLyric(audio.currentTime.toFixed(2));
+            };
+            audio.src = './asset/lib/Aimer - LAST STARDUST.mp3';
+        }
+
+        function animaLyric(mLyric) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.font = '20px Georgia';
+            ctx.fillStyle = 'white';
+            ctx.fillText(mLyric.toString(), 5, 35);
+            ctx.stroke();
+            startRecording();
+        }
+
+        function startRecording() {
+            let chunks = []; // here we will store our recorded media chunks (Blobs)
+            let stream = canvas.captureStream(); // grab our canvas MediaStream
+            let rec = new MediaRecorder(stream); // init the recorder
+            // every time the recorder has new data, we will store it in our array
+            rec.ondataavailable = (e) => chunks.push(e.data);
+            rec.onstop = (e) => exportVid(new Blob(chunks, { type: 'video/webm' }));
+            rec.start();
+            setTimeout(() => rec.stop(), 50); // stop recording in 3s
+        }
+
+        function exportVid(blob) {
+            video.src = URL.createObjectURL(blob);
+            video.controls = false;
+            video.autoplay = true;
+        }
+
+        let x = 0;
+        function canvasAnima() {
+            x = (x + 1) % canvas.width;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = '5';
+            ctx.arc(50 + x, 50, 46, 0, Math.PI*2, false);
+            ctx.stroke();
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = '2.5';
+            ctx.arc(50 + x, 50, 46, 0, Math.PI*2, false);
+            ctx.stroke();
+            if (x !== (canvas.width - 1)) requestAnimationFrame(canvasAnima);
+        }
+    // https://stackoverflow.com/questions/50681683/how-to-save-canvas-animation-as-gif-or-webm
+    </script>
+    <!-- script>
     // Data to Blob
         let blob = new Blob(['Array', 'Blob', 'DOMString'], {type: 'text/csv;charset=utf-8;'});
     // Blob to Object URL
@@ -97,6 +174,7 @@ function b() {
     xhr.send();
 }
 
+/*
     (fx=()=>{
         var gm = (window.yt && window.yt.config_ || window.ytcfg && window.ytcfg.data_)['EXPERIMENT_FLAGS'];
         var m = `### Youtube Config Test ###\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n`;
@@ -113,7 +191,6 @@ function b() {
         console.log('%c'+m, 'background:#222;color:#CFA');
     })()
 
-/*
     enable_autoplay_pause_by_lact
 
     new Date(window["_lact"])
@@ -128,8 +205,7 @@ function b() {
 
     _yt_player.M.prototype.Tu()
 */
-
-    </script>
+    </script -->
 </body>
 
 </html>
