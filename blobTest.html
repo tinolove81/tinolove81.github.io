@@ -11,11 +11,10 @@
     <script src='./asset/js/bootstrap.bundle.min.js'></script>
     <title>Goodbye world !</title>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Imprima');
         @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
         html,
         body {
-            font-family: Imprima, 'Noto Sans JP';
+            font-family: 'Noto Sans JP';
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -29,26 +28,45 @@
         <tbody>
             <tr>
                 <td><canvas id='canvasText' class='d-block mx-auto bg-dark border border-danger rounded'></canvas></td>
+                <td rowspan='3' style='height: 300px;'>
+                    <textarea id='textLyric' class='m-0 w-100 h-100 border' style='min-width: 700px;background: lemonchiffon; resize: none;' spellcheck='false' autocomplete='off'></textarea>
+                </td>
             </tr>
             <tr>
                 <td><video id='videoLyric' class='d-block mx-auto bg-dark border border-success rounded'></video></td>
             </tr>
             <tr>
-                <td><video id='audioLyric' class='d-block mx-auto bg-dark border border-warning rounded'></video></td>
+                <td><audio id='audioLyric' class='d-block mx-auto bg-dark border border-warning rounded'></audio></td>
+            </tr>
+            <tr>
+                <td><div id='myDiv' class=''>中文字</div></td>
+                <td>
+                    <a id='downloadLink' class='btn btn-secondary btn-sm disabled' target='_blank' rel='noopener' download='Lyric.webm'>Disabled</a>
+                </td>
             </tr>
         </tbody>
     </table>
-    <div id='myDiv' class=''>中文字</div>
 
     <script>
         let canvas = document.querySelector('#canvasText');
         let ctx = canvas.getContext('2d');
         let video = document.querySelector('#videoLyric');
         let audio = document.querySelector('#audioLyric');
+        let link = document.querySelector('#downloadLink');
+        let lyric = document.querySelector('#textLyric');
         let recorder;
         let blob;
+        let lrc = {
+            ti: '', //歌名
+            ar: '', //歌手
+            al: '', //專輯名稱
+            by: '', //歌詞製作人
+            offset: 200, //時間偏移植，單位毫秒，用於調整歌詞整體進度
+            ms: [] //歌詞陣列 {t: 時間, c:歌詞內容}
+        };
         
         init();
+        songSwitch();
 
         function init() {
             canvas.width = 700; canvas.height = 100;
@@ -58,7 +76,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             video.width = 700; video.height = 100;
             video.controls = true; video.autoplay = true;
-            audio.width = 960; audio.height = 54; audio.volume = 0.2;
+            audio.style.width = '700px'; audio.style.height = '54px'; audio.volume = 0.2;
             audio.controls = true; audio.autoplay = false;
             audio.onplay = () => {
                 startRecording();
@@ -75,15 +93,40 @@
             audio.src = './asset/lib/Aimer - LAST STARDUST.mp3';
         }
 
-        function animaLyric(mLyric) {
+        function animaLyric(mTracktime) {
+            let currentLrc = 0;
+            let lastLrc = lrc.ms.length;
+            for (let i = 0; i < lastLrc; i++) {
+                if (+lrc['ms'][i+1]['t'] > +mTracktime+lrc['offset']/1000 && +lrc['ms'][i]['t'] < +mTracktime+lrc['offset']/1000) {
+                    currentLrc = i;
+                    break;
+                }
+            }
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillText(mLyric.toString(), 1, 43);
-            ctx.fillText(mLyric.toString(), 1, 93);
+            if (currentLrc !== 0) ctx.font = '15px "Noto Sans JP"';
+            if (currentLrc !== 0) ctx.fillText(lrc['ms'][currentLrc - 1]['c'].toString(), 10, 13);
+            ctx.font = '30px "Noto Sans JP"';
+            ctx.fillText(lrc['ms'][currentLrc]['c'].toString(), 1, 43);
+            ctx.font = '15px "Noto Sans JP"';
+            if (currentLrc !== lastLrc) ctx.fillText(lrc['ms'][currentLrc + 1]['c'].toString(), 10, 68);
+            if (currentLrc !== lastLrc) ctx.fillText(lrc['ms'][currentLrc + 2]['c'].toString(), 10, 93);
         }
 
         function startRecording() {
             let chunks = []; // here we will store our recorded media chunks (Blobs)
-            let stream = canvas.captureStream(); // grab our canvas MediaStream
+            let cStream = canvas.captureStream(60);
+            let audioCtx = new AudioContext();
+            // create a stream from our AudioContext
+            let dest = audioCtx.createMediaStreamDestination();
+            let aStream = dest.stream;
+            // connect our video element's output to the stream
+            let sourceNode = audioCtx.createMediaElementSource(audio);
+            sourceNode.connect(dest);
+            // output to our headphones
+            sourceNode.connect(audioCtx.destination)
+            
+            let stream = new MediaStream([cStream.getVideoTracks()[0], aStream.getAudioTracks()[0]]); // grab our canvas MediaStream
             recorder = new MediaRecorder(stream); // init the recorder
             // every time the recorder has new data, we will store it in our array
             recorder.ondataavailable = (e) => {
@@ -94,10 +137,93 @@
                 exportVid(blob);
             }
             recorder.start();
+            
+            link.classList.add('disabled');
+            link.innerHTML = 'disabled';
         }
 
         function exportVid(blob) {
-            video.src = URL.createObjectURL(blob);
+            video.src = link.href = URL.createObjectURL(blob);
+            link.classList.remove('disabled');
+            link.innerHTML = 'Download';
+        }
+
+        function songSwitch(s) {
+            let lrc = `[00:00.00]Aimer - LAST STARDUST
+[00:23.00]
+[00:26.00]ふりしきる強い雨
+[00:28.90]描いた理想の果て
+[00:32.00]震える肩濡らし　歩き続けた
+[00:37.86]擦り切れた小さな手
+[00:41.06]隙間を埋めるまで
+[00:44.00]色の消えた記憶　拾い集めた
+[00:50.05]愛しさ　優しさ
+[00:55.90]すべて投げ出してもいい
+[01:01.50]失くしたもの　見つけたなら
+[01:10.35]傷つくのが運命だとしても
+[01:16.24]心はまだ彩を放つ
+[01:22.13]最後のStardust　舞いあがれ
+[01:28.04]Dust to Dust, Ash to Ash
+[01:30.72]彼方へ
+[01:33.71]願いの破片よ　届け
+[01:42.20]
+[01:48.81]遠ざかる通り雨
+[01:51.91]消えてく夜の風
+[01:54.89]孤独だけが　傍にたたずんでいた
+[02:00.98]選んだ正しさ
+[02:06.80]すべて間違いでもいい
+[02:12.43]信じたもの　守れたなら
+[02:21.30]傷だらけの硝子の心が
+[02:27.05]忘れかけた熱を灯す
+[02:32.95]最後のStardust　舞いあがれ
+[02:38.85]Dust to Dust, Earth to Earth
+[02:41.66]彼方へ
+[02:44.60]願いの破片よ　永遠へ
+[02:59.65]Brave Shine
+[03:11.75]Stay the night
+[03:23.32]Save my life
+[03:34.93]The Brave Shine
+[03:46.95]Brave Shine
+[03:55.73]傷つくのが運命だとしても
+[04:01.44]心はまだ彩を放つ
+[04:07.42]さよなら　Judas　灰になれ
+[04:13.23]Dust to Dust　いつかの弱さへ
+[04:19.17]傷だらけの硝子の心が
+[04:25.03]忘れかけた熱を灯す
+[04:31.01]最後のStardust　舞いあがれ
+[04:36.84]Dust to Dust, Ash to Ash
+[04:39.73]彼方へ
+[04:42.64]願いの破片よ　永遠へ
+[04:46.00]`;
+            lyric.value = lrc;
+            createLrcObj(lrc);
+        }
+        
+        function createLrcObj(mLrc) {
+	        if(mLrc.length == 0) return false;
+            let lrcs = mLrc.split('\n');
+            for (let i in lrcs) {
+                lrcs[i] = lrcs[i].trim();
+                let timeArray = lrcs[i].match(/\[(\d+:.+?)\]/g);
+                for (let j in timeArray) {
+                    let t = timeArray[j].slice(1, -1).split(':');
+                    if (isNaN(parseInt(t[0]))) {
+                        if (t[0].toLowerCase() !== 'ms' && lrc.hasOwnProperty(t[0].toLowerCase())) {
+                            lrc[t[0].toLowerCase()] = t[1];
+                        }
+                    } else {
+                        lrc.ms.push({
+                            't': (parseFloat(t[0]) * 60 + parseFloat(t[1])).toFixed(2),
+                            'c': lrcs[i].substring(timeArray.join('').length)
+                        });
+                    }
+                    
+                }
+            }
+            lrc.ms.sort((a, b) => {
+                return a.t - b.t;
+            });
+            
         }
 
         let x = 0;
@@ -116,6 +242,7 @@
             if (x !== (canvas.width - 1)) requestAnimationFrame(canvasAnima);
         }
     // https://stackoverflow.com/questions/50681683/how-to-save-canvas-animation-as-gif-or-webm
+    // https://stackoverflow.com/questions/39302814/mediastream-capture-canvas-and-audio-simultaneously
     </script>
     <!-- script>
     // Data to Blob
