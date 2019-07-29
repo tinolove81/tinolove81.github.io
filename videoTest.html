@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no'>
+    <link rel='stylesheet' href='./asset/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='https://unpkg.com/plyr@3/dist/plyr.css' />
+    <link rel='icon' href='./favicon.ico' type='image/x-icon'>
+    <script src='./asset/js/jquery-3.2.1.min.js'></script>
+    <script src='./asset/js/bootstrap.bundle.min.js'></script>
+    <script src='https://unpkg.com/plyr@3'></script>
+    <title>Goodbye world !</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Noto Sans JP');
+        html,
+        body {
+            font-family: 'Noto Sans JP';
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body class='container bg-dark text-light'>
+    <table class='table table-sm table-bordered mt-3'>
+        <tbody>
+            <tr>
+                <td>
+                    <video id='player' src=''></video>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a id='downloadlink' class='btn btn-secondary btn-sm disabled' target='_blank' rel='noopener'>Disabled</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let player = new Plyr('#player');
+        player.source = {
+            type: 'video',
+            sources: [
+                {
+                    src: './asset/lib/Aimer - LAST STARDUST.mp3',
+                    type: 'audio/mp3',
+                }
+            ],
+            poster: './asset/lib/poster.jpg'
+        };
+    </script>
+</body>
+
+</html>

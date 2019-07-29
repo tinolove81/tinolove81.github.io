@@ -165,7 +165,7 @@ function findSuperKakusei(mBlock) {
 function findActiveSkill(mBlock) {
     let ActiveSkill = mBlock.find('p');
     CHAR['ActiveSkillName'] = ActiveSkill.eq(0).find('strong').eq(0).text();
-    CHAR['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace('ターン数：', '').replace('（', '/').replace('）', '');
+    CHAR['ActiveSkillCD'] = ActiveSkill.eq(0).find('strong').eq(1).text().replace(/ターン数：(\d*)（(\d*)）/, '$1/$2')
     CHAR['ActiveSkillContent'] = ActiveSkill.eq(1).text()
         .replace('減少、', '減少。')
         .replace('+', '＋')

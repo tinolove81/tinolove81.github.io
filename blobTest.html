@@ -85,10 +85,10 @@
                 animaLyric(audio.currentTime.toFixed(2));
             };
             audio.onpause = () => {
-                if (recorder.state =='recording') recorder.stop();
+                if (recorder && recorder.state =='recording') recorder.stop();
             };
             audio.onended = () => {
-                if (recorder.state =='recording') recorder.stop();
+                if (recorder && recorder.state =='recording') recorder.stop();
             }
             audio.src = './asset/lib/Aimer - LAST STARDUST.mp3';
         }
@@ -128,9 +128,20 @@
             
             let stream = new MediaStream([cStream.getVideoTracks()[0], aStream.getAudioTracks()[0]]); // grab our canvas MediaStream
             recorder = new MediaRecorder(stream); // init the recorder
+            // let mediaSource = new MediaSource;
+            // mediaSource.addEventListener('sourceopen', (e) => {
+                // URL.revokeObjectURL(video.src);
+            // });
+            // video.src = URL.createObjectURL(mediaSource);
             // every time the recorder has new data, we will store it in our array
             recorder.ondataavailable = (e) => {
                 chunks.push(e.data);
+                // console.log(stream);
+                // let mime = 'video/webm';
+                // Store it in a variable so it can be used in a closure.
+                // let sourceBuffer = mediaSource.addSourceBuffer(mime);
+                // Fetch and process the video.
+                // sourceBuffer.appendBuffer(stream);
             }
             recorder.onstop = (e) => {
                 blob = new Blob(chunks, { type: 'video/webm' })
